@@ -1,11 +1,11 @@
-<pre>
+
 <?php
     //header("Content-type:text/html;charset=utf-8");
     //include "_SERVER['DOCUMENT_ROOT']/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
     // utility functions
     //$path = $_SERVER['DOCUMENT_ROOT'];
     //echo $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
-    include "../DataPersistenceLayer/MainAccountManager.php";
+   // include "../DataPersistenceLayer/MainAccountManager.php";
     //echo "\n";
     
     function print_vars($obj)
@@ -57,12 +57,11 @@
 //                        array(15,802,"123213",0,"7/13/1014","12/23/2111","","","证中模拟","mobile",""))
 //                      );
     
-    $hardcode = array ( "data"=>1,"recordsTotal"=>57,"recordsFiltered"=>57,"data"=>array(
-        array(4,"CTP","中证模拟","模拟线路","000000073","123456",50000.00)
+    $hardcode = array ("data"=>array(
+        array("4","CTP","中证模拟","模拟线路","000000073","123456","50000.00")
     ));
 
     echo json_encode($hardcode) ;
     
     
     ?>
-</pre>
