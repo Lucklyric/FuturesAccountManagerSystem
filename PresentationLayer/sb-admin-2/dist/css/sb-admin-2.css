@@ -323,3 +323,7 @@ body {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+
+table.dataTable tbody tr.selected {
+    background-color: #b0bed9;
+}
