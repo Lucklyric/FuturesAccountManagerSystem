@@ -5,12 +5,12 @@
     // utility functions
     $path = $_SERVER['DOCUMENT_ROOT'];
     //echo $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
-    include $path."/phpClasses/MainAccountManager.php";
-    include $path."/phpClasses/SubAccountManager.php";
-    include $path."/phpClasses/SettlementAccountManager.php";
-    include $path."/phpClasses/MainRowClass.php";
-    include $path."/phpClasses/SubRowClass.php";
-    include $path."/phpClasses/SettlementRowClass.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubAccountManager.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SettlementAccountManager.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainRowClass.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubRowClass.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SettlementRowClass.php";
     
     
     function print_vars($obj)
@@ -43,20 +43,20 @@
     $SubAccount = new SubAccountManager();
     $SettlementAccount = new SettlementAccountManager();
     
-    echo "<br>GetAllMainAccountData: <br>";
+    //echo "<br>GetAllMainAccountData: <br>";
     
     $rawData=$testAccount->GetAllData();
     
-    echo($rawData);
+    //echo($rawData);
     
-    echo "<br>Split test:<br>";
+    //echo "<br>Split test:<br>";
     
     $obj=json_decode($rawData);
     
-    foreach($obj->ColColumnName as $colName){
-        echo $colName." ";
-    }
-    echo "<br>test array:";
+    //foreach($obj->ColColumnName as $colName){
+    //    echo $colName." ";
+    //}
+    //echo "<br>test array:";
     $AllMainRows=array();
     $AllSubRows=array();
     $AllSettlementRows=array();
@@ -66,15 +66,10 @@
         $NewRow = new MainAccountRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5]);
         $AllMainRows[$colRawData[0]]=$NewRow;
 
-        echo "<br>";
+     //   echo "<br>";
     }
-   
-    foreach($AllMainRows as $OneRow){
-        echo "<br>";
-        echo $OneRow->GetAllData();
-        echo "<br>";
-        
-    }
+    
+
 //    echo $obj->ColRowData[1][1];
     
     $subRawData=$SubAccount->GetAllData();
@@ -84,13 +79,13 @@
     //echo "<br><br>";
     
     $obj=json_decode($subRawData);
-    echo "<br>";
-    echo $subRawData;
-    echo "<br>";
+    //echo "<br>";
+    //echo $subRawData;
+    //echo "<br>";
     
-    foreach($obj->ColColumnName as $colName){
+    /*foreach($obj->ColColumnName as $colName){
         echo $colName." ";
-    }
+    }*/
     
     foreach($obj->ColRowData as $colRawData){
         if($colRawData){
@@ -105,19 +100,63 @@
             
             echo $counter.":".$single." ";
         }*/
-        echo "<br>";
+      //  echo "<br>";
     }
     
     //echo json_encode($testarray) ;
-   
+   /*
     foreach($AllSubRows as $OneRow){
         echo "<br>";
-        echo $OneRow->GetAllData();
+        //print_r( $OneRow->GetAllData());
         echo "<br>";
         
-    }
+    }*/
     
-    echo "<br><br>";
+    $AllMainAccountData=array();
+    foreach($AllMainRows as $OneRow){
+        $CombineMainAndSubData=array();
+        
+        $OneMainAccountData=array();
+        
+        $SubAccountData=array();
+        
+        //echo "<br>";
+
+        $OneMainAccountData=$OneRow->GetAllData();
+        $CombineMainAndSubData["inf"]=$OneMainAccountData;
+        
+        foreach($AllSubRows as $OneSubRow){
+            //echo "<br>";
+            //echo "sub:".$OneSubRow->GetMainId();
+            //echo " main:".$OneRow->GetMainId();
+            //echo "<br>";
+            
+            if($OneSubRow->GetMainId()==$OneRow->GetMainId()){
+                array_push($SubAccountData, $OneSubRow->GetAllData());
+                print_r( $OneSubRow->GetAllData());
+                
+            }
+            
+            //echo "<br>";
+            
+        }
+        $CombineMainAndSubData["sub"]=$SubAccountData;
+        
+//        print_r( $CombineMainAndSubData);
+        array_push($AllMainAccountData,$CombineMainAndSubData);
+      //  echo "<br>";
+        
+    }
+    //echo "<br>";
+    $finalreturn=array();
+    $finalreturn["data"]=$AllMainAccountData;
+    echo json_encode($finalreturn) ;
+    
+    //print_r($finalreturn);
+    //echo "<br>";
+    //echo "<br>";
+    
+    /*echo "<br><br>";
     
     $SettlementRawData=$SettlementAccount->GetAllData();
     echo $SettlementRawData;
@@ -160,8 +199,21 @@
                        array(13,801,"123213",1,"1/13/2014","12/23/2111","","","中证模拟","app",""),
                        array(15,802,"123213",0,"7/13/1014","12/23/2111","","","证中模拟","mobile","")
                        );
-    header("Content-type:text/html;charset=utf-8");
-    echo json_encode($hardcode) ;
+    header("Content-type:text/html;charset=utf-8");*/
+    $hardcode = array("data" => array(
+                                      array("inf" => array("1", "CTP", "中证模拟", "模拟线路", "000000073", "123456", "50000.00"),
+                                            "subs" => array(
+                                                            array(13, 801, "123213", 1, "1/13/2014", "12/23/2111", "", "", "中证模拟", "app", ""),
+                                                            array(15, 802, "123213", 0, "7/13/1014", "12/23/2111", "", "", "证中模拟", "mobile", "")
+                                                            )
+                                            ),
+                                      array("inf" => array("3", "CTP", "中证模拟", "模拟线路", "000000073", "123456", "50000.00"),
+                                            "subs" => array(
+                                                            array(20, 801, "123213", 1, "1/13/2014", "12/23/2111", "", "", "中证模拟", "app", ""),
+                                                            array(21, 802, "123213", 0, "7/13/1014", "12/23/2111", "", "", "证中模拟", "mobile", "")
+                                                            )
+                                            )));
+//    print_r($hardcode);
     
     
     ?>

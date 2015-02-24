@@ -37,6 +37,10 @@
         {
             return $this->UserName;
         }
+        function GetMainId()
+        {
+            return $this->MainId;
+        }
         
         function GetContactInfo()
         {
@@ -45,7 +49,7 @@
         
         function GetRiskManagementGroup()
         {
-            return $this->MainId;
+            return $this->$RiskManagementGroup;
         }
 
         function GetRateGroupName()
@@ -55,7 +59,7 @@
 
         function GetSubSystemId()
         {
-            return $this->Channel;
+            return $this->$SubSystemId;
         }
         
         function GetSubId()
@@ -86,7 +90,9 @@
         
         function GetAllData()
         {
-            $result = $this->SubSystemId." ".$this->SubId." ".$this->SubPass." ".$this->Restriction." ".$this->CreateTime." ".$this->LastLoginTime." ".$this->UserName." ".$this->ContactInfo." ".$this->MainId." ".$this->RiskManagementGroup." ".$this->RateGroupName;
+            $result=array();
+            array_push($result,$this->SubSystemId,$this->SubId,$this->SubPass,$this->Restriction,$this->CreateTime,$this->LastLoginTime,$this->UserName,$this->ContactInfo,$this->MainId,$this->RiskManagementGroup,$this->RateGroupName);
+            //$result = $this->SubSystemId." ".$this->SubId." ".$this->SubPass." ".$this->Restriction." ".$this->CreateTime." ".$this->LastLoginTime." ".$this->UserName." ".$this->ContactInfo." ".$this->MainId." ".$this->RiskManagementGroup." ".$this->RateGroupName;
 
             return $result;
         }

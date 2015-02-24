@@ -66,7 +66,9 @@
         
         function GetAllData()
         {
-            $result = $this->MainId." ".$this->Channel." ".$this->CompanyName." ".$this->CompanyServer." ".$this->AccountId." ".$this->AccountPassword." ".$this->StaticEquity;
+            $result=array();
+            array_push($result,$this->MainId,$this->Channel,$this->CompanyName,$this->CompanyServer,$this->AccountId,$this->AccountPassword,$this->StaticEquity);
+            //$result = $this->MainId." ".$this->Channel." ".$this->CompanyName." ".$this->CompanyServer." ".$this->AccountId." ".$this->AccountPassword." ".$this->StaticEquity;
             
             return $result;
         }
