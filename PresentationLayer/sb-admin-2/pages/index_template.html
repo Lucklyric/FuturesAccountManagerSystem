@@ -476,7 +476,8 @@
     var mainAccountTableData;
     var mainAccounts = [];
     var curSubAccounts = [];
-    var selectedIndex = 0;
+    var selectedIndex = 0;  //mainSelectedIndex
+    var subSelectedIndex = 0;  //subSelectedIndex
 
     /**
      * Document加载完毕 更新数据刷新Table绑定点击事件
@@ -500,6 +501,7 @@
 
         $('#subAccounts').on('click', 'tr', function () { //绑定点击事件刷新子账户
             ifHideSubAccountToolBar(false);
+            subSelectedIndex = subAccountTable.row(this).index();
             if ( $(this).hasClass('selected') ) {
                 //$(this).removeClass('selected');
             }
@@ -518,7 +520,7 @@
      */
     function refreshData() {
         mainAccounts = [];
-        $.getJSON('futuresAccount.php', function (data) {
+        $.getJSON('http://localhost/SharpSpeed/FuturesAccountManagerSystem/PresentationLayer/sb-admin-2/pages/futuresAccount.php', function (data) {
             mainAccountTableData = data.data;
             for (var i = 0; i < mainAccountTableData.length; i++) {
                 mainAccounts.push(mainAccountTableData[i].inf);
