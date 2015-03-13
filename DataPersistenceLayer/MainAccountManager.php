@@ -109,7 +109,7 @@
             curl_close($ch);
             header("Content-type:text/html;charset=utf-8");
             
-            return strlen($result);
+            return $result;
             
         }
         
@@ -134,7 +134,7 @@
             curl_close($ch);
             header("Content-type:text/html;charset=utf-8");
             
-            return strlen($result);
+            return $result;
             
         }
         
@@ -159,7 +159,7 @@
             curl_close($ch);
             header("Content-type:text/html;charset=utf-8");
             
-            return strlen($result);
+            return $result;
             
         }
         

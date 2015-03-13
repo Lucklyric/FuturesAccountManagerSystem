@@ -6,7 +6,7 @@
 //echo $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
 // include "../DataPersistenceLayer/MainAccountManager.php";
 //echo "\n";
-
+//tablename=MainAccount&state=1&通道=CTP&经纪公司名称=测试&经纪公司服务器=测试&账户ID=990&密码=110
 function print_vars($obj)
 {
     foreach (get_object_vars($obj) as $prop => $val) {
