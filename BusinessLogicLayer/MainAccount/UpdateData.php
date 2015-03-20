@@ -5,12 +5,12 @@
     // utility functions
     $path = $_SERVER['DOCUMENT_ROOT'];
     //echo $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SettlementAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainRowClass.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubRowClass.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SettlementRowClass.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccount/MainRowClass.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccount/MainAccountManager.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubAccount/SubRowClass.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubAccount/SubAccountManager.php";
+
+
     
     $MainId=isset($_GET["MainId"]) ? $_GET["MainId"] :"";
     $Channel=isset($_GET["Channel"]) ? $_GET["Channel"] :"";
@@ -24,7 +24,7 @@
 
     
     $TableName="MainTable";
-    $State="1";
+    $State="3";
     $Channel="2";
     $CompanyName="海通期货";
     $CompanyServer="test";

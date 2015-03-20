@@ -11,6 +11,8 @@
     include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainRowClass.php";
     include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubRowClass.php";
     include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SettlementRowClass.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/RiskManageRowClass.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/RiskManager.php";
     
     
     function print_vars($obj)
@@ -41,14 +43,12 @@
     $UserId=isset($_GET["UserId"]) ? $_GET["UserId"] :"";
     $Password=isset($_GET["Password"]) ? $_GET["Password"] :"";
  
-    
-    $testAccount = new MainAccountManager();
-    $SubAccount = new SubAccountManager();
+
     $SettlementAccount = new SettlementAccountManager();
     
     //echo "<br>GetAllMainAccountData: <br>";
     
-    $rawData=$testAccount->GetAllData();
+    $rawData=$SettlementAccount->GetAllData();
     
     //echo($rawData);
     
@@ -66,8 +66,8 @@
     if($obj){
     foreach($obj->ColRowData as $colRawData){
         
-        $NewRow = new MainAccountRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5]);
-        $AllMainRows[$colRawData[0]]=$NewRow;
+        $NewRow = new SettlementAccountRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7],$colRawData[8],$colRawData[9],$colRawData[10],$colRawData[11]);
+        $AllSettlementRows[$colRawData[0]]=$NewRow;
 
      //   echo "<br>";
     }
@@ -75,88 +75,8 @@
     echo "Server in maitenance, cannot get MainRows.";
     }
 
-//    echo $obj->ColRowData[1][1];
-    
-    $subRawData=$SubAccount->GetAllData();
-    //echo $subRawData;
-    
-    //echo "<br>Split test:<br>";
-    //echo "<br><br>";
-    
-    $obj=json_decode($subRawData);
-    //echo "<br>";
-    //echo $subRawData;
-    //echo "<br>";
-    
-    /*foreach($obj->ColColumnName as $colName){
-        echo $colName." ";
-    }*/
-    if($obj){
-    foreach($obj->ColRowData as $colRawData){
-        if($colRawData){
-        $NewRow = new SubAccountRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7],$colRawData[8],$colRawData[9],$colRawData[10]);
-        $AllSubRows[$colRawData[0]]=$NewRow;
-        }
-        //$counter=0;
-        
- /*       echo "<br>";
-        foreach($colRawData as $single){
-            $counter=$counter+1;
-            
-            echo $counter.":".$single." ";
-        }*/
-      //  echo "<br>";
-    }
-    }else{
-    echo "<br>Server is in maintenance, cannot get SubRows.<br>";
-    }
-    //echo json_encode($testarray) ;
-   /*
-    foreach($AllSubRows as $OneRow){
-        echo "<br>";
-        //print_r( $OneRow->GetAllData());
-        echo "<br>";
-        
-    }*/
-    
-    $AllMainAccountData=array();
-    foreach($AllMainRows as $OneRow){
-        $CombineMainAndSubData=array();
-        
-        $OneMainAccountData=array();
-        
-        $SubAccountData=array();
-        
-        //echo "<br>";
-
-        $OneMainAccountData=$OneRow->GetAllData();
-        $CombineMainAndSubData["inf"]=$OneMainAccountData;
-        
-        foreach($AllSubRows as $OneSubRow){
-            //echo "<br>";
-            //echo "sub:".$OneSubRow->GetMainId();
-            //echo " main:".$OneRow->GetMainId();
-            //echo "<br>";
-            
-            if($OneSubRow->GetMainId()==$OneRow->GetMainId()){
-                array_push($SubAccountData, $OneSubRow->GetAllData());
-                print_r( $OneSubRow->GetAllData());
-                
-            }
-            
-            //echo "<br>";
-            
-        }
-        $CombineMainAndSubData["sub"]=$SubAccountData;
-        
-//        print_r( $CombineMainAndSubData);
-        array_push($AllMainAccountData,$CombineMainAndSubData);
-      //  echo "<br>";
-        
-    }
-    //echo "<br>";
     $finalreturn=array();
-    $finalreturn["data"]=$AllMainAccountData;
+    $finalreturn["data"]=$AllSettlementRows;
     echo json_encode($finalreturn) ;
     
     //print_r($finalreturn);

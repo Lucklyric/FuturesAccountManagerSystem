@@ -1,12 +1,12 @@
 <?php
     
     // base class with member properties and methods
-    class MainAccountManager {
+    class FeeSettingManager {
         
         var $userName;
         var $userType;
         
-        function MainAccountManager($userName="guest", $userType="guest")
+        function FeeSettingManager($userName="guest", $userType="guest")
         {
             $this->userName = $userName;
             $this->userType = $userType;
@@ -17,7 +17,7 @@
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("tablename" => "MainAccount");
+            $data = array("tablename" => "feesetting");
             $data_string = json_encode($data);
             $ch = curl_init('http://121.40.57.186/SPService/SPService.svc/loadtabledata');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -33,15 +33,15 @@
             
             return $result;
         }
-        
-        function GetChannelData($data)
+   
+        function GetCommissionFeeMultiplier()
         {
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("tablename" => "SystemStatus");
+            $data = array("port" => "10083");
             $data_string = json_encode($data);
-            $ch = curl_init('http://121.40.57.186/SPService/SPService.svc/loadtabledata');
+            $ch = curl_init('http://121.40.57.186/SPService/SPService.svc/     GetCommissionFeeMultiplier');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -56,14 +56,14 @@
             return $result;
         }
         
-        function GetCompanyName($data)
+        function GetMarginRateMultiplier()
         {
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("tablename" => "SystemStatus");
+            $data = array("port" => "10083");
             $data_string = json_encode($data);
-            $ch = curl_init('http://121.40.57.186/SPService/SPService.svc/loadtabledata');
+            $ch = curl_init('http://121.40.57.186/SPService/SPService.svc/     GetMarginRateMultiplier');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -77,82 +77,6 @@
             
             return $result;
         }
-        
-        function GetCompanyServer($data)
-        {
-            include_once('HTTP/Request.php');
-            //$next="abc";
-            //return $next;
-            $data = array("tablename" => "SystemStatus");
-            $data_string = json_encode($data);
-            $ch = curl_init('http://121.40.57.186/SPService/SPService.svc/loadtabledata');
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                                                       'Content-Type: application/json',
-                                                       'Content-Length: ' . strlen($data_string)));
-            
-            $result = curl_exec($ch);
-            curl_close($ch);
-            header("Content-type:text/html;charset=utf-8");
-            
-            return $result;
-        }
-        
-        
-        function DeleteDataById($userId)
-        {
-            include_once('HTTP/Request.php');
-            
-            $next="Id:".$userId;
-            
-            return $next;
-            
-            /*$data = array("tablename" => "MainAccount");
-            $data_string = json_encode($data);
-            $ch = curl_init('http://121.40.57.186/SPService/SPService.svc/loadtabledata');
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                                                       'Content-Type: application/json',
-                                                       'Content-Length: ' . strlen($data_string)));
-            
-            $result = curl_exec($ch);
-            curl_close($ch);
-            header("Content-type:text/html;charset=utf-8");
-            
-            return $result;*/
-            
-        }
-        
-        function UpdateDataById($userId, $dataJson)
-        {
-            include_once('HTTP/Request.php');
-            
-            $next="Id:".$userId;
-            $return=$next.$dataJson;
-            return $return;
-            
-            /*$data = array("tablename" => "MainAccount");
-             $data_string = json_encode($data);
-             $ch = curl_init('http://121.40.57.186/SPService/SPService.svc/loadtabledata');
-             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-             'Content-Type: application/json',
-             'Content-Length: ' . strlen($data_string)));
-             
-             $result = curl_exec($ch);
-             curl_close($ch);
-             header("Content-type:text/html;charset=utf-8");
-             
-             return $result;*/
-            
-        }
-        
         function UpdateData($data){
             
             include_once('HTTP/Request.php');
@@ -174,7 +98,7 @@
             curl_close($ch);
             header("Content-type:text/html;charset=utf-8");
             
-            return $result;
+            return strlen($result);
             
         }
         
@@ -199,7 +123,7 @@
             curl_close($ch);
             header("Content-type:text/html;charset=utf-8");
             
-            return $result;
+            return strlen($result);
             
         }
         
@@ -224,11 +148,11 @@
             curl_close($ch);
             header("Content-type:text/html;charset=utf-8");
             
-            return $result;
+            return strlen($result);
             
         }
         
-        
+
         function GetMainAccountNo()
         {
             $hardcode=1;

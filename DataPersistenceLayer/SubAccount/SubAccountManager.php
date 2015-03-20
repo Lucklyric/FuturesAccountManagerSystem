@@ -19,7 +19,7 @@
             //return $next;
             $data = array("tablename" => "SubAccount");
             $data_string = json_encode($data);
-            $ch = curl_init('http://121.40.57.186/SPService/SPService.svc/loadtabledata');
+            $ch = curl_init('121.40.131.144/Test/SPService/SPService.svc/loadtabledata');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
