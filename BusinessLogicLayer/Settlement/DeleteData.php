@@ -1,0 +1,48 @@
+
+<?php
+    
+    //include "_SERVER['DOCUMENT_ROOT']/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
+    // utility functions
+    $path = $_SERVER['DOCUMENT_ROOT'];
+    //echo $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccount/MainRowClass.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccount/MainAccountManager.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubAccount/SubRowClass.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubAccount/SubAccountManager.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/Settlement/SettlementAccountManager.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/Settlement/SettlementRowClass.php";
+    
+    $Id=isset($_GET["Id"]) ? $_GET["Id"] :"";
+    $SubAccountName=isset($_GET["SubAccountName"]) ? $_GET["SubAccountName"] :"";
+    $MainId=isset($_GET["MainId"]) ? $_GET["MainId"] :"";
+    $InAndOut=isset($_GET["InAndOut"]) ? $_GET["InAndOut"] :"";
+    $UpdateTime=isset($_GET["UpdateTime"]) ? $_GET["UpdateTime"] :"";
+    $Priority=isset($_GET["Priority"]) ? $_GET["Priority"] :"";
+    
+    $State=isset($_GET["State"]) ? $_GET["State"] :"";
+    $TableName=isset($_GET["TableName"]) ? $_GET["TableName"] :"";
+    
+    
+    $TableName="moneyinandout";
+    $State="2";
+    
+    if($TableName && $State && $Id && $SubAccountName && $MainId && $InAndOut && $UpdateTime && $Priority){
+        $data=$initialdata.$TableName."&state=".$State."&编号=".$Id."&子账户名称=".$SubAccountName."&主账户编号=".$MainId."&出入金=".$InAndOut."&更新时间=".$UpdateTime."&优先劣后=".$Priority;
+        echo $data;
+    }else{
+        
+        echo "Some data is missing!";
+        
+    }
+    
+    //echo $data;
+    echo "<br>";
+    $SettlementAccount = new SettlementAccountManager();
+    if($data){
+        
+        $response=$testAccount->InsertData($data);
+        
+    }
+    echo($response);
+    
+    ?>
