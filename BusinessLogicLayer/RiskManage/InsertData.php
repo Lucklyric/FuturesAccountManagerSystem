@@ -5,14 +5,8 @@
     // utility functions
     $path = $_SERVER['DOCUMENT_ROOT'];
     //echo $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SettlementAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainRowClass.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubRowClass.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SettlementRowClass.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/RiskManageRowClass.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/RiskManager.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/RiskManager/RiskManageRowClass.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/RiskManager/RiskManager.php";
     
     
     $Id=isset($_GET["Id"]) ? $_GET["Id"] :"";
@@ -30,12 +24,16 @@
     $OvernightSellShareDetail=isset($_GET["OvernightSellShareDetail"]) ? $_GET["OvernightSellShareDetail"] :"";
     $DayLimitation=isset($_GET["DayLimitation"]) ? $_GET["DayLimitation"] :"";
 
-    
+    $AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
+    $AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
+    $port=10083;
     $TableName="riskmanage";
     $State="1";
+    $initialdata="Port=";
+    
     
     if($TableName && $State && $Id && $GroupName && $TradePermitTime && $OpenPositionForbiddenTime && $SellSharesTime && $RiskAlertLine && $RiskAlertLog && $RiskForbiddenLine && $RiskForbiddenLog && $EquityAlertLine &&  $EquityBalanceLine && $OvernightSellShareLine && $OvernightSellShareDetail && $DayLimitation){
-    $data=$initialdata.$TableName."&state=".$State."&通道=".$Channel."&经纪公司=".$CompanyName."&经纪公司服务器=".$CompanyServer."&账户ID=".$AccountId."&账户密码=".$AccountPassword;
+    $data=$initialdata.$port."&AdminAccount=".$AdminAccount."&AdminPassword=".$AdminPassword."&TableName=".$TableName."&RowState=".$State."&编号=".$Id."&组名称=".$GroupName."&允许交易合约=".$TradePermitTime."&禁止开仓时间段=".$OpenPositionForbiddenTime."&减仓时间段=".$SellSharesTime."&风险度警告线=".$RiskAlertLine."&风险度警告线详细=".$RiskAlertLog."&风险度禁开线=".$RiskForbiddenLine."&风险度禁开线详细=".$RiskForbiddenLog."&权益警告线=".$EquityAlertLine."&权益强平线=".$EquityBalanceLine."&隔夜减仓线=".$OvernightSellShareLine."&隔夜减仓线详细=".$OvernightSellShareDetail."&每日撤单次数上限=".$DayLimitation;
         echo $data;
     }else{
     
@@ -46,11 +44,10 @@
     //echo $data;
     echo "<br>";
     
-    $testAccount = new MainAccountManager();
-    $SubAccount = new SubAccountManager();
+    $RiskManager = new RiskManager();
     if($data){
         
-        $response=$testAccount->InsertData($data);
+        $response=$RiskManager->InsertData($data);
     
     }
     echo($response);

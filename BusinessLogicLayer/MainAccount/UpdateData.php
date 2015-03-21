@@ -22,28 +22,29 @@
     $State=isset($_GET["State"]) ? $_GET["State"] :"";
     $TableName=isset($_GET["TableName"]) ? $_GET["TableName"] :"";
 
+    $AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
+    $AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
+    $port=10083;
     
     $TableName="MainTable";
+    $AdminAccount="aaa";
+    $AdminPassword="123";
     $State="3";
     $Channel="2";
     $CompanyName="海通期货";
     $CompanyServer="test";
     $AccountId="2";
     $AccountPassword="3";
-    $initialdata="tablename=";
-    $data="";
+    $initialdata="Port=";
+    //$data="";
     if($TableName && $State && $Channel && $CompanyName && $CompanyServer && $AccountId && $AccountPassword){
-    $data=$initialdata.$TableName."&state=".$State."&通道=".$Channel."&经纪公司=".$CompanyName."&经纪公司服务器=".$CompanyServer."&账户ID=".$AccountId."&账户密码=".$AccountPassword;
+        $data=$initialdata.$port."&AdminAccount=".$AdminAccount."&AdminPassword=".$AdminPassword."&TableName=".$TableName."&RowState=".$State."&通道=".$Channel."&经纪公司=".$CompanyName."&经纪公司服务器=".$CompanyServer."&账户ID=".$AccountId."&账户密码=".$AccountPassword;
         echo $data;
     }else{
-    
+        
         echo "Some data is missing!";
-    
+        
     }
-    
-    //echo $data;
-    echo "<br>";
-    
     $testAccount = new MainAccountManager();
     $SubAccount = new SubAccountManager();
     if($data){

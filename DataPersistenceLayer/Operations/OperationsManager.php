@@ -1,23 +1,24 @@
 <?php
     
     // base class with member properties and methods
-    class RiskManager {
+    class OperationsManager {
         
         var $userName;
         var $userType;
         
-        function RiskManager($userName="guest", $userType="guest")
+        function OperationsManager($userName="guest", $userType="guest")
         {
             $this->userName = $userName;
             $this->userType = $userType;
         }
+        //拿主账户表里所有数据
         
         function GetAllData()
         {
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("tablename" => "riskmanage");
+            $data = array("tablename" => "operations");
             $data_string = json_encode($data);
             $ch = curl_init('121.40.131.144/Test/SPService/SPService.svc/loadtabledata');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -34,6 +35,7 @@
             return $result;
         }
         
+             
         function UpdateData($data){
             
             include_once('HTTP/Request.php');
@@ -55,7 +57,7 @@
             curl_close($ch);
             header("Content-type:text/html;charset=utf-8");
             
-            return strlen($result);
+            return $result;
             
         }
         
@@ -80,7 +82,7 @@
             curl_close($ch);
             header("Content-type:text/html;charset=utf-8");
             
-            return strlen($result);
+            return $result;
             
         }
         
@@ -105,12 +107,12 @@
             curl_close($ch);
             header("Content-type:text/html;charset=utf-8");
             
-            return strlen($result);
+            return $result;
             
         }
         
-
         
+
     } // end of class Vegetable
 
 

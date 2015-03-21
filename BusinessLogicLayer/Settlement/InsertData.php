@@ -18,13 +18,16 @@
     $State=isset($_GET["State"]) ? $_GET["State"] :"";
     $TableName=isset($_GET["TableName"]) ? $_GET["TableName"] :"";
 
-    
+    $port=10083;
+    $AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
+    $AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
     $TableName="moneyinandout";
     $State="1";
     
+    $initialdata="Port=";
     
     if($TableName && $State && $Id && $SubAccountName && $MainId && $InAndOut && $UpdateTime && $Priority){
-    $data=$initialdata.$TableName."&state=".$State."&编号=".$Id."&子账户名称=".$SubAccountName."&主账户编号=".$MainId."&出入金=".$InAndOut."&更新时间=".$UpdateTime."&优先劣后=".$Priority;
+    $data=$initialdata.$port."&AdminAccount=".$AdminAccount."&AdminPassword=".$AdminPassword."&TableName=".$TableName."&RowState=".$State."&编号=".$Id."&子账户名称=".$SubAccountName."&主账户编号=".$MainId."&出入金=".$InAndOut."&更新时间=".$UpdateTime."&优先劣后=".$Priority;
         echo $data;
     }else{
     

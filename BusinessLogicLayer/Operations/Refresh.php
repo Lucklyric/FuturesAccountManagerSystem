@@ -5,14 +5,8 @@
     // utility functions
     $path = $_SERVER['DOCUMENT_ROOT'];
     //echo $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SettlementAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainRowClass.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubRowClass.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SettlementRowClass.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/RiskManageRowClass.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/RiskManager.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/Operations/OperationsManager.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/Operations/OperationsRow.php";
     
     
     function print_vars($obj)
@@ -43,12 +37,12 @@
     $UserId=isset($_GET["UserId"]) ? $_GET["UserId"] :"";
     $Password=isset($_GET["Password"]) ? $_GET["Password"] :"";
  
-
-    $SettlementAccount = new SettlementAccountManager();
+    
+    $testAccount = new OperationsManager();
     
     //echo "<br>GetAllMainAccountData: <br>";
     
-    $rawData=$SettlementAccount->GetAllData();
+    $rawData=$testAccount->GetAllData();
     
     //echo($rawData);
     
@@ -60,23 +54,21 @@
     //    echo $colName." ";
     //}
     //echo "<br>test array:";
-    $AllMainRows=array();
-    $AllSubRows=array();
-    $AllSettlementRows=array();
+    $AllOperationRows=array();
     if($obj){
     foreach($obj->ColRowData as $colRawData){
         
-        $NewRow = new SettlementAccountRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7],$colRawData[8],$colRawData[9],$colRawData[10],$colRawData[11]);
-        $AllSettlementRows[$colRawData[0]]=$NewRow;
+        $NewRow = new OperationsRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7],$colRawData[8],$colRawData[9]);
+        $AllOperationRows[$colRawData[0]]=$NewRow;
 
      //   echo "<br>";
     }
     }else{
-    echo "Server in maitenance, cannot get MainRows.";
+    echo "Server in maitenance, cannot get RiskRow.";
     }
 
     $finalreturn=array();
-    $finalreturn["data"]=$AllSettlementRows;
+    $finalreturn["data"]=$AllOperationRows;
     echo json_encode($finalreturn) ;
     
     //print_r($finalreturn);

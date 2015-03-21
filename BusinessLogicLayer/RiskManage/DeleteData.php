@@ -5,51 +5,50 @@
     // utility functions
     $path = $_SERVER['DOCUMENT_ROOT'];
     //echo $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SettlementAccountManager.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainRowClass.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubRowClass.php";
-    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SettlementRowClass.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/RiskManager/RiskManageRowClass.php";
+    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/RiskManager/RiskManager.php";
     
-    $MainId=isset($_GET["MainId"]) ? $_GET["MainId"] :"";
-    $Channel=isset($_GET["Channel"]) ? $_GET["Channel"] :"";
-    $CompanyName=isset($_GET["CompanyName"]) ? $_GET["CompanyName"] :"";
-    $CompanyServer=isset($_GET["CompanyServer"]) ? $_GET["CompanyServer"] :"";
-    $AccountId=isset($_GET["AccountId"]) ? $_GET["AccountId"] :"";
-    $AccountPassword=isset($_GET["AccountPassword"]) ? $_GET["AccountPassword"] :"";
-    $StaticEquity=isset($_GET["StaticEquity"]) ? $_GET["StaticEquity"] :"";
-    $State=isset($_GET["State"]) ? $_GET["State"] :"";
-    $TableName=isset($_GET["TableName"]) ? $_GET["TableName"] :"";
-
     
-    $TableName="MainTable";
-    $State="1";
-    $Channel="2";
-    $CompanyName="海通期货";
-    $CompanyServer="test";
-    $AccountId="2";
-    $AccountPassword="3";
-    $initialdata="tablename=";
-    $data="";
-    if($TableName && $State && $Channel && $CompanyName && $CompanyServer && $AccountId && $AccountPassword){
-    $data=$initialdata.$TableName."&state=".$State."&通道=".$Channel."&经纪公司=".$CompanyName."&经纪公司服务器=".$CompanyServer."&账户ID=".$AccountId."&账户密码=".$AccountPassword;
+    $Id=isset($_GET["Id"]) ? $_GET["Id"] :"";
+    $GroupName=isset($_GET["GroupName"]) ? $_GET["GroupName"] :"";
+    $TradePermitTime=isset($_GET["TradePermitTime"]) ? $_GET["TradePermitTime"] :"";
+    $OpenPositionForbiddenTime=isset($_GET["OpenPositionForbiddenTime"]) ? $_GET["OpenPositionForbiddenTime"] :"";
+    $SellSharesTime=isset($_GET["SellSharesTime"]) ? $_GET["SellSharesTime"] :"";
+    $RiskAlertLine=isset($_GET["RiskAlertLine"]) ? $_GET["RiskAlertLine"] :"";
+    $RiskAlertLog=isset($_GET["RiskAlertLog"]) ? $_GET["RiskAlertLog"] :"";
+    $RiskForbiddenLine=isset($_GET["RiskForbiddenLine"]) ? $_GET["RiskForbiddenLine"] :"";
+    $RiskForbiddenLog=isset($_GET["RiskForbiddenLog"]) ? $_GET["RiskForbiddenLog"] :"";
+    $EquityAlertLine=isset($_GET["EquityAlertLine"]) ? $_GET["EquityAlertLine"] :"";
+    $EquityBalanceLine=isset($_GET["EquityBalanceLine"]) ? $_GET["EquityBalanceLine"] :"";
+    $OvernightSellShareLine=isset($_GET["OvernightSellShareLine"]) ? $_GET["OvernightSellShareLine"] :"";
+    $OvernightSellShareDetail=isset($_GET["OvernightSellShareDetail"]) ? $_GET["OvernightSellShareDetail"] :"";
+    $DayLimitation=isset($_GET["DayLimitation"]) ? $_GET["DayLimitation"] :"";
+    
+    $AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
+    $AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
+    $port=10083;
+    $TableName="riskmanage";
+    $State="2";
+    $initialdata="Port=";
+    
+    
+    if($TableName && $State && $Id && $GroupName && $TradePermitTime && $OpenPositionForbiddenTime && $SellSharesTime && $RiskAlertLine && $RiskAlertLog && $RiskForbiddenLine && $RiskForbiddenLog && $EquityAlertLine &&  $EquityBalanceLine && $OvernightSellShareLine && $OvernightSellShareDetail && $DayLimitation){
+        $data=$initialdata.$port."&AdminAccount=".$AdminAccount."&AdminPassword=".$AdminPassword."&TableName=".$TableName."&RowState=".$State."&编号=".$Id."&组名称=".$GroupName."&允许交易合约=".$TradePermitTime."&禁止开仓时间段=".$OpenPositionForbiddenTime."&减仓时间段=".$SellSharesTime."&风险度警告线=".$RiskAlertLine."&风险度警告线详细=".$RiskAlertLog."&风险度禁开线=".$RiskForbiddenLine."&风险度禁开线详细=".$RiskForbiddenLog."&权益警告线=".$EquityAlertLine."&权益强平线=".$EquityBalanceLine."&隔夜减仓线=".$OvernightSellShareLine."&隔夜减仓线详细=".$OvernightSellShareDetail."&每日撤单次数上限=".$DayLimitation;
         echo $data;
     }else{
-    
+        
         echo "Some data is missing!";
-    
+        
     }
     
     //echo $data;
     echo "<br>";
     
-    $testAccount = new MainAccountManager();
-    $SubAccount = new SubAccountManager();
+    $RiskManager = new RiskManager();
     if($data){
         
-        $response=$testAccount->DeleteData($data);
-    
+        $response=$RiskManager->DeleteData($data);
+        
     }
     echo($response);
     

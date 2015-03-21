@@ -17,10 +17,11 @@
     
     $TableName="riskmonitors";
     $State="2";
-    
+    $initialdata="Port=";
+    $port=10083;
     
     if($TableName && $State && $SystemId && $Id && $Password && $SubAccount && $Name && $Contact){
-        $data=$initialdata.$TableName."&编号=".$SystemId."&ID=".$Id."&密码=".$Password."&附属子账户=".$SubAccount."&姓名=".$Name."&联系方式=".$Contact;
+        $data=$initialdata.$port."&AdminAccount=".$AdminAccount."&AdminPassword=".$AdminPassword."&TableName=".$TableName."&RowState=".$State."&编号=".$SystemId."&ID=".$Id."&密码=".$Password."&附属子账户=".$SubAccount."&姓名=".$Name."&联系方式=".$Contact;
         echo $data;
     }else{
         
