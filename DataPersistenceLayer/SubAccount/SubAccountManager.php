@@ -41,7 +41,7 @@
             //$data="tablename=MainTable&state=1&通道=CTP&经纪公司=海通期货&经纪公司服务器=上海电信&账户ID=888&账户密码=111";
             
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'http://121.40.57.186/SPService/SPService.svc/updatetablerowdata');
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '121.40.131.144/Test/SPService/SPService.svc/updatetablerowdata');
             curl_setopt($ch, CURLOPT_POST, 1);
             
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -66,7 +66,7 @@
             //$data="tablename=MainTable&state=1&通道=CTP&经纪公司=海通期货&经纪公司服务器=上海电信&账户ID=888&账户密码=111";
             
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'http://121.40.57.186/SPService/SPService.svc/updatetablerowdata');
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '121.40.131.144/Test/SPService/SPService.svc/updatetablerowdata');
             curl_setopt($ch, CURLOPT_POST, 1);
             
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -91,7 +91,7 @@
             //$data="tablename=MainTable&state=1&通道=CTP&经纪公司=海通期货&经纪公司服务器=上海电信&账户ID=888&账户密码=111";
             
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'http://121.40.57.186/SPService/SPService.svc/updatetablerowdata');
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '121.40.131.144/Test/SPService/SPService.svc/updatetablerowdata');
             curl_setopt($ch, CURLOPT_POST, 1);
             
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
