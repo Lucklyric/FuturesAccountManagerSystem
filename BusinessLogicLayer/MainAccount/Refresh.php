@@ -144,7 +144,7 @@
             //echo "<br>";
             
         }
-        $CombineMainAndSubData["sub"]=$SubAccountData;
+        $CombineMainAndSubData["subs"]=$SubAccountData;
         
         //        print_r( $CombineMainAndSubData);
         array_push($AllMainAccountData,$CombineMainAndSubData);

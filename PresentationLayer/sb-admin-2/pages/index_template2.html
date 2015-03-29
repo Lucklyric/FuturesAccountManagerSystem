@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>锋利资产管理系统</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css"
+          rel="stylesheet">
+
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">锋利资产管理系统</a>
+        </div>
+        <!-- /.navbar-header -->
+
+        <ul class="nav navbar-top-links navbar-right">
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> 账户资料</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="index.html"><i class="fa fa-th-list fa-fw"></i> 账户管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="flot.html">期货账户管理</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">证券账户管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-cny fa-fw"></i> 资金管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="flot.html">子账户出金</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">子账户入金</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="tables.html"><i class="fa fa-tachometer fa-fw"></i> 风控管理</a>
+                    </li>
+                    <li>
+                        <a href="forms.html"><i class="fa fa-bar-chart-o fa-fw"></i> 费率管理</a>
+                    </li>
+                    <li>
+                        <a href="forms.html"><i class="fa fa-user fa-fw"></i> 管理员管理</a>
+                    </li>
+                    <li>
+                        <a href="forms.html"><i class="fa fa-check fa-fw"></i> 业务审核</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-search fa-fw"></i> 数据查询<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="panels-wells.html">出入金查询</a>
+                            </li>
+                            <li>
+                                <a href="buttons.html">交易记录查询</a>
+                            </li>
+                            <li>
+                                <a href="notifications.html">资金曲线查询</a>
+                            </li>
+                            <li>
+                                <a href="typography.html">业务审批查询</a>
+                            </li>
+                            <li>
+                                <a href="icons.html"> Icons</a>
+                            </li>
+                            <li>
+                                <a href="grid.html">Grid</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+
+
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header">期货账户管理</h3>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            主账户
+
+
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+
+
+                                <!--Modal-->
+                                <div class="modal fade" tabindex="-1" role="dialog" id="accountModal"
+                                     aria-labelledby="newMainAccountLabel" aria-hidden="true">
+                                    <div class="modal-dialog" id="newAccountModal">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="newMainAccountLabel">新建主账户</h4>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <div class="form-group">
+
+                                                    <label for="channel">通道</label>
+
+                                                    <select style="float: right; width: 50%" class="form-control" id="channel">
+                                                        <option>CTP</option>
+                                                        <option>CTP</option>
+                                                        <option>CTP</option>
+                                                        <option>CTP</option>
+                                                        <option>CTP</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <label for="company">经纪公司</label>
+
+                                                    <select  style="float: right; width: 50%" class="form-control" id="company">
+                                                        <option>CTP</option>
+                                                        <option>CTP</option>
+                                                        <option>CTP</option>
+                                                        <option>CTP</option>
+                                                        <option>CTP</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <label for="server">服务器</label>
+
+                                                    <select  style="float: right; width: 50%" class="form-control" id="server">
+                                                        <option>上海电信</option>
+                                                        <option>上海电信</option>
+                                                        <option>上海电信</option>
+                                                        <option>上海电信</option>
+                                                        <option>上海电信</option>
+                                                    </select>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label for="userId">账户ID</label>
+                                                    <input class="form-control" style="float: right; width: 50%" type="text" name="userId" id="userId"
+                                                            value="" placeholder="账户ID"/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="userPassword">账户密码</label>
+                                                    <input  class="form-control" style="float: right; width: 50%" type="password" name="userPassword"
+                                                            id="userPassword" value="" placeholder="账户密码"/>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                                                </button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!--/.modal-->
+
+                                <!-- Modal -->
+                                <div class="modal fade" tabindex="-1" role="dialog" id="subModal"
+                                     aria-labelledby="newSubAccountLabel" aria-hidden="true">
+                                    <div class="modal-dialog" id="newSubModal">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="newSubAccountLabel">新建子账户</h4>
+                                            </div>
+                                            <div class="modal-body">
+
+
+                                                <div class="form-group">
+                                                    <label for="subId">子账户ID</label>
+                                                    <input  class="form-control" style="float: right; width: 50%" type="text" name="userId" id="subId"
+                                                            value="" placeholder="账户ID"/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="subPassword">子账户密码</label>
+                                                    <input  class="form-control" style="float: right; width: 50%" type="password" name="subPassword"
+                                                            id="subPassword" value="" placeholder="账户密码"/>
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <label for="mainAccount">主账户</label>
+
+                                                    <select  style="float: right; width: 50%" class="form-control" id="mainAccount">
+                                                        <option></option>
+                                                        <option></option>
+                                                        <option></option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <label for="riskControl">风控</label>
+
+                                                    <select  style="float: right; width: 50%" class="form-control" id="riskControl">
+                                                        <option></option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <label for="rate">费率</label>
+
+                                                    <select  style="float: right; width: 50%" class="form-control" id="rate">
+                                                        <option>上海电信</option>
+                                                        <option>上海电信</option>
+                                                        <option>上海电信</option>
+                                                        <option>上海电信</option>
+                                                        <option>上海电信</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="subName">用户姓名</label>
+                                                    <input  class="form-control" style="float: right; width: 50%" type="text" name="userId" id="subName"
+                                                            value=""/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="subContact">联系方式</label>
+                                                    <input  class="form-control" style="float: right; width: 50%" type="password" name="userId"
+                                                            id="subContact" value="" />
+                                                </div>
+
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                                                </button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.modal -->
+
+
+                                <table id="mainAccounts" class="table table-striped table-bordered table-hover"
+                                       cellspacing="0" width="100%">
+
+                                    <div class="mainAccountToolbar" style="float:left">
+                                        <button type="button" class="btn btn-default btn-lg" id="main-add" data-toggle="modal"
+                                                data-target="#accountModal">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-lg" id="main-update" data-toggle="modal"
+                                                data-target="#accountModal">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-lg" id="main-delete" data-toggle="modal"
+                                                data-target="#accountModal">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                    <thead>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>通道</th>
+                                        <th>经纪公司名称</th>
+                                        <th>经纪公司服务器</th>
+                                        <th>账户ID</th>
+                                        <th>账户密码</th>
+                                        <th>静态权益</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tfoot>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>通道</th>
+                                        <th>经纪公司名称</th>
+                                        <th>经纪公司服务器</th>
+                                        <th>账户ID</th>
+                                        <th>账户密码</th>
+                                        <th>静态权益</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            子账户
+                        </div>
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <table id="subAccounts" class="table table-striped table-bordered table-hover"
+                                       cellspacing="0"
+                                       width="100%">
+                                    <div class="subAccountToolbar" style="float:left">
+                                        <button type="button" class="btn btn-default btn-lg" id="sub-add" data-toggle="modal"
+                                                data-target="#subModal">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-lg" id="sub-update" data-toggle="modal"
+                                                data-target="#subModal">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-lg" id="sub-delete" data-toggle="modal"
+                                                data-target="#subModal">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                    <thead>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>子账户ID</th>
+                                        <th>子账户密码</th>
+                                        <th>限制使用</th>
+                                        <th>创建日期</th>
+                                        <th>最后登录时间</th>
+                                        <th>用户姓名</th>
+                                        <th>联系方式</th>
+                                        <th>主账户名称</th>
+                                        <th>风控组名称</th>
+                                        <th>费率组名称</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tfoot>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>子账户ID</th>
+                                        <th>子账户密码</th>
+                                        <th>限制使用</th>
+                                        <th>创建日期</th>
+                                        <th>最后登录时间</th>
+                                        <th>用户姓名</th>
+                                        <th>联系方式</th>
+                                        <th>主账户名称</th>
+                                        <th>风控组名称</th>
+                                        <th>费率组名称</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+<!-- DataTables JavaScript -->
+<script
+        src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script
+        src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+
+<script>
+    /**
+     * 定义全局变量
+     */
+    var mainAccountTable;
+    var subAccountTable;
+    var mainAccountTableData;
+    var mainAccounts = [];
+    var curSubAccounts = [];
+    var selectedIndex = 0;  //mainSelectedIndex
+    var subSelectedIndex = 0;  //subSelectedIndex
+
+    /**
+     * Document加载完毕 更新数据刷新Table绑定点击事件
+     */
+    $(document).ready(function () {
+        refreshData(); //更新数据
+        $('#mainAccounts').on('click', 'tr', function () { //绑定点击事件刷新子账户
+
+            selectedIndex = mainAccountTable.row(this).index();
+            updateSubAccounts(selectedIndex);
+            refreshSubAccountsTable();
+            ifHideMainAccountToolBar(false);
+            ifHideSubAccountToolBar(true);
+            if ( $(this).hasClass('selected') ) {
+                //$(this).removeClass('selected');
+            }
+            else {
+                mainAccountTable.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        } );
+
+        $('#subAccounts').on('click', 'tr', function () { //绑定点击事件刷新子账户
+            ifHideSubAccountToolBar(false);
+            subSelectedIndex = subAccountTable.row(this).index();
+            if ( $(this).hasClass('selected') ) {
+                //$(this).removeClass('selected');
+            }
+            else {
+                subAccountTable.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        } );
+
+    });
+</script>
+
+<script>
+    /**
+     * Ajax从服务端取数据
+     */
+    function refreshData() {
+        mainAccounts = [];
+        $.getJSON('http://localhost:63342/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
+            mainAccountTableData = data.data;
+            for (var i = 0; i < mainAccountTableData.length; i++) {
+                mainAccounts.push(mainAccountTableData[i].inf);
+            }
+            refreshMainAccountsTable();
+            updateSubAccounts(selectedIndex);
+            refreshSubAccountsTable();
+            ifHideMainAccountToolBar(true);
+            ifHideSubAccountToolBar(true);
+        });
+    }
+
+    /**
+     * 从本地取出对应的子账户信息
+     * @param index 对应主账户index
+     */
+    function updateSubAccounts(index) {
+        curSubAccounts = [];
+        for (var i = 0; i < mainAccountTableData[index].subs.length; i++) {
+            curSubAccounts.push(mainAccountTableData[index].subs[i]);
+        }
+    }
+
+    /**
+     * 刷新主账户表格
+     */
+    function refreshMainAccountsTable() {
+        if ($.fn.dataTable.isDataTable('#mainAccounts')) {
+            mainAccountTable.clear();
+            for (var i = 0; i < mainAccounts.length; i++) {
+                mainAccountTable.row.add(mainAccounts[i]);
+            }
+            mainAccountTable.draw();
+        }
+        else {
+            mainAccountTable = $('#mainAccounts').DataTable({
+                "processing": true,
+                "data": mainAccounts,
+                "scrollY": "200px",
+                "scrollCollapse": false,
+                "paging": false,
+                "dom": '<"mainAccountToolbar"f>lpti',
+                "language": {
+                    "search": "搜索:",
+                    "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
+                    "infoEmpty": "显示 0 到 0 共 0 记录"
+                }
+            });
+        }
+    }
+
+    /**
+     * 刷新子账户表格
+     */
+    function refreshSubAccountsTable() {
+        if ($.fn.dataTable.isDataTable('#subAccounts')) {
+            subAccountTable.clear();
+            for (var i = 0; i < curSubAccounts.length; i++) {
+                subAccountTable.row.add(curSubAccounts[i]);
+            }
+            subAccountTable.draw();
+        }
+        else {
+            subAccountTable = $('#subAccounts').DataTable({
+                "processing": true,
+                "data": curSubAccounts,
+                "scrollY": "500px",
+                "scrollCollapse": true,
+                "paging": false,
+                "dom": '<"subAccountToolbar"f>lpti',
+                "language": {
+                    "search": "搜索:",
+                    "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
+                    "infoEmpty": "显示 0 到 0 共 0 记录"
+                }
+            });
+        }
+    }
+
+    function ifHideMainAccountToolBar(flag){
+
+        if (flag){
+            $('#main-update').hide();
+            $('#main-delete').hide();
+        }else{
+            $('#main-update').show();
+            $('#main-delete').show();
+        }
+    }
+
+    function ifHideSubAccountToolBar(flag){
+        if (flag){
+            $('#sub-update').hide();
+            $('#sub-delete').hide();
+        }else{
+            $('#sub-update').show();
+            $('#sub-delete').show();
+        }
+    }
+
+</script>
+
+<script>
+
+    //modal 确定 逻辑处理
+    $(document).on("click", "#newAccountModal .btn-primary", function () {
+        var channel = $("#newAccountModal #channel")[0].value;
+        var company = $("#newAccountModal #company")[0].value;
+        var server = $("#newAccountModal #server")[0].value;
+        var userId = $("#newAccountModal #userId")[0].value;
+        var userPassword = $("#newAccountModal #userPassword")[0].value;
+
+        //TODO: 应该做 validate
+        //ajax 发送插入
+
+        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/InsertData.php";
+
+        $.ajax({
+            url: hostpath,
+            type: "get", //send it through get method
+            data:{
+                Channel: channel,
+                CompanyName: company,
+                CompanyServer: server,
+                AccountId: userId,
+                AccountPassword: userPassword
+             },
+            success: function(response) {
+                alert( "Data Loaded: " + response);
+            },
+            error: function(xhr) {
+                //Do Something to handle error
+            }
+        });
+
+    });
+
+    // .click(function() {
+        // alert( "Handler for .click() called." );
+    // });
+
+    //显示modal
+    $(document).on("click", "#main-add", function () {
+
+//        $(".modal-body").append(texts.toArray().join(", "));
+        // As pointed out in comments,
+        // it is superfluous to have to manually call the modal.
+        $('.modal-dialog').modal('show');
+    });
+</script>
+
+</body>
+
+</html>
