@@ -186,7 +186,7 @@
 
                                                     <label for="channel">通道</label>
 
-                                                    <select  style="float: right; width: 50%" class="form-control" id="channel">
+                                                    <select style="float: right; width: 50%" class="form-control" id="channel">
                                                         <option>CTP</option>
                                                         <option>CTP</option>
                                                         <option>CTP</option>
@@ -224,13 +224,13 @@
 
                                                 <div class="form-group">
                                                     <label for="userId">账户ID</label>
-                                                    <input  class="form-control" style="float: right; width: 50%" type="text" name="userId" id="userId"
+                                                    <input class="form-control" style="float: right; width: 50%" type="text" name="userId" id="userId"
                                                             value="" placeholder="账户ID"/>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="userPassword">账户密码</label>
-                                                    <input  class="form-control" style="float: right; width: 50%" type="password" name="userId"
+                                                    <input  class="form-control" style="float: right; width: 50%" type="password" name="userPassword"
                                                             id="userPassword" value="" placeholder="账户密码"/>
                                                 </div>
 
@@ -269,7 +269,7 @@
 
                                                 <div class="form-group">
                                                     <label for="subPassword">子账户密码</label>
-                                                    <input  class="form-control" style="float: right; width: 50%" type="password" name="userId"
+                                                    <input  class="form-control" style="float: right; width: 50%" type="password" name="subPassword"
                                                             id="subPassword" value="" placeholder="账户密码"/>
                                                 </div>
 
@@ -623,6 +623,45 @@
 </script>
 
 <script>
+
+    //modal 确定 逻辑处理
+    $(document).on("click", "#newAccountModal .btn-primary", function () {
+        var channel = $("#newAccountModal #channel")[0].value;
+        var company = $("#newAccountModal #company")[0].value;
+        var server = $("#newAccountModal #server")[0].value;
+        var userId = $("#newAccountModal #userId")[0].value;
+        var userPassword = $("#newAccountModal #userPassword")[0].value;
+
+        //TODO: 应该做 validate
+        //ajax 发送插入
+
+        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/InsertData.php";
+
+        $.ajax({
+            url: hostpath,
+            type: "get", //send it through get method
+            data:{
+                Channel: channel,
+                CompanyName: company,
+                CompanyServer: server,
+                AccountId: userId,
+                AccountPassword: userPassword
+             },
+            success: function(response) {
+                alert( "Data Loaded: " + response);
+            },
+            error: function(xhr) {
+                //Do Something to handle error
+            }
+        });
+
+    });
+
+    // .click(function() {
+        // alert( "Handler for .click() called." );
+    // });
+
+    //显示modal
     $(document).on("click", "#main-add", function () {
 
 //        $(".modal-body").append(texts.toArray().join(", "));

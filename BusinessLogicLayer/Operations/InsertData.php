@@ -3,7 +3,7 @@
     
     //include "_SERVER['DOCUMENT_ROOT']/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
     // utility functions
-    $path = $_SERVER['DOCUMENT_ROOT'];
+    $path = "../../..";
     //echo $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
     include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/Operations/OperationsManager.php";
     include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/Operations/OperationsRow.php";

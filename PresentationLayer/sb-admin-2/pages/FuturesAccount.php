@@ -2,7 +2,7 @@
 //header("Content-type:text/html;charset=utf-8");
 //include "_SERVER['DOCUMENT_ROOT']/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
 // utility functions
-//$path = $_SERVER['DOCUMENT_ROOT'];
+//$path = "../../..";
 //echo $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
 // include "../DataPersistenceLayer/MainAccountManager.php";
 //echo "\n";
