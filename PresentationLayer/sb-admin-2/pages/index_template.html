@@ -338,16 +338,13 @@
                                        cellspacing="0" width="100%">
 
                                     <div class="mainAccountToolbar" style="float:left">
-                                        <button type="button" class="btn btn-default btn-lg" id="main-add" data-toggle="modal"
-                                                data-target="#accountModal">
+                                        <button type="button" class="btn btn-default btn-lg" id="main-add" data-toggle="modal">
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="main-update" data-toggle="modal"
-                                                data-target="#accountModal">
+                                        <button type="button" class="btn btn-default btn-lg" id="main-update" data-toggle="modal">
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="main-delete" data-toggle="modal"
-                                                data-target="#accountModal">
+                                        <button type="button" class="btn btn-default btn-lg" id="main-delete" data-toggle="modal">
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
                                     </div>
@@ -520,7 +517,7 @@
      */
     function refreshData() {
         mainAccounts = [];
-        $.getJSON('http://localhost/SharpSpeed/FuturesAccountManagerSystem/PresentationLayer/sb-admin-2/pages/futuresAccount.php', function (data) {
+        $.getJSON('http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
             mainAccountTableData = data.data;
             for (var i = 0; i < mainAccountTableData.length; i++) {
                 mainAccounts.push(mainAccountTableData[i].inf);
@@ -624,8 +621,16 @@
 
 <script>
 
-    //modal 确定 逻辑处理
-    $(document).on("click", "#newAccountModal .btn-primary", function () {
+    //填充MainModal
+    function fillMainModal(modal, data){
+        $(modal + " #channel option").eq(0).text(data[1]);
+        $(modal + " #company option").eq(0).text(data[2]);
+        $(modal + " #server option").eq(0).text(data[3]);
+        $(modal + " #userId").val(data[4]);
+        $(modal + " #userPassword").val(data[5]);
+    }
+
+    function newAccount(){
         var channel = $("#newAccountModal #channel")[0].value;
         var company = $("#newAccountModal #company")[0].value;
         var server = $("#newAccountModal #server")[0].value;
@@ -646,7 +651,7 @@
                 CompanyServer: server,
                 AccountId: userId,
                 AccountPassword: userPassword
-             },
+            },
             success: function(response) {
                 alert( "Data Loaded: " + response);
             },
@@ -654,21 +659,91 @@
                 //Do Something to handle error
             }
         });
+    }
 
-    });
+    function updateAccount(){
+        var channel = $("#newAccountModal #channel")[0].value;
+        var company = $("#newAccountModal #company")[0].value;
+        var server = $("#newAccountModal #server")[0].value;
+        var userId = $("#newAccountModal #userId")[0].value;
+        var userPassword = $("#newAccountModal #userPassword")[0].value;
 
-    // .click(function() {
-        // alert( "Handler for .click() called." );
-    // });
+        //TODO: 应该做 validate
+        //ajax 发送插入
 
-    //显示modal
+        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/UpdateData.php";
+
+        $.ajax({
+            url: hostpath,
+            type: "get", //send it through get method
+            data:{
+                Channel: channel,
+                CompanyName: company,
+                CompanyServer: server,
+                AccountId: userId,
+                AccountPassword: userPassword
+            },
+            success: function(response) {
+                alert( "Data Loaded: " + response);
+            },
+            error: function(xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+
+    function deleteAccount(data){
+
+        alert(data);
+
+        var channel = data[1];
+        var company = data[2];
+        var server = data[3];
+        var userId = data[4];
+        var userPassword = data[4];
+
+        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/DeleteData.php";
+
+        $.ajax({
+            url: hostpath,
+            type: "get", //send it through get method
+            data:{
+                Channel: channel,
+                CompanyName: company,
+                CompanyServer: server,
+                AccountId: userId,
+                AccountPassword: userPassword
+            },
+            success: function(response) {
+                alert( "Data Loaded: " + response);
+            },
+            error: function(xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+
+    //显示add modal
     $(document).on("click", "#main-add", function () {
-
-//        $(".modal-body").append(texts.toArray().join(", "));
-        // As pointed out in comments,
-        // it is superfluous to have to manually call the modal.
-        $('.modal-dialog').modal('show');
+        //绑定回调
+        $(document).off("click", "#newAccountModal .btn-primary");
+        $(document).on("click", "#newAccountModal .btn-primary", newAccount);
+        $('#accountModal').modal('show');
     });
+
+    //显示update modal
+    $(document).on("click", "#main-update", function () {
+        $(document).off("click", "#newAccountModal .btn-primary");
+        fillMainModal("#accountModal", mainAccounts[selectedIndex]);
+        //绑定回调
+        $(document).on("click", "#newAccountModal .btn-primary", updateAccount);
+        $('#accountModal').modal('show');
+    });
+
+    $(document).on("click", "#main-delete", function () {
+        deleteAccount(mainAccounts[selectedIndex]);
+    });
+
 </script>
 
 </body>
