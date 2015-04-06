@@ -572,6 +572,8 @@
                 mainAccountTable.row.add(mainAccounts[i]);
             }
             mainAccountTable.draw();
+            var table = $('#mainAccounts').dataTable();
+            table.fnProcessingIndicator(false);      // On
         }
         else {
             console.log("开始构建主表");
@@ -581,12 +583,13 @@
                 "scrollY": "200px",
                 "scrollCollapse": false,
                 "paging": false,
-                "dom": '<"mainAccountToolbar"f>lpti',
+                "dom": '<"mainAccountToolbar"f>lrpti',
                 "language": {
                     "search": "搜索:",
                     "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
                     "infoEmpty": "显示 0 到 0 共 0 记录",
-                    "emptyTable":"暂无可显示数据"
+                    "emptyTable":"暂无可显示数据",
+                    "processing": "正在加载......"
                 }
             });
 
@@ -611,11 +614,13 @@
                 "scrollY": "500px",
                 "scrollCollapse": true,
                 "paging": false,
-                "dom": '<"subAccountToolbar"f>lpti',
+                "dom": '<"subAccountToolbar"f>lrpti',
                 "language": {
                     "search": "搜索:",
                     "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
-                    "infoEmpty": "显示 0 到 0 共 0 记录"
+                    "infoEmpty": "显示 0 到 0 共 0 记录",
+                    "emptyTable":"暂无可显示数据",
+                    "processing": "正在加载......"
                 }
             });
         }
