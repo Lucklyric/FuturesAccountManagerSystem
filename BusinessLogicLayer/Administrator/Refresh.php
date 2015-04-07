@@ -59,8 +59,8 @@
     foreach($obj->ColRowData as $colRawData){
         
         $NewRow = new AdministratorRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6]);
-        $AllAdminRows[$colRawData[0]]=$NewRow;
-
+        array_push($AllAdminRows,$NewRow);
+        
      //   echo "<br>";
     }
     }else{

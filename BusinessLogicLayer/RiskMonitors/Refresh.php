@@ -59,7 +59,7 @@
     foreach($obj->ColRowData as $colRawData){
         
         $NewRow = new RiskManageRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5]);
-        $AllRiskRows[$colRawData[0]]=$NewRow;
+        array_push($AllRiskRows,$NewRow);
 
      //   echo "<br>";
     }
