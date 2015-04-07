@@ -61,7 +61,7 @@
     foreach($obj->ColRowData as $colRawData){
         
         $NewRow = new FeeSettingRowClass($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7]);
-         array_push($AllFeeRows,$NewRow);
+         array_push($AllFeeRows,$colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7]);
         
      //   echo "<br>";
     }

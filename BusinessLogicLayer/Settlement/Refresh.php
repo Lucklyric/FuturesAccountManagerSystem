@@ -40,7 +40,7 @@
         
         $NewRow = new SettlementAccountRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7],$colRawData[8],$colRawData[9],$colRawData[10],$colRawData[11]);
 //        $AllSettlementRows[$colRawData[0]]=$NewRow;
-        array_push($AllSettlementRows,$NewRow);
+        array_push($AllSettlementRows,$colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7],$colRawData[8],$colRawData[9],$colRawData[10],$colRawData[11]);
      //   echo "<br>";
     }
     }else{
