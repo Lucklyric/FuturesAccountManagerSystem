@@ -540,9 +540,11 @@
         //mainAccountTable.fnProcessingIndicator();
         $.getJSON('http://localhost:63342/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
             mainAccountTableData = data.data;
+            console.log(mainAccountTableData);
             for (var i = 0; i < mainAccountTableData.length; i++) {
                 mainAccounts.push(mainAccountTableData[i].inf);
             }
+            console.log(mainAccounts);
             refreshMainAccountsTable();
             updateSubAccounts(selectedIndex);
             refreshSubAccountsTable();
@@ -592,7 +594,6 @@
                     "processing": "正在加载......"
                 }
             });
-
         }
     }
 
@@ -619,6 +620,7 @@
                     "search": "搜索:",
                     "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
                     "infoEmpty": "显示 0 到 0 共 0 记录",
+                    "emptyTable":"暂无可显示数据",
                     "processing": "正在加载......"
                 }
             });

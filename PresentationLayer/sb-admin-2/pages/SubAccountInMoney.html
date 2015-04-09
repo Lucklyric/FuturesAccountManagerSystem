@@ -434,13 +434,13 @@
         refreshData(); //更新数据
 
         $('#subAccountMoneyTable').on('click', 'tr', function () { //绑定点击事件刷新子账户
-            selectedIndex = mainAccountTable.row(this).index();
+            selectedIndex = subAccountTable.row(this).index();
             //refreshMainTable();
             if ( $(this).hasClass('selected') ) {
                 //$(this).removeClass('selected');
             }
             else {
-                mainAccountTable.$('tr.selected').removeClass('selected');
+                subAccountTable.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
             }
             $('.modal-dialog').modal('show');
@@ -462,11 +462,11 @@
         //mainAccountTable.fnProcessingIndicator();
         $.getJSON('http://localhost:63342/FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/Refresh.php', function (data) {
             subAccountTableData = data.data;
-            console.log(subAccountTableData[0]);
+           // subAccounts.push(subAccountTableData);
             for (var i = 0; i < subAccountTableData.length; i++) {
                 subAccounts.push(subAccountTableData[i]);
             }
-            console.log(subAccounts[0]);
+            console.log(subAccounts);
             refreshMainTable();
 
         });
