@@ -56,12 +56,12 @@
             
         }
         //获取服务器当前状态信息，eInitial - 0,eMainAccountConnected - 1,eStarted - 2,eStopped - 3。在整个页面醒目位置需要显示当前服务器的状态。
-        function GetLogs()
+        function GetLogs($userid,$password)
         {
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("tablename" => "log");
+            $data = array("userid"=>$userid,"password"=>$password,"tablename" => "log");
             $data_string = json_encode($data);
             $ch = curl_init('121.40.131.144/SPService/SPService.svc/loadtabledata');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -124,11 +124,11 @@
             
         }
         
-        function ConnectAllSPServerMainAccounts(){
+        function ConnectAllSPServerMainAccounts($userid,$password){
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("port" => "10083");
+            $data = array("userid"=>$userid,"password"=>$password,"port" => "10083");
             $data_string = json_encode($data);
             $ch = curl_init('121.40.131.144/SPService/SPService.svc/ConnectAllSPServerMainAccounts');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -146,11 +146,11 @@
             
         }
         
-        function RestartSharpSpeedServer(){
+        function RestartSharpSpeedServer($userid,$password){
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("port" => "10083");
+            $data = array("userid"=>$userid,"password"=>$password,"port" => "10083");
             $data_string = json_encode($data);
             $ch = curl_init('121.40.131.144/SPService/SPService.svc/RestartSharpSpeedServer');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
