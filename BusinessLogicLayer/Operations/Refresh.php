@@ -59,16 +59,18 @@
     foreach($obj->ColRowData as $colRawData){
         
         $NewRow = new OperationsRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7],$colRawData[8],$colRawData[9]);
-        $AllOperationRows[$colRawData[0]]=$NewRow;
-
+        //$AllOperationRows[$colRawData[0]]=$NewRow;
+        array_push($AllOperationRows,$colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7],$colRawData[8],$colRawData[9]);
+        
      //   echo "<br>";
     }
     }else{
     echo "Server in maitenance, cannot get RiskRow.";
     }
-
+    $FinalCombine=array();
+    array_push($FinalCombine,$AllOperationRows);
     $finalreturn=array();
-    $finalreturn["data"]=$AllOperationRows;
+    $finalreturn["data"]=$FinalCombine;
     echo json_encode($finalreturn) ;
     
     //print_r($finalreturn);

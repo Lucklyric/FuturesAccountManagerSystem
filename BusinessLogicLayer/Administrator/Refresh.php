@@ -66,9 +66,10 @@
     }else{
     echo "Server in maitenance, cannot get RiskRow.";
     }
-
+    $FinalCombine=array();
+    array_push($FinalCombine,$AllAdminRows);
     $finalreturn=array();
-    $finalreturn["data"]=$AllAdminRows;
+    $finalreturn["data"]=$FinalCombine;
     echo json_encode($finalreturn) ;
     
     //print_r($finalreturn);

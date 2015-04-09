@@ -69,9 +69,10 @@
     }else{
     echo "Server in maitenance, cannot get MainRows.";
     }
-
+    $FinalCombine=array();
+    array_push($FinalCombine,$AllRiskRows);
     $finalreturn=array();
-    $finalreturn["data"]=$AllRiskRows;
+    $finalreturn["data"]=$FinalCombine;
     echo json_encode($finalreturn) ;
     
     //print_r($finalreturn);
