@@ -9,13 +9,14 @@
     
     $UserId=isset($_GET["UserId"]) ? $_GET["UserId"] :"";
     $Password=isset($_GET["Password"]) ? $_GET["Password"] :"";
- 
+    $UserId="frankzch";
+    $Password="123456";
     
     $testAccount = new ServerManager();
     
     //echo "<br>GetAllMainAccountData: <br>";
     
-    $rawData=$testAccount->GetServerState();
+    $rawData=$testAccount->GetServerState($UserId,$Password);
 
     echo $rawData;
     

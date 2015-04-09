@@ -10,12 +10,15 @@
     $UserId=isset($_GET["UserId"]) ? $_GET["UserId"] :"";
     $Password=isset($_GET["Password"]) ? $_GET["Password"] :"";
  
+    $UserId="frankzch";
+    $Password="123456";
     
+
     $testAccount = new ServerManager();
     
     //echo "<br>GetAllMainAccountData: <br>";
     
-    $rawData=$testAccount->GetAllTradableInstrumentsAndProps();
+    $rawData=$testAccount->GetAllTradableInstrumentsAndProps($UserId,$Password);
 
     echo $rawData;
     
