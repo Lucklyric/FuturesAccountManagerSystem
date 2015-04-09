@@ -79,7 +79,7 @@
         }
         
 
-        function GetServerState(string userid, string password){
+        function GetServerState($userid, $password){
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
@@ -102,11 +102,11 @@
         }
         
         
-        function GetLoggedInSubAccountCount(){
+        function GetLoggedInSubAccountCount($userid,$password){
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("port" => "10083");
+            $data = array("userid"=>$userid,"password"=>$password,"port" => "10083");
             $data_string = json_encode($data);
             $ch = curl_init('121.40.131.144/SPService/SPService.svc/GetLoggedInSubAccountCount');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
