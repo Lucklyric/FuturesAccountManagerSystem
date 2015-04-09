@@ -12,14 +12,14 @@
             $this->userType = $userType;
         }
         
-        function GetAllData()
+        function GetAllData($userid,$password)
         {
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("tablename" => "SubAccount");
+            $data = array("userid"=>$userid,"password"=>$password,"tablename" => "SubAccount");
             $data_string = json_encode($data);
-            $ch = curl_init('121.40.131.144/Test/SPService/SPService.svc/loadtabledata');
+            $ch = curl_init('121.40.131.144/SPService/SPService.svc/loadtabledata');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -41,7 +41,7 @@
             //$data="tablename=MainTable&state=1&通道=CTP&经纪公司=海通期货&经纪公司服务器=上海电信&账户ID=888&账户密码=111";
             
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '121.40.131.144/Test/SPService/SPService.svc/updatetablerowdata');
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '121.40.131.144/SPService/SPService.svc/updatetablerowdata');
             curl_setopt($ch, CURLOPT_POST, 1);
             
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -66,7 +66,7 @@
             //$data="tablename=MainTable&state=1&通道=CTP&经纪公司=海通期货&经纪公司服务器=上海电信&账户ID=888&账户密码=111";
             
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '121.40.131.144/Test/SPService/SPService.svc/updatetablerowdata');
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '121.40.131.144/SPService/SPService.svc/updatetablerowdata');
             curl_setopt($ch, CURLOPT_POST, 1);
             
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -91,7 +91,7 @@
             //$data="tablename=MainTable&state=1&通道=CTP&经纪公司=海通期货&经纪公司服务器=上海电信&账户ID=888&账户密码=111";
             
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '121.40.131.144/Test/SPService/SPService.svc/updatetablerowdata');
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '121.40.131.144/SPService/SPService.svc/updatetablerowdata');
             curl_setopt($ch, CURLOPT_POST, 1);
             
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);

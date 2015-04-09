@@ -36,13 +36,16 @@
     
     $UserId=isset($_GET["UserId"]) ? $_GET["UserId"] :"";
     $Password=isset($_GET["Password"]) ? $_GET["Password"] :"";
- 
+    $UserId="frankzch";
+    $Password="123456";
+    
+
     
     $testAccount = new AdministratorManager();
     
     //echo "<br>GetAllMainAccountData: <br>";
     
-    $rawData=$testAccount->GetAllData();
+    $rawData=$testAccount->GetAllData($UserId,$Password);
     
     //echo($rawData);
     

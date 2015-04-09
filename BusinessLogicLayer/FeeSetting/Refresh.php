@@ -37,13 +37,16 @@
     
     $UserId=isset($_GET["UserId"]) ? $_GET["UserId"] :"";
     $Password=isset($_GET["Password"]) ? $_GET["Password"] :"";
- 
+    $UserId="frankzch";
+    $Password="123456";
+    
+
 
     $FeeSettingManager = new FeeSettingManager();
     
     //echo "<br>GetAllMainAccountData: <br>";
     
-    $rawData=$FeeSettingManager->GetAllData();
+    $rawData=$FeeSettingManager->GetAllData($UserId,$Password);
     
     //echo($rawData);
     

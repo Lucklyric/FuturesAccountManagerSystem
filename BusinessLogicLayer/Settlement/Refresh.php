@@ -15,12 +15,14 @@
     $UserId=isset($_GET["UserId"]) ? $_GET["UserId"] :"";
     $Password=isset($_GET["Password"]) ? $_GET["Password"] :"";
  
-
+    $UserId="frankzch";
+    $Password="123456";
+    
     $SettlementAccount = new SettlementAccountManager();
     
     //echo "<br>GetAllMainAccountData: <br>";
     
-    $rawData=$SettlementAccount->GetAllData();
+    $rawData=$SettlementAccount->GetAllData($UserId,$Password);
     
    // echo($rawData);
     

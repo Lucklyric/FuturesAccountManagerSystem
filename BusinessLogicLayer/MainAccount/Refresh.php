@@ -40,15 +40,16 @@
     
     $UserId=isset($_GET["UserId"]) ? $_GET["UserId"] :"";
     $Password=isset($_GET["Password"]) ? $_GET["Password"] :"";
-    
+    $UserId="frankzch";
+    $Password="123456";
     
     $testAccount = new MainAccountManager();
     $SubAccount = new SubAccountManager();
     $SettlementAccount = new SettlementAccountManager();
     
     //echo "<br>GetAllMainAccountData: <br>";
-    
-    $rawData=$testAccount->GetAllData();
+   
+    $rawData=$testAccount->GetAllData($UserId,$Password);
     
     //echo($rawData);
     
@@ -75,7 +76,7 @@
     }
     //    echo $obj->ColRowData[1][1];
     
-    $subRawData=$SubAccount->GetAllData();
+    $subRawData=$SubAccount->GetAllData($UserId,$Password);
     //echo $subRawData;
     
     //echo "<br>Split test:<br>";

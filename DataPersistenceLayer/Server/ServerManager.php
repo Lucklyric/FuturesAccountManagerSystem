@@ -13,11 +13,11 @@
         }
         
         //获取全部经纪公司信息，这个数据结构在主账户窗口会被使用到。
-        function GetAllBrokersInfo(){
+        function GetAllBrokersInfo($userid,$password){
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("port" => "10083");
+            $data = array("userid"=>$userid,"password"=>$password,"port" => "10083");
             $data_string = json_encode($data);
             $ch = curl_init('121.40.131.144/Test/SPService/SPService.svc/GetAllBrokersInfo');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -34,11 +34,11 @@
             return $result;
         
         }
-        function GetAllTradableInstrumentsAndProps(){
+        function GetAllTradableInstrumentsAndProps($userid,$password){
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("port" => "10083");
+            $data = array("userid"=>$userid,"password"=>$password,"port" => "10083");
             $data_string = json_encode($data);
             $ch = curl_init('121.40.131.144/Test/SPService/SPService.svc/GetAllTradableInstrumentsAndProps');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
