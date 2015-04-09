@@ -58,22 +58,22 @@
     //    echo $colName." ";
     //}
     //echo "<br>test array:";
-
-    $AllFeeRows=array();
+    $FinalCombine=array();
+    
     if($obj){
     foreach($obj->ColRowData as $colRawData){
+        $AllFeeRows=array();
         
         $NewRow = new FeeSettingRowClass($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7]);
          array_push($AllFeeRows,$colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7]);
-        
+        array_push($FinalCombine,$AllFeeRows);
+
      //   echo "<br>";
     }
     }else{
     echo "Server in maitenance, cannot get MainRows.";
     }
-    $FinalCombine=array();
-    array_push($FinalCombine,$AllFeeRows);
-
+   
     $finalreturn=array();
     $finalreturn["data"]=$FinalCombine;
     echo json_encode($finalreturn) ;

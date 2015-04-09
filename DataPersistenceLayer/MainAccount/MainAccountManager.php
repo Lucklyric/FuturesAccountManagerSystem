@@ -74,7 +74,7 @@
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                                                       'Content-Type: x-www-form-urlencoded',
+                                                       'Content-Type: application/json',
                                                        'Content-Length: 129' ));
             
             $result = curl_exec($ch);

@@ -56,20 +56,21 @@
     //    echo $colName." ";
     //}
     //echo "<br>test array:";
-    $AllRiskRows=array();
+    $FinalCombine=array();
+    
     if($obj){
     foreach($obj->ColRowData as $colRawData){
+        $AllRiskRows=array();
         
         $NewRow = new RiskManageRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5]);
         array_push($AllRiskRows,$NewRow->$colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5]);
-
+        array_push($FinalCombine,$AllRiskRows);
+        
      //   echo "<br>";
     }
     }else{
     echo "Server in maitenance, cannot get RiskRow.";
     }
-    $FinalCombine=array();
-    array_push($FinalCombine,$AllRiskRows);
     $finalreturn=array();
     $finalreturn["data"]=$FinalCombine;
     echo json_encode($finalreturn) ;

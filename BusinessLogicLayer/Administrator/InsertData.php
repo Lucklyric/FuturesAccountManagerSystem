@@ -17,6 +17,16 @@
     $UserName=isset($_GET["UserName"]) ? $_GET["UserName"] :"";
     $Contact=isset($_GET["Contact"]) ? $_GET["Contact"] :"";
     
+    $AdminAccount="frankzch";
+    $AdminPassword="123456";
+    $Id="12";
+    $Name="GCtest";
+    $Password="testpass";
+    $SubMain="1";
+    $Restriction="2";
+    $UserName="GameCloud";
+    $Contact="CA";
+    
     $TableName="administrators";
     $State="1";
     $initialdata="Port=";

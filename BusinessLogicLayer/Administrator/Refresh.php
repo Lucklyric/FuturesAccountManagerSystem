@@ -57,20 +57,22 @@
     //    echo $colName." ";
     //}
     //echo "<br>test array:";
-    $AllAdminRows=array();
+    $FinalCombine=array();
+    
     if($obj){
     foreach($obj->ColRowData as $colRawData){
+        $AllAdminRows=array();
         
         $NewRow = new AdministratorRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6]);
         //$AllAdminRows[$colRawData[0]]=$NewRow;
         array_push($AllAdminRows,$colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6]);
      //   echo "<br>";
+        array_push($FinalCombine,$AllAdminRows);
+        
     }
     }else{
     echo "Server in maitenance, cannot get RiskRow.";
     }
-    $FinalCombine=array();
-    array_push($FinalCombine,$AllAdminRows);
     $finalreturn=array();
     $finalreturn["data"]=$FinalCombine;
     echo json_encode($finalreturn) ;
