@@ -36,20 +36,22 @@
     //echo "<br>test array:";
     $AllMainRows=array();
     $AllSubRows=array();
-    $AllSettlementRows=array();
+    
+    $FinalCombine=array();
+    
     if($obj){
     foreach($obj->ColRowData as $colRawData){
-        
+        $AllSettlementRows=array();
         $NewRow = new SettlementAccountRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7],$colRawData[8],$colRawData[9],$colRawData[10],$colRawData[11]);
 //        $AllSettlementRows[$colRawData[0]]=$NewRow;
         array_push($AllSettlementRows,$colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7],$colRawData[8],$colRawData[9],$colRawData[10],$colRawData[11]);
      //   echo "<br>";
+        array_push($FinalCombine,$AllSettlementRows);
+        
     }
     }else{
     echo "Server in maitenance, cannot get MainRows.";
     }
-   $FinalCombine=array();
-    array_push($FinalCombine,$AllSettlementRows);
     $finalreturn=array();
     $finalreturn["data"]=$FinalCombine;
     echo json_encode($finalreturn) ;
