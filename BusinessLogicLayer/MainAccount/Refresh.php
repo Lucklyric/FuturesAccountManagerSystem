@@ -138,7 +138,7 @@
             
             if($OneSubRow->GetMainId()==$OneRow->GetMainId()){
                 array_push($SubAccountData, $OneSubRow->GetAllData());
-                print_r( $OneSubRow->GetAllData());
+                //print_r( $OneSubRow->GetAllData());
                 
             }
             

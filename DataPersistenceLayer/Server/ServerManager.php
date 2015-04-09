@@ -19,7 +19,7 @@
             //return $next;
             $data = array("userid"=>$userid,"password"=>$password,"port" => "10083");
             $data_string = json_encode($data);
-            $ch = curl_init('121.40.131.144/Test/SPService/SPService.svc/GetAllBrokersInfo');
+            $ch = curl_init('121.40.131.144/SPService/SPService.svc/GetAllBrokersInfo');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -40,7 +40,7 @@
             //return $next;
             $data = array("userid"=>$userid,"password"=>$password,"port" => "10083");
             $data_string = json_encode($data);
-            $ch = curl_init('121.40.131.144/Test/SPService/SPService.svc/GetAllTradableInstrumentsAndProps');
+            $ch = curl_init('121.40.131.144/SPService/SPService.svc/GetAllTradableInstrumentsAndProps');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -63,7 +63,7 @@
             //return $next;
             $data = array("tablename" => "log");
             $data_string = json_encode($data);
-            $ch = curl_init('121.40.131.144/Test/SPService/SPService.svc/loadtabledata');
+            $ch = curl_init('121.40.131.144/SPService/SPService.svc/loadtabledata');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -79,13 +79,13 @@
         }
         
 
-        function GetServerState(){
+        function GetServerState(string userid, string password){
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("port" => "10083");
+            $data = array("userid"=>$userid,"password"=>$password,"port" => "10083");
             $data_string = json_encode($data);
-            $ch = curl_init('121.40.131.144/Test/SPService/SPService.svc/GetServerState');
+            $ch = curl_init('121.40.131.144/SPService/SPService.svc/GetServerState');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -108,7 +108,7 @@
             //return $next;
             $data = array("port" => "10083");
             $data_string = json_encode($data);
-            $ch = curl_init('121.40.131.144/Test/SPService/SPService.svc/GetLoggedInSubAccountCount');
+            $ch = curl_init('121.40.131.144/SPService/SPService.svc/GetLoggedInSubAccountCount');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -130,7 +130,7 @@
             //return $next;
             $data = array("port" => "10083");
             $data_string = json_encode($data);
-            $ch = curl_init('121.40.131.144/Test/SPService/SPService.svc/ConnectAllSPServerMainAccounts');
+            $ch = curl_init('121.40.131.144/SPService/SPService.svc/ConnectAllSPServerMainAccounts');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -152,7 +152,7 @@
             //return $next;
             $data = array("port" => "10083");
             $data_string = json_encode($data);
-            $ch = curl_init('121.40.131.144/Test/SPService/SPService.svc/RestartSharpSpeedServer');
+            $ch = curl_init('121.40.131.144/SPService/SPService.svc/RestartSharpSpeedServer');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
