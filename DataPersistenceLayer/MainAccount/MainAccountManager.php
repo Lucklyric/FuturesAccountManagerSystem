@@ -66,9 +66,9 @@
             
             include_once('HTTP/Request.php');
             //$data="tablename=MainTable&state=1&通道=CTP&经纪公司=海通期货&经纪公司服务器=上海电信&账户ID=888&账户密码=111";
-            
+            $data="AdminAccount=frankzch&AdminPassword=123456&TableName=MainAccount&RowState=1&编号=0&通道=CTP&经纪公司=游云模拟&经纪公司服务器=模拟线路&账户ID=00044&账户密码=3&静态权益=0.1";
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '121.40.131.144/SPService/SPService.svc/updatetablerowdata');
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '121.40.131.144/SPService/SPService.svc/UpdateTableRowData');
             curl_setopt($ch, CURLOPT_POST, 1);
             
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -81,7 +81,6 @@
             
             curl_close($ch);
             header("Content-type:text/html;charset=utf-8");
-            
             return $result;
             
         }

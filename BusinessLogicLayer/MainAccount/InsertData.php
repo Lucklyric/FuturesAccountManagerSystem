@@ -24,7 +24,7 @@
     $AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
     $port=10083;
     
-    $TableName="MainTable";
+    $TableName="MainAccount";
     $AdminAccount="frankzch";
     $AdminPassword="123456";
     $State="1";
@@ -38,7 +38,7 @@
     $initialdata="Port=";
     //$data="";
     if($TableName && $State && $Channel && $CompanyName && $CompanyServer && $AccountId && $AccountPassword){
-    $data=$initialdata.$port."&AdminAccount=".$AdminAccount."&AdminPassword=".$AdminPassword."&TableName=".$TableName."&RowState=".$State."&通道=".$Channel."&经纪公司=".$CompanyName."&经纪公司服务器=".$CompanyServer."&账户ID=".$AccountId."&账户密码=".$AccountPassword."&静态权益=".$StaticEquity;
+    $data="AdminAccount=".$AdminAccount."&AdminPassword=".$AdminPassword."&TableName=".$TableName."&RowState=".$State."&编号=0"."&通道=".$Channel."&经纪公司=".$CompanyName."&经纪公司服务器=".$CompanyServer."&账户ID=".$AccountId."&账户密码=".$AccountPassword."&静态权益=".$StaticEquity;
         echo $data;
     }else{
     

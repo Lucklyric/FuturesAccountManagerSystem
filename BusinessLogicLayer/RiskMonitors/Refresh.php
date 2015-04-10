@@ -62,8 +62,8 @@
     foreach($obj->ColRowData as $colRawData){
         $AllRiskRows=array();
         
-        $NewRow = new RiskManageRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5]);
-        array_push($AllRiskRows,$NewRow->$colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5]);
+        $NewRow = new RiskMonitorRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5]);
+        array_push($AllRiskRows,$colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5]);
         array_push($FinalCombine,$AllRiskRows);
         
      //   echo "<br>";
