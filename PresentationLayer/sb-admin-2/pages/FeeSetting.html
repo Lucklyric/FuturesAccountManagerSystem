@@ -497,6 +497,7 @@
      */
     function refreshData() {
         feeSettingData = [];
+        ifHideMainAccountToolBar(true);
         var table = $('#feeSettingTable').dataTable();
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
@@ -601,9 +602,7 @@
             $('#main-delete').show();
         }
     }
-    // .click(function() {
-    // alert( "Handler for .click() called." );
-    // });
+
 
     //显示modal
     $(document).on("click", "#main-add", function () {

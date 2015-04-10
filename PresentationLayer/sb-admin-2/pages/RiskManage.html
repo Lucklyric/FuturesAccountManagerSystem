@@ -345,15 +345,15 @@
 
                                     <div class="riskManagerToolbar" style="float:left">
                                         <button type="button" class="btn btn-default btn-lg" id="main-add" data-toggle="modal"
-                                                data-target="#accountModal">
+                                                >
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
                                         <button type="button" class="btn btn-default btn-lg" id="main-update" data-toggle="modal"
-                                                data-target="#accountModal">
+                                                >
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
                                         <button type="button" class="btn btn-default btn-lg" id="main-delete" data-toggle="modal"
-                                                data-target="#accountModal">
+                                                >
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
                                     </div>
@@ -462,8 +462,6 @@
             }
            // $('.modal-dialog').modal('show');
         } );
-
-
     });
 </script>
 
@@ -477,7 +475,7 @@
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
         //mainAccountTable.fnProcessingIndicator();
-        $.getJSON('http://localhost:63342/FuturesAccountManagerSystem/BusinessLogicLayer/RiskManage/Refresh.php', function (data) {
+        $.getJSON('http://localhost:63342/FuturesAccountManagerSystem/BusinessLogicLayer/Administrator/Refresh.php', function (data) {
             riskManagerTableData = data.data;
             console.log(riskManagerTableData[0]);
             for (var i = 0; i < riskManagerTableData.length; i++) {
@@ -581,7 +579,7 @@
     // alert( "Handler for .click() called." );
     // });
 
-    //显示modal
+    //显示modal //SY这边添加添删改的功能
     $(document).on("click", "#main-add", function () {
 
 //        $(".modal-body").append(texts.toArray().join(", "));

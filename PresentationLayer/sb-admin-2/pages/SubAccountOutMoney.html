@@ -343,7 +343,12 @@
                                 <table id="subAccountMoneyTable" class="table table-striped table-bordered table-hover"
                                        cellspacing="0" width="100%">
 
+                                    <div class="subAccountToolbar" style="float:left">
+                                        <button type="button" class="btn btn-default btn-lg" id="sub-update" data-toggle="modal">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </button>
 
+                                    </div>
                                     <thead>
                                     <tr>
                                         <th>编号</th>
@@ -434,16 +439,17 @@
         refreshData(); //更新数据
 
         $('#subAccountMoneyTable').on('click', 'tr', function () { //绑定点击事件刷新子账户
-            selectedIndex = mainAccountTable.row(this).index();
+            selectedIndex = subAccountTable.row(this).index();
             //refreshMainTable();
+            ifHideSubAccountToolBar(false);
             if ( $(this).hasClass('selected') ) {
                 //$(this).removeClass('selected');
             }
             else {
-                mainAccountTable.$('tr.selected').removeClass('selected');
+                subAccountTable.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
             }
-            $('.modal-dialog').modal('show');
+
         } );
 
 
@@ -456,17 +462,18 @@
      */
     function refreshData() {
         subAccounts = [];
+        ifHideSubAccountToolBar(true);
         var table = $('#subAccountMoneyTable').dataTable();
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
         //mainAccountTable.fnProcessingIndicator();
         $.getJSON('http://localhost:63342/FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/Refresh.php', function (data) {
             subAccountTableData = data.data;
-            console.log(subAccountTableData[0]);
+            // subAccounts.push(subAccountTableData);
             for (var i = 0; i < subAccountTableData.length; i++) {
                 subAccounts.push(subAccountTableData[i]);
             }
-            console.log(subAccounts[0]);
+            console.log(subAccounts);
             refreshMainTable();
 
         });
@@ -515,6 +522,13 @@
 
 <script>
 
+    function ifHideSubAccountToolBar(flag){
+        if (flag){
+            $('#sub-update').hide();
+        }else{
+            $('#sub-update').show();
+        }
+    }
     //modal 确定 逻辑处理
     $(document).on("click", "#newAccountModal .btn-primary", function () {
         var channel = $("#newAccountModal #channel")[0].value;
