@@ -502,7 +502,7 @@
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
         //mainAccountTable.fnProcessingIndicator();
-        $.getJSON('http://localhost:63342/FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/Refresh.php', function (data) {
             feeSettingTableData = data.data;
             console.log(feeSettingTableData[0]);
             for (var i = 0; i < feeSettingTableData.length; i++) {

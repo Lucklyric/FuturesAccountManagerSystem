@@ -39,7 +39,7 @@ function SSToolBar(restartServer,connectMainAccount,onlineCount,serverStatus){
         parent.serverStatusJq.text("服务器状态：请求重启...");
         console.log("开始请求服务器状态")
         //parent.manualRefreah();
-        $.getJSON('http://localhost:63342/FuturesAccountManagerSystem/BusinessLogicLayer/Server/RestartSharpSpeedServer.php', function (data) {
+        $.getJSON('../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/RestartSharpSpeedServer.php', function (data) {
             console.log("服务器状态"+data);
             if (data == ""){
                 parent.serverStatusJq.text("服务器状态：正在重启...");

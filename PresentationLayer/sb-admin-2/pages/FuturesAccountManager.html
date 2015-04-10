@@ -538,7 +538,7 @@
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
         //mainAccountTable.fnProcessingIndicator();
-        $.getJSON('http://localhost:63342/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
             mainAccountTableData = data.data;
             console.log(mainAccountTableData);
             for (var i = 0; i < mainAccountTableData.length; i++) {

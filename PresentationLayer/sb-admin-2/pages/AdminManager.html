@@ -465,7 +465,7 @@
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
         //mainAccountTable.fnProcessingIndicator();
-        $.getJSON('http://localhost:63342/FuturesAccountManagerSystem/BusinessLogicLayer/RiskManage/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskManage/Refresh.php', function (data) {
             adminManagerTableData = data.data;
             console.log(adminManagerTableData[0]);
             for (var i = 0; i < adminManagerTableData.length; i++) {
