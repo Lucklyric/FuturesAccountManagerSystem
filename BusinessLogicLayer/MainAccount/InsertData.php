@@ -39,7 +39,7 @@
     //$data="";
     if($TableName && $State && $Channel && $CompanyName && $CompanyServer && $AccountId && $AccountPassword){
     $data="AdminAccount=".$AdminAccount."&AdminPassword=".$AdminPassword."&TableName=".$TableName."&RowState=".$State."&编号=0"."&通道=".$Channel."&经纪公司=".$CompanyName."&经纪公司服务器=".$CompanyServer."&账户ID=".$AccountId."&账户密码=".$AccountPassword."&静态权益=".$StaticEquity;
-        echo $data;
+       // echo $data;
     }else{
     
         echo "Some data is missing!";

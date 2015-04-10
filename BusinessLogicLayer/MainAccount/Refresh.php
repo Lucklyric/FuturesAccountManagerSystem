@@ -67,7 +67,7 @@
     if($obj){
         foreach($obj->ColRowData as $colRawData){
             
-            $NewRow = new MainAccountRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5]);
+            $NewRow = new MainAccountRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6]);
             $AllMainRows[$colRawData[0]]=$NewRow;
             //   echo "<br>";
         }

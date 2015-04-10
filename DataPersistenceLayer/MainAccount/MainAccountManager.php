@@ -65,24 +65,35 @@
         function InsertData($data){
             
             include_once('HTTP/Request.php');
+            $id=0;
+            $se=90.00;
+            $mm=2000.00;
             //$data="tablename=MainTable&state=1&通道=CTP&经纪公司=海通期货&经纪公司服务器=上海电信&账户ID=888&账户密码=111";
-            $data="AdminAccount=frankzch&AdminPassword=123456&TableName=MainAccount&RowState=1&编号=0&通道=CTP&经纪公司=游云模拟&经纪公司服务器=模拟线路&账户ID=00044&账户密码=3&静态权益=0.1";
+            
+            //$data="admin=frankzch&password=123456&tablename=MainAccount&state=1&编号=".$id."&通道=CTP&经纪公司名称=游云模拟&经纪公司服务器=模拟线路&账户ID=00044&账户密码=3&静态权益=".$se."&最大可分配金额=".$mm;
+            //$str = mb_convert_encoding($data, "UTF-8");
+            $data="admin=frankzch&password=123456&tablename=MainAccount&state=1&编号=0&通道=CTP&经纪公司名称=test期货&经纪公司服务器=上海电信&账户ID=999&账户密码=111&静态权益=90&最大可分配金额=2000";
+         //   $str=urlencode($data);
+            echo $data;
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '121.40.131.144/SPService/SPService.svc/UpdateTableRowData');
+            
+            curl_setopt($ch, CURLOPT_URL,'121.40.131.144/SPService/SPService.svc/updatetablerowdata');
             curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS,
+                        $data);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
             
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            
+            // receive server response ...
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                                                       'Content-Type: application/json',
-                                                       'Content-Length: 129' ));
             
-            $result = curl_exec($ch);
+            $server_output = curl_exec ($ch);
             
-            curl_close($ch);
+            curl_close ($ch);
             header("Content-type:text/html;charset=utf-8");
-            return $result;
             
+            echo $server_output;
+
         }
         
         
