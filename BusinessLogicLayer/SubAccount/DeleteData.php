@@ -19,22 +19,36 @@
     $MainId=isset($_GET["MainId"]) ? $_GET["MainId"] :"";
     $RiskManagementGroup=isset($_GET["RiskManagementGroup"]) ? $_GET["RiskManagementGroup"] :"";
     $RateGroupName=isset($_GET["RateGroupName"]) ? $_GET["RateGroupName"] :"";
+    $MoneyAccount=isset($_GET["MoneyAccount"]) ? $_GET["MoneyAccount"] :"";
+    $MoneyRatio=isset($_GET["MoneyRatio"]) ? $_GET["MoneyRatio"] :"";
+    $SecondMain=isset($_GET["SecondMain"]) ? $_GET["SecondMain"] :"";
     
     $AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
     $AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
-    $port=10083;
     
     $TableName="SubAccount";
+    $AdminAccount="frankzch";
+    $AdminPassword="123456";
+    $TableName="SubAccount";
+    $SubSystemId="23";
+    $SubId="shw9794602";
+    $SubPass="testpass";
+    $Restriction="True";
+    $CreateTime="2015-4-10 17:19:22";
+    $LastLoginTime="2015-4-10 17:19:23";
+    $UserName="test";
+    $ContactInfo="test";
+    $MainId="5";
+    $RiskManagementGroup="test";
+    $RateGroupName="test";
+    $MoneyAccount="123";
+    $MoneyRatio="1:2";
+    $SecondMain="False";
     $State="2";
-    $Channel="2";
-    $CompanyName="海通期货";
-    $CompanyServer="test";
-    $AccountId="2";
-    $AccountPassword="3";
-    $initialdata="Port=";
     
-    if($TableName && $State && $SubSystemId && $SubId && $SubPass && $Restriction && $CreateTime && $LastLoginTime&& $UserName && $ContactInfo && $MainId && $RiskManagementGroup && $RateGroupName){
-        $data=$initialdata.$port."&AdminAccount=".$AdminAccount."&AdminPassword=".$AdminPassword."&TableName=".$TableName."&RowState=".$State."&编号=".$SubSystemId."&子账户ID=".$SubId."&子账户密码=".$SubPass."&限制使用=".$Restriction."&创建时间=".$CreateTime."&最后登录时间=".$LastLoginTime."&用户姓名=".$UserName."&联系方式=".$ContactInfo."&主账户编号=".$MainId."&风控组名称=".$RiskManagementGroup."&费率组名称=".$RateGroupName;
+    if($TableName && $State ){
+        $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$SubSystemId."&子账户ID=".$SubId."&子账户密码=".$SubPass."&限制使用=".$Restriction."&创建时间=".$CreateTime."&最后登录时间=".$LastLoginTime."&用户姓名=".$UserName."&联系方式=".$ContactInfo."&主账户编号=".$MainId."&风控组名称=".$RiskManagementGroup."&费率组名称=".$RateGroupName."&初始配资比例=".$MoneyRatio."&二级主账户=".$SecondMain;
+        echo "This is hardcoded test data:<br>";
         echo $data;
     }else{
         
@@ -48,7 +62,7 @@
     $testAccount = new SubAccountManager();
     if($data){
         
-        $response=$testAccount->DeleteData($data);
+        $response=$testAccount->InsertData($data);
         
     }
     echo($response);

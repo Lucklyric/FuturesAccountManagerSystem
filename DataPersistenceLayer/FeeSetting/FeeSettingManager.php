@@ -84,21 +84,24 @@
             //$data="tablename=MainTable&state=1&通道=CTP&经纪公司=海通期货&经纪公司服务器=上海电信&账户ID=888&账户密码=111";
             
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '121.40.131.144/SPService/SPService.svc/updatetablerowdata');
+            
+            curl_setopt($ch, CURLOPT_URL,'121.40.131.144/SPService/SPService.svc/updatetablerowdata');
             curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS,
+                        $data);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
             
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            
+            // receive server response ...
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                                                       'Content-Type: x-www-form-urlencoded',
-                                                       'Content-Length: 129' ));
             
-            $result = curl_exec($ch);
+            $server_output = curl_exec ($ch);
             
-            curl_close($ch);
+            curl_close ($ch);
             header("Content-type:text/html;charset=utf-8");
             
-            return strlen($result);
+            echo $server_output;
+            
             
         }
         
@@ -107,23 +110,25 @@
             
             include_once('HTTP/Request.php');
             //$data="tablename=MainTable&state=1&通道=CTP&经纪公司=海通期货&经纪公司服务器=上海电信&账户ID=888&账户密码=111";
-            
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '121.40.131.144/SPService/SPService.svc/updatetablerowdata');
+            
+            curl_setopt($ch, CURLOPT_URL,'121.40.131.144/SPService/SPService.svc/updatetablerowdata');
             curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS,
+                        $data);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
             
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            
+            // receive server response ...
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                                                       'Content-Type: x-www-form-urlencoded',
-                                                       'Content-Length: 129' ));
             
-            $result = curl_exec($ch);
+            $server_output = curl_exec ($ch);
             
-            curl_close($ch);
+            curl_close ($ch);
             header("Content-type:text/html;charset=utf-8");
             
-            return strlen($result);
+            echo $server_output;
+            
             
         }
         
@@ -134,21 +139,24 @@
             //$data="tablename=MainTable&state=1&通道=CTP&经纪公司=海通期货&经纪公司服务器=上海电信&账户ID=888&账户密码=111";
             
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '121.40.131.144/SPService/SPService.svc/updatetablerowdata');
+            
+            curl_setopt($ch, CURLOPT_URL,'121.40.131.144/SPService/SPService.svc/updatetablerowdata');
             curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS,
+                        $data);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
             
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            
+            // receive server response ...
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                                                       'Content-Type: x-www-form-urlencoded',
-                                                       'Content-Length: 129' ));
             
-            $result = curl_exec($ch);
+            $server_output = curl_exec ($ch);
             
-            curl_close($ch);
+            curl_close ($ch);
             header("Content-type:text/html;charset=utf-8");
             
-            return strlen($result);
+            echo $server_output;
+            
             
         }
         

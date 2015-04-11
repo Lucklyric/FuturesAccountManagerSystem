@@ -9,8 +9,6 @@
     include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccount/MainAccountManager.php";
     include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubAccount/SubRowClass.php";
     include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubAccount/SubAccountManager.php";
-
-
     
     $MainId=isset($_GET["MainId"]) ? $_GET["MainId"] :"";
     $Channel=isset($_GET["Channel"]) ? $_GET["Channel"] :"";
@@ -21,26 +19,31 @@
     $StaticEquity=isset($_GET["StaticEquity"]) ? $_GET["StaticEquity"] :"";
     $State=isset($_GET["State"]) ? $_GET["State"] :"";
     $TableName=isset($_GET["TableName"]) ? $_GET["TableName"] :"";
-
+    //编号
+    $RowId=isset($_GET["RowId"]) ? $_GET["RowId"] :"";
+    
     $AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
     $AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
-    $port=10083;
     
-    $TableName="MainTable";
-    $AdminAccount="aaa";
-    $AdminPassword="123";
+    $MaxMoney=isset($_GET["MaxMoney"]) ? $_GET["MaxMoney"] :"";
+    
+    $TableName="MainAccount";
+    $AdminAccount="frankzch";
+    $AdminPassword="123456";
     $State="2";
-    $Channel="2";
-    $CompanyName="海通期货";
-    $CompanyServer="test";
-    $AccountId="2";
+    
+    $Channel="CTP";
+    $CompanyName="游云模拟";
+    $CompanyServer="模拟test";
+    $AccountId="00044";
     $AccountPassword="3";
-    $initialdata="Port=";
-    $data="";
-    if($TableName && $State && $Channel && $CompanyName && $CompanyServer && $AccountId && $AccountPassword){
-        $data=$initialdata.$port."&AdminAccount=".$AdminAccount."&AdminPassword=".$AdminPassword."&TableName=".$TableName."&RowState=".$State."&通道=".$Channel."&经纪公司=".$CompanyName."&经纪公司服务器=".$CompanyServer."&账户ID=".$AccountId."&账户密码=".$AccountPassword;
-        
-        echo $data;
+    $StaticEquity="0.1";
+    $MaxMoney="200";
+    $RowId="11";
+    //$data="";
+    if($TableName && $State && $Channel && $CompanyName && $CompanyServer && $AccountId && $AccountPassword && $MaxMoney){
+        $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$RowId."&通道=".$Channel."&经纪公司名称=".$CompanyName."&经纪公司服务器=".$CompanyServer."&账户ID=".$AccountId."&账户密码=".$AccountPassword."&静态权益=".$StaticEquity."&最大可分配金额=".$MaxMoney;
+        // echo $data;
     }else{
         
         echo "Some data is missing!";
@@ -54,7 +57,7 @@
     $SubAccount = new SubAccountManager();
     if($data){
         
-        $response=$testAccount->DeleteData($data);
+        $response=$testAccount->InsertData($data);
         
     }
     echo($response);

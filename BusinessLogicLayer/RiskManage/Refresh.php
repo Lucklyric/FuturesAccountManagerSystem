@@ -62,9 +62,9 @@
     if($obj){
     foreach($obj->ColRowData as $colRawData){
         $AllRiskRows=array();
-        $NewRow = new RiskManageRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7],$colRawData[8],$colRawData[9],$colRawData[10],$colRawData[11],$colRawData[12],$colRawData[13]);
+     //   $NewRow = new RiskManageRow($colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7],$colRawData[8],$colRawData[9],$colRawData[10],$colRawData[11],$colRawData[12],$colRawData[13]);
         //$AllRiskRows[$colRawData[0]]=$NewRow;
-        array_push($AllRiskRows,$colRawData[0],$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7],$colRawData[8],$colRawData[9],$colRawData[10],$colRawData[11],$colRawData[12],$colRawData[13]);
+        array_push($AllRiskRows,$colRawData[1],$colRawData[2],$colRawData[3],$colRawData[4],$colRawData[5],$colRawData[6],$colRawData[7],$colRawData[8],$colRawData[9],$colRawData[10],$colRawData[11],$colRawData[12],$colRawData[13]);
         array_push($FinalCombine,$AllRiskRows);
      //   echo "<br>";
     }
