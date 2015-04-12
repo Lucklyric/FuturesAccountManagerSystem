@@ -124,6 +124,9 @@
                         <a href="FeeSetting.html"><i class="fa fa-bar-chart-o fa-fw"></i> 费率管理</a>
                     </li>
                     <li>
+                        <a href="RiskMonitorManager.html"><i class="fa fa-user fa-fw"></i> 风控员员管理</a>
+                    </li>
+                    <li>
                         <a href="AdminManager.html"><i class="fa fa-user fa-fw"></i> 管理员管理</a>
                     </li>
                     <li>
@@ -416,6 +419,7 @@
 <script src="../../../Source/DataTable-Plugins/api/fnProcessingIndicator.js"></script>
 
 <script src="../js/SSClass/SSToolBar.js"></script>
+
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
 
@@ -451,6 +455,9 @@
             // $('.modal-dialog').modal('show');
         } );
 
+        new $.fn.dataTable.FixedColumns( adminManagerTable, {
+            heightMatch: 'none'
+        } );
 
     });
 </script>
@@ -465,7 +472,7 @@
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
         //mainAccountTable.fnProcessingIndicator();
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskManage/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Administrator/Refresh.php', function (data) {
             adminManagerTableData = data.data;
             console.log(adminManagerTableData[0]);
             for (var i = 0; i < adminManagerTableData.length; i++) {

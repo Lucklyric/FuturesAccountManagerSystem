@@ -45,51 +45,51 @@
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="margin-bottom: 0">
         <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html">锋利资产管理系统v1.0.0.1</a>
-        </div>
-        <!-- /.navbar-header -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">锋利资产管理系统v1.0.0.1</a>
+            </div>
+            <!-- /.navbar-header -->
 
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <p id = "onlineCount" class="navbar-text">在线人数：0人</p>
-            </li>
-            <li>
-                <p id = "serverStatus" class="navbar-text">服务器状态：关闭</p>
-            </li>
-            <li>
-                <button id = "connectMainAccount" class="btn btn-info navbar-btn" style="margin-right: 5px">连接主账户</button>
-            </li>
-            <li>
-                <button id = "restartServer" class="btn btn-primary navbar-btn" style="margin-right: 5px">重启服务器</button>
-            </li>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <p id = "onlineCount" class="navbar-text">在线人数：0人</p>
+                </li>
+                <li>
+                    <p id = "serverStatus" class="navbar-text">服务器状态：关闭</p>
+                </li>
+                <li>
+                    <button id = "connectMainAccount" class="btn btn-info navbar-btn" style="margin-right: 5px">连接主账户</button>
+                </li>
+                <li>
+                    <button id = "restartServer" class="btn btn-primary navbar-btn" style="margin-right: 5px">重启服务器</button>
+                </li>
 
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> 账户资料</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-            </li>
-        </ul>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> 账户资料</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+            </ul>
 
-        <!-- /.navbar-top-links -->
+            <!-- /.navbar-top-links -->
             <!-- /.dropdown -->
-        <!-- /.navbar-top-links -->
+            <!-- /.navbar-top-links -->
         </div>
         <div class="navbar-default sidebar" role="navigation" style="margin-top:5px">
             <div class="sidebar-nav navbar-collapse" style="margin-top:0px">
@@ -157,14 +157,14 @@
             <!-- /.sidebar-collapse -->
         </div>
         <!-- /.navbar-static-side -->
-            <!--</div>-->
+        <!--</div>-->
     </nav>
 
     <div id="page-wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">证券账户管理</h3>
+                    <h3 class="page-header">管理员管理</h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -172,7 +172,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            主账户
+                            管理员
                         </div>
 
                         <div class="panel-body">
@@ -234,7 +234,7 @@
                                                 <div class="form-group">
                                                     <label for="userId">账户ID</label>
                                                     <input class="form-control" style="float: right; width: 50%" type="text" name="userId" id="userId"
-                                                            value="" placeholder="账户ID"/>
+                                                           value="" placeholder="账户ID"/>
                                                 </div>
 
                                                 <div class="form-group">
@@ -343,108 +343,49 @@
                                 <!-- /.modal -->
 
 
-                                <table id="mainAccounts" class="table table-striped table-bordered table-hover"
+                                <table id="riskMonitorTable" class="table table-striped table-bordered table-hover"
                                        cellspacing="0" width="100%">
 
-                                    <div class="mainAccountToolbar" style="float:left">
+                                    <div class="riskMonitorToolbar" style="float:left">
                                         <button type="button" class="btn btn-default btn-lg" id="main-add" data-toggle="modal"
-                                                data-target="#accountModal">
+                                                >
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
                                         <button type="button" class="btn btn-default btn-lg" id="main-update" data-toggle="modal"
-                                                data-target="#accountModal">
+                                                >
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
                                         <button type="button" class="btn btn-default btn-lg" id="main-delete" data-toggle="modal"
-                                                data-target="#accountModal">
+                                                >
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
                                     </div>
                                     <thead>
                                     <tr>
                                         <th>编号</th>
-                                        <th>通道</th>
-                                        <th>经纪公司名称</th>
-                                        <th>经纪公司服务器</th>
-                                        <th>账户ID</th>
-                                        <th>账户密码</th>
-                                        <th>静态权益</th>
+                                        <th>名称</th>
+                                        <th>密码</th>
+                                        <th>附属主账户</th>
+                                        <th>姓名</th>
+                                        <th>联系方式</th>
                                     </tr>
                                     </thead>
 
                                     <tfoot>
                                     <tr>
                                         <th>编号</th>
-                                        <th>通道</th>
-                                        <th>经纪公司名称</th>
-                                        <th>经纪公司服务器</th>
-                                        <th>账户ID</th>
-                                        <th>账户密码</th>
-                                        <th>静态权益</th>
+                                        <th>名称</th>
+                                        <th>密码</th>
+                                        <th>附属主账户</th>
+                                        <th>姓名</th>
+                                        <th>联系方式</th>
                                     </tr>
                                     </tfoot>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            子账户
-                        </div>
-                        <div class="panel-body">
-                            <div class="dataTable_wrapper">
-                                <table id="subAccounts" class="table table-striped table-bordered table-hover"
-                                       cellspacing="0"
-                                       width="100%">
-                                    <div class="subAccountToolbar" style="float:left">
-                                        <button type="button" class="btn btn-default btn-lg" id="sub-add" data-toggle="modal"
-                                                data-target="#subModal">
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="sub-update" data-toggle="modal"
-                                                data-target="#subModal">
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="sub-delete" data-toggle="modal"
-                                                data-target="#subModal">
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </button>
-                                    </div>
-                                    <thead>
-                                    <tr>
-                                        <th>编号</th>
-                                        <th>子账户ID</th>
-                                        <th>子账户密码</th>
-                                        <th>限制使用</th>
-                                        <th>创建日期</th>
-                                        <th>最后登录时间</th>
-                                        <th>用户姓名</th>
-                                        <th>联系方式</th>
-                                        <th>主账户名称</th>
-                                        <th>风控组名称</th>
-                                        <th>费率组名称</th>
-                                    </tr>
-                                    </thead>
 
-                                    <tfoot>
-                                    <tr>
-                                        <th>编号</th>
-                                        <th>子账户ID</th>
-                                        <th>子账户密码</th>
-                                        <th>限制使用</th>
-                                        <th>创建日期</th>
-                                        <th>最后登录时间</th>
-                                        <th>用户姓名</th>
-                                        <th>联系方式</th>
-                                        <th>主账户名称</th>
-                                        <th>风控组名称</th>
-                                        <th>费率组名称</th>
-                                    </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
                 <!-- /.col-lg-12 -->
@@ -476,6 +417,7 @@
 <script src="../../../Source/DataTable-Plugins/api/fnProcessingIndicator.js"></script>
 
 <script src="../js/SSClass/SSToolBar.js"></script>
+
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
 
@@ -483,49 +425,36 @@
     /**
      * 定义全局变量
      */
-    var mainAccountTable;
-    var subAccountTable;
-    var mainAccountTableData;
-    var mainAccounts = [];
-    var curSubAccounts = [];
+
+    var riskMonitorTable;
+    var riskMonitorTableData;
+    var riskMonitorData= [];
     var selectedIndex = 0;  //mainSelectedIndex
-    var subSelectedIndex = 0;  //subSelectedIndex
     var toolBarManger = new SSToolBar($("#restartServer"),$("#connectMainAccount"),$("#onlineCount"),$("#serverStatus"));
     /**
      * Document加载完毕 更新数据刷新Table绑定点击事件
      */
     $(document).ready(function () {
         ifHideMainAccountToolBar(true);
-        ifHideSubAccountToolBar(true);
-        refreshMainAccountsTable();
+        refreshMainTable();
         refreshData(); //更新数据
 
-        $('#mainAccounts').on('click', 'tr', function () { //绑定点击事件刷新子账户
-
-            selectedIndex = mainAccountTable.row(this).index();
-            updateSubAccounts(selectedIndex);
-            refreshSubAccountsTable();
+        $('#riskMonitorTable').on('click', 'tr', function () { //绑定点击事件刷新子账户
+            selectedIndex = riskMonitorTable.row(this).index();
             ifHideMainAccountToolBar(false);
-            ifHideSubAccountToolBar(true);
+            //refreshMainTable();
             if ( $(this).hasClass('selected') ) {
                 //$(this).removeClass('selected');
             }
             else {
-                mainAccountTable.$('tr.selected').removeClass('selected');
+                riskMonitorTable.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
             }
+            // $('.modal-dialog').modal('show');
         } );
 
-        $('#subAccounts').on('click', 'tr', function () { //绑定点击事件刷新子账户
-            ifHideSubAccountToolBar(false);
-            subSelectedIndex = subAccountTable.row(this).index();
-            if ( $(this).hasClass('selected') ) {
-                //$(this).removeClass('selected');
-            }
-            else {
-                subAccountTable.$('tr.selected').removeClass('selected');
-                $(this).addClass('selected');
-            }
+        new $.fn.dataTable.FixedColumns( riskMonitorTable, {
+            heightMatch: 'none'
         } );
 
     });
@@ -536,57 +465,48 @@
      * Ajax从服务端取数据
      */
     function refreshData() {
-        mainAccounts = [];
-        var table = $('#mainAccounts').dataTable();
+        riskMonitorData = [];
+        var table = $('#riskMonitorTable').dataTable();
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
         //mainAccountTable.fnProcessingIndicator();
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
-            mainAccountTableData = data.data;
-            for (var i = 0; i < mainAccountTableData.length; i++) {
-                mainAccounts.push(mainAccountTableData[i].inf);
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskMonitors/Refresh.php', function (data) {
+            riskMonitorTableData = data.data;
+            console.log(riskMonitorTableData[0]);
+            for (var i = 0; i < riskMonitorTableData.length; i++) {
+                riskMonitorData.push(riskMonitorTableData[i]);
             }
-            refreshMainAccountsTable();
-            updateSubAccounts(selectedIndex);
-            refreshSubAccountsTable();
-            ifHideMainAccountToolBar(true);
-            ifHideSubAccountToolBar(true);
+            console.log("取到数据");
+            refreshMainTable();
+
         });
     }
 
-    /**
-     * 从本地取出对应的子账户信息
-     * @param index 对应主账户index
-     */
-    function updateSubAccounts(index) {
-        curSubAccounts = [];
-        for (var i = 0; i < mainAccountTableData[index].subs.length; i++) {
-            curSubAccounts.push(mainAccountTableData[index].subs[i]);
-        }
-    }
 
     /**
      * 刷新主账户表格
      */
-    function refreshMainAccountsTable() {
-        if ($.fn.dataTable.isDataTable('#mainAccounts')) {
-            mainAccountTable.clear();
-            for (var i = 0; i < mainAccounts.length; i++) {
-                mainAccountTable.row.add(mainAccounts[i]);
+    function refreshMainTable() {
+        if ($.fn.dataTable.isDataTable('#riskMonitorTable')) {
+            console.log("刷新表格");
+            console.log(riskMonitorData[0]);
+            riskMonitorTable.clear();
+            for (var i = 0; i < riskMonitorData.length; i++) {
+                riskMonitorTable.row.add(riskMonitorData[i]);
             }
-            mainAccountTable.draw();
-            var table = $('#mainAccounts').dataTable();
+            riskMonitorTable.draw();
+            var table = $('#riskMonitorTable').dataTable();
             table.fnProcessingIndicator(false);      // On
         }
         else {
             console.log("开始构建主表");
-            mainAccountTable = $('#mainAccounts').DataTable({
+            riskMonitorTable = $('#riskMonitorTable').DataTable({
                 "processing": true,
-                "data": mainAccounts,
-                "scrollY": "200px",
+                "data": riskMonitorData,
+                "scrollY": "500px",
                 "scrollCollapse": false,
                 "paging": false,
-                "dom": '<"mainAccountToolbar"f>lrpti',
+                "dom": '<"riskMonitorToolbar"f>rlpti',
                 "language": {
                     "search": "搜索:",
                     "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
@@ -599,56 +519,7 @@
         }
     }
 
-    /**
-     * 刷新子账户表格
-     */
-    function refreshSubAccountsTable() {
-        if ($.fn.dataTable.isDataTable('#subAccounts')) {
-            subAccountTable.clear();
-            for (var i = 0; i < curSubAccounts.length; i++) {
-                subAccountTable.row.add(curSubAccounts[i]);
-            }
-            subAccountTable.draw();
-        }
-        else {
-            subAccountTable = $('#subAccounts').DataTable({
-                "processing": true,
-                "data": curSubAccounts,
-                "scrollY": "500px",
-                "scrollCollapse": true,
-                "paging": false,
-                "dom": '<"subAccountToolbar"f>lrpti',
-                "language": {
-                    "search": "搜索:",
-                    "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
-                    "infoEmpty": "显示 0 到 0 共 0 记录",
-                    "emptyTable":"暂无可显示数据",
-                    "processing": "正在加载......"
-                }
-            });
-        }
-    }
 
-    function ifHideMainAccountToolBar(flag){
-
-        if (flag){
-            $('#main-update').hide();
-            $('#main-delete').hide();
-        }else{
-            $('#main-update').show();
-            $('#main-delete').show();
-        }
-    }
-
-    function ifHideSubAccountToolBar(flag){
-        if (flag){
-            $('#sub-update').hide();
-            $('#sub-delete').hide();
-        }else{
-            $('#sub-update').show();
-            $('#sub-delete').show();
-        }
-    }
 
 </script>
 
@@ -676,7 +547,7 @@
                 CompanyServer: server,
                 AccountId: userId,
                 AccountPassword: userPassword
-             },
+            },
             success: function(response) {
                 alert( "Data Loaded: " + response);
             },
@@ -687,11 +558,23 @@
 
     });
 
+
+
+    function ifHideMainAccountToolBar(flag){
+
+        if (flag){
+            $('#main-update').hide();
+            $('#main-delete').hide();
+        }else{
+            $('#main-update').show();
+            $('#main-delete').show();
+        }
+    }
     // .click(function() {
-        // alert( "Handler for .click() called." );
+    // alert( "Handler for .click() called." );
     // });
 
-    //显示modal
+    //显示modal //SY这边添加添删改的功能
     $(document).on("click", "#main-add", function () {
 
 //        $(".modal-body").append(texts.toArray().join(", "));
