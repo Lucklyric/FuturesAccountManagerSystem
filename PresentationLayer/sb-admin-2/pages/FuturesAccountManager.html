@@ -287,9 +287,6 @@
                                                     <label for="mainAccount">主账户</label>
 
                                                     <select  style="float: right; width: 50%" class="form-control" id="mainAccount">
-                                                        <option></option>
-                                                        <option></option>
-                                                        <option></option>
                                                     </select>
                                                 </div>
 
@@ -347,17 +344,14 @@
                                        cellspacing="0" width="100%">
 
                                     <div class="mainAccountToolbar" style="float:left">
-                                        <button type="button" class="btn btn-default btn-lg" id="main-add" data-toggle="modal"
-                                                data-target="#accountModal">
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <button type="button" class="btn btn-success" id="main-add" data-toggle="modal">
+                                            添加主账户
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="main-update" data-toggle="modal"
-                                                data-target="#accountModal">
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <button type="button" class="btn btn-warning" id="main-update" data-toggle="modal">
+                                            修改主账户
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="main-delete" data-toggle="modal"
-                                                data-target="#accountModal">
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <button type="button" class="btn btn-danger" id="main-delete" data-toggle="modal">
+                                            删除主账户
                                         </button>
                                     </div>
                                     <thead>
@@ -397,17 +391,14 @@
                                        cellspacing="0"
                                        width="100%">
                                     <div class="subAccountToolbar" style="float:left">
-                                        <button type="button" class="btn btn-default btn-lg" id="sub-add" data-toggle="modal"
-                                                data-target="#subModal">
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <button type="button" class="btn btn-success" id="sub-add" data-toggle="modal">
+                                            添加子账户
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="sub-update" data-toggle="modal"
-                                                data-target="#subModal">
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <button type="button" class="btn btn-warning" id="sub-update" data-toggle="modal">
+                                            修改子账户
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="sub-delete" data-toggle="modal"
-                                                data-target="#subModal">
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <button type="button" class="btn btn-danger" id="sub-delete" data-toggle="modal">
+                                            删除子账户
                                         </button>
                                     </div>
                                     <thead>
@@ -655,8 +646,29 @@
 
 <script>
 
-    //modal 确定 逻辑处理
-    $(document).on("click", "#newAccountModal .btn-primary", function () {
+    //填充MainModal
+    function fillMainModal(modal, data) {
+        $(modal + " #channel option").eq(0).text(data[1]);
+        $(modal + " #company option").eq(0).text(data[2]);
+        $(modal + " #server option").eq(0).text(data[3]);
+        $(modal + " #userId").val(data[4]);
+        $(modal + " #userPassword").val(data[5]);
+    }
+
+    //填充MainModal
+    function fillSubModal(modal, data) {
+
+        alert(data);
+        $(modal + " #userId").val(data[1]);
+        $(modal + " #subPassword").val(data[2]);
+        $(modal + " #mainAccount option").eq(0).text(data[8]);
+        $(modal + " #riskControl option").eq(0).text(data[9]);
+        $(modal + " #rate option").eq(0).text(data[10]);
+        $(modal + " #subName").val(data[6]);
+        $(modal + " #subContact").val(data[7]);
+    }
+
+    function newAccount() {
         var channel = $("#newAccountModal #channel")[0].value;
         var company = $("#newAccountModal #company")[0].value;
         var server = $("#newAccountModal #server")[0].value;
@@ -671,35 +683,243 @@
         $.ajax({
             url: hostpath,
             type: "get", //send it through get method
-            data:{
+            data: {
                 Channel: channel,
                 CompanyName: company,
                 CompanyServer: server,
                 AccountId: userId,
                 AccountPassword: userPassword
-             },
-            success: function(response) {
-                alert( "Data Loaded: " + response);
             },
-            error: function(xhr) {
+            success: function (response) {
+                alert("Data Loaded: " + response);
+            },
+            error: function (xhr) {
                 //Do Something to handle error
             }
         });
+    }
 
-    });
+    function updateAccount() {
+        var channel = $("#newAccountModal #channel")[0].value;
+        var company = $("#newAccountModal #company")[0].value;
+        var server = $("#newAccountModal #server")[0].value;
+        var userId = $("#newAccountModal #userId")[0].value;
+        var userPassword = $("#newAccountModal #userPassword")[0].value;
 
-    // .click(function() {
-        // alert( "Handler for .click() called." );
-    // });
+        //TODO: 应该做 validate
+        //ajax 发送插入
 
-    //显示modal
+        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/UpdateData.php";
+
+        $.ajax({
+            url: hostpath,
+            type: "get", //send it through get method
+            data: {
+                Channel: channel,
+                CompanyName: company,
+                CompanyServer: server,
+                AccountId: userId,
+                AccountPassword: userPassword
+            },
+            success: function (response) {
+                alert("Data Loaded: " + response);
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+
+    function deleteAccount(data) {
+
+        var channel = data[1];
+        var company = data[2];
+        var server = data[3];
+        var userId = data[4];
+        var userPassword = data[4];
+
+        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/DeleteData.php";
+
+        $.ajax({
+            url: hostpath,
+            type: "get", //send it through get method
+            data: {
+                Channel: channel,
+                CompanyName: company,
+                CompanyServer: server,
+                AccountId: userId,
+                AccountPassword: userPassword
+            },
+            success: function (response) {
+                alert("Data Loaded: " + response);
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+
+    function newSubAccount() {
+        var subId = $("#newSubModal #subId")[0].value;
+        var subPassword = $("#newSubModal #subPassword")[0].value;
+        var mainAccount = $("#newSubModal #mainAccount")[0].value;
+        var riskControl = $("#newSubModal #riskControl")[0].value;
+        var rate = $("#newSubModal #rate")[0].value;
+        var subName = $("#newSubModal #subName")[0].value;
+        var subContact = $("#newSubModal #subContact")[0].value;
+
+        //TODO: 应该做 validate
+        //ajax 发送插入
+
+        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/InsertData.php";
+
+        $.ajax({
+            url: hostpath,
+            type: "get", //send it through get method
+            data: {
+                SubId: subId,
+                SubPass: subPassword,
+                AdminAccount: mainAccount,
+                RiskManagementGroup: riskControl,
+                MoneyRatio: rate,
+                UserName: subName,
+                ContactInfo: subContact
+            },
+            success: function (response) {
+                alert("Data Loaded: " + response);
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+
+    function updateSubAccount() {
+        var subId = $("#newSubModal #subId")[0].value;
+        var subPassword = $("#newSubModal #subPassword")[0].value;
+        var mainAccount = $("#newSubModal #mainAccount")[0].value;
+        var riskControl = $("#newSubModal #riskControl")[0].value;
+        var rate = $("#newSubModal #rate")[0].value;
+        var subName = $("#newSubModal #subName")[0].value;
+        var subContact = $("#newSubModal #subContact")[0].value;
+
+        //TODO: 应该做 validate
+        //ajax 发送插入
+
+        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/UpdateData.php";
+
+        $.ajax({
+            url: hostpath,
+            type: "get", //send it through get method
+            data: {
+                SubId: subId,
+                SubPass: subPassword,
+                AdminAccount: mainAccount,
+                RiskManagementGroup: riskControl,
+                MoneyRatio: rate,
+                UserName: subName,
+                ContactInfo: subContact
+            },
+            success: function (response) {
+                alert("Data Loaded: " + response);
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+
+    function deleteSubAccount(data) {
+
+        var subId = data[1];
+        var subPassword = data[2];
+        var mainAccount = data[8];
+        var riskControl = data[9];
+        var rate = data[10];
+        var subName = data[6];
+        var subContact = data[7];
+
+        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/DeleteData.php";
+
+        $.ajax({
+            url: hostpath,
+            type: "get", //send it through get method
+            data: {
+                SubId: subId,
+                SubPass: subPassword,
+                AdminAccount: mainAccount,
+                RiskManagementGroup: riskControl,
+                MoneyRatio: rate,
+                UserName: subName,
+                ContactInfo: subContact
+            },
+            success: function (response) {
+                alert("Data Loaded: " + response);
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+
+
+    //显示add modal
     $(document).on("click", "#main-add", function () {
-
-//        $(".modal-body").append(texts.toArray().join(", "));
-        // As pointed out in comments,
-        // it is superfluous to have to manually call the modal.
-        $('.modal-dialog').modal('show');
+        //绑定回调
+        $(document).off("click", "#newAccountModal .btn-primary");
+        $(document).on("click", "#newAccountModal .btn-primary", newAccount);
+        $('#accountModal').modal('show');
     });
+
+    //显示update modal
+    $(document).on("click", "#main-update", function () {
+        $(document).off("click", "#newAccountModal .btn-primary");
+        fillMainModal("#accountModal", mainAccounts[selectedIndex]);
+        //绑定回调
+        $(document).on("click", "#newAccountModal .btn-primary", updateAccount);
+        $('#accountModal').modal('show');
+    });
+
+    $(document).on("click", "#main-delete", function () {
+        deleteAccount(mainAccounts[selectedIndex]);
+    });
+
+    //显示add sub modal
+    $(document).on("click", "#sub-add", function () {
+        //绑定回调
+        $(document).off("click", "#newSubModal .btn-primary");
+        $(document).on("click", "#newSubModal .btn-primary", newSubAccount);
+        var mainAccountOption = $("#newSubModal #mainAccount");
+        mainAccountOption.empty();
+        for (var i = 0; i < mainAccounts.length; i++) {
+            mainAccountOption.append($('<option>', {
+                        value: mainAccounts[i][4],
+                        text: mainAccounts[i][4]
+                    })
+            )
+        }
+        $('#subModal').modal('show');
+    });
+
+    //显示update sub modal
+    $(document).on("click", "#sub-update", function () {
+        $(document).off("click", "#newSubModal .btn-primary");
+        fillSubModal("#subModal", curSubAccounts[subSelectedIndex]);
+        //绑定回调
+        $(document).on("click", "#newSubModal .btn-primary", updateSubAccount);
+        $('#subModal').modal('show');
+    });
+
+    $(document).on("click", "#main-delete", function () {
+        deleteAccount(mainAccounts[selectedIndex]);
+    });
+
+    $(document).on("click", "#sub-delete", function () {
+        deleteSubAccount(curSubAccounts[subSelectedIndex]);
+    });
+
+    //理论上来说添加修改以后都应该刷新
+
 </script>
 
 </body>

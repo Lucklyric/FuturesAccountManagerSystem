@@ -29,7 +29,6 @@
     $TableName="SubAccount";
     $AdminAccount="frankzch";
     $AdminPassword="123456";
-    $TableName="SubAccount";
     $SubSystemId="24";
     $SubId="shw9794602";
     $SubPass="testpass";
