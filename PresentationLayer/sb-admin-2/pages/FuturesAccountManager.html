@@ -458,6 +458,9 @@
     /**
      * 定义全局变量
      */
+    var allBrokersInfo =[];
+    var riskGroups=[];
+    var ratioTypes=[];
     var mainAccountTable;
     var subAccountTable;
     var mainAccountTableData;
@@ -470,6 +473,7 @@
      * Document加载完毕 更新数据刷新Table绑定点击事件
      */
     $(document).ready(function () {
+        refreshRiskGroupInfo();
         ifHideMainAccountToolBar(true);
         ifHideSubAccountToolBar(true);
         refreshMainAccountsTable();
@@ -528,6 +532,31 @@
             refreshSubAccountsTable();
             ifHideMainAccountToolBar(true);
             ifHideSubAccountToolBar(true);
+        });
+    }
+
+    /**
+     * 取得交易所详情信息
+     */
+    function refreshBrokerInfo(){
+        console.log("开始获取交易所信息");
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/BrokersInfo.php', function (data) {
+            console.log("获取到交易所信息");
+            allBrokersInfo = data;
+        });
+    }
+
+    /**
+     * 取得风控组名称
+     */
+    function refreshRiskGroupInfo(){
+        console.log("开始获取风控组信息");
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskManage/Refresh.php', function (data) {
+            riskGroups=[];
+            console.log("取到风控组信息");
+            for (var i = 0; i < data.data.length; i++) {
+                riskGroups.push(data.data[i]);
+            }
         });
     }
 
@@ -875,6 +904,15 @@
             mainAccountOption.append($('<option>', {
                         value: mainAccounts[i][4],
                         text: mainAccounts[i][4]
+                    })
+            )
+        }
+        var riskControlOptions = $("#newSubModal #riskControl");
+        riskControlOptions.empty();
+        for (var i = 0; i < riskGroups.length; i++) {
+            riskControlOptions.append($('<option>', {
+                        value: riskGroups[i][0],
+                        text: riskGroups[i][0]
                     })
             )
         }
