@@ -197,10 +197,6 @@
 
                                                     <select style="float: right; width: 50%" class="form-control" id="channel">
                                                         <option>CTP</option>
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
                                                     </select>
                                                 </div>
 
@@ -210,10 +206,6 @@
 
                                                     <select  style="float: right; width: 50%" class="form-control" id="company">
                                                         <option>CTP</option>
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
                                                     </select>
                                                 </div>
 
@@ -222,10 +214,6 @@
                                                     <label for="server">服务器</label>
 
                                                     <select  style="float: right; width: 50%" class="form-control" id="server">
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
                                                         <option>上海电信</option>
                                                     </select>
                                                 </div>
@@ -304,10 +292,6 @@
                                                     <label for="rate">费率</label>
 
                                                     <select  style="float: right; width: 50%" class="form-control" id="rate">
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
                                                         <option>上海电信</option>
                                                     </select>
                                                 </div>
@@ -692,6 +676,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
+                refreshData();
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -723,6 +708,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
+                refreshData();
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -732,6 +718,7 @@
 
     function deleteAccount(data) {
 
+        var rowId = data[0];
         var channel = data[1];
         var company = data[2];
         var server = data[3];
@@ -744,6 +731,7 @@
             url: hostpath,
             type: "get", //send it through get method
             data: {
+                RowId: rowId,
                 Channel: channel,
                 CompanyName: company,
                 CompanyServer: server,
@@ -752,6 +740,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
+                refreshData();
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -787,6 +776,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
+                refreshData();
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -822,6 +812,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
+                refreshData();
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -831,13 +822,7 @@
 
     function deleteSubAccount(data) {
 
-        var subId = data[1];
-        var subPassword = data[2];
-        var mainAccount = data[8];
-        var riskControl = data[9];
-        var rate = data[10];
-        var subName = data[6];
-        var subContact = data[7];
+        var subSystemId = data[0];
 
         var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/DeleteData.php";
 
@@ -845,16 +830,11 @@
             url: hostpath,
             type: "get", //send it through get method
             data: {
-                SubId: subId,
-                SubPass: subPassword,
-                AdminAccount: mainAccount,
-                RiskManagementGroup: riskControl,
-                MoneyRatio: rate,
-                UserName: subName,
-                ContactInfo: subContact
+                SubSystemId: subSystemId
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
+                refreshData();
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -910,9 +890,6 @@
         $('#subModal').modal('show');
     });
 
-    $(document).on("click", "#main-delete", function () {
-        deleteAccount(mainAccounts[selectedIndex]);
-    });
 
     $(document).on("click", "#sub-delete", function () {
         deleteSubAccount(curSubAccounts[subSelectedIndex]);
