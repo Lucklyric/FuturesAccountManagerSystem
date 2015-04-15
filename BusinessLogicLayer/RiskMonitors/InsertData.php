@@ -15,13 +15,23 @@
     $Name=isset($_GET["Name"]) ? $_GET["Name"] :"";
     $Contact=isset($_GET["Contact"]) ? $_GET["Contact"] :"";
     
-    $TableName="riskmonitors";
-    $State="1";
-    $initialdata="Port=";
-    $port=10083;
+    $AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
+    $AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
     
-    if($TableName && $State && $SystemId && $Id && $Password && $SubAccount && $Name && $Contact){
-    $data=$initialdata.$port."&AdminAccount=".$AdminAccount."&AdminPassword=".$AdminPassword."&TableName=".$TableName."&RowState=".$State."&编号=".$SystemId."&ID=".$Id."&密码=".$Password."&附属子账户=".$SubAccount."&姓名=".$Name."&联系方式=".$Contact;
+    $AdminAccount="frankzch";
+    $AdminPassword="123456";
+    $TableName="RiskMonitor";
+    $SystemId="0";
+    $Id="0";
+    $Password="test";
+    $SubAccount="11";
+    $Name="test";
+    $Contact="test";
+    $State="1";
+    
+    //admin=frankzch&password=123456&tablename=RiskMonitor&state=1&编号=0&ID=11&密码=test&附属子账户=1&姓名=测试&联系方式=testcontact
+    if($TableName && $State){
+    $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$SystemId."&ID=".$Id."&密码=".$Password."&附属子账户=".$SubAccount."&姓名=".$Name."&联系方式=".$Contact;
         echo $data;
     }else{
     

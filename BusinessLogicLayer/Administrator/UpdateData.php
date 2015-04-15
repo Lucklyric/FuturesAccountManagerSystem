@@ -17,13 +17,24 @@
     $UserName=isset($_GET["UserName"]) ? $_GET["UserName"] :"";
     $Contact=isset($_GET["Contact"]) ? $_GET["Contact"] :"";
     
-    $TableName="administrators";
-    $State="3";
-    $initialdata="Port=";
-    $port=10083;
+    $AdminAccount="frankzch";
+    $AdminPassword="123456";
     
-    if($TableName && $State && $Id && $Name && $Password && $SubMain && $Restriction && $UserName && $Contact){
-        $data=$initialdata.$port."&AdminAccount=".$AdminAccount."&AdminPassword=".$AdminPassword."&TableName=".$TableName."&RowState=".$State."&编号=".$Id."&名称=".$Name."&密码=".$Password."&附属主账户=".$SubMain."&模块权限=".$Restriction."&姓名=".$UserName."&联系方式=".$Contact;
+    $TableName="Admin";
+    $State="3";
+    $Id="12";
+    $Name="GCtest";
+    $Password="testpass";
+    $SubMain="1";
+    $Restriction="2";
+    $UserName="GameCloud";
+    $Contact="CA";
+    
+    
+    
+    //admin=frankzch&password=123456&tablename=Admin&state=1&编号=1&名称=test&密码=new&附属主账户=0.1&模块权限=0.2&姓名=0.1&联系方式=1
+    if($TableName && $State ){
+        $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$Id."&名称=".$Name."&密码=".$Password."&附属主账户=".$SubMain."&模块权限=".$Restriction."&姓名=".$UserName."&联系方式=".$Contact;
         echo $data;
     }else{
         
@@ -37,7 +48,7 @@
     $testAccount = new AdministratorManager();
     if($data){
         
-        $response=$testAccount->UpdateData($data);
+        $response=$testAccount->InsertData($data);
         
     }
     echo($response);
