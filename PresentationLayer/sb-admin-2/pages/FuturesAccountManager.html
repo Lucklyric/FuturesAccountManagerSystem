@@ -458,7 +458,7 @@
     /**
      * 定义全局变量
      */
-    var allBrokersInfo =[];
+    var allBrokersInfo ={};
     var riskGroups=[];
     var ratioTypes=[];
     var mainAccountTable;
@@ -473,7 +473,9 @@
      * Document加载完毕 更新数据刷新Table绑定点击事件
      */
     $(document).ready(function () {
+        refreshBrokerInfo();
         refreshRiskGroupInfo();
+        refreshMoneyRationInfo();
         ifHideMainAccountToolBar(true);
         ifHideSubAccountToolBar(true);
         refreshMainAccountsTable();
@@ -541,8 +543,25 @@
     function refreshBrokerInfo(){
         console.log("开始获取交易所信息");
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/BrokersInfo.php', function (data) {
+
+            //allBrokersInfo = data;
+            allBrokersInfo['0'] = new Array();
+            allBrokersInfo['1'] = new Array();
+            allBrokersInfo['2'] = new Array();
+            allBrokersInfo['4'] = new Array();
+            for (var i = 0 ; i < data.length;i++){
+                var tmpInfo = [];
+                tmpInfo.push(data[i].mapServer2MarketDataAddresses);
+                tmpInfo.push(data[i].sBrokerName);
+
+                if (allBrokersInfo[data[i].eChannel]){
+                    allBrokersInfo[data[i].eChannel].push(tmpInfo);
+                }else{
+                    allBrokersInfo[data[i].eChannel] = [];
+                }
+            }
             console.log("获取到交易所信息");
-            allBrokersInfo = data;
+            console.log(allBrokersInfo);
         });
     }
 
@@ -559,6 +578,21 @@
             }
         });
     }
+
+    /**
+     * 取得费率组名称
+     */
+    function refreshMoneyRationInfo(){
+        console.log("开始获取费率组信息");
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/Refresh.php', function (data) {
+            ratioTypes=[];
+            console.log("取到费率组信息");
+            for (var i = 0; i < data.data.length; i++) {
+                ratioTypes.push(data.data[i]);
+            }
+        });
+    }
+
 
     /**
      * 从本地取出对应的子账户信息
@@ -592,7 +626,7 @@
                 "scrollY": "200px",
                 "scrollCollapse": false,
                 "paging": false,
-                "dom": '<"mainAccountToolbar"f>lrpti',
+                "dom": '<"mainAccountToolbar"f>rlpti',
                 "language": {
                     "search": "搜索:",
                     "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
@@ -877,6 +911,29 @@
         //绑定回调
         $(document).off("click", "#newAccountModal .btn-primary");
         $(document).on("click", "#newAccountModal .btn-primary", newAccount);
+        var mainChannelOption = $("#newAccountModal #channel");
+        mainChannelOption.empty();
+        mainChannelOption.append($('<option>', {
+                    value:'0',
+                    text: 'CTP'
+                })
+        )
+        mainChannelOption.append($('<option>', {
+                    value:'1',
+                    text: '金仕达'
+                })
+        )
+        mainChannelOption.append($('<option>', {
+                    value:'2',
+                    text: '恒生期货'
+                })
+        )
+        mainChannelOption.append($('<option>', {
+                    value:'4',
+                    text: '恒生证券'
+                })
+        )
+
         $('#accountModal').modal('show');
     });
 
@@ -886,6 +943,7 @@
         fillMainModal("#accountModal", mainAccounts[selectedIndex]);
         //绑定回调
         $(document).on("click", "#newAccountModal .btn-primary", updateAccount);
+
         $('#accountModal').modal('show');
     });
 
@@ -913,6 +971,15 @@
             riskControlOptions.append($('<option>', {
                         value: riskGroups[i][0],
                         text: riskGroups[i][0]
+                    })
+            )
+        }
+        var ratioTypesOptions = $("#newSubModal #rate");
+        ratioTypesOptions.empty();
+        for (var i = 0; i < ratioTypes.length; i++) {
+            ratioTypesOptions.append($('<option>', {
+                        value: ratioTypes[i][0],
+                        text: ratioTypes[i][0]
                     })
             )
         }
