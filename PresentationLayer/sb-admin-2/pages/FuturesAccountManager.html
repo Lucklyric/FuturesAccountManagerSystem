@@ -905,6 +905,32 @@
         });
     }
 
+    function setMainAccountCompanyInfo(index) {
+
+        var brokerArray = allBrokersInfo[index];
+        var companySelect = $("#newAccountModal #company");
+        companySelect.empty();
+        for (var i = 0; i < brokerArray.length; i++) {
+            companySelect.append($('<option>', {
+                value: i,
+                text: brokerArray[i][1]
+            }))
+        }
+        companySelect.on('change', function(){
+            var severSelect = $("#newAccountModal #server");
+            var serverDict = brokerArray[this.value][0];
+            severSelect.empty();
+            for (var i = 0; i < serverDict.length; i++) {
+                severSelect.append($('<option>', {
+                    value: i,
+                    text: serverDict[i]["Key"]
+                }))
+            }
+        })
+        companySelect.select(0);
+        companySelect.trigger('change')
+
+    }
 
     //显示add modal
     $(document).on("click", "#main-add", function () {
@@ -933,6 +959,11 @@
                     text: '恒生证券'
                 })
         )
+        mainChannelOption.on('change', function(){
+            setMainAccountCompanyInfo(this.value)
+        })
+        mainChannelOption.select('1');
+        mainChannelOption.trigger('change')
 
         $('#accountModal').modal('show');
     });
