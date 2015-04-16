@@ -498,13 +498,19 @@
     /**
      * Ajax从服务端取数据
      */
-    function refreshData() {
+    function refreshData(flag) {
         feeSettingData = [];
         ifHideMainAccountToolBar(true);
         var table = $('#feeSettingTable').dataTable();
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
         //mainAccountTable.fnProcessingIndicator();
+        if (flag === undefined){
+            if (sessionStorage.getItem('ratioTypes')){
+                feeSettingData = JSON.parse(sessionStorage.getItem('ratioTypes'));
+                return;
+            }
+        }
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/Refresh.php', function (data) {
             feeSettingTableData = data.data;
             console.log(feeSettingTableData[0]);
@@ -512,6 +518,7 @@
                 feeSettingData.push(feeSettingTableData[i]);
             }
             console.log("取到数据");
+            sessionStorage.setItem('ratioTypes',JSON.stringify(feeSettingData));
             refreshMainTable();
 
         });

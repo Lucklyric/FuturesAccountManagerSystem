@@ -305,7 +305,7 @@
     /**
      * 定义全局变量
      */
-
+    var mainAccountTableData=[];
     var subAccountTable;
     var subAccountTableData;
     var subAccounts = [];
@@ -340,12 +340,19 @@
     /**
      * Ajax从服务端取数据
      */
-    function refreshData() {
+    function refreshData(flag) {
         subAccounts = [];
         ifHideSubAccountToolBar(true);
         var table = $('#subAccountMoneyTable').dataTable();
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
+        if (flag === undefined){
+            if (sessionStorage.getItem('localSettlement')){
+                subAccounts = JSON.parse(sessionStorage.getItem('localSettlement'));
+                refreshMainTable();
+                return;
+            }
+        }
         //mainAccountTable.fnProcessingIndicator();
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/Refresh.php', function (data) {
             subAccountTableData = data.data;
@@ -354,11 +361,28 @@
                 subAccounts.push(subAccountTableData[i]);
             }
             console.log(subAccounts);
+            sessionStorage.setItem('localSettlement',JSON.stringify(subAccounts));
             refreshMainTable();
 
         });
     }
 
+    /**
+     * 取得主账户子账户关系表
+     */
+    function refreshMainSubAccounts(flag){
+        if (flag === undefined) {
+            if (sessionStorage.getItem('mainAccountTableData')) {
+                mainAccountTableData = JSON.parse(sessionStorage.getItem('mainAccountTableData'));
+                return;
+            }
+        }
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
+            mainAccountTableData = data.data;
+            sessionStorage.setItem('mainAccountTableData', JSON.stringify(mainAccountTableData));
+            console.log(mainAccountTableData);
+        });
+    }
 
     /**
      * 刷新主账户表格
@@ -413,10 +437,10 @@
 
 <script>
 
-    $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$Id.
-    "&子账户名称=".$SubAccountName."&主账户编号=".$MainId."&出入金=".$InAndOut."&更新时间=".$UpdateTime."&优先劣后=".
-            $Priority."&备注=".$Comment;
-    echo $data;
+//    $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$Id.
+//    "&子账户名称=".$SubAccountName."&主账户编号=".$MainId."&出入金=".$InAndOut."&更新时间=".$UpdateTime."&优先劣后=".
+//            $Priority."&备注=".$Comment;
+//    echo $data;
 
     function SubAccountInMoney() {
         var selectedData = subAccounts[selectedIndex];
@@ -453,7 +477,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
-                refreshData();
+                refreshData(1);
             },
             error: function (xhr) {
                 //Do Something to handle error

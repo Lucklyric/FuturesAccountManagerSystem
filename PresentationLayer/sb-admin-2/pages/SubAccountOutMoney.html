@@ -463,12 +463,20 @@
     /**
      * Ajax从服务端取数据
      */
-    function refreshData() {
+    function refreshData(flag) {
         subAccounts = [];
         ifHideSubAccountToolBar(true);
         var table = $('#subAccountMoneyTable').dataTable();
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
+        if (flag === undefined){
+            if (sessionStorage.getItem('localSettlement')){
+
+                subAccounts = JSON.parse(sessionStorage.getItem('localSettlement'));
+                refreshMainTable();
+                return;
+            }
+        }
         //mainAccountTable.fnProcessingIndicator();
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/Refresh.php', function (data) {
             subAccountTableData = data.data;
@@ -477,6 +485,7 @@
                 subAccounts.push(subAccountTableData[i]);
             }
             console.log(subAccounts);
+            sessionStorage.setItem('localSettlement',JSON.stringify(subAccounts));
             refreshMainTable();
 
         });
