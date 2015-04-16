@@ -733,9 +733,28 @@
 
     //填充MainModal
     function fillMainModal(modal, data) {
-        $(modal + " #channel option").eq(0).text(data[1]);
-        $(modal + " #company option").eq(0).text(data[2]);
-        $(modal + " #server option").eq(0).text(data[3]);
+
+        var channelArray = $(modal + " #channel option");
+        for (var i = 0; i < channelArray.length; i++){
+            if (channelArray.eq(i).text() == data[1]){
+                channelArray.select(i);
+            }
+        }
+
+        var companyArray = $(modal + " #company option");
+        for (var i = 0; i < companyArray.length; i++){
+            if (companyArray.eq(i).text() == data[2]){
+                companyArray.select(i);
+            }
+        }
+
+        var serverArray = $(modal + " #server option");
+        for (var i = 0; i < serverArray.length; i++){
+            if (serverArray.eq(i).text() == data[3]){
+                serverArray.select(i);
+            }
+        }
+
         $(modal + " #userId").val(data[4]);
         $(modal + " #userPassword").val(data[5]);
     }
@@ -743,22 +762,43 @@
     //填充MainModal
     function fillSubModal(modal, data) {
 
-        alert(data);
         $(modal + " #userId").val(data[1]);
         $(modal + " #subPassword").val(data[2]);
-        $(modal + " #mainAccount option").eq(0).text(data[8]);
-        $(modal + " #riskControl option").eq(0).text(data[9]);
-        $(modal + " #rate option").eq(0).text(data[10]);
         $(modal + " #subName").val(data[6]);
         $(modal + " #subContact").val(data[7]);
+
+        var mainArray = $(modal + " #mainAccount option");
+        for (var i = 0; i < mainArray.length; i++){
+            if (mainArray.eq(i).text() == data[8]){
+                mainArray.select(i);
+            }
+        }
+
+
+        var riskArray = $(modal + " #riskControl option");
+        for (var i = 0; i < riskArray.length; i++){
+            if (riskArray.eq(i).text() == data[9]){
+                riskArray.select(i);
+            }
+        }
+
+        var rateArray = $(modal + " #rate option");
+        for (var i = 0; i < rateArray.length; i++){
+            if (rateArray.eq(i).text() == data[10]){
+                rateArray.select(i);
+            }
+        }
+
     }
 
     function newAccount() {
-        var channel = $("#newAccountModal #channel")[0].value;
-        var company = $("#newAccountModal #company")[0].value;
-        var server = $("#newAccountModal #server")[0].value;
+        var channel = $("#newAccountModal #channel :selected").text();
+        var company = $("#newAccountModal #company :selected").text();
+        var server = $("#newAccountModal #server :selected").text();
         var userId = $("#newAccountModal #userId")[0].value;
         var userPassword = $("#newAccountModal #userPassword")[0].value;
+
+        alert(channel + company + server);
 
         //TODO: 应该做 validate
         //ajax 发送插入
@@ -786,9 +826,9 @@
     }
 
     function updateAccount() {
-        var channel = $("#newAccountModal #channel")[0].value;
-        var company = $("#newAccountModal #company")[0].value;
-        var server = $("#newAccountModal #server")[0].value;
+        var channel = $("#newAccountModal #channel :selected").text();
+        var company = $("#newAccountModal #company :selected").text();
+        var server = $("#newAccountModal #server :selected").text();
         var userId = $("#newAccountModal #userId")[0].value;
         var userPassword = $("#newAccountModal #userPassword")[0].value;
 
@@ -852,11 +892,13 @@
     function newSubAccount() {
         var subId = $("#newSubModal #subId")[0].value;
         var subPassword = $("#newSubModal #subPassword")[0].value;
-        var mainAccount = $("#newSubModal #mainAccount")[0].value;
-        var riskControl = $("#newSubModal #riskControl")[0].value;
-        var rate = $("#newSubModal #rate")[0].value;
+        var mainAccount = $("#newSubModal #mainAccount :selected").val();
+        var riskControl = $("#newSubModal #riskControl :selected").text();
+        var rate = $("#newSubModal #rate :selected").text();
         var subName = $("#newSubModal #subName")[0].value;
         var subContact = $("#newSubModal #subContact")[0].value;
+
+        alert(mainAccount);
 
         //TODO: 应该做 validate
         //ajax 发送插入
@@ -869,7 +911,7 @@
             data: {
                 SubId: subId,
                 SubPass: subPassword,
-                AdminAccount: mainAccount,
+                MainId: mainAccount,
                 RiskManagementGroup: riskControl,
                 MoneyRatio: rate,
                 UserName: subName,
@@ -888,9 +930,9 @@
     function updateSubAccount() {
         var subId = $("#newSubModal #subId")[0].value;
         var subPassword = $("#newSubModal #subPassword")[0].value;
-        var mainAccount = $("#newSubModal #mainAccount")[0].value;
-        var riskControl = $("#newSubModal #riskControl")[0].value;
-        var rate = $("#newSubModal #rate")[0].value;
+        var mainAccount = $("#newSubModal #mainAccount :selected").val();
+        var riskControl = $("#newSubModal #riskControl :selected").text();
+        var rate = $("#newSubModal #rate :selected").text();
         var subName = $("#newSubModal #subName")[0].value;
         var subContact = $("#newSubModal #subContact")[0].value;
 
@@ -905,7 +947,7 @@
             data: {
                 SubId: subId,
                 SubPass: subPassword,
-                AdminAccount: mainAccount,
+                MainId: mainAccount,
                 RiskManagementGroup: riskControl,
                 MoneyRatio: rate,
                 UserName: subName,
@@ -971,11 +1013,11 @@
 
     }
 
-    //显示add modal
-    $(document).on("click", "#main-add", function () {
-        //绑定回调
-        $(document).off("click", "#newAccountModal .btn-primary");
-        $(document).on("click", "#newAccountModal .btn-primary", newAccount);
+    function setMainAccountInfo(){
+        //clear existing info
+        $("#newAccountModal #userId").val("");
+        $("#newAccountModal #userPassword").val("");
+
         var mainChannelOption = $("#newAccountModal #channel");
         mainChannelOption.empty();
         mainChannelOption.append($('<option>', {
@@ -1003,13 +1045,21 @@
         })
         mainChannelOption.select('1');
         mainChannelOption.trigger('change')
+    }
 
+    //显示add modal
+    $(document).on("click", "#main-add", function () {
+        //绑定回调
+        $(document).off("click", "#newAccountModal .btn-primary");
+        $(document).on("click", "#newAccountModal .btn-primary", newAccount);
+        setMainAccountInfo();
         $('#accountModal').modal('show');
     });
 
     //显示update modal
     $(document).on("click", "#main-update", function () {
         $(document).off("click", "#newAccountModal .btn-primary");
+        setMainAccountInfo();
         fillMainModal("#accountModal", mainAccounts[selectedIndex]);
         //绑定回调
         $(document).on("click", "#newAccountModal .btn-primary", updateAccount);
@@ -1021,16 +1071,29 @@
         deleteAccount(mainAccounts[selectedIndex]);
     });
 
+
+
     //显示add sub modal
     $(document).on("click", "#sub-add", function () {
         //绑定回调
         $(document).off("click", "#newSubModal .btn-primary");
         $(document).on("click", "#newSubModal .btn-primary", newSubAccount);
+        setSubAccountInfo();
+        $('#subModal').modal('show');
+    });
+
+    function setSubAccountInfo(){
+        //clear existing info
+        $("#newSubModal #userId").val("");
+        $("#newSubModal #subPassword").val("");
+        $("#newSubModal #subName").val("");
+        $("#newSubModal #subContact").val("");
+
         var mainAccountOption = $("#newSubModal #mainAccount");
         mainAccountOption.empty();
         for (var i = 0; i < mainAccounts.length; i++) {
             mainAccountOption.append($('<option>', {
-                        value: mainAccounts[i][4],
+                        value: mainAccounts[i][0],
                         text: mainAccounts[i][4]
                     })
             )
@@ -1053,12 +1116,12 @@
                     })
             )
         }
-        $('#subModal').modal('show');
-    });
+    }
 
     //显示update sub modal
     $(document).on("click", "#sub-update", function () {
         $(document).off("click", "#newSubModal .btn-primary");
+        setSubAccountInfo();
         fillSubModal("#subModal", curSubAccounts[subSelectedIndex]);
         //绑定回调
         $(document).on("click", "#newSubModal .btn-primary", updateSubAccount);

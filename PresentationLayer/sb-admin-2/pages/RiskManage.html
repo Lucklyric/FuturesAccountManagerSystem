@@ -41,7 +41,8 @@
 </head>
 
 <br/>
-<div id = "wrapper">
+
+<div id="wrapper">
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="margin-bottom: 0">
         <div class="container-fluid">
@@ -58,16 +59,18 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <p id = "onlineCount" class="navbar-text">在线人数：0人</p>
+                    <p id="onlineCount" class="navbar-text">在线人数：0人</p>
                 </li>
                 <li>
-                    <p id = "serverStatus" class="navbar-text">服务器状态：关闭</p>
+                    <p id="serverStatus" class="navbar-text">服务器状态：关闭</p>
                 </li>
                 <li>
-                    <button id = "connectMainAccount" class="btn btn-info navbar-btn" style="margin-right: 5px">连接主账户</button>
+                    <button id="connectMainAccount" class="btn btn-info navbar-btn" style="margin-right: 5px">连接主账户
+                    </button>
                 </li>
                 <li>
-                    <button id = "restartServer" class="btn btn-primary navbar-btn" style="margin-right: 5px">重启服务器</button>
+                    <button id="restartServer" class="btn btn-primary navbar-btn" style="margin-right: 5px">重启服务器
+                    </button>
                 </li>
 
                 <li class="dropdown">
@@ -191,61 +194,79 @@
                                             </div>
                                             <div class="modal-body">
 
-                                                <div style="display:table-cell" width="100%">
+
+                                                <fieldset>
+                                                    <legend>交易合约限制</legend>
+                                                </fieldset>
+
+                                                <table width="100%">
+
+                                                    <tr>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <div class="radio" id="futureOrStock">
+                                                                    <label><input type="radio" name="futureOrStock"
+                                                                                  checked="true">期货</label>
+                                                                </div>
+                                                                <div class="radio">
+                                                                    <label><input type="radio"
+                                                                                  name="futureOrStock">证券</label>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div style="float: left;padding: 10px" class="form-group">
+                                                                <select style="float: right" class="form-control"
+                                                                        id="exchange">
+                                                                    <option>郑州</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div style="float: left;padding: 10px" class="form-group">
+                                                                <select style="float: right" class="form-control"
+                                                                        id="stock">
+                                                                    <option>白砂糖</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <!--<div style="float: left">-->
+                                                            <input style="padding: 10px"
+                                                                       type="checkbox"> 主力 </input>
+                                                            <input style="padding: 10px"
+                                                                       type="checkbox"> 次主力 </input>
+                                                            <!--</div>-->
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <div class="radio" id="blackOrWhite">
+                                                                    <label><input type="radio" name="blackOrWhite"
+                                                                                  checked="true">黑名单</label>
+                                                                </div>
+                                                                <div class="radio">
+                                                                    <label><input type="radio"
+                                                                                  name="blackOrWhite">白名单</label>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
 
 
-                                                    <fieldset>
-                                                        <legend>交易合约限制</legend>
-                                                    </fieldset>
+                                                </table>
 
-                                                <div style="float: left">
+                                                <table style="display:table-cell">
 
-                                                    <div class="form-group">
-                                                        <div class="radio" id="futureOrStock">
-                                                            <label><input type="radio" name="futureOrStock" checked="true">期货</label>
-                                                        </div>
-                                                        <div class="radio">
-                                                            <label><input type="radio" name="futureOrStock">证券</label>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <div class="radio" id="blackOrWhite">
-                                                            <label><input type="radio" name="blackOrWhite" checked="true">黑名单</label>
-                                                        </div>
-                                                        <div class="radio">
-                                                            <label><input type="radio" name="blackOrWhite">白名单</label>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <div style="float: left;padding: 10px" class="form-group">
-
-                                                    <!--<label for="company">经纪公司</label>-->
-
-                                                    <select  style="float: right" class="form-control" id="exchange">
-                                                        <option>郑州</option>
-                                                    </select>
-                                                </div>
-
-                                                    <div style="float: left;padding: 10px" class="form-group">
-
-                                                        <select  style="float: right" class="form-control" id="stock">
-                                                            <option>白砂糖</option>
-                                                        </select>
-                                                    </div>
-
-                                                </div>
-
-
+                                                </table>
 
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                                 </button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">确定
+                                                </button>
                                             </div>
                                         </div>
                                         <!-- /.modal-content -->
@@ -259,15 +280,18 @@
                                        cellspacing="0" width="100%">
 
                                     <div class="riskManagerToolbar" style="float:left">
-                                        <button type="button" class="btn btn-default btn-lg" id="risk-add" data-toggle="modal"
+                                        <button type="button" class="btn btn-default btn-lg" id="risk-add"
+                                                data-toggle="modal"
                                                 >
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="main-update" data-toggle="modal"
+                                        <button type="button" class="btn btn-default btn-lg" id="main-update"
+                                                data-toggle="modal"
                                                 >
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="main-delete" data-toggle="modal"
+                                        <button type="button" class="btn btn-default btn-lg" id="main-delete"
+                                                data-toggle="modal"
                                                 >
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
@@ -353,9 +377,9 @@
 
     var riskManagerTable;
     var riskManagerTableData;
-    var riskManagerData= [];
+    var riskManagerData = [];
     var selectedIndex = 0;  //mainSelectedIndex
-    var toolBarManger = new SSToolBar($("#restartServer"),$("#connectMainAccount"),$("#onlineCount"),$("#serverStatus"));
+    var toolBarManger = new SSToolBar($("#restartServer"), $("#connectMainAccount"), $("#onlineCount"), $("#serverStatus"));
     /**
      * Document加载完毕 更新数据刷新Table绑定点击事件
      */
@@ -368,15 +392,15 @@
             selectedIndex = riskManagerTable.row(this).index();
             ifHideMainAccountToolBar(false);
             //refreshMainTable();
-            if ( $(this).hasClass('selected') ) {
+            if ($(this).hasClass('selected')) {
                 //$(this).removeClass('selected');
             }
             else {
                 riskManagerTable.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
             }
-           // $('.modal-dialog').modal('show');
-        } );
+            // $('.modal-dialog').modal('show');
+        });
     });
 </script>
 
@@ -431,14 +455,13 @@
                     "search": "搜索:",
                     "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
                     "infoEmpty": "显示 0 到 0 共 0 记录",
-                    "emptyTable":"暂无可显示数据",
+                    "emptyTable": "暂无可显示数据",
                     "processing": "正在加载......"
                 }
             });
 
         }
     }
-
 
 
 </script>
@@ -461,17 +484,17 @@
         $.ajax({
             url: hostpath,
             type: "get", //send it through get method
-            data:{
+            data: {
                 Channel: channel,
                 CompanyName: company,
                 CompanyServer: server,
                 AccountId: userId,
                 AccountPassword: userPassword
             },
-            success: function(response) {
-                alert( "Data Loaded: " + response);
+            success: function (response) {
+                alert("Data Loaded: " + response);
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 //Do Something to handle error
             }
         });
@@ -479,13 +502,12 @@
     });
 
 
+    function ifHideMainAccountToolBar(flag) {
 
-    function ifHideMainAccountToolBar(flag){
-
-        if (flag){
+        if (flag) {
             $('#main-update').hide();
             $('#main-delete').hide();
-        }else{
+        } else {
             $('#main-update').show();
             $('#main-delete').show();
         }
