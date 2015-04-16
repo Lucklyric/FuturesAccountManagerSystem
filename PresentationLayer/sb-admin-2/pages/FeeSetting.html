@@ -508,6 +508,7 @@
         if (flag === undefined){
             if (sessionStorage.getItem('ratioTypes')){
                 feeSettingData = JSON.parse(sessionStorage.getItem('ratioTypes'));
+                refreshMainTable();
                 return;
             }
         }

@@ -271,15 +271,15 @@
                                 <table id="riskMonitorTable" class="table table-striped table-bordered table-hover"
                                        cellspacing="0" width="100%">
 
-                                    <div class="riskMonitorToolbar" style="float:left">
-                                        <button type="button" class="btn btn-default btn-lg" id="risk-add" data-toggle="modal"
-                                                >
+                                    <div class="subAccountToolbar" style="float:left">
+                                        <button type="button" class="btn btn-success" id="main-add" data-toggle="modal">
+                                            添加管理员
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="risk-update" data-toggle="modal"
-                                                >
+                                        <button type="button" class="btn btn-warning" id="main-update" data-toggle="modal">
+                                            修改管理员
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="risk-delete" data-toggle="modal"
-                                                >
+                                        <button type="button" class="btn btn-danger" id="main-delete" data-toggle="modal">
+                                            删除管理员
                                         </button>
                                     </div>
                                     <thead>
@@ -384,12 +384,19 @@
     /**
      * Ajax从服务端取数据
      */
-    function refreshData() {
+    function refreshData(flag) {
         riskMonitorData = [];
         var table = $('#riskMonitorTable').dataTable();
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
         //mainAccountTable.fnProcessingIndicator();
+        if (flag === undefined){
+            if (sessionStorage.getItem('riskMonitorData')){
+                riskMonitorData = JSON.parse(sessionStorage.getItem('riskMonitorData'));
+                refreshMainTable();
+                return;
+            }
+        }
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskMonitors/Refresh.php', function (data) {
             riskMonitorTableData = data.data;
             console.log(riskMonitorTableData[0]);
@@ -397,6 +404,7 @@
                 riskMonitorData.push(riskMonitorTableData[i]);
             }
             console.log("取到数据");
+            sessionStorage.setItem('riskMonitorData',JSON.stringify(riskMonitorData));
             refreshMainTable();
 
         });

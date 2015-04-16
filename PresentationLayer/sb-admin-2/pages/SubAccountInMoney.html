@@ -363,7 +363,6 @@
             console.log(subAccounts);
             sessionStorage.setItem('localSettlement',JSON.stringify(subAccounts));
             refreshMainTable();
-
         });
     }
 
@@ -407,7 +406,7 @@
                 "scrollY": "500px",
                 "scrollCollapse": false,
                 "paging": false,
-                "dom": '<"mainAccountToolbar"f>rlpti',
+                "dom": '<"#mainAccountToolbar"f>rlpti',
                 "language": {
                     "search": "搜索:",
                     "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
