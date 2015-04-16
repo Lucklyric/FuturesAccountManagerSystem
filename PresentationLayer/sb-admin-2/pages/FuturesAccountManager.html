@@ -516,14 +516,31 @@
     /**
      * Ajax从服务端取数据
      */
-    function refreshData() {
+    function refreshData(flag) {
+
         mainAccounts = [];
         var table = $('#mainAccounts').dataTable();
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
+        if (flag === undefined){
+            if (sessionStorage.getItem('mainAccountTableData')){
+                mainAccountTableData = JSON.parse(sessionStorage.getItem('mainAccountTableData'));
+                for (var i = 0; i < mainAccountTableData.length; i++) {
+                    mainAccounts.push(mainAccountTableData[i].inf);
+                }
+                console.log(mainAccounts);
+                refreshMainAccountsTable();
+                updateSubAccounts(selectedIndex);
+                refreshSubAccountsTable();
+                ifHideMainAccountToolBar(true);
+                ifHideSubAccountToolBar(true);
+                return;
+            }
+        }
         //mainAccountTable.fnProcessingIndicator();
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
             mainAccountTableData = data.data;
+            sessionStorage.setItem('mainAccountTableData',JSON.stringify(mainAccountTableData));
             console.log(mainAccountTableData);
             for (var i = 0; i < mainAccountTableData.length; i++) {
                 mainAccounts.push(mainAccountTableData[i].inf);
@@ -540,35 +557,48 @@
     /**
      * 取得交易所详情信息
      */
-    function refreshBrokerInfo(){
-        console.log("开始获取交易所信息");
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/BrokersInfo.php', function (data) {
-
-            //allBrokersInfo = data;
-            allBrokersInfo['0'] = new Array();
-            allBrokersInfo['1'] = new Array();
-            allBrokersInfo['2'] = new Array();
-            allBrokersInfo['4'] = new Array();
-            for (var i = 0 ; i < data.length;i++){
-                var tmpInfo = [];
-                tmpInfo.push(data[i].mapServer2MarketDataAddresses);
-                tmpInfo.push(data[i].sBrokerName);
-
-                if (allBrokersInfo[data[i].eChannel]){
-                    allBrokersInfo[data[i].eChannel].push(tmpInfo);
-                }else{
-                    allBrokersInfo[data[i].eChannel] = [];
-                }
+    function refreshBrokerInfo(flag){
+        if (flag === undefined){
+            if (sessionStorage.getItem('allBrokerInfo')){
+                allBrokersInfo = JSON.parse(sessionStorage.getItem('allBrokerInfo'));
+                return;
             }
-            console.log("获取到交易所信息");
-            console.log(allBrokersInfo);
-        });
+        }
+            console.log("开始获取交易所信息");
+            $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/BrokersInfo.php', function (data) {
+
+                //allBrokersInfo = data;
+                allBrokersInfo['0'] = new Array();
+                allBrokersInfo['1'] = new Array();
+                allBrokersInfo['2'] = new Array();
+                allBrokersInfo['4'] = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var tmpInfo = [];
+                    tmpInfo.push(data[i].mapServer2MarketDataAddresses);
+                    tmpInfo.push(data[i].sBrokerName);
+
+                    if (allBrokersInfo[data[i].eChannel]) {
+                        allBrokersInfo[data[i].eChannel].push(tmpInfo);
+                    } else {
+                        allBrokersInfo[data[i].eChannel] = [];
+                    }
+                }
+                sessionStorage.setItem('allBrokerInfo',JSON.stringify(allBrokersInfo));
+                console.log("获取到交易所信息");
+                console.log(allBrokersInfo);
+            });
     }
 
     /**
      * 取得风控组名称
      */
-    function refreshRiskGroupInfo(){
+    function refreshRiskGroupInfo(flag){
+        if (flag === undefined){
+            if (sessionStorage.getItem('riskGroups')){
+                riskGroups = JSON.parse(sessionStorage.getItem('riskGroups'));
+                return;
+            }
+        }
         console.log("开始获取风控组信息");
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskManage/Refresh.php', function (data) {
             riskGroups=[];
@@ -576,13 +606,20 @@
             for (var i = 0; i < data.data.length; i++) {
                 riskGroups.push(data.data[i]);
             }
+            sessionStorage.setItem('riskGroups',JSON.stringify(riskGroups));
         });
     }
 
     /**
      * 取得费率组名称
      */
-    function refreshMoneyRationInfo(){
+    function refreshMoneyRationInfo(flag){
+        if (flag === undefined){
+            if (sessionStorage.getItem('ratioTypes')){
+                ratioTypes = JSON.parse(sessionStorage.getItem('ratioTypes'));
+                return;
+            }
+        }
         console.log("开始获取费率组信息");
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/Refresh.php', function (data) {
             ratioTypes=[];
@@ -590,6 +627,7 @@
             for (var i = 0; i < data.data.length; i++) {
                 ratioTypes.push(data.data[i]);
             }
+            sessionStorage.setItem('ratioTypes',JSON.stringify(ratioTypes));
         });
     }
 
@@ -739,7 +777,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
-                refreshData();
+                refreshData(1);
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -771,7 +809,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
-                refreshData();
+                refreshData(1);
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -803,7 +841,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
-                refreshData();
+                refreshData(1);
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -839,7 +877,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
-                refreshData();
+                refreshData(1);
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -875,7 +913,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
-                refreshData();
+                refreshData(1);
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -897,7 +935,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
-                refreshData();
+                refreshData(1);
             },
             error: function (xhr) {
                 //Do Something to handle error

@@ -45,51 +45,51 @@
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="margin-bottom: 0">
         <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html">锋利资产管理系统v1.0.0.1</a>
-        </div>
-        <!-- /.navbar-header -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">锋利资产管理系统v1.0.0.1</a>
+            </div>
+            <!-- /.navbar-header -->
 
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <p id = "onlineCount" class="navbar-text">在线人数：0人</p>
-            </li>
-            <li>
-                <p id = "serverStatus" class="navbar-text">服务器状态：关闭</p>
-            </li>
-            <li>
-                <button id = "connectMainAccount" class="btn btn-info navbar-btn" style="margin-right: 5px">连接主账户</button>
-            </li>
-            <li>
-                <button id = "restartServer" class="btn btn-primary navbar-btn" style="margin-right: 5px">重启服务器</button>
-            </li>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <p id = "onlineCount" class="navbar-text">在线人数：0人</p>
+                </li>
+                <li>
+                    <p id = "serverStatus" class="navbar-text">服务器状态：关闭</p>
+                </li>
+                <li>
+                    <button id = "connectMainAccount" class="btn btn-info navbar-btn" style="margin-right: 5px">连接主账户</button>
+                </li>
+                <li>
+                    <button id = "restartServer" class="btn btn-primary navbar-btn" style="margin-right: 5px">重启服务器</button>
+                </li>
 
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> 账户资料</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-            </li>
-        </ul>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> 账户资料</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+            </ul>
 
-        <!-- /.navbar-top-links -->
+            <!-- /.navbar-top-links -->
             <!-- /.dropdown -->
-        <!-- /.navbar-top-links -->
+            <!-- /.navbar-top-links -->
         </div>
         <div class="navbar-default sidebar" role="navigation" style="margin-top:5px">
             <div class="sidebar-nav navbar-collapse" style="margin-top:0px">
@@ -157,7 +157,7 @@
             <!-- /.sidebar-collapse -->
         </div>
         <!-- /.navbar-static-side -->
-            <!--</div>-->
+        <!--</div>-->
     </nav>
 
     <div id="page-wrapper">
@@ -375,16 +375,16 @@
                                        cellspacing="0"
                                        width="100%">
                                     <div class="subAccountToolbar" style="float:left">
-                                    <button type="button" class="btn btn-success" id="sub-add" data-toggle="modal">
-                                        添加子账户
-                                    </button>
-                                    <button type="button" class="btn btn-warning" id="sub-update" data-toggle="modal">
-                                        修改子账户
-                                    </button>
-                                    <button type="button" class="btn btn-danger" id="sub-delete" data-toggle="modal">
-                                        删除子账户
-                                    </button>
-                                </div>
+                                        <button type="button" class="btn btn-success" id="sub-add" data-toggle="modal">
+                                            添加子账户
+                                        </button>
+                                        <button type="button" class="btn btn-warning" id="sub-update" data-toggle="modal">
+                                            修改子账户
+                                        </button>
+                                        <button type="button" class="btn btn-danger" id="sub-delete" data-toggle="modal">
+                                            删除子账户
+                                        </button>
+                                    </div>
                                     <thead>
                                     <tr>
                                         <th>编号</th>
@@ -458,6 +458,9 @@
     /**
      * 定义全局变量
      */
+    var allBrokersInfo ={};
+    var riskGroups=[];
+    var ratioTypes=[];
     var mainAccountTable;
     var subAccountTable;
     var mainAccountTableData;
@@ -470,6 +473,9 @@
      * Document加载完毕 更新数据刷新Table绑定点击事件
      */
     $(document).ready(function () {
+        refreshBrokerInfo();
+        refreshRiskGroupInfo();
+        refreshMoneyRationInfo();
         ifHideMainAccountToolBar(true);
         ifHideSubAccountToolBar(true);
         refreshMainAccountsTable();
@@ -510,17 +516,36 @@
     /**
      * Ajax从服务端取数据
      */
-    function refreshData() {
+    function refreshData(flag) {
+
         mainAccounts = [];
         var table = $('#mainAccounts').dataTable();
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
+        if (flag === undefined){
+            if (sessionStorage.getItem('mainAccountTableDataSec')){
+                mainAccountTableData = JSON.parse(sessionStorage.getItem('mainAccountTableDataSec'));
+                for (var i = 0; i < mainAccountTableData.length; i++) {
+                    mainAccounts.push(mainAccountTableData[i].inf);
+                }
+                console.log(mainAccounts);
+                refreshMainAccountsTable();
+                updateSubAccounts(selectedIndex);
+                refreshSubAccountsTable();
+                ifHideMainAccountToolBar(true);
+                ifHideSubAccountToolBar(true);
+                return;
+            }
+        }
         //mainAccountTable.fnProcessingIndicator();
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
             mainAccountTableData = data.data;
+            sessionStorage.setItem('mainAccountTableDataSec',JSON.stringify(mainAccountTableData));
+            console.log(mainAccountTableData);
             for (var i = 0; i < mainAccountTableData.length; i++) {
                 mainAccounts.push(mainAccountTableData[i].inf);
             }
+            console.log(mainAccounts);
             refreshMainAccountsTable();
             updateSubAccounts(selectedIndex);
             refreshSubAccountsTable();
@@ -528,6 +553,84 @@
             ifHideSubAccountToolBar(true);
         });
     }
+
+    /**
+     * 取得交易所详情信息
+     */
+    function refreshBrokerInfo(flag){
+        if (flag === undefined){
+            if (sessionStorage.getItem('allBrokerInfo')){
+                allBrokersInfo = JSON.parse(sessionStorage.getItem('allBrokerInfo'));
+                return;
+            }
+        }
+        console.log("开始获取交易所信息");
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/BrokersInfo.php', function (data) {
+
+            //allBrokersInfo = data;
+            allBrokersInfo['0'] = new Array();
+            allBrokersInfo['1'] = new Array();
+            allBrokersInfo['2'] = new Array();
+            allBrokersInfo['4'] = new Array();
+            for (var i = 0; i < data.length; i++) {
+                var tmpInfo = [];
+                tmpInfo.push(data[i].mapServer2MarketDataAddresses);
+                tmpInfo.push(data[i].sBrokerName);
+
+                if (allBrokersInfo[data[i].eChannel]) {
+                    allBrokersInfo[data[i].eChannel].push(tmpInfo);
+                } else {
+                    allBrokersInfo[data[i].eChannel] = [];
+                }
+            }
+            sessionStorage.setItem('allBrokerInfo',JSON.stringify(allBrokersInfo));
+            console.log("获取到交易所信息");
+            console.log(allBrokersInfo);
+        });
+    }
+
+    /**
+     * 取得风控组名称
+     */
+    function refreshRiskGroupInfo(flag){
+        if (flag === undefined){
+            if (sessionStorage.getItem('riskGroups')){
+                riskGroups = JSON.parse(sessionStorage.getItem('riskGroups'));
+                return;
+            }
+        }
+        console.log("开始获取风控组信息");
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskManage/Refresh.php', function (data) {
+            riskGroups=[];
+            console.log("取到风控组信息");
+            for (var i = 0; i < data.data.length; i++) {
+                riskGroups.push(data.data[i]);
+            }
+            sessionStorage.setItem('riskGroups',JSON.stringify(riskGroups));
+        });
+    }
+
+    /**
+     * 取得费率组名称
+     */
+    function refreshMoneyRationInfo(flag){
+        if (flag === undefined){
+            if (sessionStorage.getItem('ratioTypes')){
+                ratioTypes = JSON.parse(sessionStorage.getItem('ratioTypes'));
+                return;
+            }
+        }
+        console.log("开始获取费率组信息");
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/Refresh.php', function (data) {
+            ratioTypes=[];
+            console.log("取到费率组信息");
+            for (var i = 0; i < data.data.length; i++) {
+                ratioTypes.push(data.data[i]);
+            }
+            sessionStorage.setItem('ratioTypes',JSON.stringify(ratioTypes));
+        });
+    }
+
 
     /**
      * 从本地取出对应的子账户信息
@@ -561,7 +664,7 @@
                 "scrollY": "200px",
                 "scrollCollapse": false,
                 "paging": false,
-                "dom": '<"mainAccountToolbar"f>lrpti',
+                "dom": '<"mainAccountToolbar"f>rlpti',
                 "language": {
                     "search": "搜索:",
                     "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
@@ -570,7 +673,6 @@
                     "processing": "正在加载......"
                 }
             });
-
         }
     }
 
@@ -592,7 +694,7 @@
                 "scrollY": "500px",
                 "scrollCollapse": true,
                 "paging": false,
-                "dom": '<"subAccountToolbar"f>lrpti',
+                "dom": '<"subAccountToolbar"f>rlpti',
                 "language": {
                     "search": "搜索:",
                     "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
@@ -675,7 +777,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
-                refreshData();
+                refreshData(1);
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -707,7 +809,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
-                refreshData();
+                refreshData(1);
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -739,7 +841,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
-                refreshData();
+                refreshData(1);
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -775,7 +877,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
-                refreshData();
+                refreshData(1);
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -811,7 +913,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
-                refreshData();
+                refreshData(1);
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -833,7 +935,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
-                refreshData();
+                refreshData(1);
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -841,12 +943,67 @@
         });
     }
 
+    //设置动态更新
+    function setMainAccountCompanyInfo(index) {
+
+        var brokerArray = allBrokersInfo[index];
+        var companySelect = $("#newAccountModal #company");
+        companySelect.empty();
+        for (var i = 0; i < brokerArray.length; i++) {
+            companySelect.append($('<option>', {
+                value: i,
+                text: brokerArray[i][1]
+            }))
+        }
+        companySelect.on('change', function(){
+            var severSelect = $("#newAccountModal #server");
+            var serverDict = brokerArray[this.value][0];
+            severSelect.empty();
+            for (var i = 0; i < serverDict.length; i++) {
+                severSelect.append($('<option>', {
+                    value: i,
+                    text: serverDict[i]["Key"]
+                }))
+            }
+        })
+        companySelect.select(0);
+        companySelect.trigger('change')
+
+    }
 
     //显示add modal
     $(document).on("click", "#main-add", function () {
         //绑定回调
         $(document).off("click", "#newAccountModal .btn-primary");
         $(document).on("click", "#newAccountModal .btn-primary", newAccount);
+        var mainChannelOption = $("#newAccountModal #channel");
+        mainChannelOption.empty();
+        mainChannelOption.append($('<option>', {
+                    value:'0',
+                    text: 'CTP'
+                })
+        )
+        mainChannelOption.append($('<option>', {
+                    value:'1',
+                    text: '金仕达'
+                })
+        )
+        mainChannelOption.append($('<option>', {
+                    value:'2',
+                    text: '恒生期货'
+                })
+        )
+        mainChannelOption.append($('<option>', {
+                    value:'4',
+                    text: '恒生证券'
+                })
+        )
+        mainChannelOption.on('change', function(){
+            setMainAccountCompanyInfo(this.value)
+        })
+        mainChannelOption.select('1');
+        mainChannelOption.trigger('change')
+
         $('#accountModal').modal('show');
     });
 
@@ -856,6 +1013,7 @@
         fillMainModal("#accountModal", mainAccounts[selectedIndex]);
         //绑定回调
         $(document).on("click", "#newAccountModal .btn-primary", updateAccount);
+
         $('#accountModal').modal('show');
     });
 
@@ -874,6 +1032,24 @@
             mainAccountOption.append($('<option>', {
                         value: mainAccounts[i][4],
                         text: mainAccounts[i][4]
+                    })
+            )
+        }
+        var riskControlOptions = $("#newSubModal #riskControl");
+        riskControlOptions.empty();
+        for (var i = 0; i < riskGroups.length; i++) {
+            riskControlOptions.append($('<option>', {
+                        value: riskGroups[i][0],
+                        text: riskGroups[i][0]
+                    })
+            )
+        }
+        var ratioTypesOptions = $("#newSubModal #rate");
+        ratioTypesOptions.empty();
+        for (var i = 0; i < ratioTypes.length; i++) {
+            ratioTypesOptions.append($('<option>', {
+                        value: ratioTypes[i][0],
+                        text: ratioTypes[i][0]
                     })
             )
         }
