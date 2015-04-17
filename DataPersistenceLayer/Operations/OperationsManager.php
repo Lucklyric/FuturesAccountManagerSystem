@@ -1,5 +1,7 @@
 <?php
-    
+$path = "../../..";
+//echo $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
+include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.php";
     // base class with member properties and methods
     class OperationsManager {
         
@@ -20,7 +22,7 @@
             //return $next;
             $data = array("userid"=>$userid,"password"=>$password,"tablename" => "Operation");
             $data_string = json_encode($data);
-            $ch = curl_init('121.40.131.144/SPService/SPService.svc/loadtabledata');
+            $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/loadtabledata');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -44,7 +46,7 @@
             
             $ch = curl_init();
             
-            curl_setopt($ch, CURLOPT_URL,'121.40.131.144/SPService/SPService.svc/updatetablerowdata');
+            curl_setopt($ch, CURLOPT_URL,$GLOBALS['serverAddress'].'SPService/SPService.svc/updatetablerowdata');
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS,
                         $data);
@@ -72,7 +74,7 @@
             
             $ch = curl_init();
             
-            curl_setopt($ch, CURLOPT_URL,'121.40.131.144/SPService/SPService.svc/updatetablerowdata');
+            curl_setopt($ch, CURLOPT_URL,$GLOBALS['serverAddress'].'SPService/SPService.svc/updatetablerowdata');
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS,
                         $data);
@@ -101,7 +103,7 @@
             
             $ch = curl_init();
             
-            curl_setopt($ch, CURLOPT_URL,'121.40.131.144/SPService/SPService.svc/updatetablerowdata');
+            curl_setopt($ch, CURLOPT_URL,$GLOBALS['serverAddress'].'SPService/SPService.svc/updatetablerowdata');
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS,
                         $data);
