@@ -38,6 +38,12 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .modal-row {
+            padding: 10px
+        }
+    </style>
+
 </head>
 
 <br/>
@@ -187,28 +193,49 @@
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title" id="newMainAccountLabel">新建主账户</h4>
+                                                <h4 class="modal-title" id="newMainAccountLabel">子账户入金</h4>
                                             </div>
                                             <div class="modal-body">
-
-                                                <label style="width: 50%" id="subAccountLabel">子账户:</label>
-                                                <label id="mainAccountLabel">主账户:</label>
-
-                                                <div class="form-group">
-                                                    <label for="moneyAmount">输入金额</label>
-                                                    <input class="form-control" style="float: right; width: 50%" type="text" name="moneyAmount" id="moneyAmount"
-                                                           value="" placeholder="请输入金额"/>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="radio">
-                                                        <label><input type="radio" name="inMoneyRadio">优先资金</label>
+                                                <div class="container">
+                                                <div class="row clearfix">
+                                                    <div class="col-md-2 column modal-row">
+                                                        <label style="margin-top: 8px">子账户:</label>
                                                     </div>
-                                                    <div class="radio">
-                                                        <label><input type="radio" name="inMoneyRadio">劣后资金</label>
+                                                    <div class="col-md-4 column modal-row">
+                                                        <label style="margin-top: 8px" id="subAccount" >XXX</label>
                                                     </div>
                                                 </div>
+                                                <div class="row clearfix">
+                                                    <div class="col-md-2 column modal-row">
+                                                        <label style="margin-top: 8px">主账户:</label>
+                                                    </div>
+                                                    <div class="col-md-4 column modal-row">
+                                                        <label style="margin-top: 8px" id="mainAccount" >XXX</label>
+                                                    </div>
+                                                </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <label style="margin-top: 8px">输入金额:</label>
+                                                        </div>
+                                                        <div class="col-md-4 column modal-row">
+                                                            <input class="form-control" style="max-width: 300px" type="text" name="moneyAmount" id="moneyAmount"
+                                                                   value="" placeholder="请输入金额"/>
+                                                        </div>
+                                                    </div>
 
+
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <div class="radio">
+                                                                <label><input type="radio" name="inMoneyRadio" value="优先" id="preferred">优先资金</label>
+                                                            </div>
+                                                            <div class="radio">
+                                                                <label><input type="radio" name="inMoneyRadio" value="劣后" id="nonPreferred">劣后资金</label>
+                                                            </div>                                                        </div>
+                                                    </div>
+
+
+                                                </div>
 
                                             </div>
                                             <div class="modal-footer">
@@ -230,7 +257,6 @@
                                         <button type="button" class="btn btn-success" id="sub-update" data-toggle="modal">
                                             子账户入金
                                         </button>
-
                                     </div>
                                     <thead>
                                     <tr>
@@ -320,6 +346,7 @@
     $(document).ready(function () {
         refreshMainTable();
         refreshData(); //更新数据
+        refreshMainSubAccounts();
 
         $('#subAccountMoneyTable').on('click', 'tr', function () { //绑定点击事件刷新子账户
             selectedIndex = subAccountTable.row(this).index();
@@ -394,7 +421,7 @@
         for (var i = 0; i < mainAccountTableData.length;i++){
             for (var j = 0; j < mainAccountTableData[i].subs.length;j++){
                 if (mainAccountTableData[i].subs[j][1] == subAccountID){
-                    return mainAccountTableData[i].inf[4];
+                    return [mainAccountTableData[i].inf[4],mainAccountTableData[i].inf[0]];
                 }
             }
         }
@@ -453,43 +480,39 @@
 
 <script>
 
-//    $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$Id.
-//    "&子账户名称=".$SubAccountName."&主账户编号=".$MainId."&出入金=".$InAndOut."&更新时间=".$UpdateTime."&优先劣后=".
-//            $Priority."&备注=".$Comment;
-//    echo $data;
+    //填充modal
+    function fillModal(){
+        var subAccountId = subAccounts[selectedIndex][1];
+        var mainAccountInfo = returnMainAccountId(subAccountId);
+        $("#newInMoneyModal #mainAccount").text(mainAccountInfo[0]);
+        $("#newInMoneyModal #mainAccount").val(mainAccountInfo[1]);
+        $("#newInMoneyModal #subAccount").text(subAccountId);
+        $("#newInMoneyModal #preferred").prop("checked", true);
+    }
 
+    //入金
     function SubAccountInMoney() {
         var selectedData = subAccounts[selectedIndex];
         var amount = $("#newInMoneyModal #moneyAmount")[0].value;
         var preferredMoney = $("input:radio[name ='inMoneyRadio']:checked").val();
         var subId = selectedData[0];
-        var subAccountName = SubAccountName[1];
-
-
-        var subId = $("#newSubModal #subId")[0].value;
-        var subPassword = $("#newSubModal #subPassword")[0].value;
-        var mainAccount = $("#newSubModal #mainAccount")[0].value;
-        var riskControl = $("#newSubModal #riskControl")[0].value;
-        var rate = $("#newSubModal #rate")[0].value;
-        var subName = $("#newSubModal #subName")[0].value;
-        var subContact = $("#newSubModal #subContact")[0].value;
+        var subAccountName = selectedData[1];
+        var mainAccountId = $("#newInMoneyModal #mainAccount").val();
 
         //TODO: 应该做 validate
         //ajax 发送插入
 
-        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/InsertData.php";
+        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/InsertData.php";
 
         $.ajax({
             url: hostpath,
             type: "get", //send it through get method
             data: {
-                SubId: subId,
-                SubPass: subPassword,
-                AdminAccount: mainAccount,
-                RiskManagementGroup: riskControl,
-                MoneyRatio: rate,
-                UserName: subName,
-                ContactInfo: subContact
+                SubAccountName: subAccountName,
+                InAndOut: amount,
+                Priority: preferredMoney,
+                Id: subId,
+                MainId: mainAccountId
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
@@ -500,14 +523,12 @@
             }
         });
     }
-    // .click(function() {
-    // alert( "Handler for .click() called." );
-    // });
 
     //显示inMoney modal
     $(document).on("click", "#sub-update", function () {
         $(document).off("click", "#newInMoneyModal .btn-primary");
         //绑定回调
+        fillModal();
         $(document).on("click", "#newInMoneyModal .btn-primary", SubAccountInMoney);
         $('#inMoneyModal').modal('show');
     });

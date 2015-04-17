@@ -29,19 +29,19 @@
     
     $AdminAccount="frankzch";
     $AdminPassword="123456";
-    $Id="94";
-    $SubAccountName="999";
-    $MainId=5;
-    $InAndOut=33.572;
+//    $Id="36";
+//    $SubAccountName="1001";
+//    $MainId=8;
+//    $InAndOut=33.572;
     $UpdateTime="2015-04-13 00:00:00";
-    $Priority="优先";
+//    $Priority="优先";
     $Comment="newtest";
     
     $initialdata="Port=";
 //    $data=admin=frankzch&password=123456&tablename=Settlement&state=1&编号=0&子账户名称=810&静态权益=2000000.000&手续费=33.572&平仓盈亏=315.000&持仓盈亏=-170.000&占用保证金=7180.650&动态权益=1999481.428&风险度=0.004&结算日期=2015-04-13&结算时间=08:30:36&优先资金=1000000.000;
     if($TableName && $State && $SubAccountName && $MainId && $InAndOut && $UpdateTime && $Priority){
     $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$Id.
-        "&子账户名称=".$SubAccountName."&出入金=".$InAndOut."&更新时间=".$UpdateTime."&优先劣后=".
+        "&子账户名称=".$SubAccountName."&主账户编号=".$MainId."&出入金=".$InAndOut."&更新时间=".$UpdateTime."&优先劣后=".
         $Priority."&备注=".$Comment;
         echo $data;
     }else{
