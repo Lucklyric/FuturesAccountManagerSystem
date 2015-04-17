@@ -463,11 +463,18 @@
     /**
      * Ajax从服务端取数据
      */
-    function refreshData() {
+    function refreshData(flag) {
         adminManagerData = [];
         var table = $('#adminManagerTable').dataTable();
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
+        if (flag === undefined){
+            if (sessionStorage.getItem('adminManagerData')){
+                adminManagerData = JSON.parse(sessionStorage.getItem('adminManagerData'));
+                refreshMainTable();
+                return;
+            }
+        }
         //mainAccountTable.fnProcessingIndicator();
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Administrator/Refresh.php', function (data) {
             adminManagerTableData = data.data;
@@ -476,6 +483,7 @@
                 adminManagerData.push(adminManagerTableData[i]);
             }
             console.log("取到数据");
+            sessionStorage.setItem('adminManagerData',JSON.stringify(adminManagerData));
             refreshMainTable();
 
         });

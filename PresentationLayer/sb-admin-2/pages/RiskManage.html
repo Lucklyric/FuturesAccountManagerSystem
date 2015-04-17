@@ -409,11 +409,18 @@
     /**
      * Ajax从服务端取数据
      */
-    function refreshData() {
+    function refreshData(flag) {
         riskManagerData = [];
         var table = $('#riskManagerTable').dataTable();
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
+        if (flag === undefined){
+            if (sessionStorage.getItem('riskManagerData')){
+                riskManagerData = JSON.parse(sessionStorage.getItem('riskManagerData'));
+                refreshMainTable();
+                return;
+            }
+        }
         //mainAccountTable.fnProcessingIndicator();
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskManage/Refresh.php', function (data) {
             riskManagerTableData = data.data;
@@ -421,6 +428,7 @@
             for (var i = 0; i < riskManagerTableData.length; i++) {
                 riskManagerData.push(riskManagerTableData[i]);
             }
+            sessionStorage.setItem('riskManagerData',JSON.stringify(riskManagerData));
             console.log("取到数据");
             refreshMainTable();
 
