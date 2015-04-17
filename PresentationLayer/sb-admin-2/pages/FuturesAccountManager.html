@@ -1054,7 +1054,7 @@
         mainChannelOption.on('change', function(){
             setMainAccountCompanyInfo(this.value)
         });
-        mainChannelOption.select('1');
+        mainChannelOption.eq(0).attr('selected', 'selected');
         mainChannelOption.trigger('change');
     }
 
