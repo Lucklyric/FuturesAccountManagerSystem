@@ -38,6 +38,28 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!--http://bootsnipp.com/snippets/featured/checked-list-group-->
+    <style>
+        .state-icon {
+            left: -5px;
+        }
+        .list-group-item-primary {
+            color: rgb(255, 255, 255);
+            background-color: rgb(66, 139, 202);
+        }
+
+        /* DEMO ONLY - REMOVES UNWANTED MARGIN */
+        .well .list-group {
+            margin-bottom: 0px;
+        }
+
+        .modal-row {
+            padding: 10px
+        }
+    </style>
+
+
 </head>
 
 <br/>
@@ -180,78 +202,138 @@
 
 
                                 <!--Modal-->
-                                <div class="modal fade" tabindex="-1" role="dialog" id="riskModal"
-                                     aria-labelledby="newMainAccountLabel" aria-hidden="true">
-                                    <div class="modal-dialog" id="newRiskModal">
+                                <div class="modal fade" tabindex="-1" role="dialog" id="riskManagerModal"
+                                     aria-labelledby="riskManagerModal" aria-hidden="true">
+                                    <div class="modal-dialog" id="newRiskManagerModal">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title" id="newMainAccountLabel">新建主账户</h4>
+                                                <h4 class="modal-title" id="newMainAccountLabel">新建风控员</h4>
                                             </div>
                                             <div class="modal-body">
 
-                                                <div width="30%">
-
-                                                <div class="form-group">
-                                                    <div class="radio" id="futureOrStock">
-                                                        <label><input type="radio" name="futures">期货</label>
+                                                <div class="container">
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <label style="margin-top: 8px" for="riskManaagerAccount">账户</label>
+                                                        </div>
+                                                        <div class="col-md-4 column modal-row">
+                                                            <input class="form-control" type="text" name="riskManaagerAccount" id="riskManaagerAccount"
+                                                                   value="" placeholder="账户ID"/>
+                                                        </div>
                                                     </div>
-                                                    <div class="radio">
-                                                        <label><input type="radio" name="stock">证券</label>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <label style="margin-top: 8px" for="riskManaagerPassword">密码</label>
+                                                        </div>
+                                                        <div class="col-md-4 column modal-row">
+                                                            <input class="form-control" type="password" name="riskManaagerPassword" id="riskManaagerPassword"
+                                                                   value="" placeholder="账户ID"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <label style="margin-top: 8px" for="riskManaagerPassword">附属子账户</label>
+                                                        </div>
+                                                        <div class="col-md-4 column modal-row">
+                                                                <div class="well" style="max-height: 300px;overflow: auto;">
+                                                                    <ul class="list-group checked-list-box">
+                                                                        <li class="list-group-item">Cras justo odio</li>
+                                                                        <li class="list-group-item" data-checked="true">Dapibus ac facilisis in</li>
+                                                                        <li class="list-group-item">Morbi leo risus</li>
+                                                                        <li class="list-group-item">Porta ac consectetur ac</li>
+                                                                        <li class="list-group-item">Vestibulum at eros</li>
+                                                                        <li class="list-group-item">Cras justo odio</li>
+                                                                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                                                                        <li class="list-group-item">Morbi leo risus</li>
+                                                                        <li class="list-group-item">Porta ac consectetur ac</li>
+                                                                        <li class="list-group-item">Vestibulum at eros</li>
+                                                                    </ul>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <label style="margin-top: 8px" for="riskManaagerName">姓名</label>
+                                                        </div>
+                                                        <div class="col-md-4 column modal-row">
+                                                            <input class="form-control" type="text" name="riskManaagerName" id="riskManaagerName"
+                                                                   value="" placeholder="姓名"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <label style="margin-top: 8px" for="riskManaagerContact">联系方式</label>
+                                                        </div>
+                                                        <div class="col-md-4 column modal-row">
+                                                            <input class="form-control" type="text" name="riskManaagerContact" id="riskManaagerContact"
+                                                                   value="" placeholder="联系方式"/>
+                                                        </div>
                                                     </div>
                                                 </div>
 
+                                                <!--<div width="30%">-->
 
-                                                <div class="form-group">
-                                                    <div class="radio" id="blackOrWhite">
-                                                        <label><input type="radio" name="black">黑名单</label>
-                                                    </div>
-                                                    <div class="radio">
-                                                        <label><input type="radio" name="white">白名单</label>
-                                                    </div>
-                                                </div>
-
-                                                </div>
-
-                                                <div class="form-group">
-
-                                                    <label for="company">经纪公司</label>
-
-                                                    <select  style="float: right; width: 50%" class="form-control" id="company">
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-group">
-
-                                                    <label for="server">服务器</label>
-
-                                                    <select  style="float: right; width: 50%" class="form-control" id="server">
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                    </select>
-                                                </div>
+                                                <!--<div class="form-group">-->
+                                                    <!--<div class="radio" id="futureOrStock">-->
+                                                        <!--<label><input type="radio" name="futures">期货</label>-->
+                                                    <!--</div>-->
+                                                    <!--<div class="radio">-->
+                                                        <!--<label><input type="radio" name="stock">证券</label>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
 
 
-                                                <div class="form-group">
-                                                    <label for="userId">账户ID</label>
-                                                    <input class="form-control" style="float: right; width: 50%" type="text" name="userId" id="userId"
-                                                           value="" placeholder="账户ID"/>
-                                                </div>
+                                                <!--<div class="form-group">-->
+                                                    <!--<div class="radio" id="blackOrWhite">-->
+                                                        <!--<label><input type="radio" name="black">黑名单</label>-->
+                                                    <!--</div>-->
+                                                    <!--<div class="radio">-->
+                                                        <!--<label><input type="radio" name="white">白名单</label>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
 
-                                                <div class="form-group">
-                                                    <label for="userPassword">账户密码</label>
-                                                    <input  class="form-control" style="float: right; width: 50%" type="password" name="userPassword"
-                                                            id="userPassword" value="" placeholder="账户密码"/>
-                                                </div>
+                                                <!--</div>-->
+
+                                                <!--<div class="form-group">-->
+
+                                                    <!--<label for="company">经纪公司</label>-->
+
+                                                    <!--<select  style="float: right; width: 50%" class="form-control" id="company">-->
+                                                        <!--<option>CTP</option>-->
+                                                        <!--<option>CTP</option>-->
+                                                        <!--<option>CTP</option>-->
+                                                        <!--<option>CTP</option>-->
+                                                        <!--<option>CTP</option>-->
+                                                    <!--</select>-->
+                                                <!--</div>-->
+
+                                                <!--<div class="form-group">-->
+
+                                                    <!--<label for="server">服务器</label>-->
+
+                                                    <!--<select  style="float: right; width: 50%" class="form-control" id="server">-->
+                                                        <!--<option>上海电信</option>-->
+                                                        <!--<option>上海电信</option>-->
+                                                        <!--<option>上海电信</option>-->
+                                                        <!--<option>上海电信</option>-->
+                                                        <!--<option>上海电信</option>-->
+                                                    <!--</select>-->
+                                                <!--</div>-->
+
+
+                                                <!--<div class="form-group">-->
+                                                    <!--<label for="userId">账户ID</label>-->
+                                                    <!--<input class="form-control" style="float: right; width: 50%" type="text" name="userId" id="userId"-->
+                                                           <!--value="" placeholder="账户ID"/>-->
+                                                <!--</div>-->
+
+                                                <!--<div class="form-group">-->
+                                                    <!--<label for="userPassword">账户密码</label>-->
+                                                    <!--<input  class="form-control" style="float: right; width: 50%" type="password" name="userPassword"-->
+                                                            <!--id="userPassword" value="" placeholder="账户密码"/>-->
+                                                <!--</div>-->
 
 
                                             </div>
@@ -272,14 +354,14 @@
                                        cellspacing="0" width="100%">
 
                                     <div class="subAccountToolbar" style="float:left">
-                                        <button type="button" class="btn btn-success" id="main-add" data-toggle="modal">
-                                            添加管理员
+                                        <button type="button" class="btn btn-success" id="riskManager-add" data-toggle="modal">
+                                            添加风控员
                                         </button>
-                                        <button type="button" class="btn btn-warning" id="main-update" data-toggle="modal">
-                                            修改管理员
+                                        <button type="button" class="btn btn-warning" id="riskManager-update" data-toggle="modal">
+                                            修改风控员
                                         </button>
-                                        <button type="button" class="btn btn-danger" id="main-delete" data-toggle="modal">
-                                            删除管理员
+                                        <button type="button" class="btn btn-danger" id="riskManager-delete" data-toggle="modal">
+                                            删除风控员
                                         </button>
                                     </div>
                                     <thead>
@@ -453,38 +535,38 @@
 
 <script>
 
-    //modal 确定 逻辑处理
-    $(document).on("click", "#newAccountModal .btn-primary", function () {
-        var channel = $("#newAccountModal #channel")[0].value;
-        var company = $("#newAccountModal #company")[0].value;
-        var server = $("#newAccountModal #server")[0].value;
-        var userId = $("#newAccountModal #userId")[0].value;
-        var userPassword = $("#newAccountModal #userPassword")[0].value;
-
-        //TODO: 应该做 validate
-        //ajax 发送插入
-
-        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/InsertData.php";
-
-        $.ajax({
-            url: hostpath,
-            type: "get", //send it through get method
-            data:{
-                Channel: channel,
-                CompanyName: company,
-                CompanyServer: server,
-                AccountId: userId,
-                AccountPassword: userPassword
-            },
-            success: function(response) {
-                alert( "Data Loaded: " + response);
-            },
-            error: function(xhr) {
-                //Do Something to handle error
-            }
-        });
-
-    });
+//    //modal 确定 逻辑处理
+//    $(document).on("click", "#newAccountModal .btn-primary", function () {
+//        var channel = $("#newAccountModal #channel")[0].value;
+//        var company = $("#newAccountModal #company")[0].value;
+//        var server = $("#newAccountModal #server")[0].value;
+//        var userId = $("#newAccountModal #userId")[0].value;
+//        var userPassword = $("#newAccountModal #userPassword")[0].value;
+//
+//        //TODO: 应该做 validate
+//        //ajax 发送插入
+//
+//        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/InsertData.php";
+//
+//        $.ajax({
+//            url: hostpath,
+//            type: "get", //send it through get method
+//            data:{
+//                Channel: channel,
+//                CompanyName: company,
+//                CompanyServer: server,
+//                AccountId: userId,
+//                AccountPassword: userPassword
+//            },
+//            success: function(response) {
+//                alert( "Data Loaded: " + response);
+//            },
+//            error: function(xhr) {
+//                //Do Something to handle error
+//            }
+//        });
+//
+//    });
 
 
 
@@ -498,22 +580,99 @@
             $('#main-delete').show();
         }
     }
-    // .click(function() {
-    // alert( "Handler for .click() called." );
-    // });
-
 
     //显示modal //SY这边添加添删改的功能
-    $(document).on("click", "#risk-add", function () {
+    $(document).on("click", "#riskManager-add", function () {
 
 //        $(".modal-body").append(texts.toArray().join(", "));
         // As pointed out in comments,
         // it is superfluous to have to manually call the modal.
-        alert(123);
-        $('#riskModal').modal('show');
+        $('#riskManagerModal').modal('show');
     });
 </script>
 
+
+<script>
+    //http://bootsnipp.com/snippets/featured/checked-list-group
+    $(function () {
+        $('.list-group.checked-list-box .list-group-item').each(function () {
+
+            // Settings
+            var $widget = $(this),
+                    $checkbox = $('<input type="checkbox" class="hidden" />'),
+                    color = ($widget.data('color') ? $widget.data('color') : "primary"),
+                    style = ($widget.data('style') == "button" ? "btn-" : "list-group-item-"),
+                    settings = {
+                        on: {
+                            icon: 'glyphicon glyphicon-check'
+                        },
+                        off: {
+                            icon: 'glyphicon glyphicon-unchecked'
+                        }
+                    };
+
+            $widget.css('cursor', 'pointer')
+            $widget.append($checkbox);
+
+            // Event Handlers
+            $widget.on('click', function () {
+                $checkbox.prop('checked', !$checkbox.is(':checked'));
+                $checkbox.triggerHandler('change');
+                updateDisplay();
+            });
+            $checkbox.on('change', function () {
+                updateDisplay();
+            });
+
+
+            // Actions
+            function updateDisplay() {
+                var isChecked = $checkbox.is(':checked');
+
+                // Set the button's state
+                $widget.data('state', (isChecked) ? "on" : "off");
+
+                // Set the button's icon
+                $widget.find('.state-icon')
+                        .removeClass()
+                        .addClass('state-icon ' + settings[$widget.data('state')].icon);
+
+                // Update the button's color
+                if (isChecked) {
+                    $widget.addClass(style + color + ' active');
+                } else {
+                    $widget.removeClass(style + color + ' active');
+                }
+            }
+
+            // Initialization
+            function init() {
+
+                if ($widget.data('checked') == true) {
+                    $checkbox.prop('checked', !$checkbox.is(':checked'));
+                }
+
+                updateDisplay();
+
+                // Inject the icon if applicable
+                if ($widget.find('.state-icon').length == 0) {
+                    $widget.prepend('<span class="state-icon ' + settings[$widget.data('state')].icon + '"></span>');
+                }
+            }
+            init();
+        });
+
+        $('#get-checked-data').on('click', function(event) {
+            event.preventDefault();
+            var checkedItems = {}, counter = 0;
+            $("#check-list-box li.active").each(function(idx, li) {
+                checkedItems[counter] = $(li).text();
+                counter++;
+            });
+            $('#display-json').html(JSON.stringify(checkedItems, null, '\t'));
+        });
+    });
+</script>
 </body>
 
 </html>
