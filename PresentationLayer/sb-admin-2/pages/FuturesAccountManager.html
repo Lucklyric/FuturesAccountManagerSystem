@@ -528,7 +528,7 @@
                 for (var i = 0; i < mainAccountTableData.length; i++) {
                     mainAccounts.push(mainAccountTableData[i].inf);
                 }
-                console.log(mainAccounts);
+                //console.log(mainAccounts);
                 refreshMainAccountsTable();
                 updateSubAccounts(selectedIndex);
                 refreshSubAccountsTable();
@@ -541,11 +541,12 @@
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
             mainAccountTableData = data.data;
             sessionStorage.setItem('mainAccountTableData',JSON.stringify(mainAccountTableData));
-            console.log(mainAccountTableData);
+           // console.log(mainAccountTableData);
+            console.log("走到这里了");
             for (var i = 0; i < mainAccountTableData.length; i++) {
                 mainAccounts.push(mainAccountTableData[i].inf);
             }
-            console.log(mainAccounts);
+            //console.log(mainAccounts);
             refreshMainAccountsTable();
             updateSubAccounts(selectedIndex);
             refreshSubAccountsTable();
@@ -640,6 +641,7 @@
         curSubAccounts = [];
         for (var i = 0; i < mainAccountTableData[index].subs.length; i++) {
             curSubAccounts.push(mainAccountTableData[index].subs[i]);
+            curSubAccounts[curSubAccounts.length-1][8] = mainAccountTableData[index].inf[4];
         }
     }
 
@@ -803,7 +805,7 @@
         //TODO: 应该做 validate
         //ajax 发送插入
 
-        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/InsertData.php";
+        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/InsertData.php";
 
         $.ajax({
             url: hostpath,
@@ -835,7 +837,7 @@
         //TODO: 应该做 validate
         //ajax 发送插入
 
-        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/UpdateData.php";
+        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/UpdateData.php";
 
         $.ajax({
             url: hostpath,
@@ -866,7 +868,7 @@
         var userId = data[4];
         var userPassword = data[4];
 
-        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/DeleteData.php";
+        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/DeleteData.php";
 
         $.ajax({
             url: hostpath,
@@ -881,6 +883,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
+                selectedIndex = 0;
                 refreshData(1);
             },
             error: function (xhr) {
@@ -903,7 +906,7 @@
         //TODO: 应该做 validate
         //ajax 发送插入
 
-        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/InsertData.php";
+        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/InsertData.php";
 
         $.ajax({
             url: hostpath,
@@ -939,7 +942,7 @@
         //TODO: 应该做 validate
         //ajax 发送插入
 
-        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/UpdateData.php";
+        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/UpdateData.php";
 
         $.ajax({
             url: hostpath,
@@ -967,7 +970,7 @@
 
         var subSystemId = data[0];
 
-        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/DeleteData.php";
+        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/DeleteData.php";
 
         $.ajax({
             url: hostpath,
@@ -977,6 +980,7 @@
             },
             success: function (response) {
                 alert("Data Loaded: " + response);
+                subSelectedIndex = 0;
                 refreshData(1);
             },
             error: function (xhr) {
@@ -1042,13 +1046,14 @@
         )
         mainChannelOption.on('change', function(){
             setMainAccountCompanyInfo(this.value)
-        })
+        });
         mainChannelOption.select('1');
-        mainChannelOption.trigger('change')
+        mainChannelOption.trigger('change');
     }
 
     //显示add modal
     $(document).on("click", "#main-add", function () {
+        if (allBrokersInfo.length == 0) return;
         //绑定回调
         $(document).off("click", "#newAccountModal .btn-primary");
         $(document).on("click", "#newAccountModal .btn-primary", newAccount);
@@ -1058,6 +1063,7 @@
 
     //显示update modal
     $(document).on("click", "#main-update", function () {
+        if (allBrokersInfo.length == 0) return;
         $(document).off("click", "#newAccountModal .btn-primary");
         setMainAccountInfo();
         fillMainModal("#accountModal", mainAccounts[selectedIndex]);
@@ -1075,6 +1081,7 @@
 
     //显示add sub modal
     $(document).on("click", "#sub-add", function () {
+        if (mainAccounts.length == 0) return;
         //绑定回调
         $(document).off("click", "#newSubModal .btn-primary");
         $(document).on("click", "#newSubModal .btn-primary", newSubAccount);
@@ -1120,6 +1127,8 @@
 
     //显示update sub modal
     $(document).on("click", "#sub-update", function () {
+        if (mainAccounts.length == 0) return;
+        //if (riskGroups.length == 0 || ratioTypes.length == 0) return;
         $(document).off("click", "#newSubModal .btn-primary");
         setSubAccountInfo();
         fillSubModal("#subModal", curSubAccounts[subSelectedIndex]);
@@ -1130,7 +1139,9 @@
 
 
     $(document).on("click", "#sub-delete", function () {
+
         deleteSubAccount(curSubAccounts[subSelectedIndex]);
+
     });
 
     //理论上来说添加修改以后都应该刷新
