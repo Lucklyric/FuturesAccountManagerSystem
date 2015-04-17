@@ -386,6 +386,19 @@
         });
     }
 
+    /**
+     * 返回主账户ID
+     * @param subAccountID:子账户ID
+     */
+    function returnMainAccountId(subAccountID){
+        for (var i = 0; i < mainAccountTableData.length;i++){
+            for (var j = 0; j < mainAccountTableData[i].subs.length;j++){
+                if (mainAccountTableData[i].subs[j][1] == subAccountID){
+                    return mainAccountTableData[i].inf[4];
+                }
+            }
+        }
+    }
 
     /**
      * 刷新主账户表格

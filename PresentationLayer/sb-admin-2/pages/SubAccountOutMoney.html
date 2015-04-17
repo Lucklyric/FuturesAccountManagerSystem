@@ -428,7 +428,7 @@
     /**
      * 定义全局变量
      */
-
+    var mainAccountTableData=[];
     var subAccountTable;
     var subAccountTableData;
     var subAccounts = [];
@@ -439,6 +439,7 @@
      */
     $(document).ready(function () {
         refreshMainTable();
+        refreshMainSubAccounts();
         refreshData(); //更新数据
 
         $('#subAccountMoneyTable').on('click', 'tr', function () { //绑定点击事件刷新子账户
@@ -490,7 +491,38 @@
 
         });
     }
+    /**
+     * 取得主账户子账户关系表
+     */
+    function refreshMainSubAccounts(flag){
+        if (flag === undefined) {
+            if (sessionStorage.getItem('mainAccountTableData')) {
+                mainAccountTableData = JSON.parse(sessionStorage.getItem('mainAccountTableData'));
+                console.log(mainAccountTableData);
+                return;
+            }
+        }
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
+            mainAccountTableData = data.data;
+            sessionStorage.setItem('mainAccountTableData', JSON.stringify(mainAccountTableData));
+            console.log(mainAccountTableData);
+        });
+    }
 
+
+    /**
+     * 返回主账户ID
+     * @param subAccountID:子账户ID
+     */
+    function returnMainAccountId(subAccountID){
+        for (var i = 0; i < mainAccountTableData.length;i++){
+            for (var j = 0; j < mainAccountTableData[i].subs.length;j++){
+                if (mainAccountTableData[i].subs[j][1] == subAccountID){
+                    return mainAccountTableData[i].inf[4];
+                }
+            }
+        }
+    }
 
     /**
      * 刷新主账户表格
