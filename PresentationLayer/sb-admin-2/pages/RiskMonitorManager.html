@@ -434,6 +434,7 @@
     var riskMonitorTable;
     var riskMonitorTableData;
     var riskMonitorData= [];
+    var subAccounts=[];
     var selectedIndex = 0;  //mainSelectedIndex
     var toolBarManger = new SSToolBar($("#restartServer"),$("#connectMainAccount"),$("#onlineCount"),$("#serverStatus"));
     /**
@@ -441,6 +442,7 @@
      */
     $(document).ready(function () {
         ifHideMainAccountToolBar(true);
+        refreshSubAccounts();
         refreshMainTable();
         refreshData(); //更新数据
 
@@ -492,7 +494,25 @@
 
         });
     }
-
+    /**
+     * 刷新子账户
+     */
+    function refreshSubAccounts(flag){
+        if (flag === undefined){
+            if (sessionStorage.getItem('localSettlement')){
+                subAccounts = JSON.parse(sessionStorage.getItem('localSettlement'));
+                return;
+            }
+        }
+        //mainAccountTable.fnProcessingIndicator();
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/Refresh.php', function (data) {
+            subAccounts = [];
+            for (var i = 0; i < data.data.length; i++) {
+                subAccounts.push(subAccountTableData[i]);
+            }
+            sessionStorage.setItem('localSettlement',JSON.stringify(subAccounts));
+        });
+    }
 
     /**
      * 刷新主账户表格
@@ -574,11 +594,11 @@
     function ifHideMainAccountToolBar(flag){
 
         if (flag){
-            $('#main-update').hide();
-            $('#main-delete').hide();
+            $('#riskManager-update').hide();
+            $('#riskManager-delete').hide();
         }else{
-            $('#main-update').show();
-            $('#main-delete').show();
+            $('#riskManager-update').show();
+            $('#riskManager-delete').show();
         }
     }
 
