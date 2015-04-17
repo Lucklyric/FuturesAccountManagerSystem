@@ -739,21 +739,24 @@
         var channelArray = $(modal + " #channel option");
         for (var i = 0; i < channelArray.length; i++){
             if (channelArray.eq(i).text() == data[1]){
-                channelArray.select(i);
+                channelArray.eq(i).attr('selected', 'selected');
+                break;
             }
         }
 
         var companyArray = $(modal + " #company option");
         for (var i = 0; i < companyArray.length; i++){
             if (companyArray.eq(i).text() == data[2]){
-                companyArray.select(i);
+                companyArray.eq(i).attr('selected', 'selected');
+                break;
             }
         }
 
         var serverArray = $(modal + " #server option");
         for (var i = 0; i < serverArray.length; i++){
             if (serverArray.eq(i).text() == data[3]){
-                serverArray.select(i);
+                serverArray.eq(i).attr('selected', 'selected');
+                break;
             }
         }
 
@@ -764,7 +767,7 @@
     //填充MainModal
     function fillSubModal(modal, data) {
 
-        $(modal + " #userId").val(data[1]);
+        $(modal + " #subId").val(data[1]);
         $(modal + " #subPassword").val(data[2]);
         $(modal + " #subName").val(data[6]);
         $(modal + " #subContact").val(data[7]);
@@ -772,22 +775,24 @@
         var mainArray = $(modal + " #mainAccount option");
         for (var i = 0; i < mainArray.length; i++){
             if (mainArray.eq(i).text() == data[8]){
-                mainArray.select(i);
+                mainArray.eq(i).attr('selected', 'selected');
+                break;
             }
         }
-
 
         var riskArray = $(modal + " #riskControl option");
         for (var i = 0; i < riskArray.length; i++){
             if (riskArray.eq(i).text() == data[9]){
-                riskArray.select(i);
+                riskArray.eq(i).attr('selected', 'selected');
+                break;
             }
         }
 
         var rateArray = $(modal + " #rate option");
         for (var i = 0; i < rateArray.length; i++){
             if (rateArray.eq(i).text() == data[10]){
-                rateArray.select(i);
+                rateArray.eq(i).attr('selected', 'selected');
+                break;
             }
         }
 
@@ -1078,7 +1083,6 @@
     });
 
 
-
     //显示add sub modal
     $(document).on("click", "#sub-add", function () {
         if (mainAccounts.length == 0) return;
@@ -1091,7 +1095,7 @@
 
     function setSubAccountInfo(){
         //clear existing info
-        $("#newSubModal #userId").val("");
+        $("#newSubModal #subId").val("");
         $("#newSubModal #subPassword").val("");
         $("#newSubModal #subName").val("");
         $("#newSubModal #subContact").val("");
@@ -1139,9 +1143,7 @@
 
 
     $(document).on("click", "#sub-delete", function () {
-
         deleteSubAccount(curSubAccounts[subSelectedIndex]);
-
     });
 
     //理论上来说添加修改以后都应该刷新
