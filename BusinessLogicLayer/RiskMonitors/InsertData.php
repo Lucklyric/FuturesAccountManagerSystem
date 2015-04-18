@@ -22,11 +22,11 @@
     $AdminPassword="123456";
     $TableName="RiskMonitor";
     $SystemId="0";
-    $Id="0";
-    $Password="test";
-    $SubAccount="11";
-    $Name="test";
-    $Contact="test";
+//    $Id="0";
+//    $Password="test";
+//    $SubAccount="11";
+//    $Name="test";
+//    $Contact="test";
     $State="1";
     
     //admin=frankzch&password=123456&tablename=RiskMonitor&state=1&编号=0&ID=11&密码=test&附属子账户=1&姓名=测试&联系方式=testcontact
@@ -34,7 +34,6 @@
     $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$SystemId."&ID=".$Id."&密码=".$Password."&附属子账户=".$SubAccount."&姓名=".$Name."&联系方式=".$Contact;
         echo $data;
     }else{
-    
         echo "Some data is missing!";
     
     }

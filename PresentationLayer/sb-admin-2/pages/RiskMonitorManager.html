@@ -44,6 +44,7 @@
         .state-icon {
             left: -5px;
         }
+
         .list-group-item-primary {
             color: rgb(255, 255, 255);
             background-color: rgb(66, 139, 202);
@@ -64,7 +65,8 @@
 </head>
 
 <br/>
-<div id = "wrapper">
+
+<div id="wrapper">
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="margin-bottom: 0">
         <div class="container-fluid">
@@ -81,16 +83,18 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <p id = "onlineCount" class="navbar-text">在线人数：0人</p>
+                    <p id="onlineCount" class="navbar-text">在线人数：0人</p>
                 </li>
                 <li>
-                    <p id = "serverStatus" class="navbar-text">服务器状态：关闭</p>
+                    <p id="serverStatus" class="navbar-text">服务器状态：关闭</p>
                 </li>
                 <li>
-                    <button id = "connectMainAccount" class="btn btn-info navbar-btn" style="margin-right: 5px">连接主账户</button>
+                    <button id="connectMainAccount" class="btn btn-info navbar-btn" style="margin-right: 5px">连接主账户
+                    </button>
                 </li>
                 <li>
-                    <button id = "restartServer" class="btn btn-primary navbar-btn" style="margin-right: 5px">重启服务器</button>
+                    <button id="restartServer" class="btn btn-primary navbar-btn" style="margin-right: 5px">重启服务器
+                    </button>
                 </li>
 
                 <li class="dropdown">
@@ -217,58 +221,57 @@
                                                 <div class="container">
                                                     <div class="row clearfix">
                                                         <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px" for="riskManaagerAccount">账户</label>
+                                                            <label style="margin-top: 8px"
+                                                                   for="riskManagerAccount">账户</label>
                                                         </div>
                                                         <div class="col-md-4 column modal-row">
-                                                            <input class="form-control" type="text" name="riskManaagerAccount" id="riskManaagerAccount"
+                                                            <input class="form-control" type="text"
+                                                                   name="riskManagerAccount" id="riskManagerAccount"
                                                                    value="" placeholder="账户ID"/>
                                                         </div>
                                                     </div>
                                                     <div class="row clearfix">
                                                         <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px" for="riskManaagerPassword">密码</label>
+                                                            <label style="margin-top: 8px"
+                                                                   for="riskManagerPassword">密码</label>
                                                         </div>
                                                         <div class="col-md-4 column modal-row">
-                                                            <input class="form-control" type="password" name="riskManaagerPassword" id="riskManaagerPassword"
+                                                            <input class="form-control" type="password"
+                                                                   name="riskManagerPassword" id="riskManagerPassword"
                                                                    value="" placeholder="账户密码"/>
                                                         </div>
                                                     </div>
                                                     <div class="row clearfix">
                                                         <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px" for="riskManaagerPassword">附属子账户</label>
+                                                            <label style="margin-top: 8px" for="riskManagerPassword">附属子账户</label>
                                                         </div>
                                                         <div class="col-md-4 column modal-row">
-                                                                <div class="well" style="max-height: 300px;overflow: auto;">
-                                                                    <ul class="list-group checked-list-box">
-                                                                        <li class="list-group-item">Cras justo odio</li>
-                                                                        <li class="list-group-item" data-checked="true">Dapibus ac facilisis in</li>
-                                                                        <li class="list-group-item">Morbi leo risus</li>
-                                                                        <li class="list-group-item">Porta ac consectetur ac</li>
-                                                                        <li class="list-group-item">Vestibulum at eros</li>
-                                                                        <li class="list-group-item">Cras justo odio</li>
-                                                                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                                                                        <li class="list-group-item">Morbi leo risus</li>
-                                                                        <li class="list-group-item">Porta ac consectetur ac</li>
-                                                                        <li class="list-group-item">Vestibulum at eros</li>
-                                                                    </ul>
-                                                                </div>
+                                                            <div class="well" style="max-height: 300px;overflow: auto;">
+                                                                <ul class="list-group checked-list-box"
+                                                                    id="subAccountUL">
+                                                                    <li class="list-group-item">Cras justo odio</li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="row clearfix">
                                                         <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px" for="riskManaagerName">姓名</label>
+                                                            <label style="margin-top: 8px"
+                                                                   for="riskManagerName">姓名</label>
                                                         </div>
                                                         <div class="col-md-4 column modal-row">
-                                                            <input class="form-control" type="text" name="riskManaagerName" id="riskManaagerName"
+                                                            <input class="form-control" type="text"
+                                                                   name="riskManagerName" id="riskManagerName"
                                                                    value="" placeholder="姓名"/>
                                                         </div>
                                                     </div>
                                                     <div class="row clearfix">
                                                         <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px" for="riskManaagerContact">联系方式</label>
+                                                            <label style="margin-top: 8px" for="riskManagerContact">联系方式</label>
                                                         </div>
                                                         <div class="col-md-4 column modal-row">
-                                                            <input class="form-control" type="text" name="riskManaagerContact" id="riskManaagerContact"
+                                                            <input class="form-control" type="text"
+                                                                   name="riskManagerContact" id="riskManagerContact"
                                                                    value="" placeholder="联系方式"/>
                                                         </div>
                                                     </div>
@@ -277,63 +280,63 @@
                                                 <!--<div width="30%">-->
 
                                                 <!--<div class="form-group">-->
-                                                    <!--<div class="radio" id="futureOrStock">-->
-                                                        <!--<label><input type="radio" name="futures">期货</label>-->
-                                                    <!--</div>-->
-                                                    <!--<div class="radio">-->
-                                                        <!--<label><input type="radio" name="stock">证券</label>-->
-                                                    <!--</div>-->
+                                                <!--<div class="radio" id="futureOrStock">-->
+                                                <!--<label><input type="radio" name="futures">期货</label>-->
+                                                <!--</div>-->
+                                                <!--<div class="radio">-->
+                                                <!--<label><input type="radio" name="stock">证券</label>-->
+                                                <!--</div>-->
                                                 <!--</div>-->
 
 
                                                 <!--<div class="form-group">-->
-                                                    <!--<div class="radio" id="blackOrWhite">-->
-                                                        <!--<label><input type="radio" name="black">黑名单</label>-->
-                                                    <!--</div>-->
-                                                    <!--<div class="radio">-->
-                                                        <!--<label><input type="radio" name="white">白名单</label>-->
-                                                    <!--</div>-->
+                                                <!--<div class="radio" id="blackOrWhite">-->
+                                                <!--<label><input type="radio" name="black">黑名单</label>-->
+                                                <!--</div>-->
+                                                <!--<div class="radio">-->
+                                                <!--<label><input type="radio" name="white">白名单</label>-->
+                                                <!--</div>-->
                                                 <!--</div>-->
 
                                                 <!--</div>-->
 
                                                 <!--<div class="form-group">-->
 
-                                                    <!--<label for="company">经纪公司</label>-->
+                                                <!--<label for="company">经纪公司</label>-->
 
-                                                    <!--<select  style="float: right; width: 50%" class="form-control" id="company">-->
-                                                        <!--<option>CTP</option>-->
-                                                        <!--<option>CTP</option>-->
-                                                        <!--<option>CTP</option>-->
-                                                        <!--<option>CTP</option>-->
-                                                        <!--<option>CTP</option>-->
-                                                    <!--</select>-->
+                                                <!--<select  style="float: right; width: 50%" class="form-control" id="company">-->
+                                                <!--<option>CTP</option>-->
+                                                <!--<option>CTP</option>-->
+                                                <!--<option>CTP</option>-->
+                                                <!--<option>CTP</option>-->
+                                                <!--<option>CTP</option>-->
+                                                <!--</select>-->
                                                 <!--</div>-->
 
                                                 <!--<div class="form-group">-->
 
-                                                    <!--<label for="server">服务器</label>-->
+                                                <!--<label for="server">服务器</label>-->
 
-                                                    <!--<select  style="float: right; width: 50%" class="form-control" id="server">-->
-                                                        <!--<option>上海电信</option>-->
-                                                        <!--<option>上海电信</option>-->
-                                                        <!--<option>上海电信</option>-->
-                                                        <!--<option>上海电信</option>-->
-                                                        <!--<option>上海电信</option>-->
-                                                    <!--</select>-->
+                                                <!--<select  style="float: right; width: 50%" class="form-control" id="server">-->
+                                                <!--<option>上海电信</option>-->
+                                                <!--<option>上海电信</option>-->
+                                                <!--<option>上海电信</option>-->
+                                                <!--<option>上海电信</option>-->
+                                                <!--<option>上海电信</option>-->
+                                                <!--</select>-->
                                                 <!--</div>-->
 
 
                                                 <!--<div class="form-group">-->
-                                                    <!--<label for="userId">账户ID</label>-->
-                                                    <!--<input class="form-control" style="float: right; width: 50%" type="text" name="userId" id="userId"-->
-                                                           <!--value="" placeholder="账户ID"/>-->
+                                                <!--<label for="userId">账户ID</label>-->
+                                                <!--<input class="form-control" style="float: right; width: 50%" type="text" name="userId" id="userId"-->
+                                                <!--value="" placeholder="账户ID"/>-->
                                                 <!--</div>-->
 
                                                 <!--<div class="form-group">-->
-                                                    <!--<label for="userPassword">账户密码</label>-->
-                                                    <!--<input  class="form-control" style="float: right; width: 50%" type="password" name="userPassword"-->
-                                                            <!--id="userPassword" value="" placeholder="账户密码"/>-->
+                                                <!--<label for="userPassword">账户密码</label>-->
+                                                <!--<input  class="form-control" style="float: right; width: 50%" type="password" name="userPassword"-->
+                                                <!--id="userPassword" value="" placeholder="账户密码"/>-->
                                                 <!--</div>-->
 
 
@@ -341,7 +344,8 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                                 </button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">确定
+                                                </button>
                                             </div>
                                         </div>
                                         <!-- /.modal-content -->
@@ -355,13 +359,16 @@
                                        cellspacing="0" width="100%">
 
                                     <div class="subAccountToolbar" style="float:left">
-                                        <button type="button" class="btn btn-success" id="riskManager-add" data-toggle="modal">
+                                        <button type="button" class="btn btn-success" id="riskManager-add"
+                                                data-toggle="modal">
                                             添加风控员
                                         </button>
-                                        <button type="button" class="btn btn-warning" id="riskManager-update" data-toggle="modal">
+                                        <button type="button" class="btn btn-warning" id="riskManager-update"
+                                                data-toggle="modal">
                                             修改风控员
                                         </button>
-                                        <button type="button" class="btn btn-danger" id="riskManager-delete" data-toggle="modal">
+                                        <button type="button" class="btn btn-danger" id="riskManager-delete"
+                                                data-toggle="modal">
                                             删除风控员
                                         </button>
                                     </div>
@@ -427,195 +434,9 @@
 <script src="../dist/js/sb-admin-2.js"></script>
 
 <script>
-    /**
-     * 定义全局变量
-     */
-
-    var riskMonitorTable;
-    var riskMonitorTableData;
-    var riskMonitorData= [];
-    var subAccounts=[];
-    var selectedIndex = 0;  //mainSelectedIndex
-    var toolBarManger = new SSToolBar($("#restartServer"),$("#connectMainAccount"),$("#onlineCount"),$("#serverStatus"));
-    /**
-     * Document加载完毕 更新数据刷新Table绑定点击事件
-     */
-    $(document).ready(function () {
-        ifHideMainAccountToolBar(true);
-        refreshSubAccounts();
-        refreshMainTable();
-        refreshData(); //更新数据
-
-        $('#riskMonitorTable').on('click', 'tr', function () { //绑定点击事件刷新子账户
-            selectedIndex = riskMonitorTable.row(this).index();
-            ifHideMainAccountToolBar(false);
-            //refreshMainTable();
-            if ( $(this).hasClass('selected') ) {
-                //$(this).removeClass('selected');
-            }
-            else {
-                riskMonitorTable.$('tr.selected').removeClass('selected');
-                $(this).addClass('selected');
-            }
-            // $('.modal-dialog').modal('show');
-        } );
-
-
-
-    });
-</script>
-
-<script>
-    /**
-     * Ajax从服务端取数据
-     */
-    function refreshData(flag) {
-        riskMonitorData = [];
-        var table = $('#riskMonitorTable').dataTable();
-        table.fnProcessingIndicator();      // On
-        console.log("开始刷新数据");
-        //mainAccountTable.fnProcessingIndicator();
-        if (flag === undefined){
-            if (sessionStorage.getItem('riskMonitorData')){
-                riskMonitorData = JSON.parse(sessionStorage.getItem('riskMonitorData'));
-                refreshMainTable();
-                return;
-            }
-        }
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskMonitors/Refresh.php', function (data) {
-            riskMonitorTableData = data.data;
-            console.log(riskMonitorTableData[0]);
-            for (var i = 0; i < riskMonitorTableData.length; i++) {
-                riskMonitorData.push(riskMonitorTableData[i]);
-            }
-            console.log("取到数据");
-            sessionStorage.setItem('riskMonitorData',JSON.stringify(riskMonitorData));
-            refreshMainTable();
-
-        });
-    }
-    /**
-     * 刷新子账户
-     */
-    function refreshSubAccounts(flag){
-        if (flag === undefined){
-            if (sessionStorage.getItem('localSettlement')){
-                subAccounts = JSON.parse(sessionStorage.getItem('localSettlement'));
-                return;
-            }
-        }
-        //mainAccountTable.fnProcessingIndicator();
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/Refresh.php', function (data) {
-            subAccounts = [];
-            for (var i = 0; i < data.data.length; i++) {
-                subAccounts.push(subAccountTableData[i]);
-            }
-            sessionStorage.setItem('localSettlement',JSON.stringify(subAccounts));
-        });
-    }
-
-    /**
-     * 刷新主账户表格
-     */
-    function refreshMainTable() {
-        if ($.fn.dataTable.isDataTable('#riskMonitorTable')) {
-            console.log("刷新表格");
-            console.log(riskMonitorData[0]);
-            riskMonitorTable.clear();
-            for (var i = 0; i < riskMonitorData.length; i++) {
-                riskMonitorTable.row.add(riskMonitorData[i]);
-            }
-            riskMonitorTable.draw();
-            var table = $('#riskMonitorTable').dataTable();
-            table.fnProcessingIndicator(false);      // On
-        }
-        else {
-            console.log("开始构建主表");
-            riskMonitorTable = $('#riskMonitorTable').DataTable({
-                "processing": true,
-                "data": riskMonitorData,
-                "scrollY": "500px",
-                "scrollCollapse": false,
-                "paging": false,
-                "dom": '<"riskMonitorToolbar"f>rlpti',
-                "language": {
-                    "search": "搜索:",
-                    "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
-                    "infoEmpty": "显示 0 到 0 共 0 记录",
-                    "emptyTable":"暂无可显示数据",
-                    "processing": "正在加载......"
-                }
-            });
-
-        }
-    }
-
-
-
-</script>
-
-<script>
-
-//    //modal 确定 逻辑处理
-//    $(document).on("click", "#newAccountModal .btn-primary", function () {
-//        var channel = $("#newAccountModal #channel")[0].value;
-//        var company = $("#newAccountModal #company")[0].value;
-//        var server = $("#newAccountModal #server")[0].value;
-//        var userId = $("#newAccountModal #userId")[0].value;
-//        var userPassword = $("#newAccountModal #userPassword")[0].value;
-//
-//        //TODO: 应该做 validate
-//        //ajax 发送插入
-//
-//        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/InsertData.php";
-//
-//        $.ajax({
-//            url: hostpath,
-//            type: "get", //send it through get method
-//            data:{
-//                Channel: channel,
-//                CompanyName: company,
-//                CompanyServer: server,
-//                AccountId: userId,
-//                AccountPassword: userPassword
-//            },
-//            success: function(response) {
-//                alert( "Data Loaded: " + response);
-//            },
-//            error: function(xhr) {
-//                //Do Something to handle error
-//            }
-//        });
-//
-//    });
-
-
-
-    function ifHideMainAccountToolBar(flag){
-
-        if (flag){
-            $('#riskManager-update').hide();
-            $('#riskManager-delete').hide();
-        }else{
-            $('#riskManager-update').show();
-            $('#riskManager-delete').show();
-        }
-    }
-
-    //显示modal //SY这边添加添删改的功能
-    $(document).on("click", "#riskManager-add", function () {
-
-//        $(".modal-body").append(texts.toArray().join(", "));
-        // As pointed out in comments,
-        // it is superfluous to have to manually call the modal.
-        $('#riskManagerModal').modal('show');
-    });
-</script>
-
-
-<script>
     //http://bootsnipp.com/snippets/featured/checked-list-group
-    $(function () {
+
+    function updateCheckBox() {
         $('.list-group.checked-list-box .list-group-item').each(function () {
 
             // Settings
@@ -680,20 +501,320 @@
                     $widget.prepend('<span class="state-icon ' + settings[$widget.data('state')].icon + '"></span>');
                 }
             }
+
             init();
         });
+    }
 
-        $('#get-checked-data').on('click', function(event) {
-            event.preventDefault();
-            var checkedItems = {}, counter = 0;
-            $("#check-list-box li.active").each(function(idx, li) {
-                checkedItems[counter] = $(li).text();
-                counter++;
-            });
-            $('#display-json').html(JSON.stringify(checkedItems, null, '\t'));
+</script>
+
+<script>
+    /**
+     * 定义全局变量
+     */
+
+    var riskMonitorTable;
+    var riskMonitorTableData;
+    var riskMonitorData = [];
+    var subAccounts = [];
+    var selectedIndex = 0;  //mainSelectedIndex
+    var toolBarManger = new SSToolBar($("#restartServer"), $("#connectMainAccount"), $("#onlineCount"), $("#serverStatus"));
+    /**
+     * Document加载完毕 更新数据刷新Table绑定点击事件
+     */
+    $(document).ready(function () {
+        ifHideMainAccountToolBar(true);
+        refreshSubAccounts();
+        refreshMainTable();
+        refreshData(); //更新数据
+
+        $('#riskMonitorTable').on('click', 'tr', function () { //绑定点击事件刷新子账户
+            selectedIndex = riskMonitorTable.row(this).index();
+            ifHideMainAccountToolBar(false);
+            //refreshMainTable();
+            if ($(this).hasClass('selected')) {
+                //$(this).removeClass('selected');
+            }
+            else {
+                riskMonitorTable.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+            // $('.modal-dialog').modal('show');
         });
+
+
     });
 </script>
+
+<script>
+    /**
+     * Ajax从服务端取数据
+     */
+    function refreshData(flag) {
+        riskMonitorData = [];
+        var table = $('#riskMonitorTable').dataTable();
+        table.fnProcessingIndicator();      // On
+        console.log("开始刷新数据");
+        //mainAccountTable.fnProcessingIndicator();
+        if (flag === undefined) {
+            if (sessionStorage.getItem('riskMonitorData')) {
+                riskMonitorData = JSON.parse(sessionStorage.getItem('riskMonitorData'));
+                refreshMainTable();
+                return;
+            }
+        }
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskMonitors/Refresh.php', function (data) {
+            riskMonitorTableData = data.data;
+            console.log(riskMonitorTableData[0]);
+            for (var i = 0; i < riskMonitorTableData.length; i++) {
+                riskMonitorData.push(riskMonitorTableData[i]);
+            }
+            console.log("取到数据");
+            sessionStorage.setItem('riskMonitorData', JSON.stringify(riskMonitorData));
+            refreshMainTable();
+
+        });
+    }
+    /**
+     * 刷新子账户
+     */
+    function refreshSubAccounts(flag) {
+        if (flag === undefined) {
+            if (sessionStorage.getItem('localSettlement')) {
+                subAccounts = JSON.parse(sessionStorage.getItem('localSettlement'));
+                return;
+            }
+        }
+        //mainAccountTable.fnProcessingIndicator();
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/Refresh.php', function (data) {
+            subAccounts = [];
+            for (var i = 0; i < data.data.length; i++) {
+                subAccounts.push(subAccountTableData[i]);
+            }
+            sessionStorage.setItem('localSettlement', JSON.stringify(subAccounts));
+        });
+    }
+
+    /**
+     * 刷新主账户表格
+     */
+    function refreshMainTable() {
+        if ($.fn.dataTable.isDataTable('#riskMonitorTable')) {
+            console.log("刷新表格");
+            console.log(riskMonitorData[0]);
+            riskMonitorTable.clear();
+            for (var i = 0; i < riskMonitorData.length; i++) {
+                riskMonitorTable.row.add(riskMonitorData[i]);
+            }
+            riskMonitorTable.draw();
+            var table = $('#riskMonitorTable').dataTable();
+            table.fnProcessingIndicator(false);      // On
+        }
+        else {
+            console.log("开始构建主表");
+            riskMonitorTable = $('#riskMonitorTable').DataTable({
+                "processing": true,
+                "data": riskMonitorData,
+                "scrollY": "500px",
+                "scrollCollapse": false,
+                "paging": false,
+                "dom": '<"riskMonitorToolbar"f>rlpti',
+                "language": {
+                    "search": "搜索:",
+                    "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
+                    "infoEmpty": "显示 0 到 0 共 0 记录",
+                    "emptyTable": "暂无可显示数据",
+                    "processing": "正在加载......"
+                }
+            });
+
+        }
+    }
+
+
+</script>
+
+<script>
+
+    function addNewRiskManager(){
+        //modal 确定 逻辑处理
+            var checkedSubAccounts = getCheckedItems().toString();
+            var riskManagerAccount = $("#newRiskManagerModal #riskManagerAccount").val();
+            var riskManagerPassword = $("#newRiskManagerModal #riskManagerPassword").val();
+            var riskManagerName = $("#newRiskManagerModal #riskManagerName").val();
+            var riskManagerContact = $("#newRiskManagerModal #riskManagerContact").val();
+
+            //TODO: 应该做 validate
+            //ajax 发送插入
+
+            var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskMonitors/InsertData.php";
+
+            $.ajax({
+                url: hostpath,
+                type: "get", //send it through get method
+                data:{
+                    Id: riskManagerAccount,
+                    Password: riskManagerPassword,
+                    SubAccount: checkedSubAccounts,
+                    Name: riskManagerName,
+                    Contact: riskManagerContact
+                },
+                success: function(response) {
+                    alert( "Data Loaded: " + response);
+                },
+                error: function(xhr) {
+                    //Do Something to handle error
+                }
+            });
+    }
+
+    function updateRiskManager(){
+        //modal 确定 逻辑处理
+        var checkedSubAccounts = getCheckedItems().toString();
+        var riskManagerAccount = $("#newRiskManagerModal #riskManagerAccount").val();
+        var riskManagerPassword = $("#newRiskManagerModal #riskManagerPassword").val();
+        var riskManagerName = $("#newRiskManagerModal #riskManagerName").val();
+        var riskManagerContact = $("#newRiskManagerModal #riskManagerContact").val();
+
+        //TODO: 应该做 validate
+        //ajax 发送插入
+
+        //TODO: PHP有问题，修改PHP
+        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskMonitors/UpdateData.php";
+
+        $.ajax({
+            url: hostpath,
+            type: "get", //send it through get method
+            data:{
+                Id: riskManagerAccount,
+                Password: riskManagerPassword,
+                SubAccount: checkedSubAccounts,
+                Name: riskManagerName,
+                Contact: riskManagerContact
+            },
+            success: function(response) {
+                alert( "Data Loaded: " + response);
+            },
+            error: function(xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+
+    function deleteRiskManager(){
+        var riskManagerInfo = riskMonitorData[selectedIndex];
+
+        var checkedSubAccounts = riskManagerInfo[3];
+        var riskManagerAccount = riskManagerInfo[1];
+        var riskManagerPassword = riskManagerInfo[2];
+        var riskManagerName = riskManagerInfo[4];
+        var riskManagerContact = riskManagerInfo[5];
+
+        //TODO: 应该做 validate
+        //ajax 发送插入
+
+        //TODO: PHP有问题，修改PHP
+        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskMonitors/DeleteData.php";
+
+        $.ajax({
+            url: hostpath,
+            type: "get", //send it through get method
+            data:{
+                Id: riskManagerAccount,
+                Password: riskManagerPassword,
+                SubAccount: checkedSubAccounts,
+                Name: riskManagerName,
+                Contact: riskManagerContact
+            },
+            success: function(response) {
+                alert( "Data Loaded: " + response);
+            },
+            error: function(xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+
+
+    function ifHideMainAccountToolBar(flag) {
+
+        if (flag) {
+            $('#riskManager-update').hide();
+            $('#riskManager-delete').hide();
+        } else {
+            $('#riskManager-update').show();
+            $('#riskManager-delete').show();
+        }
+    }
+
+    function setRiskMonitorInfo() {
+        //clear existing contents
+        $("#newRiskManagerModal #riskManagerAccount").val("");
+        $("#newRiskManagerModal #riskManagerPassword").val("");
+        $("#newRiskManagerModal #riskManagerName").val("");
+        $("#newRiskManagerModal #riskManagerContact").val("");
+
+        //add subAccounts
+        var subAccountUL = $("#newRiskManagerModal #subAccountUL");
+        subAccountUL.empty();
+        for (var i = 0; i < subAccounts.length; i++) {
+            subAccountUL.append($("<li class='list-group-item'>").text(subAccounts[i][1]));
+        }
+        updateCheckBox();
+    }
+
+    //暂时无法测试
+    function fillRiskManagerModal(){
+        var riskManagerInfo = riskMonitorData[selectedIndex];
+        $("#newRiskManagerModal #riskManagerAccount").val(riskManagerInfo[1]);
+        $("#newRiskManagerModal #riskManagerPassword").val(riskManagerInfo[2]);
+        $("#newRiskManagerModal #riskManagerName").val(riskManagerInfo[4]);
+        $("#newRiskManagerModal #riskManagerContact").val(riskManagerInfo[5]);
+
+        var subAccountArray = riskManagerInfo[3].split(",");
+
+        $("#subAccountUL li.active").each(function (idx, li) {
+            var subId = $(li).text();
+            subAccountArray.indexOf(subId) > -1 //找到
+            $(li).addClass('active');//高亮
+            //TODO: checkbox
+        });
+    }
+
+    function getCheckedItems () {
+        var checkedItems = [], counter = 0;
+        $("#subAccountUL li.active").each(function (idx, li) {
+            checkedItems[counter] = $(li).text();
+            counter++;
+        });
+        return checkedItems;
+    }
+
+    //显示modal //SY这边添加添删改的功能
+    $(document).on("click", "#riskManager-add", function () {
+
+        $(document).off("click", "#newRiskManagerModal .btn-primary");
+        setRiskMonitorInfo();
+        $(document).on("click", "#newRiskManagerModal .btn-primary", addNewRiskManager);
+        $('#riskManagerModal').modal('show');
+    });
+
+    //显示modal //SY这边添加添删改的功能
+    $(document).on("click", "#riskManager-update", function () {
+        $(document).off("click", "#newRiskManagerModal .btn-primary");
+        setRiskMonitorInfo();
+        fillRiskManagerModal();
+        $(document).on("click", "#newRiskManagerModal .btn-primary", addNewRiskManager);
+        $('#riskManagerModal').modal('show');
+    });
+
+    $(document).on("click", "#riskManager-delete", function () {
+        deleteRiskManager();
+    });
+
+</script>update
+
+
 </body>
 
 </html>
