@@ -745,6 +745,9 @@
 
     function ifHideMainAccountToolBar(flag) {
 
+        /**
+         * 已经没有用了
+         */
         if (flag) {
             $('#admin-update').hide();
             $('#admin-delete').hide();
@@ -752,8 +755,14 @@
             $('#admin-update').show();
             $('#admin-delete').show();
         }
+
+
+
     }
 
+    /**
+     * 设置管理员信息
+     */
     function setAdminManagerInfo() {
         //clear existing contents
         $("#newAdminManagerModal #adminManagerAccount").val("");

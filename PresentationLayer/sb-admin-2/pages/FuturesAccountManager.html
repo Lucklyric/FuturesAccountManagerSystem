@@ -734,9 +734,26 @@
         subAccountTable.row(subSelectedIndex).nodes().to$().addClass('selected');
     }
 
+    /**
+     * 是否隐藏工具栏
+     * @param flag
+     */
     function ifHideMainAccountToolBar(flag){
 
+        /**
+         * 已经没有用了
+         */
         if (flag){
+            $('#main-update').hide();
+            $('#main-delete').hide();
+        }else{
+            $('#main-update').show();
+            $('#main-delete').show();
+        }
+        /**
+         * 新逻辑
+         */
+        if(mainAccounts.length == 0){
             $('#main-update').hide();
             $('#main-delete').hide();
         }else{
@@ -745,8 +762,19 @@
         }
     }
 
+    /**
+     * 同上
+     * @param flag
+     */
     function ifHideSubAccountToolBar(flag){
         if (flag){
+            $('#sub-update').hide();
+            $('#sub-delete').hide();
+        }else{
+            $('#sub-update').show();
+            $('#sub-delete').show();
+        }
+        if(subAccounts.length == 0){
             $('#sub-update').hide();
             $('#sub-delete').hide();
         }else{

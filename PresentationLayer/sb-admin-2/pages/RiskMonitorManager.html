@@ -599,9 +599,11 @@
      * 刷新主账户表格
      */
     function refreshMainTable() {
+        var container = $('#riskMonitorTable,div.dataTables_scrollBody');
         if ($.fn.dataTable.isDataTable('#riskMonitorTable')) {
             console.log("刷新表格");
             console.log(riskMonitorData[0]);
+            var tmpOffset = container.scrollTop();
             riskMonitorTable.clear();
             for (var i = 0; i < riskMonitorData.length; i++) {
                 riskMonitorTable.row.add(riskMonitorData[i]);
@@ -609,6 +611,7 @@
             riskMonitorTable.draw();
             var table = $('#riskMonitorTable').dataTable();
             table.fnProcessingIndicator(false);      // On
+            container.scrollTop(tmpOffset);
         }
         else {
             console.log("开始构建主表");
@@ -629,6 +632,8 @@
             });
 
         }
+        riskMonitorTable.row(selectedIndex).nodes().to$().addClass('selected');
+        ifHideMainAccountToolBar(true);
     }
 
 
@@ -694,6 +699,7 @@
             },
             success: function(response) {
                 alert( "Data Loaded: " + response);
+                refreshData(1);
             },
             error: function(xhr) {
                 //Do Something to handle error
@@ -728,6 +734,8 @@
             },
             success: function(response) {
                 alert( "Data Loaded: " + response);
+                selectedIndex = 0;
+                refreshData(1);
             },
             error: function(xhr) {
                 //Do Something to handle error
@@ -742,6 +750,14 @@
             $('#riskManager-update').hide();
             $('#riskManager-delete').hide();
         } else {
+            $('#riskManager-update').show();
+            $('#riskManager-delete').show();
+        }
+
+        if(riskMonitorData.length == 0){
+            $('#riskManager-update').hide();
+            $('#riskManager-delete').hide();
+        }else{
             $('#riskManager-update').show();
             $('#riskManager-delete').show();
         }

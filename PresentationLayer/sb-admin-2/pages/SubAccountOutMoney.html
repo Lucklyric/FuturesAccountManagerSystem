@@ -431,9 +431,11 @@
      * 刷新主账户表格
      */
     function refreshMainTable() {
+        var container = $('#subAccountMoneyTable,div.dataTables_scrollBody');
         if ($.fn.dataTable.isDataTable('#subAccountMoneyTable')) {
             console.log("刷新表格");
             console.log(subAccounts[0]);
+            var tmpOffset = container.scrollTop();
             subAccountTable.clear();
             for (var i = 0; i < subAccounts.length; i++) {
                 subAccountTable.row.add(subAccounts[i]);
@@ -441,6 +443,7 @@
             subAccountTable.draw();
             var table = $('#subAccountMoneyTable').dataTable();
             table.fnProcessingIndicator(false);      // On
+            container.scrollTop(tmpOffset);
         }
         else {
             console.log("开始构建主表");
@@ -461,6 +464,8 @@
             });
 
         }
+        subAccountTable.row(selectedIndex).nodes().to$().addClass('selected');
+        ifHideSubAccountToolBar(true);
     }
 
 
@@ -471,6 +476,11 @@
 
     function ifHideSubAccountToolBar(flag){
         if (flag){
+            $('#sub-update').hide();
+        }else{
+            $('#sub-update').show();
+        }
+        if(subAccounts.length == 0){
             $('#sub-update').hide();
         }else{
             $('#sub-update').show();

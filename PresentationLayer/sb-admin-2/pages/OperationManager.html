@@ -347,11 +347,11 @@
                                        cellspacing="0" width="100%">
 
                                     <div class="operationManagerToolbar" style="float:left">
-                                        <button type="button" class="btn btn-default btn-lg" id="main-update" data-toggle="modal"
+                                        <button type="button" class="btn btn-default btn-lg" id="main-accept" data-toggle="modal"
                                                 >
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="main-delete" data-toggle="modal"
+                                        <button type="button" class="btn btn-default btn-lg" id="main-reject" data-toggle="modal"
                                                 >
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
@@ -464,12 +464,20 @@
     /**
      * Ajax从服务端取数据
      */
-    function refreshData() {
+    function refreshData(flag) {
         operationManagerData = [];
+        ifHideMainAccountToolBar(true);
         var table = $('#operationManagerTable').dataTable();
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
         //mainAccountTable.fnProcessingIndicator();
+        if (flag === undefined){
+            if (sessionStorage.getItem('operationManagerData')){
+                operationManagerData = JSON.parse(sessionStorage.getItem('operationManagerData'));
+                refreshMainTable();
+                return;
+            }
+        }
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Operations/Refresh.php', function (data) {
             operationManagerTableData = data.data;
             console.log(operationManagerTableData[0]);
@@ -477,8 +485,8 @@
                 operationManagerData.push(operationManagerTableData[i]);
             }
             console.log("取到数据");
+            sessionStorage.setItem('operationManagerData',JSON.stringify(operationManagerData));
             refreshMainTable();
-
         });
     }
 
@@ -487,9 +495,11 @@
      * 刷新主账户表格
      */
     function refreshMainTable() {
+        var container = $('#operationManagerTable,div.dataTables_scrollBody');
         if ($.fn.dataTable.isDataTable('#operationManagerTable')) {
             console.log("刷新表格");
             console.log(operationManagerData[0]);
+            var tmpOffset = container.scrollTop();
             operationManagerTable.clear();
             for (var i = 0; i < operationManagerData.length; i++) {
                 operationManagerTable.row.add(operationManagerData[i]);
@@ -497,6 +507,7 @@
             operationManagerTable.draw();
             var table = $('#operationManagerTable').dataTable();
             table.fnProcessingIndicator(false);      // On
+            container.scrollTop(tmpOffset);
         }
         else {
             console.log("开始构建主表");
@@ -517,6 +528,8 @@
             });
 
         }
+        operationManagerTable.row(selectedIndex).nodes().to$().addClass('selected');
+        ifHideMainAccountToolBar(true);
     }
 
 
@@ -563,11 +576,18 @@
     function ifHideMainAccountToolBar(flag){
 
         if (flag){
-            $('#main-update').hide();
-            $('#main-delete').hide();
+            $('#main-accept').hide();
+            $('#main-reject').hide();
         }else{
-            $('#main-update').show();
-            $('#main-delete').show();
+            $('#main-accept').show();
+            $('#main-reject').show();
+        }
+        if (operationManagerData.length == 0){
+            $('#main-accept').hide();
+            $('#main-reject').hide();
+        }else{
+            $('#main-accept').hide();
+            $('#main-reject').hide();
         }
     }
     // .click(function() {
