@@ -451,6 +451,7 @@
 <script src="../../../Source/DataTable-Plugins/api/fnProcessingIndicator.js"></script>
 
 <script src="../js/SSClass/SSToolBar.js"></script>
+<script src="../js/SSClass/dataTables.scroller.js"></script>
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
 
@@ -484,10 +485,15 @@
         $('#mainAccounts').on('click', 'tr', function () { //绑定点击事件刷新子账户
 
             selectedIndex = mainAccountTable.row(this).index();
+            console.log("选择"+selectedIndex);
             updateSubAccounts(selectedIndex);
             refreshSubAccountsTable();
             ifHideMainAccountToolBar(false);
-            ifHideSubAccountToolBar(true);
+            if(curSubAccounts.length == 0) {
+                ifHideSubAccountToolBar(true);
+            }else{
+                ifHideSubAccountToolBar(false);
+            }
             if ( $(this).hasClass('selected') ) {
                 //$(this).removeClass('selected');
             }
@@ -532,8 +538,12 @@
                 refreshMainAccountsTable();
                 updateSubAccounts(selectedIndex);
                 refreshSubAccountsTable();
-                ifHideMainAccountToolBar(true);
-                ifHideSubAccountToolBar(true);
+                ifHideMainAccountToolBar(false);
+                if(curSubAccounts.length == 0) {
+                    ifHideSubAccountToolBar(true);
+                }else{
+                    ifHideSubAccountToolBar(false);
+                }
                 return;
             }
         }
@@ -550,8 +560,12 @@
             refreshMainAccountsTable();
             updateSubAccounts(selectedIndex);
             refreshSubAccountsTable();
-            ifHideMainAccountToolBar(true);
-            ifHideSubAccountToolBar(true);
+            ifHideMainAccountToolBar(false);
+            if(curSubAccounts.length == 0) {
+                ifHideSubAccountToolBar(true);
+            }else{
+                ifHideSubAccountToolBar(false);
+            }
         });
     }
 
@@ -649,14 +663,20 @@
      * 刷新主账户表格
      */
     function refreshMainAccountsTable() {
+        var container = $('#mainAccounts,div.dataTables_scrollBody');
         if ($.fn.dataTable.isDataTable('#mainAccounts')) {
+            var tmpOffset = container.scrollTop();
+            var table = $('#mainAccounts').dataTable();
+           // var scrollPos=mainAccountTable.scrollTop();
             mainAccountTable.clear();
             for (var i = 0; i < mainAccounts.length; i++) {
                 mainAccountTable.row.add(mainAccounts[i]);
             }
             mainAccountTable.draw();
-            var table = $('#mainAccounts').dataTable();
-            table.fnProcessingIndicator(false);      // On
+
+            table.fnProcessingIndicator(false);      // off
+            container.scrollTop(tmpOffset);
+
         }
         else {
             console.log("开始构建主表");
@@ -676,18 +696,23 @@
                 }
             });
         }
+        mainAccountTable.row(selectedIndex).nodes().to$().addClass('selected');
+
     }
 
     /**
      * 刷新子账户表格
      */
     function refreshSubAccountsTable() {
+        var container = $('#subAccounts,div.dataTables_scrollBody');
         if ($.fn.dataTable.isDataTable('#subAccounts')) {
+            var tmpOffset = container.scrollTop();
             subAccountTable.clear();
             for (var i = 0; i < curSubAccounts.length; i++) {
                 subAccountTable.row.add(curSubAccounts[i]);
             }
             subAccountTable.draw();
+            container.scrollTop(tmpOffset);
         }
         else {
             subAccountTable = $('#subAccounts').DataTable({
@@ -706,6 +731,7 @@
                 }
             });
         }
+        subAccountTable.row(subSelectedIndex).nodes().to$().addClass('selected');
     }
 
     function ifHideMainAccountToolBar(flag){
