@@ -22,13 +22,13 @@
     
     $TableName="Admin";
     $State="1";
-    $Id="12";
-    $Name="GCtest";
-    $Password="testpass";
-    $SubMain="1";
-    $Restriction="2";
-    $UserName="GameCloud";
-    $Contact="CA";
+//    $Id="12";
+//    $Name="GCtest";
+//    $Password="testpass";
+//    $SubMain="1";
+//    $Restriction="2";
+//    $UserName="GameCloud";
+//    $Contact="CA";
     
     
     
