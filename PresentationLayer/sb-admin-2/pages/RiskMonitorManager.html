@@ -645,6 +645,7 @@
 <script>
 
     function addNewRiskManager(){
+        if (subAccounts.length == 0)return;
         //modal 确定 逻辑处理
             var checkedSubAccounts = getCheckedItems().toString();
             var riskManagerAccount = $("#newRiskManagerModal #riskManagerAccount").val();
@@ -680,6 +681,7 @@
     }
 
     function updateRiskManager(){
+        if (subAccounts.length == 0)return;
         //modal 确定 逻辑处理
         var riskManagerInfo = riskMonitorData[selectedIndex];
 
@@ -720,6 +722,7 @@
     }
 
     function deleteRiskManager(){
+        if (subAccounts.length == 0)return;
         var riskManagerInfo = riskMonitorData[selectedIndex];
 
         var checkedSubAccounts = riskManagerInfo[3];
