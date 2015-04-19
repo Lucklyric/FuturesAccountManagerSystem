@@ -16,12 +16,13 @@
     $Restriction=isset($_GET["Restriction"]) ? $_GET["Restriction"] :"";
     $UserName=isset($_GET["UserName"]) ? $_GET["UserName"] :"";
     $Contact=isset($_GET["Contact"]) ? $_GET["Contact"] :"";
+    $State=isset($_GET["State"]) ? $_GET["State"] :"";
     
     $AdminAccount="frankzch";
     $AdminPassword="123456";
     
     $TableName="Admin";
-    $State="1";
+//    $State="1";
 //    $Id="12";
 //    $Name="GCtest";
 //    $Password="testpass";

@@ -662,7 +662,9 @@
                     Password: riskManagerPassword,
                     SubAccount: checkedSubAccounts,
                     Name: riskManagerName,
-                    Contact: riskManagerContact
+                    Contact: riskManagerContact,
+                    SystemId : 0,
+                    State: 1
                 },
                 success: function(response) {
                     alert( "Data Loaded: " + response);
@@ -675,17 +677,21 @@
 
     function updateRiskManager(){
         //modal 确定 逻辑处理
+        var riskManagerInfo = riskMonitorData[selectedIndex];
+
         var checkedSubAccounts = getCheckedItems().toString();
         var riskManagerAccount = $("#newRiskManagerModal #riskManagerAccount").val();
         var riskManagerPassword = $("#newRiskManagerModal #riskManagerPassword").val();
         var riskManagerName = $("#newRiskManagerModal #riskManagerName").val();
         var riskManagerContact = $("#newRiskManagerModal #riskManagerContact").val();
+        var systemId = riskManagerInfo[0];
+
 
         //TODO: 应该做 validate
         //ajax 发送插入
 
         //TODO: PHP有问题，修改PHP
-        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskMonitors/UpdateData.php";
+        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskMonitors/InsertData.php";
 
         $.ajax({
             url: hostpath,
@@ -695,7 +701,9 @@
                 Password: riskManagerPassword,
                 SubAccount: checkedSubAccounts,
                 Name: riskManagerName,
-                Contact: riskManagerContact
+                Contact: riskManagerContact,
+                SystemId : systemId,
+                State: 3
             },
             success: function(response) {
                 alert( "Data Loaded: " + response);
@@ -715,12 +723,13 @@
         var riskManagerPassword = riskManagerInfo[2];
         var riskManagerName = riskManagerInfo[4];
         var riskManagerContact = riskManagerInfo[5];
+        var systemId = riskManagerInfo[0];
 
         //TODO: 应该做 validate
         //ajax 发送插入
 
         //TODO: PHP有问题，修改PHP
-        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskMonitors/DeleteData.php";
+        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskMonitors/InsertData.php";
 
         $.ajax({
             url: hostpath,
@@ -730,7 +739,9 @@
                 Password: riskManagerPassword,
                 SubAccount: checkedSubAccounts,
                 Name: riskManagerName,
-                Contact: riskManagerContact
+                Contact: riskManagerContact,
+                SystemId : systemId,
+                State: 2
             },
             success: function(response) {
                 alert( "Data Loaded: " + response);
@@ -773,6 +784,7 @@
         //add subAccounts
         var subAccountUL = $("#newRiskManagerModal #subAccountUL");
         subAccountUL.empty();
+//        alert("subaccouts:" + subAccounts.length);
         for (var i = 0; i < subAccounts.length; i++) {
             subAccountUL.append($("<li class='list-group-item'>").text(subAccounts[i][1]));
         }

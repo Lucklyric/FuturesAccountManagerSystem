@@ -646,7 +646,7 @@
         var adminManagerPassword = $("#newRiskManagerModal #adminManagerPassword").val();
         var adminManagerName = $("#newRiskManagerModal #adminManagerName").val();
         var adminManagerContact = $("#newRiskManagerModal #adminManagerContact").val();
-        var restriction = "2,2,2,2,2";
+        var restriction = "0-2,1-2,2-2,3-2,4-2";
 
         alert(checkedMainAccounts);
 
@@ -659,12 +659,14 @@
             url: hostpath,
             type: "get", //send it through get method
             data:{
-                Id: adminManagerAccount,
+                Id: 0,
+                Name: adminManagerAccount,
                 Password: adminManagerPassword,
                 SubMain: checkedMainAccounts,
                 Restriction: restriction,
-                Name: adminManagerName,
-                Contact: adminManagerContact
+                UserName: adminManagerName,
+                Contact: adminManagerContact,
+                State: 1
             },
             success: function(response) {
                 alert( "Data Loaded: " + response);
@@ -708,39 +710,44 @@
 //        });
 //    }
 //
-//    function deleteRiskManager(){
-//        var riskManagerInfo = riskMonitorData[selectedIndex];
-//
-//        var checkedSubAccounts = riskManagerInfo[3];
-//        var riskManagerAccount = riskManagerInfo[1];
-//        var riskManagerPassword = riskManagerInfo[2];
-//        var riskManagerName = riskManagerInfo[4];
-//        var riskManagerContact = riskManagerInfo[5];
-//
-//        //TODO: 应该做 validate
-//        //ajax 发送插入
-//
-//        //TODO: PHP有问题，修改PHP
-//        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskMonitors/DeleteData.php";
-//
-//        $.ajax({
-//            url: hostpath,
-//            type: "get", //send it through get method
-//            data:{
-//                Id: riskManagerAccount,
-//                Password: riskManagerPassword,
-//                SubAccount: checkedSubAccounts,
-//                Name: riskManagerName,
-//                Contact: riskManagerContact
-//            },
-//            success: function(response) {
-//                alert( "Data Loaded: " + response);
-//            },
-//            error: function(xhr) {
-//                //Do Something to handle error
-//            }
-//        });
-//    }
+    function deleteAdminManager(){
+        var adminManagerInfo = adminManagerData[selectedIndex];
+
+        var adminManagerAccount = adminManagerInfo[1];
+        var adminManagerPassword = adminManagerInfo[2];
+        var checkedMainAccounts = adminManagerInfo[3];
+        var systemId = adminManagerInfo[0];
+        var adminManagerName = adminManagerInfo[5];
+        var adminManagerContact = adminManagerInfo[6];
+        var restriction = adminManagerInfo[4];
+
+        //TODO: 应该做 validate
+        //ajax 发送插入
+
+        //TODO: PHP有问题，修改PHP
+        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Administrator/InsertData.php";
+
+        $.ajax({
+            url: hostpath,
+            type: "get", //send it through get method
+            data:{
+                Name: adminManagerAccount,
+                Password: adminManagerPassword,
+                SubMain: checkedMainAccounts,
+                Id: systemId,
+                Restriction: restriction,
+                UserName: adminManagerName,
+                Contact: adminManagerContact,
+                State: 2
+            },
+            success: function(response) {
+                alert( "Data Loaded: " + response);
+            },
+            error: function(xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
 
 
     function ifHideMainAccountToolBar(flag) {
@@ -828,9 +835,9 @@
 //        $('#riskManagerModal').modal('show');
 //    });
 //
-//    $(document).on("click", "#riskManager-delete", function () {
-//        deleteRiskManager();
-//    });
+    $(document).on("click", "#admin-delete", function () {
+        deleteAdminManager();
+    });
 
 </script>
 
