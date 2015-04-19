@@ -308,7 +308,7 @@
                                                                     风控员管理
                                                                 </div>
                                                                 <div class="col-md-6 column modal-row">
-                                                                    <select class="form-control" id="rateManagerAdmin">
+                                                                    <select class="form-control" id="riskManagerAdmin">
                                                                         <option value="0">无权限</option>
                                                                         <option value="1">一般权限</option>
                                                                         <option value="2">最高权限</option>
@@ -643,10 +643,15 @@
         //modal 确定 逻辑处理
         var checkedMainAccounts = getCheckedItems().toString();
         var adminManagerAccount = $("#newAdminManagerModal #adminManagerAccount").val();
-        var adminManagerPassword = $("#newRiskManagerModal #adminManagerPassword").val();
-        var adminManagerName = $("#newRiskManagerModal #adminManagerName").val();
-        var adminManagerContact = $("#newRiskManagerModal #adminManagerContact").val();
-        var restriction = "0-2,1-2,2-2,3-2,4-2";
+        var adminManagerPassword = $("#newAdminManagerModal #adminManagerPassword").val();
+        var adminManagerName = $("#newAdminManagerModal #adminManagerName").val();
+        var adminManagerContact = $("#newAdminManagerModal #adminManagerContact").val();
+        var accountAdmin = $("#newAdminManagerModal #accountAdmin :selected").val();
+        var moneyAdmin = $("#newAdminManagerModal #moneyAdmin :selected").val();
+        var riskAdmin = $("#newAdminManagerModal #riskAdmin :selected").val();
+        var rateAdmin = $("#newAdminManagerModal #rateAdmin :selected").val();
+        var riskManagerAdmin = $("#newAdminManagerModal #riskManagerAdmin :selected").val();
+        var restriction = "0-" + accountAdmin + ",1-" + moneyAdmin + ",2-" + riskAdmin + ",3-" + rateAdmin + ",4-" + riskManagerAdmin;
 
         alert(checkedMainAccounts);
 
@@ -676,40 +681,53 @@
             }
         });
     }
-//
-//    function updateRiskManager(){
-//        //modal 确定 逻辑处理
-//        var checkedSubAccounts = getCheckedItems().toString();
-//        var riskManagerAccount = $("#newRiskManagerModal #riskManagerAccount").val();
-//        var riskManagerPassword = $("#newRiskManagerModal #riskManagerPassword").val();
-//        var riskManagerName = $("#newRiskManagerModal #riskManagerName").val();
-//        var riskManagerContact = $("#newRiskManagerModal #riskManagerContact").val();
-//
-//        //TODO: 应该做 validate
-//        //ajax 发送插入
-//
-//        //TODO: PHP有问题，修改PHP
-//        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskMonitors/UpdateData.php";
-//
-//        $.ajax({
-//            url: hostpath,
-//            type: "get", //send it through get method
-//            data:{
-//                Id: riskManagerAccount,
-//                Password: riskManagerPassword,
-//                SubAccount: checkedSubAccounts,
-//                Name: riskManagerName,
-//                Contact: riskManagerContact
-//            },
-//            success: function(response) {
-//                alert( "Data Loaded: " + response);
-//            },
-//            error: function(xhr) {
-//                //Do Something to handle error
-//            }
-//        });
-//    }
-//
+
+    function updateAdminManager(){
+
+        var adminManagerInfo = adminManagerData[selectedIndex];
+        var systemId = adminManagerInfo[0];
+
+        var checkedMainAccounts = getCheckedItems().toString();
+        var adminManagerAccount = $("#newAdminManagerModal #adminManagerAccount").val();
+        var adminManagerPassword = $("#newAdminManagerModal #adminManagerPassword").val();
+        var adminManagerName = $("#newAdminManagerModal #adminManagerName").val();
+        var adminManagerContact = $("#newAdminManagerModal #adminManagerContact").val();
+        var accountAdmin = $("#newAdminManagerModal #accountAdmin :selected").val();
+        var moneyAdmin = $("#newAdminManagerModal #moneyAdmin :selected").val();
+        var riskAdmin = $("#newAdminManagerModal #riskAdmin :selected").val();
+        var rateAdmin = $("#newAdminManagerModal #rateAdmin :selected").val();
+        var riskManagerAdmin = $("#newAdminManagerModal #riskManagerAdmin :selected").val();
+        var restriction = "0-" + accountAdmin + ",1-" + moneyAdmin + ",2-" + riskAdmin + ",3-" + rateAdmin + ",4-" + riskManagerAdmin;
+
+        alert(checkedMainAccounts);
+
+        //TODO: 应该做 validate
+        //ajax 发送插入
+
+        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Administrator/InsertData.php";
+
+        $.ajax({
+            url: hostpath,
+            type: "get", //send it through get method
+            data:{
+                Id: systemId,
+                Name: adminManagerAccount,
+                Password: adminManagerPassword,
+                SubMain: checkedMainAccounts,
+                Restriction: restriction,
+                UserName: adminManagerName,
+                Contact: adminManagerContact,
+                State: 3
+            },
+            success: function(response) {
+                alert( "Data Loaded: " + response);
+            },
+            error: function(xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+
     function deleteAdminManager(){
         var adminManagerInfo = adminManagerData[selectedIndex];
 
@@ -779,9 +797,9 @@
 
         $("#newAdminManagerModal #accountAdmin option").eq(0).attr("selected","selected");
         $("#newAdminManagerModal #moneyAdmin option").eq(0).attr("selected","selected");
-        $("#newAdminManagerModal #rateAdmin option").eq(0).attr("selected","selected");
-        $("#newAdminManagerModal #rateManagerAdmin option").eq(0).attr("selected","selected");
         $("#newAdminManagerModal #riskAdmin option").eq(0).attr("selected","selected");
+        $("#newAdminManagerModal #rateAdmin option").eq(0).attr("selected","selected");
+        $("#newAdminManagerModal #riskManagerAdmin option").eq(0).attr("selected","selected");
 
         //add mainAccounts
         var mainAccountUL = $("#newAdminManagerModal #mainAccountUL");
@@ -793,23 +811,45 @@
         updateCheckBox();
     }
 
-    //暂时无法测试
-//    function fillRiskManagerModal(){
-//        var riskManagerInfo = riskMonitorData[selectedIndex];
-//        $("#newRiskManagerModal #riskManagerAccount").val(riskManagerInfo[1]);
-//        $("#newRiskManagerModal #riskManagerPassword").val(riskManagerInfo[2]);
-//        $("#newRiskManagerModal #riskManagerName").val(riskManagerInfo[4]);
-//        $("#newRiskManagerModal #riskManagerContact").val(riskManagerInfo[5]);
-//
-//        var subAccountArray = riskManagerInfo[3].split(",");
-//
-//        $("#subAccountUL li.active").each(function (idx, li) {
-//            var subId = $(li).text();
-//            subAccountArray.indexOf(subId) > -1 //找到
-//            $(li).addClass('active');//高亮
-//            //TODO: checkbox
-//        });
-//    }
+    function fillAdminManagerModal(){
+        var adminManagerInfo = adminManagerData[selectedIndex];
+
+        $("#newAdminManagerModal #adminManagerAccount").val(adminManagerInfo[1]);
+        $("#newAdminManagerModal #adminManagerPassword").val(adminManagerInfo[2]);
+        $("#newAdminManagerModal #adminManagerName").val(adminManagerInfo[5]);
+        $("#newAdminManagerModal #adminManagerContact").val(adminManagerInfo[6]);
+
+        var mainAccountArray = adminManagerInfo[3].split(",");
+
+        $("#mainAccountUL li").each(function (idx, li) {
+            var subId = $(li).text();
+            if (mainAccountArray.indexOf(subId) > -1) //找到
+                $(li).click();  //高亮
+        });
+
+        var restrictionArray = adminManagerInfo[4].split(",");
+
+        var accountAdmin = restrictionArray[0].slice(-1);
+        var accountAdminOption = $("#newAdminManagerModal #accountAdmin option");
+        accountAdminOption.eq(accountAdmin).attr('selected', 'selected');
+
+        var moneyAdmin = restrictionArray[1].slice(-1);
+        var moneyAdminOption = $("#newAdminManagerModal #moneyAdmin option");
+        moneyAdminOption.eq(moneyAdmin).attr('selected', 'selected');
+
+        var riskAdmin = restrictionArray[2].slice(-1);
+        var riskAdminOption = $("#newAdminManagerModal #riskAdmin option");
+        riskAdminOption.eq(riskAdmin).attr('selected', 'selected');
+
+        var rateAdmin = restrictionArray[3].slice(-1);
+        var rateAdminOption = $("#newAdminManagerModal #rateAdmin option");
+        rateAdminOption.eq(rateAdmin).attr('selected', 'selected');
+
+        var riskManagerAdmin = restrictionArray[4].slice(-1);
+        var riskManagerAdminOption = $("#newAdminManagerModal #riskManagerAdmin option");
+        riskManagerAdminOption.eq(riskManagerAdmin).attr('selected', 'selected');
+
+    }
 
     function getCheckedItems () {
         var checkedItems = [], counter = 0;
@@ -827,14 +867,14 @@
         $('#adminManagerModal').modal('show');
     });
 
-//    $(document).on("click", "#riskManager-update", function () {
-//        $(document).off("click", "#newRiskManagerModal .btn-primary");
-//        setRiskMonitorInfo();
-//        fillRiskManagerModal();
-//        $(document).on("click", "#newRiskManagerModal .btn-primary", addNewRiskManager);
-//        $('#riskManagerModal').modal('show');
-//    });
-//
+    $(document).on("click", "#admin-update", function () {
+        $(document).off("click", "#newAdminManagerModal .btn-primary");
+        setAdminManagerInfo();
+        fillAdminManagerModal();
+        $(document).on("click", "#newAdminManagerModal .btn-primary", updateAdminManager);
+        $('#adminManagerModal').modal('show');
+    });
+
     $(document).on("click", "#admin-delete", function () {
         deleteAdminManager();
     });
