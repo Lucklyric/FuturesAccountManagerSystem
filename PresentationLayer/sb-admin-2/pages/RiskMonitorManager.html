@@ -582,15 +582,18 @@
         if (flag === undefined) {
             if (sessionStorage.getItem('localSettlement')) {
                 subAccounts = JSON.parse(sessionStorage.getItem('localSettlement'));
+                console.log("长度"+subAccounts.length);
                 return;
             }
         }
         //mainAccountTable.fnProcessingIndicator();
+
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/Refresh.php', function (data) {
             subAccounts = [];
             for (var i = 0; i < data.data.length; i++) {
-                subAccounts.push(subAccountTableData[i]);
+                subAccounts.push(data.data[i]);
             }
+            console.log("长度"+subAccounts.length);
             sessionStorage.setItem('localSettlement', JSON.stringify(subAccounts));
         });
     }
@@ -668,6 +671,7 @@
                 },
                 success: function(response) {
                     alert( "Data Loaded: " + response);
+                    refreshData(1);
                 },
                 error: function(xhr) {
                     //Do Something to handle error
@@ -784,7 +788,7 @@
         //add subAccounts
         var subAccountUL = $("#newRiskManagerModal #subAccountUL");
         subAccountUL.empty();
-//        alert("subaccouts:" + subAccounts.length);
+        alert("subaccouts:" + subAccounts.length);
         for (var i = 0; i < subAccounts.length; i++) {
             subAccountUL.append($("<li class='list-group-item'>").text(subAccounts[i][1]));
         }
@@ -801,10 +805,12 @@
 
         var subAccountArray = riskManagerInfo[3].split(",");
 
-        $("#subAccountUL li.active").each(function (idx, li) {
+        $("#subAccountUL li").each(function (idx, li) {
             var subId = $(li).text();
-            subAccountArray.indexOf(subId) > -1 //找到
-            $(li).addClass('active');//高亮
+           // alert(subID);
+            if (subAccountArray.indexOf(subId) > -1) { //找到
+                $(li).addClass('active');//高亮
+            }
             //TODO: checkbox
         });
     }
@@ -832,7 +838,7 @@
         $(document).off("click", "#newRiskManagerModal .btn-primary");
         setRiskMonitorInfo();
         fillRiskManagerModal();
-        $(document).on("click", "#newRiskManagerModal .btn-primary", addNewRiskManager);
+        $(document).on("click", "#newRiskManagerModal .btn-primary", updateRiskManager);
         $('#riskManagerModal').modal('show');
     });
 
@@ -840,7 +846,7 @@
         deleteRiskManager();
     });
 
-</script>update
+</script>
 
 
 </body>
