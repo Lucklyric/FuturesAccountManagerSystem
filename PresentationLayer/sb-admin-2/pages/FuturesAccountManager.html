@@ -523,8 +523,10 @@
      * Ajax从服务端取数据
      */
     function refreshData(flag) {
-
         mainAccounts = [];
+
+
+
         var table = $('#mainAccounts').dataTable();
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
@@ -775,7 +777,7 @@
             $('#sub-delete').show();
         }
 
-        if(subAccounts.length == 0){
+        if(curSubAccounts.length == 0){
             $('#sub-update').hide();
             $('#sub-delete').hide();
         }else{
