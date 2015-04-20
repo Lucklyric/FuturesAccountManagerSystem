@@ -38,10 +38,17 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .modal-row {
+            padding: 10px;
+            max-width: 350px;
+        }
+    </style>
 </head>
 
 <br/>
-<div id = "wrapper">
+
+<div id="wrapper">
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="margin-bottom: 0">
         <div class="container-fluid">
@@ -58,16 +65,18 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <p id = "onlineCount" class="navbar-text">在线人数：0人</p>
+                    <p id="onlineCount" class="navbar-text">在线人数：0人</p>
                 </li>
                 <li>
-                    <p id = "serverStatus" class="navbar-text">服务器状态：关闭</p>
+                    <p id="serverStatus" class="navbar-text">服务器状态：关闭</p>
                 </li>
                 <li>
-                    <button id = "connectMainAccount" class="btn btn-info navbar-btn" style="margin-right: 5px">连接主账户</button>
+                    <button id="connectMainAccount" class="btn btn-info navbar-btn" style="margin-right: 5px">连接主账户
+                    </button>
                 </li>
                 <li>
-                    <button id = "restartServer" class="btn btn-primary navbar-btn" style="margin-right: 5px">重启服务器</button>
+                    <button id="restartServer" class="btn btn-primary navbar-btn" style="margin-right: 5px">重启服务器
+                    </button>
                 </li>
 
                 <li class="dropdown">
@@ -192,19 +201,18 @@
                             </div>
 
                             <!--<div class="row">-->
-                                <!--<span>交易费=期货公司交易的</span>-->
-                                <!--<div class="col-xs-2">-->
-                                    <!--<input type="text" class="form-control" id ='ration1' text='1'>倍-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-2">-->
-                                    <!--<span>保证金=期货公司交易的</span><input type="text" class="form-control" id="ration2"text="1">倍-->
-                                <!--</div>-->
+                            <!--<span>交易费=期货公司交易的</span>-->
+                            <!--<div class="col-xs-2">-->
+                            <!--<input type="text" class="form-control" id ='ration1' text='1'>倍-->
+                            <!--</div>-->
+                            <!--<div class="col-xs-2">-->
+                            <!--<span>保证金=期货公司交易的</span><input type="text" class="form-control" id="ration2"text="1">倍-->
+                            <!--</div>-->
 
 
+                            <!--</div>-->
 
-                        <!--</div>-->
-
-                    </div>
+                        </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -216,67 +224,117 @@
 
 
                                 <!--Modal-->
-                                <div class="modal fade" tabindex="-1" role="dialog" id="accountModal"
-                                     aria-labelledby="newMainAccountLabel" aria-hidden="true">
-                                    <div class="modal-dialog" id="newAccountModal">
+                                <div class="modal fade" tabindex="-1" role="dialog" id="feesettingModal"
+                                     aria-labelledby="feesettingModal" aria-hidden="true">
+                                    <div class="modal-dialog" id="newFeesettingModal">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title" id="newMainAccountLabel">新建主账户</h4>
+                                                <h4 class="modal-title" id="newFeesettingLabel">费率设置</h4>
                                             </div>
                                             <div class="modal-body">
-
-                                                <div class="form-group">
-
-                                                    <label for="channel">通道</label>
-
-                                                    <select style="float: right; width: 50%" class="form-control" id="channel">
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-group">
-
-                                                    <label for="company">经纪公司</label>
-
-                                                    <select  style="float: right; width: 50%" class="form-control" id="company">
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                        <option>CTP</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-group">
-
-                                                    <label for="server">服务器</label>
-
-                                                    <select  style="float: right; width: 50%" class="form-control" id="server">
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                    </select>
-                                                </div>
-
-
-                                                <div class="form-group">
-                                                    <label for="userId">账户ID</label>
-                                                    <input class="form-control" style="float: right; width: 50%" type="text" name="userId" id="userId"
-                                                           value="" placeholder="账户ID"/>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="userPassword">账户密码</label>
-                                                    <input  class="form-control" style="float: right; width: 50%" type="password" name="userPassword"
-                                                            id="userPassword" value="" placeholder="账户密码"/>
+                                                <div class="container">
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <label style="margin-top: 8px">组名称</label>
+                                                        </div>
+                                                        <div class="col-md-4 column modal-row">
+                                                            <div class="form-group">
+                                                                <div class="radio row clearfix" id="newOrUseExisting">
+                                                                    <div style="margin-top: 8px"
+                                                                         class="col-md-6 column modal-row">
+                                                                        <label><input type="radio"
+                                                                                      name="newOrUseExisting" onclick="handleNewGroup()">新建组</label>
+                                                                    </div>
+                                                                    <div class="col-md-6 column modal-row">
+                                                                        <input class="form-control" type="text"
+                                                                               name="feesettingGroup"
+                                                                               id="feesettingGroup"
+                                                                               value="" placeholder="新建组名称(必填)"/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="radio row clearfix">
+                                                                    <div style="margin-top: 8px"
+                                                                         class="col-md-6 column modal-row">
+                                                                        <label><input type="radio" name="newOrUseExisting" onclick="handleUseExistingGroup()">使用已有组</label>
+                                                                    </div>
+                                                                    <div class="col-md-6 column modal-row">
+                                                                        <select class="form-control" id="existingGroup">
+                                                                            <option>1</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <label style="margin-top: 8px">交易所</label>
+                                                        </div>
+                                                        <div class="col-md-4 column modal-row">
+                                                            <select class="form-control" id="channel">
+                                                                <option>1</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <label style="margin-top: 8px">手续费类型</label>
+                                                        </div>
+                                                        <div class="col-md-4 column modal-row">
+                                                            <select class="form-control" id="feeType">
+                                                                <option>固定金额</option>
+                                                                <option>百分比</option>
+                                                                <option>万分比</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <label style="margin-top: 8px">开仓手续费</label>
+                                                        </div>
+                                                        <div class="col-md-4 column modal-row">
+                                                            <input class="form-control" type="text"
+                                                                   name="openPositionFee" id="openPositionFee"
+                                                                   value="" placeholder="开仓手续费(必填)"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <label style="margin-top: 8px">平仓手续费</label>
+                                                        </div>
+                                                        <div class="col-md-4 column modal-row">
+                                                            <input class="form-control" type="text"
+                                                                   name="closePositionFee" id="closePositionFee"
+                                                                   value="" placeholder="平仓手续费(必填)"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <label style="margin-top: 8px">平今手续费</label>
+                                                        </div>
+                                                        <div class="col-md-4 column modal-row">
+                                                            <input class="form-control" type="text"
+                                                                   name="closeNowFee" id="closeNowFee"
+                                                                   value="" placeholder="平今手续费(必填)"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <label style="margin-top: 8px">保证金比例</label>
+                                                        </div>
+                                                        <div class="col-md-4 column modal-row">
+                                                            <input class="form-control" type="text"
+                                                                   name="deposit" id="deposit"
+                                                                   value="" placeholder="保证金比例(可选)"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <label style="margin-top: 8px">(保证金填0代表使用默认值)</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
 
@@ -284,7 +342,8 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                                 </button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">确定
+                                                </button>
                                             </div>
                                         </div>
                                         <!-- /.modal-content -->
@@ -293,107 +352,21 @@
                                 </div>
                                 <!--/.modal-->
 
-                                <!-- Modal -->
-                                <div class="modal fade" tabindex="-1" role="dialog" id="subModal"
-                                     aria-labelledby="newSubAccountLabel" aria-hidden="true">
-                                    <div class="modal-dialog" id="newSubModal">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title" id="newSubAccountLabel">新建子账户</h4>
-                                            </div>
-                                            <div class="modal-body">
-
-
-                                                <div class="form-group">
-                                                    <label for="subId">子账户ID</label>
-                                                    <input  class="form-control" style="float: right; width: 50%" type="text" name="userId" id="subId"
-                                                            value="" placeholder="账户ID"/>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="subPassword">子账户密码</label>
-                                                    <input  class="form-control" style="float: right; width: 50%" type="password" name="subPassword"
-                                                            id="subPassword" value="" placeholder="账户密码"/>
-                                                </div>
-
-                                                <div class="form-group">
-
-                                                    <label for="mainAccount">主账户</label>
-
-                                                    <select  style="float: right; width: 50%" class="form-control" id="mainAccount">
-                                                        <option></option>
-                                                        <option></option>
-                                                        <option></option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-group">
-
-                                                    <label for="riskControl">风控</label>
-
-                                                    <select  style="float: right; width: 50%" class="form-control" id="riskControl">
-                                                        <option></option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-group">
-
-                                                    <label for="rate">费率</label>
-
-                                                    <select  style="float: right; width: 50%" class="form-control" id="rate">
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                        <option>上海电信</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="subName">用户姓名</label>
-                                                    <input  class="form-control" style="float: right; width: 50%" type="text" name="userId" id="subName"
-                                                            value=""/>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="subContact">联系方式</label>
-                                                    <input  class="form-control" style="float: right; width: 50%" type="password" name="userId"
-                                                            id="subContact" value="" />
-                                                </div>
-
-
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">取消
-                                                </button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-                                <!-- /.modal -->
-
-
                                 <table id="feeSettingTable" class="table table-striped table-bordered table-hover"
                                        cellspacing="0" width="100%">
 
                                     <div class="feeSettingToolbar" style="float:left">
-                                        <button type="button" class="btn btn-default btn-lg" id="main-add" data-toggle="modal"
-                                                data-target="#accountModal">
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <button type="button" class="btn btn-success" id="feesetting-add"
+                                                data-toggle="modal">
+                                            添加费率设置
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="main-update" data-toggle="modal"
-                                                data-target="#accountModal">
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <button type="button" class="btn btn-warning" id="feesetting-update"
+                                                data-toggle="modal">
+                                            修改费率设置
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="main-delete" data-toggle="modal"
-                                                data-target="#accountModal">
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <button type="button" class="btn btn-danger" id="feesetting-delete"
+                                                data-toggle="modal">
+                                            删除费率设置
                                         </button>
                                     </div>
                                     <thead>
@@ -463,16 +436,17 @@
      * 定义全局变量
      */
 
+    var feeSettingGroups = {};
     var feeSettingTable;
     var feeSettingTableData;
-    var feeSettingData= [];
+    var feeSettingData = [];
     var selectedIndex = 0;  //mainSelectedIndex
-    var toolBarManger = new SSToolBar($("#restartServer"),$("#connectMainAccount"),$("#onlineCount"),$("#serverStatus"));
+    var toolBarManger = new SSToolBar($("#restartServer"), $("#connectMainAccount"), $("#onlineCount"), $("#serverStatus"));
     /**
      * Document加载完毕 更新数据刷新Table绑定点击事件
      */
     $(document).ready(function () {
-       // ifHideMainAccountToolBar(true);
+        // ifHideMainAccountToolBar(true);
         refreshMainTable();
         refreshData(); //更新数据
 
@@ -480,15 +454,15 @@
             selectedIndex = feeSettingTable.row(this).index();
             ifHideMainAccountToolBar(false);
             //refreshMainTable();
-            if ( $(this).hasClass('selected') ) {
+            if ($(this).hasClass('selected')) {
                 //$(this).removeClass('selected');
             }
             else {
                 feeSettingTable.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
             }
-             $('.modal-dialog').modal('show');
-        } );
+            $('.modal-dialog').modal('show');
+        });
 
 
     });
@@ -505,23 +479,26 @@
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
         //mainAccountTable.fnProcessingIndicator();
-        if (flag === undefined){
-            if (sessionStorage.getItem('ratioTypes')){
+        if (flag === undefined) {
+            if (sessionStorage.getItem('ratioTypes')) {
                 feeSettingData = JSON.parse(sessionStorage.getItem('ratioTypes'));
                 refreshMainTable();
                 return;
             }
         }
+
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/Refresh.php', function (data) {
             feeSettingTableData = data.data;
             console.log(feeSettingTableData[0]);
             for (var i = 0; i < feeSettingTableData.length; i++) {
                 feeSettingData.push(feeSettingTableData[i]);
+//                if (!(feeSettingTableData[i][0] in feeSettingGroups)){
+//                    feeSettingGroups[feeSettingTableData[i][0]] = 1;
+//                }
             }
             console.log("取到数据");
-            sessionStorage.setItem('ratioTypes',JSON.stringify(feeSettingData));
+            sessionStorage.setItem('ratioTypes', JSON.stringify(feeSettingData));
             refreshMainTable();
-
         });
     }
 
@@ -554,7 +531,7 @@
                     "search": "搜索:",
                     "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
                     "infoEmpty": "显示 0 到 0 共 0 记录",
-                    "emptyTable":"暂无可显示数据",
+                    "emptyTable": "暂无可显示数据",
                     "processing": "正在加载......"
                 }
             });
@@ -562,72 +539,269 @@
         }
     }
 
-
-
 </script>
 
 <script>
 
-    //modal 确定 逻辑处理
-    $(document).on("click", "#newAccountModal .btn-primary", function () {
-        var channel = $("#newAccountModal #channel")[0].value;
-        var company = $("#newAccountModal #company")[0].value;
-        var server = $("#newAccountModal #server")[0].value;
-        var userId = $("#newAccountModal #userId")[0].value;
-        var userPassword = $("#newAccountModal #userPassword")[0].value;
+    function ifHideMainAccountToolBar(flag) {
 
-        //TODO: 应该做 validate
-        //ajax 发送插入
-
-        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/InsertData.php";
-
-        $.ajax({
-            url: hostpath,
-            type: "get", //send it through get method
-            data:{
-                Channel: channel,
-                CompanyName: company,
-                CompanyServer: server,
-                AccountId: userId,
-                AccountPassword: userPassword
-            },
-            success: function(response) {
-                alert( "Data Loaded: " + response);
-            },
-            error: function(xhr) {
-                //Do Something to handle error
-            }
-        });
-
-    });
-
-
-
-    function ifHideMainAccountToolBar(flag){
-
-        if (flag){
-            $('#main-update').hide();
-            $('#main-delete').hide();
-        }else{
-            $('#main-update').show();
-            $('#main-delete').show();
+        if (flag) {
+            $('#feesetting-update').hide();
+            $('#feesetting-delete').hide();
+        } else {
+            $('#feesetting-update').show();
+            $('#feesetting-delete').show();
         }
     }
 
-
-    //显示modal
-    $(document).on("click", "#main-add", function () {
-
-//        $(".modal-body").append(texts.toArray().join(", "));
-        // As pointed out in comments,
-        // it is superfluous to have to manually call the modal.
-        $('.modal-dialog').modal('show');
-    });
-
     //提交比例修改
-    $('#confirmRatio').on('click', function() {
+    $('#confirmRatio').on('click', function () {
         console.log("提交比例修改");
     });
+</script>
+
+<script>
+
+    function handleNewGroup(){
+        $("#newFeesettingModal #feesettingGroup").removeAttr('disabled');
+        $("#newFeesettingModal #existingGroup").attr('disabled','disabled');
+    }
+
+    function handleUseExistingGroup(){
+        $("#newFeesettingModal #existingGroup").removeAttr('disabled');
+        $("#newFeesettingModal #feesettingGroup").attr('disabled','disabled');
+    }
+
+//    function addNewAdminManager(){
+//        //    $Id="12";
+////    $Name="GCtest";
+////    $Password="testpass";
+////    $SubMain="1";
+////    $Restriction="2";
+////    $UserName="GameCloud";
+////    $Contact="CA";
+//
+//        //modal 确定 逻辑处理
+//        var checkedMainAccounts = getCheckedItems().toString();
+//        var adminManagerAccount = $("#newAdminManagerModal #adminManagerAccount").val();
+//        var adminManagerPassword = $("#newAdminManagerModal #adminManagerPassword").val();
+//        var adminManagerName = $("#newAdminManagerModal #adminManagerName").val();
+//        var adminManagerContact = $("#newAdminManagerModal #adminManagerContact").val();
+//        var accountAdmin = $("#newAdminManagerModal #accountAdmin :selected").val();
+//        var moneyAdmin = $("#newAdminManagerModal #moneyAdmin :selected").val();
+//        var riskAdmin = $("#newAdminManagerModal #riskAdmin :selected").val();
+//        var rateAdmin = $("#newAdminManagerModal #rateAdmin :selected").val();
+//        var riskManagerAdmin = $("#newAdminManagerModal #riskManagerAdmin :selected").val();
+//        var restriction = "0-" + accountAdmin + ",1-" + moneyAdmin + ",2-" + riskAdmin + ",3-" + rateAdmin + ",4-" + riskManagerAdmin;
+//
+//        alert(checkedMainAccounts);
+//
+//        //TODO: 应该做 validate
+//        //ajax 发送插入
+//
+//        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Administrator/InsertData.php";
+//
+//        $.ajax({
+//            url: hostpath,
+//            type: "get", //send it through get method
+//            data:{
+//                Id: 0,
+//                Name: adminManagerAccount,
+//                Password: adminManagerPassword,
+//                SubMain: checkedMainAccounts,
+//                Restriction: restriction,
+//                UserName: adminManagerName,
+//                Contact: adminManagerContact,
+//                State: 1
+//            },
+//            success: function(response) {
+//                alert( "Data Loaded: " + response);
+//            },
+//            error: function(xhr) {
+//                //Do Something to handle error
+//            }
+//        });
+//    }
+
+//    function updateAdminManager(){
+//
+//        var adminManagerInfo = adminManagerData[selectedIndex];
+//        var systemId = adminManagerInfo[0];
+//
+//        var checkedMainAccounts = getCheckedItems().toString();
+//        var adminManagerAccount = $("#newAdminManagerModal #adminManagerAccount").val();
+//        var adminManagerPassword = $("#newAdminManagerModal #adminManagerPassword").val();
+//        var adminManagerName = $("#newAdminManagerModal #adminManagerName").val();
+//        var adminManagerContact = $("#newAdminManagerModal #adminManagerContact").val();
+//        var accountAdmin = $("#newAdminManagerModal #accountAdmin :selected").val();
+//        var moneyAdmin = $("#newAdminManagerModal #moneyAdmin :selected").val();
+//        var riskAdmin = $("#newAdminManagerModal #riskAdmin :selected").val();
+//        var rateAdmin = $("#newAdminManagerModal #rateAdmin :selected").val();
+//        var riskManagerAdmin = $("#newAdminManagerModal #riskManagerAdmin :selected").val();
+//        var restriction = "0-" + accountAdmin + ",1-" + moneyAdmin + ",2-" + riskAdmin + ",3-" + rateAdmin + ",4-" + riskManagerAdmin;
+//
+//        alert(checkedMainAccounts);
+//
+//        //TODO: 应该做 validate
+//        //ajax 发送插入
+//
+//        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Administrator/InsertData.php";
+//
+//        $.ajax({
+//            url: hostpath,
+//            type: "get", //send it through get method
+//            data:{
+//                Id: systemId,
+//                Name: adminManagerAccount,
+//                Password: adminManagerPassword,
+//                SubMain: checkedMainAccounts,
+//                Restriction: restriction,
+//                UserName: adminManagerName,
+//                Contact: adminManagerContact,
+//                State: 3
+//            },
+//            success: function(response) {
+//                alert( "Data Loaded: " + response);
+//            },
+//            error: function(xhr) {
+//                //Do Something to handle error
+//            }
+//        });
+//    }
+
+//    function deleteAdminManager(){
+//        var adminManagerInfo = adminManagerData[selectedIndex];
+//
+//        var adminManagerAccount = adminManagerInfo[1];
+//        var adminManagerPassword = adminManagerInfo[2];
+//        var checkedMainAccounts = adminManagerInfo[3];
+//        var systemId = adminManagerInfo[0];
+//        var adminManagerName = adminManagerInfo[5];
+//        var adminManagerContact = adminManagerInfo[6];
+//        var restriction = adminManagerInfo[4];
+//
+//        //TODO: 应该做 validate
+//        //ajax 发送插入
+//
+//        //TODO: PHP有问题，修改PHP
+//        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Administrator/InsertData.php";
+//
+//        $.ajax({
+//            url: hostpath,
+//            type: "get", //send it through get method
+//            data:{
+//                Name: adminManagerAccount,
+//                Password: adminManagerPassword,
+//                SubMain: checkedMainAccounts,
+//                Id: systemId,
+//                Restriction: restriction,
+//                UserName: adminManagerName,
+//                Contact: adminManagerContact,
+//                State: 2
+//            },
+//            success: function(response) {
+//                alert( "Data Loaded: " + response);
+//            },
+//            error: function(xhr) {
+//                //Do Something to handle error
+//            }
+//        });
+//    }
+
+    //设置费率信息
+    function setFeesettingInfo() {
+        //clear existing contents
+        $("#newFeesettingModal #openPositionFee").val("");
+        $("#newFeesettingModal #closePositionFee").val("");
+        $("#newFeesettingModal #closeNowFee").val("");
+        $("#newFeesettingModal #deposit").val("");
+
+        for (var groupName in feeSettingGroups){
+            alert(groupName);
+        }
+//        $("#newAdminManagerModal #accountAdmin option").eq(0).attr("selected","selected");
+//        $("#newAdminManagerModal #moneyAdmin option").eq(0).attr("selected","selected");
+//        $("#newAdminManagerModal #riskAdmin option").eq(0).attr("selected","selected");
+//        $("#newAdminManagerModal #rateAdmin option").eq(0).attr("selected","selected");
+//        $("#newAdminManagerModal #riskManagerAdmin option").eq(0).attr("selected","selected");
+//
+//        //add mainAccounts
+//        var mainAccountUL = $("#newAdminManagerModal #mainAccountUL");
+//        mainAccountUL.empty();
+//        for (var i = 0; i < mainAccountTableData.length; i++) {
+//            mainAccountUL.append($("<li class='list-group-item'>").text(mainAccountTableData[i].inf[0]));
+//        }
+//
+//        updateCheckBox();
+    }
+
+//    function fillAdminManagerModal(){
+//        var adminManagerInfo = adminManagerData[selectedIndex];
+//
+//        $("#newAdminManagerModal #adminManagerAccount").val(adminManagerInfo[1]);
+//        $("#newAdminManagerModal #adminManagerPassword").val(adminManagerInfo[2]);
+//        $("#newAdminManagerModal #adminManagerName").val(adminManagerInfo[5]);
+//        $("#newAdminManagerModal #adminManagerContact").val(adminManagerInfo[6]);
+//
+//        var mainAccountArray = adminManagerInfo[3].split(",");
+//
+//        $("#mainAccountUL li").each(function (idx, li) {
+//            var subId = $(li).text();
+//            if (mainAccountArray.indexOf(subId) > -1) //找到
+//                $(li).click();  //高亮
+//        });
+//
+//        var restrictionArray = adminManagerInfo[4].split(",");
+//
+//        var accountAdmin = restrictionArray[0].slice(-1);
+//        var accountAdminOption = $("#newAdminManagerModal #accountAdmin option");
+//        accountAdminOption.eq(accountAdmin).attr('selected', 'selected');
+//
+//        var moneyAdmin = restrictionArray[1].slice(-1);
+//        var moneyAdminOption = $("#newAdminManagerModal #moneyAdmin option");
+//        moneyAdminOption.eq(moneyAdmin).attr('selected', 'selected');
+//
+//        var riskAdmin = restrictionArray[2].slice(-1);
+//        var riskAdminOption = $("#newAdminManagerModal #riskAdmin option");
+//        riskAdminOption.eq(riskAdmin).attr('selected', 'selected');
+//
+//        var rateAdmin = restrictionArray[3].slice(-1);
+//        var rateAdminOption = $("#newAdminManagerModal #rateAdmin option");
+//        rateAdminOption.eq(rateAdmin).attr('selected', 'selected');
+//
+//        var riskManagerAdmin = restrictionArray[4].slice(-1);
+//        var riskManagerAdminOption = $("#newAdminManagerModal #riskManagerAdmin option");
+//        riskManagerAdminOption.eq(riskManagerAdmin).attr('selected', 'selected');
+//
+//    }
+
+//    function getCheckedItems () {
+//        var checkedItems = [], counter = 0;
+//        $("#mainAccountUL li.active").each(function (idx, li) {
+//            checkedItems[counter] = $(li).text();
+//            counter++;
+//        });
+//        return checkedItems;
+//    }
+
+    $(document).on("click", "#feesetting-add", function () {
+        $(document).off("click", "#newFeesettingModal .btn-primary");
+        setFeesettingInfo();
+//        $(document).on("click", "#newFeesettingModal .btn-primary", addNewAdminManager);
+        $('#feesettingModal').modal('show');
+    });
+
+//    $(document).on("click", "#admin-update", function () {
+//        $(document).off("click", "#newAdminManagerModal .btn-primary");
+//        setAdminManagerInfo();
+//        fillAdminManagerModal();
+//        $(document).on("click", "#newAdminManagerModal .btn-primary", updateAdminManager);
+//        $('#adminManagerModal').modal('show');
+//    });
+
+//    $(document).on("click", "#admin-delete", function () {
+//        deleteAdminManager();
+//    });
 </script>
 
 </body>

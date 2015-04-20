@@ -24,12 +24,12 @@
     $TableName="Commission";
     $State="1";
     $Id="0";
-    $GroupName="test";
+    $GroupName="test2";
     $Contract="new";
     $OpenPositionFee="1";
     $EqualPositionFee="2";
     $EqualNowFee="1";
-    $FeeType="绝对值";
+    $FeeType="固定金额";
     $EnsurementsPercentage="0";
     
     //admin=frankzch&password=123456&tablename=Commission&state=1&编号=1&组名称=test&合约=new&开仓手续费=0.1&平仓手续费=0.2&平今手续费=0.1&手续费类型=绝对值&保证金比例=1
