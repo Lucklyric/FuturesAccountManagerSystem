@@ -347,13 +347,11 @@
                                        cellspacing="0" width="100%">
 
                                     <div class="operationManagerToolbar" style="float:left">
-                                        <button type="button" class="btn btn-default btn-lg" id="main-accept" data-toggle="modal"
-                                                >
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <button type="button" class="btn btn-success" id="main-accept">
+                                           生效
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="main-reject" data-toggle="modal"
-                                                >
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <button type="button" class="btn btn-danger" id="main-reject" data-toggle="modal">
+                                            驳回
                                         </button>
                                     </div>
                                     <thead>
@@ -574,7 +572,7 @@
 
 
     function ifHideMainAccountToolBar(flag){
-
+        return;
         if (flag){
             $('#main-accept').hide();
             $('#main-reject').hide();
@@ -582,6 +580,7 @@
             $('#main-accept').show();
             $('#main-reject').show();
         }
+
         if (operationManagerData.length == 0){
             $('#main-accept').hide();
             $('#main-reject').hide();
@@ -594,14 +593,14 @@
     // alert( "Handler for .click() called." );
     // });
 
-    //显示modal //SY这边添加添删改的功能
-    $(document).on("click", "#main-add", function () {
-
-//        $(".modal-body").append(texts.toArray().join(", "));
-        // As pointed out in comments,
-        // it is superfluous to have to manually call the modal.
-        $('.modal-dialog').modal('show');
+    $(document).on("click", "#main-accept", function () {
+        //TODO 做同意请求
     });
+
+    $(document).on("click", "#main-reject", function () {
+        //TODO 做撤回请求
+    });
+
 </script>
 
 </body>

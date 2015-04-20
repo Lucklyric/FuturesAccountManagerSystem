@@ -28,15 +28,15 @@
     
     $AdminAccount="frankzch";
     $AdminPassword="123456";
-    $Id="1";
+    $Id="188";
     $Functions="test";
     $Operator="new";
     $OperationTime="1911-09-01 00:00:00";
-    $OperationType="test";
-    $OperationObject="test";
+    $OperationType="test1";
+    $OperationObject="test2";
     $OperationDetail="0.8";
-    $Judge="test";
-    $JudgementResult="待审核";
+    $Judge="test3";
+    $JudgementResult="生效";
     $JudgementTime="1991-01-01 00:00:00";
     //admin=frankzch&password=123456&tablename=Operation&state=1&编号=1&功能模块=test&操作员=new&操作时间=1911-09-01 00:00:00&操作类型=test&操作对象=test&操作内容=0.8&审核员=test&审核结果=待审核&审核时间=1999-01-01 00:00:00
     if($TableName && $State){
