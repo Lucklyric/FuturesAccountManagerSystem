@@ -323,6 +323,66 @@
                                 </div>
                                 <!-- /.modal -->
 
+                                <!-- Modal -->
+                                <div class="modal modal-wide fade"  tabindex="-1" role="dialog" id="mainSyncOrder"
+                                     aria-labelledby="newSubAccountLabel" aria-hidden="true">
+                                    <div class="modal-dialog" id="newMainSyncOrder">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title">报单同步</h4>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <table id="syncOrderTable" class="table table-striped table-bordered table-hover"
+                                                       cellspacing="0" width="100%">
+
+                                                    <thead>
+                                                    <tr>
+                                                        <th>子账户ID</th>
+                                                        <th>主账户编号</th>
+                                                        <th>保单系统编号</th>
+                                                        <th>合约名称</th>
+                                                        <th>买卖</th>
+                                                        <th>开平</th>
+                                                        <th>平今平昨</th>
+                                                        <th>状态</th>
+                                                        <th>成交均价</th>
+                                                        <th>成交数量</th>
+                                                        <th>成交时间</th>
+
+                                                    </tr>
+                                                    </thead>
+
+                                                    <tfoot>
+                                                    <tr>
+                                                        <th>子账户ID</th>
+                                                        <th>主账户编号</th>
+                                                        <th>保单系统编号</th>
+                                                        <th>合约名称</th>
+                                                        <th>买卖</th>
+                                                        <th>开平</th>
+                                                        <th>平今平昨</th>
+                                                        <th>状态</th>
+                                                        <th>成交均价</th>
+                                                        <th>成交数量</th>
+                                                        <th>成交时间</th>
+
+                                                    </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                                                </button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.modal -->
 
                                 <table id="mainAccounts" class="table table-striped table-bordered table-hover"
                                        cellspacing="0" width="100%">
@@ -337,6 +397,9 @@
                                         <button type="button" class="btn btn-danger" id="main-delete" data-toggle="modal">
                                             删除主账户
                                         </button>
+                                        <button type="button" class="btn btn-primary" id="main-sync" data-toggle="modal">
+                                           同步
+                                        </button>
                                     </div>
                                     <thead>
                                     <tr>
@@ -347,6 +410,8 @@
                                         <th>账户ID</th>
                                         <th>账户密码</th>
                                         <th>静态权益</th>
+                                        <th>同步状态</th>
+
                                     </tr>
                                     </thead>
 
@@ -359,6 +424,8 @@
                                         <th>账户ID</th>
                                         <th>账户密码</th>
                                         <th>静态权益</th>
+                                        <th>同步状态</th>
+
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -384,6 +451,7 @@
                                         <button type="button" class="btn btn-danger" id="sub-delete" data-toggle="modal">
                                             删除子账户
                                         </button>
+
                                     </div>
                                     <thead>
                                     <tr>
@@ -451,6 +519,7 @@
 <script src="../../../Source/DataTable-Plugins/api/fnProcessingIndicator.js"></script>
 
 <script src="../js/SSClass/SSToolBar.js"></script>
+<script src="../js/SSClass/SSMainAccountManager.js" charset="gb2312"></script>
 <script src="../js/SSClass/dataTables.scroller.js"></script>
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
@@ -470,6 +539,10 @@
     var selectedIndex = 0;  //mainSelectedIndex
     var subSelectedIndex = 0;  //subSelectedIndex
     var toolBarManger = new SSToolBar($("#restartServer"),$("#connectMainAccount"),$("#onlineCount"),$("#serverStatus"));
+    var mainAccountManager = new SSMainAccountManager("frankzch","123456",function(){
+        refreshMainAccountsTable();
+    });
+
     /**
      * Document加载完毕 更新数据刷新Table绑定点击事件
      */
@@ -533,10 +606,9 @@
         if (flag === undefined){
             if (sessionStorage.getItem('mainAccountTableData')){
                 mainAccountTableData = JSON.parse(sessionStorage.getItem('mainAccountTableData'));
-                for (var i = 0; i < mainAccountTableData.length; i++) {
-                    mainAccounts.push(mainAccountTableData[i].inf);
-                }
+                mainAccounts = JSON.parse(sessionStorage.getItem('mainAccountData'));
                 //console.log(mainAccounts);
+                mainAccountManager.InitMainAccountsCheckList(mainAccounts);
                 refreshMainAccountsTable();
                 updateSubAccounts(selectedIndex);
                 refreshSubAccountsTable();
@@ -553,11 +625,15 @@
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
             mainAccountTableData = data.data;
             sessionStorage.setItem('mainAccountTableData',JSON.stringify(mainAccountTableData));
-           // console.log(mainAccountTableData);
+            console.log(mainAccountTableData);
             console.log("走到这里了");
+
             for (var i = 0; i < mainAccountTableData.length; i++) {
                 mainAccounts.push(mainAccountTableData[i].inf);
+                mainAccounts[mainAccounts.length-1].push("获取中");
             }
+            sessionStorage.setItem('mainAccountData',JSON.stringify(mainAccounts));
+            mainAccountManager.InitMainAccountsCheckList(mainAccounts);
             //console.log(mainAccounts);
             refreshMainAccountsTable();
             updateSubAccounts(selectedIndex);
@@ -570,6 +646,7 @@
             }
         });
     }
+
 
     /**
      * 取得交易所详情信息
@@ -659,12 +736,14 @@
             curSubAccounts.push(mainAccountTableData[index].subs[i]);
             curSubAccounts[curSubAccounts.length-1][8] = mainAccountTableData[index].inf[4];
         }
+        mainAccountManager.curSubAccounts = curSubAccounts;
     }
 
     /**
      * 刷新主账户表格
      */
     function refreshMainAccountsTable() {
+        ifHideMainAccountToolBar();
         var container = $('#mainAccounts,div.dataTables_scrollBody');
         if ($.fn.dataTable.isDataTable('#mainAccounts')) {
             var tmpOffset = container.scrollTop();
@@ -758,9 +837,19 @@
         if(mainAccounts.length == 0){
             $('#main-update').hide();
             $('#main-delete').hide();
+            $('#main-sync').hide();
+            return;
         }else{
             $('#main-update').show();
             $('#main-delete').show();
+        }
+
+        if (mainAccounts[selectedIndex][7].localeCompare("获取中")==0 || mainAccounts[selectedIndex][7].localeCompare("已同步") == 0){
+            console.log(mainAccounts[selectedIndex][7]+"开启同步");
+            $('#main-sync').hide();
+        }else{
+
+            $('#main-sync').show();
         }
     }
 
@@ -1204,6 +1293,18 @@
     $(document).on("click", "#sub-delete", function () {
         deleteSubAccount(curSubAccounts[subSelectedIndex]);
     });
+
+    $(document).on("click", "#main-sync", function () {
+        if (mainAccounts[selectedIndex][7].localeCompare("需要报单同步") == 0){
+            mainAccountManager.updateCurrentMainAccountOrderInfo(selectedIndex,$("#syncOrderTable"));
+            $('#mainSyncOrder').modal('show');
+        }
+        $(document).on("click", "#newMainSyncOrder .btn-primary", function(){
+            mainAccountManager.submitSyncOrderStream(selectedIndex)
+        });
+
+    });
+
 
     //理论上来说添加修改以后都应该刷新
 

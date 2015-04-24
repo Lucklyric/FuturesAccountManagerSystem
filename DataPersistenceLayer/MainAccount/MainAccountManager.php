@@ -14,7 +14,112 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             $this->userType = $userType;
         }
         //拿主账户表里所有数据
-        
+
+
+        function GetMainAccountConnectStatus($userid,$password,$mainAccountID)
+        {
+            include_once('HTTP/Request.php');
+            //$next="abc";
+            //return $next;
+            $data = array("userid"=>$userid,"password"=>$password, "sMainAccountID"=>$mainAccountID);
+            $data_string = json_encode($data);
+            $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetMainAccountConnectStatus');
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data_string)));
+            $result = curl_exec($ch);
+            curl_close($ch);
+            header("Content-type:text/html;charset=utf-8");
+            return $result;
+        }
+
+        function ConnectMainAccount($userid,$password,$mainAccountID)
+        {
+            include_once('HTTP/Request.php');
+            //$next="abc";
+            //return $next;
+            $data = array("userid"=>$userid,"password"=>$password, "sMainAccountID"=>$mainAccountID);
+            $data_string = json_encode($data);
+            $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetMainAccountConnectStatus');
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data_string)));
+            $result = curl_exec($ch);
+            curl_close($ch);
+            header("Content-type:text/html;charset=utf-8");
+            return $result;
+        }
+
+        function GetNeedSyncOrders($userid,$password,$mainAccountID)
+        {
+            include_once('HTTP/Request.php');
+            //$next="abc";
+            //return $next;
+            $data = array("userid"=>$userid,"password"=>$password, "sMainAccountID"=>$mainAccountID);
+            $data_string = json_encode($data);
+            $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetNeedSyncOrders');
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data_string)));
+            $result = curl_exec($ch);
+            curl_close($ch);
+            header("Content-type:text/html;charset=utf-8");
+            return $result;
+        }
+
+        function GetNeedSyncPositions($userid,$password,$mainAccountID)
+        {
+            include_once('HTTP/Request.php');
+            //$next="abc";
+            //return $next;
+            $data = array("userid"=>$userid,"password"=>$password, "sMainAccountID"=>$mainAccountID);
+            $data_string = json_encode($data);
+            $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetNeedSyncPosition');
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data_string)));
+            $result = curl_exec($ch);
+            curl_close($ch);
+            header("Content-type:text/html;charset=utf-8");
+            return $result;
+        }
+
+        function OnRspSyncOrders($data){
+            include_once('HTTP/Request.php');
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL,$GLOBALS['serverAddress'].'SPService/SPService.svc/OnRspSyncOrders');
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS,
+                $data);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+
+
+            // receive server response ...
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            $server_output = curl_exec ($ch);
+
+            curl_close ($ch);
+            header("Content-type:text/html;charset=utf-8");
+
+            echo $server_output;
+        }
+
+
         function GetAllData($userid,$password)
         {
             include_once('HTTP/Request.php');
@@ -115,7 +220,8 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             echo $server_output;
 
         }
-        
+
+
         
 
     } // end of class Vegetable

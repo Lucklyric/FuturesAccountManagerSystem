@@ -39,10 +39,9 @@
 //    $ContactInfo="test";
 //    $MainId="10";
 //    $RiskManagementGroup="test";
-    $RateGroupName="test";
+
     $MoneyAccount="123";
-    $MoneyRatio="1:2";
-    $SecondMain="False";
+    $SecondMain="true";
     $State="1";
     
     if($TableName && $State ){

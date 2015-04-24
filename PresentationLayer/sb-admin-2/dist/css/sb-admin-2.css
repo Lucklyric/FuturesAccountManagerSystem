@@ -8,6 +8,13 @@ body {
     background-color: #f8f8f8;
 }
 
+.modal.modal-wide .modal-dialog {
+    width: 90%;
+}
+.modal-wide .modal-body {
+    overflow-y: auto;
+}
+
 #wrapper {
     width: 100%;
 }
