@@ -160,9 +160,23 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                         tmpTableRowData.push(ssMainAccounttManagerInstance.mainAccouts[index][0]);
                         tmpTableRowData.push(curRowData['OrderSysID']);
                         tmpTableRowData.push(curRowData['InstrumentID']);
-                        tmpTableRowData.push(curRowData['BuyOrSell']);
-                        tmpTableRowData.push(curRowData['NewOrClose']);
-                        tmpTableRowData.push(curRowData['CloseTodayOrHistoryPos']);
+                        if(curRowData['BuyOrSell'] == 'true'){
+                            tmpTableRowData.push('买');
+                        }else{
+                            tmpTableRowData.push('卖');
+                        }
+
+                        if(curRowData['NewOrClose'] == 'true'){
+                            tmpTableRowData.push('开');
+                        }else{
+                            tmpTableRowData.push('平');
+                        }
+
+                        if(curRowData['CloseTodayOrHistoryPos']=='true'){
+                            tmpTableRowData.push('平今');
+                        }else{
+                            tmpTableRowData.push('平昨');
+                        }
                         tmpTableRowData.push(curRowData['Status']);
                         tmpTableRowData.push(curRowData['TradedPrice']);
                         tmpTableRowData.push(curRowData['TradedVolume']);
@@ -177,9 +191,23 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                         tmpTableRowData.push(ssMainAccounttManagerInstance.mainAccouts[index][0]);
                         tmpTableRowData.push(curRowData['OrderSysID']);
                         tmpTableRowData.push(curRowData['InstrumentID']);
-                        tmpTableRowData.push(curRowData['BuyOrSell']);
-                        tmpTableRowData.push(curRowData['NewOrClose']);
-                        tmpTableRowData.push(curRowData['CloseTodayOrHistoryPos']);
+                        if(curRowData['BuyOrSell'] == 'true'){
+                            tmpTableRowData.push('买');
+                        }else{
+                            tmpTableRowData.push('卖');
+                        }
+
+                        if(curRowData['NewOrClose'] == 'true'){
+                            tmpTableRowData.push('开');
+                        }else{
+                            tmpTableRowData.push('平');
+                        }
+
+                        if(curRowData['CloseTodayOrHistoryPos']=='true'){
+                            tmpTableRowData.push('平今');
+                        }else{
+                            tmpTableRowData.push('平昨');
+                        }
                         tmpTableRowData.push(curRowData['Status']);
                         tmpTableRowData.push(curRowData['TradedPrice']);
                         tmpTableRowData.push(curRowData['TradedVolume']);
