@@ -26,14 +26,15 @@
     <!-- DataTables Responsive CSS -->
     <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
+    <!-- Custom CSS -->s
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <link href="../timer_picker/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
 
+    <link rel="stylesheet"
+          href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,15 +42,38 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
-    <script src="../timer_picker/bootstrap-datetimepicker.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script
+            src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script
+            src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+    <script src="../../../Source/DataTable-Plugins/api/fnProcessingIndicator.js"></script>
+
+    <script src="../js/SSClass/SSToolBar.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+
+    <script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
+    <script type="text/javascript"
+            src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+
 
 
     <![endif]-->
 
     <style>
-        @import url('http://jdewit.github.io/bootstrap-timepicker/css/bootstrap-timepicker.min.css');
-
         .state-icon {
             left: -5px;
         }
@@ -379,13 +403,22 @@
                                                                             <div class="container" style="width: 750px">
                                                                                 <div class="row clearfix">
                                                                                     <div class="col-xs-6 column">
-                                                                                        <input class="form-control"
-                                                                                               value=""/>
-                                                                                        <!--<div class="input-group bootstrap-timepicker">-->
-                                                                                        <!--<input id="timepicker1" type="text" class="input-small">-->
-                                                                                        <!--<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>-->
-                                                                                        <!--</div>-->
+                                                                                        <div class='input-group date'
+                                                                                             id='datetimepicker3'>
+                                                                                            <input type='text'
+                                                                                                   class="form-control"/>
+                                                                                            <span class="input-group-addon">
+                                                                                                <span class="glyphicon glyphicon-time"></span>
+                                                                                            </span>
+                                                                                        </div>
                                                                                     </div>
+                                                                                    <script type="text/javascript">
+                                                                                        $(function () {
+                                                                                            $('#datetimepicker3').datetimepicker({
+                                                                                                format: 'LT'
+                                                                                            });
+                                                                                        });
+                                                                                    </script>
                                                                                     <div class="col-xs-3 column">
                                                                                         <div class="form-group">
                                                                                             <div class="radio row clearfix"
@@ -399,7 +432,7 @@
                                                                                             </div>
                                                                                             <div class="radio row clearfix">
                                                                                                 <div class="col-xs-6 column">
-                                                                                                    <label  style="margin-top: 8px"><input
+                                                                                                    <label style="margin-top: 8px"><input
                                                                                                             type="radio"
                                                                                                             name="stockType">品种</label>
                                                                                                 </div>
@@ -418,7 +451,8 @@
                                                                                             <div class="row clearfix">
                                                                                                 <div class="col-xs-12 column">
                                                                                                     <button type="button"
-                                                                                                            class="btn btn-success btn-sm">添加
+                                                                                                            class="btn btn-success btn-sm">
+                                                                                                        添加
                                                                                                     </button>
                                                                                                 </div>
                                                                                             </div>
@@ -426,7 +460,8 @@
                                                                                                 <div class="col-xs-12 column">
                                                                                                     <button type="button"
                                                                                                             class="btn btn-warning btn-sm"
-                                                                                                            style="margin-top: 10px">删除
+                                                                                                            style="margin-top: 10px">
+                                                                                                        删除
                                                                                                     </button>
                                                                                                 </div>
                                                                                             </div>
@@ -435,81 +470,32 @@
                                                                                 </div>
                                                                                 <div class="row clearfix">
                                                                                     <div class="col-xs-12 column">
-                                                                                        <div class="well" style="max-height: 400px; overflow: auto;">
+                                                                                        <div class="well"
+                                                                                             style="max-height: 400px; overflow: auto;">
                                                                                             <ul class="list-group checked-list-box"
                                                                                                 id="subAccountUL">
-                                                                                                <li class="list-group-item">Cras justo odio</li>
+                                                                                                <li class="list-group-item">
+                                                                                                    Cras justo odio
+                                                                                                </li>
                                                                                             </ul>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </fieldset>
-                                                                            <fieldset>
-                                                                                <legend>日内仓位设置</legend>
-                                                                                <div class="container" style="width: 350px">
-                                                                                    <div class="row clearfix">
-                                                                                        <div class="col-xs-4 column modal-row">
-                                                                                            <label style="margin-top: 8px">总仓位预警</label>
-                                                                                        </div>
-                                                                                        <div class="col-xs-6 column">
-                                                                                            <input class="form-control"
-                                                                                            value=""/>
-                                                                                        </div>
+                                                                        <fieldset>
+                                                                            <legend>日内仓位设置</legend>
+                                                                            <div class="container" style="width: 350px">
+                                                                                <div class="row clearfix">
+                                                                                    <div class="col-xs-4 column modal-row">
+                                                                                        <label style="margin-top: 8px">总仓位预警</label>
                                                                                     </div>
-                                                                                    <div class="row clearfix">
-                                                                                        <div class="col-xs-4 column modal-row">
-                                                                                            <label style="margin-top: 8px">总仓位上限</label>
-                                                                                        </div>
-                                                                                        <div class="col-xs-6 column">
-                                                                                            <input class="form-control"
-                                                                                                   value=""/>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row clearfix">
-                                                                                        <div class="col-xs-4 column modal-row">
-                                                                                            <label style="margin-top: 8px">品种代码</label>
-                                                                                        </div>
-                                                                                        <div class="col-xs-4 column">
-                                                                                            <input class="form-control"
-                                                                                                   value=""/>
-                                                                                        </div>
-                                                                                        <div class="col-xs-4 column">
-                                                                                            <button type="button"
-                                                                                                    class="btn btn-success btn-sm">添加
-                                                                                            </button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row clearfix">
-                                                                                        <div class="col-xs-4 column modal-row">
-                                                                                            <label style="margin-top: 8px">仓位上限</label>
-                                                                                        </div>
-                                                                                        <div class="col-xs-4 column">
-                                                                                            <input class="form-control"
-                                                                                                   value=""/>
-                                                                                        </div>
-                                                                                        <div class="col-xs-4 column">
-                                                                                            <button type="button"
-                                                                                                    class="btn btn-warning btn-sm">删除
-                                                                                            </button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row clearfix">
-                                                                                        <div class="col-xs-12 column">
-                                                                                            <div class="well" style="max-height: 400px; overflow: auto;">
-                                                                                                <ul class="list-group checked-list-box"
-                                                                                                    id="subAccountUL">
-                                                                                                    <li class="list-group-item">Cras justo odio</li>
-                                                                                                </ul>
-                                                                                            </div>
-                                                                                        </div>
+                                                                                    <div class="col-xs-6 column">
+                                                                                        <input class="form-control"
+                                                                                               value=""/>
                                                                                     </div>
                                                                                 </div>
-                                                                            </fieldset>
-                                                                        <fieldset>
-                                                                            <legend>隔夜仓位设置</legend>
-                                                                            <div class="container" style="width: 350px">
-                                                                                <div class="row clearfix" style="margin-top:26px; margin-bottom: 26px">
+                                                                                <div class="row clearfix">
                                                                                     <div class="col-xs-4 column modal-row">
                                                                                         <label style="margin-top: 8px">总仓位上限</label>
                                                                                     </div>
@@ -528,7 +514,8 @@
                                                                                     </div>
                                                                                     <div class="col-xs-4 column">
                                                                                         <button type="button"
-                                                                                                class="btn btn-success btn-sm">添加
+                                                                                                class="btn btn-success btn-sm">
+                                                                                            添加
                                                                                         </button>
                                                                                     </div>
                                                                                 </div>
@@ -542,16 +529,78 @@
                                                                                     </div>
                                                                                     <div class="col-xs-4 column">
                                                                                         <button type="button"
-                                                                                                class="btn btn-warning btn-sm">删除
+                                                                                                class="btn btn-warning btn-sm">
+                                                                                            删除
                                                                                         </button>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="row clearfix">
                                                                                     <div class="col-xs-12 column">
-                                                                                        <div class="well" style="max-height: 400px; overflow: auto;">
+                                                                                        <div class="well"
+                                                                                             style="max-height: 400px; overflow: auto;">
                                                                                             <ul class="list-group checked-list-box"
                                                                                                 id="subAccountUL">
-                                                                                                <li class="list-group-item">Cras justo odio</li>
+                                                                                                <li class="list-group-item">
+                                                                                                    Cras justo odio
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </fieldset>
+                                                                        <fieldset>
+                                                                            <legend>隔夜仓位设置</legend>
+                                                                            <div class="container" style="width: 350px">
+                                                                                <div class="row clearfix"
+                                                                                     style="margin-top:26px; margin-bottom: 26px">
+                                                                                    <div class="col-xs-4 column modal-row">
+                                                                                        <label style="margin-top: 8px">总仓位上限</label>
+                                                                                    </div>
+                                                                                    <div class="col-xs-6 column">
+                                                                                        <input class="form-control"
+                                                                                               value=""/>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row clearfix">
+                                                                                    <div class="col-xs-4 column modal-row">
+                                                                                        <label style="margin-top: 8px">品种代码</label>
+                                                                                    </div>
+                                                                                    <div class="col-xs-4 column">
+                                                                                        <input class="form-control"
+                                                                                               value=""/>
+                                                                                    </div>
+                                                                                    <div class="col-xs-4 column">
+                                                                                        <button type="button"
+                                                                                                class="btn btn-success btn-sm">
+                                                                                            添加
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row clearfix">
+                                                                                    <div class="col-xs-4 column modal-row">
+                                                                                        <label style="margin-top: 8px">仓位上限</label>
+                                                                                    </div>
+                                                                                    <div class="col-xs-4 column">
+                                                                                        <input class="form-control"
+                                                                                               value=""/>
+                                                                                    </div>
+                                                                                    <div class="col-xs-4 column">
+                                                                                        <button type="button"
+                                                                                                class="btn btn-warning btn-sm">
+                                                                                            删除
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row clearfix">
+                                                                                    <div class="col-xs-12 column">
+                                                                                        <div class="well"
+                                                                                             style="max-height: 400px; overflow: auto;">
+                                                                                            <ul class="list-group checked-list-box"
+                                                                                                id="subAccountUL">
+                                                                                                <li class="list-group-item">
+                                                                                                    Cras justo odio
+                                                                                                </li>
                                                                                             </ul>
                                                                                         </div>
                                                                                     </div>
@@ -658,27 +707,6 @@
     <!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
-
-<!-- jQuery -->
-<script src="../bower_components/jquery/dist/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-<!-- Metis Menu Plugin JavaScript -->
-<script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-<!-- DataTables JavaScript -->
-<script
-        src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-<script
-        src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-
-<script src="../../../Source/DataTable-Plugins/api/fnProcessingIndicator.js"></script>
-
-<script src="../js/SSClass/SSToolBar.js"></script>
-<!-- Custom Theme JavaScript -->
-<script src="../dist/js/sb-admin-2.js"></script>
 
 <script>
     //http://bootsnipp.com/snippets/featured/checked-list-group
@@ -864,10 +892,6 @@
     }
 
 
-</script>
-
-<script>
-    $('#timepicker1').timepicker();
 </script>
 
 <script>
