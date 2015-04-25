@@ -8,14 +8,21 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
     this.accoutPwd = accoutPwd;
     this.currentChangedOrders = [];
     this.currentMissingOrders = [];
+    this.currentOriginPos = [];
+    this.currentQueryPos = [];
+
+    this.currentAllInstrumentIdDic=[];
     this.currentTableData = [];
     this.mainAccouts = [];
     this.needCheckQueue = [];
     //this.positionCheckQueue = [];
     this.redrawCallback = redrawCallBack;
     this.orderSyncTable;
+    this.positionSyncTable;
+
     this.curSubAccounts =[];
-    this.curMainIndex = 0;
+    this.duoPosText="";
+    this.kongPosText="";
 
     /***
      * 定时器函数
@@ -76,9 +83,9 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
 
                     if (tmpResponse == "需要报单同步"){
                         ssMainAccounttManagerInstance.mainAccouts[index][7] = "需要报单同步";
-                    }else if(tmpResponse == "需要仓位同步"){
+                    }else if(tmpResponse == "需要持仓同步"){
 
-                        ssMainAccounttManagerInstance.mainAccouts[index][7] = "需要仓位同步";
+                        ssMainAccounttManagerInstance.mainAccouts[index][7] = "需要持仓同步";
                     }else if(tmpResponse == "已链接"){
                         ssMainAccounttManagerInstance.mainAccouts[index][7] = "已同步";
                         ssMainAccounttManagerInstance.needCheckQueue.splice(index,1);
@@ -254,6 +261,10 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
             });
         }
 
+    /***
+     * 提交当前的报单同步信息
+     * @param index
+     */
     this.submitSyncOrderStream = function(index) {
 
 
@@ -312,6 +323,118 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
             },
             success: function (response) {
                 console.log("同步结果:"+response+".");
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+
+    /***
+     * 更新当前的仓位同步页面
+     * @param index
+     * @param table
+     */
+    this.updateCurrentMainAccountPositionInfo = function(index,table){
+        this.positionSyncTable = table;
+        $.ajax({
+            url: this.hostpath,
+            type: "get", //send it through get method
+            dataType: "json",
+            contentType: "application/json",
+            data: {
+                AdminAccount:this.accoutId,
+                AdminPassword:this.accoutPwd,
+                MainId:this.mainAccouts[index][0],
+                Method:"getNeedSyncPositions"
+            },
+            success: function (data) {
+
+                data = JSON.parse(data);
+                console.log(data);
+                ssMainAccounttManagerInstance.currentOriginPos = data['ColOriginDBPos'];
+                ssMainAccounttManagerInstance.currentQueryPos = data['ColQueryPos'];
+                ssMainAccounttManagerInstance.currentTableData = [];
+
+                ssMainAccounttManagerInstance.currentAllInstrumentIdDic =[];
+
+                for (var i = 0 ; i < ssMainAccounttManagerInstance.currentQueryPos.length ; i++) {
+                    var curPos = ssMainAccounttManagerInstance.currentQueryPos[i];
+                    if (ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]===undefined){
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']] =[];
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query'] =[];
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin'] =[];
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query']['duo'] =0;
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query']['kong'] =0;
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin']['duo'] =0;
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin']['kong'] =0;
+                    }
+                    if(curPos['Pos']['LongOrShort'] == 'true'){
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query']['duo'] += curPos['Pos']['Volume'];;
+                    }else{
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query']['kong'] += curPos['Pos']['Volume'];;
+                    }
+
+                }
+
+                for (var i = 0 ; i < ssMainAccounttManagerInstance.currentOriginPos.length ; i++) {
+                    var curPos = ssMainAccounttManagerInstance.currentOriginPos[i];
+                    if (ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]===undefined){
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']] =[];
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query'] =[];
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin'] =[];
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query']['duo'] =0;
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query']['kong'] =0;
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin']['duo'] =0;
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin']['kong'] =0;
+                    }
+                    if(curPos['Pos']['LongOrShort'] == 'true'){
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin']['duo'] += curPos['Pos']['Volume'];;
+                    }else{
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin']['kong'] += curPos['Pos']['Volume'];;
+                    }
+                }
+
+console.log(ssMainAccounttManagerInstance.currentAllInstrumentIdDic);
+                /***
+                 * 整合数据分析
+                 */
+                ssMainAccounttManagerInstance.duoPosText = "     多仓\n[主账户"+ssMainAccounttManagerInstance.mainAccouts[index][0]+']\n';
+                for (var key in ssMainAccounttManagerInstance.currentAllInstrumentIdDic){
+                    var originPos = ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['origin']['duo'];
+                    var queryPos =ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['query']['duo'];
+                    if (originPos!=queryPos) {
+                        ssMainAccounttManagerInstance.duoPosText += key + " 交易所" + originPos + "手，" + "本地" + queryPos + "手，需";
+                        if (originPos < queryPos) {
+                            ssMainAccounttManagerInstance.duoPosText += "删除" + queryPos - originPos + "手";
+                        } else if (originPos > queryPos) {
+                            ssMainAccounttManagerInstance.duoPosText += "增加" + originPos - queryPos + "手";
+                        }
+                    }
+                    ssMainAccounttManagerInstance.duoPosText+="\n";
+                }
+
+                ssMainAccounttManagerInstance.kongPosText = "     空仓\n[主账户"+ssMainAccounttManagerInstance.mainAccouts[index][0]+']\n';
+                for (var key in ssMainAccounttManagerInstance.currentAllInstrumentIdDic){
+                    var originPos = ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['origin']['kong'];
+                    var queryPos = ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['query']['kong'];
+                    if (originPos!=queryPos) {
+                        ssMainAccounttManagerInstance.kongPosText += key + " 交易所" + originPos + "手，" + "本地" + queryPos + "手，需";
+                        if (originPos < queryPos) {
+                            ssMainAccounttManagerInstance.kongPosText += "删除" + (queryPos - originPos) + "手";
+                        } else if(originPos > queryPos) {
+                            ssMainAccounttManagerInstance.kongPosText += "增加" + (originPos - queryPos) + "手";
+                        }
+                    }
+                    ssMainAccounttManagerInstance.kongPosText+="\n";
+                }
+
+
+
+                $("#duoCang").text( ssMainAccounttManagerInstance.duoPosText);
+                $("#kongCang").text( ssMainAccounttManagerInstance.kongPosText);
+
+
             },
             error: function (xhr) {
                 //Do Something to handle error

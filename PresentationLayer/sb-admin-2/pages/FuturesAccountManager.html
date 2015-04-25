@@ -383,6 +383,79 @@
                                     <!-- /.modal-dialog -->
                                 </div>
                                 <!-- /.modal -->
+                                <div class="modal modal-wide fade"  tabindex="-1" role="dialog" id="mainSyncPosition"
+                                     aria-labelledby="newSubAccountLabel" aria-hidden="true">
+                                    <div class="modal-dialog" id="newMainSyncPosition">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title">仓位同步</h4>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <table id="syncPositionTable" class="table table-striped table-bordered table-hover"
+                                                       cellspacing="0" width="100%">
+                                                    <div class="mainSyncPositionToolbar" style="float:left">
+                                                        <button type="button" class="btn btn-success" id="pos-add" data-toggle="modal">
+                                                            添加
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger" id="pos-delete" data-toggle="modal">
+                                                            删除
+                                                        </button>
+                                                    </div>
+                                                    <thead>
+                                                    <tr>
+                                                        <th>子账户ID</th>
+                                                        <th>合约名称</th>
+                                                        <th>多空</th>
+                                                        <th>持仓均价</th>
+                                                        <th>数量</th>
+                                                        <th>开仓日期</th>
+                                                        <th>报单类型</th>
+                                                    </tr>
+                                                    </thead>
+
+                                                    <tfoot>
+                                                    <tr>
+                                                        <th>子账户ID</th>
+                                                        <th>合约名称</th>
+                                                        <th>多空</th>
+                                                        <th>持仓均价</th>
+                                                        <th>数量</th>
+                                                        <th>开仓日期</th>
+                                                        <th>报单类型</th>
+                                                    </tr>
+                                                    </tfoot>
+                                                </table>
+                                                <div class="row clearfix">
+                                                    <div class="col-md-6 column">
+
+                                                            <textarea style="width: 100%;height: 250px;overflow:-moz-scrollbars-vertical;overflow-y:auto;" id="duoCang" readonly>
+                                                            </textarea>
+                                                    </div>
+                                                    <div class="col-md-6 column">
+
+                                                            <textarea style="width: 100%;height: 250px;overflow:-moz-scrollbars-vertical;overflow-y:auto;"  id ="kongCang" readonly>
+                                                            </textarea>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                                                </button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+
+
 
                                 <table id="mainAccounts" class="table table-striped table-bordered table-hover"
                                        cellspacing="0" width="100%">
@@ -554,7 +627,6 @@
         ifHideSubAccountToolBar(true);
         refreshMainAccountsTable();
         refreshData(); //更新数据
-
         $('#mainAccounts').on('click', 'tr', function () { //绑定点击事件刷新子账户
 
             selectedIndex = mainAccountTable.row(this).index();
@@ -1298,6 +1370,9 @@
         if (mainAccounts[selectedIndex][7].localeCompare("需要报单同步") == 0){
             mainAccountManager.updateCurrentMainAccountOrderInfo(selectedIndex,$("#syncOrderTable"));
             $('#mainSyncOrder').modal('show');
+        }else if(mainAccounts[selectedIndex][7].localeCompare("需要持仓同步") == 0){
+           mainAccountManager.updateCurrentMainAccountPositionInfo(selectedIndex,$("#syncOrderTable"));
+            $('#mainSyncPosition').modal('show');
         }
         $(document).on("click", "#newMainSyncOrder .btn-primary", function(){
             mainAccountManager.submitSyncOrderStream(selectedIndex)
