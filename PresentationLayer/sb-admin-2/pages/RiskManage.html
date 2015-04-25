@@ -69,8 +69,6 @@
             src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
 
-
-
     <![endif]-->
 
     <style>
@@ -281,6 +279,17 @@
                                             </div>
                                             <div class="modal-body">
 
+                                                <div class="row clearfix modal-row">
+                                                    <div class="col-xs-2 column">
+                                                        <label style="margin-top: 8px">风控组名称</label>
+                                                    </div>
+                                                    <div class="col-xs-4 column">
+                                                        <input class="form-control" value=""
+                                                               type="text"
+                                                               id="groupName"/>
+                                                    </div>
+                                                </div>
+
                                                 <fieldset>
                                                     <legend>交易合约限制</legend>
                                                     <div class="container">
@@ -288,7 +297,8 @@
                                                             <div class="col-xs-2 column">
                                                                 <div class="form-group">
                                                                     <div class="radio" id="blackOrWhite">
-                                                                        <label><input type="radio" name="blackOrWhite" id="black">黑名单</label>
+                                                                        <label><input type="radio" name="blackOrWhite"
+                                                                                      id="black">黑名单</label>
                                                                     </div>
                                                                     <div class="radio">
                                                                         <label><input type="radio" id="white"
@@ -333,17 +343,19 @@
                                                                 </button>
                                                             </div>
                                                             <div class="col-xs-7 column modal-row">
-                                                            <textarea class="form-control" rows="5"></textarea>
+                                                                <textarea class="form-control" rows="5"></textarea>
                                                             </div>
                                                             <div class="col-xs-2 column">
                                                                 <div class="row clearfix">
-                                                                    <button type="button" class="btn btn-default" id="rest-addAllMain"
+                                                                    <button type="button" class="btn btn-default"
+                                                                            id="rest-addAllMain"
                                                                             style="margin-top: 10px; margin-left: 15px">
                                                                         添加全部主力
                                                                     </button>
                                                                 </div>
                                                                 <div class="row clearfix">
-                                                                    <button type="button" class="btn btn-default" id="rest-addAllMinor"
+                                                                    <button type="button" class="btn btn-default"
+                                                                            id="rest-addAllMinor"
                                                                             style="margin-top: 10px; margin-left: 15px">
                                                                         添加全部次主力
                                                                     </button>
@@ -360,37 +372,41 @@
 
                                                         <!-- Nav tabs -->
                                                         <ul class="nav nav-tabs" role="tablist">
-                                                            <li role="presentation" class="active"><a href="#home"
-                                                                                                      aria-controls="home"
+                                                            <li role="presentation" class="active"><a href="#normal"
+                                                                                                      aria-controls="normal"
                                                                                                       role="tab"
                                                                                                       data-toggle="tab">普通风控</a>
                                                             </li>
-                                                            <li role="presentation"><a href="#profile"
-                                                                                       aria-controls="profile"
+                                                            <li role="presentation"><a href="#abs"
+                                                                                       aria-controls="abs"
                                                                                        role="tab"
                                                                                        data-toggle="tab">净值风控</a></li>
-                                                            <li role="presentation"><a href="#messages"
-                                                                                       aria-controls="messages"
+                                                            <li role="presentation"><a href="#loss"
+                                                                                       aria-controls="loss"
                                                                                        role="tab"
                                                                                        data-toggle="tab">亏损风控</a></li>
                                                         </ul>
 
                                                         <!-- Tab panes -->
                                                         <div class="tab-content">
-                                                            <div role="tabpanel" class="tab-pane active" id="home">
+                                                            <div role="tabpanel" class="tab-pane active" id="normal">
                                                                 <div class="container">
                                                                     <div class="row clearfix" style="padding-top: 15px">
                                                                         <div class="col-xs-2 column">
                                                                             <label style="margin-top: 8px">强平线</label>
                                                                         </div>
                                                                         <div class="col-xs-4 column">
-                                                                            <input class="form-control" value="" type="number" id="forceCloseLine"/>
+                                                                            <input class="form-control" value=""
+                                                                                   type="number"
+                                                                                   id="normal-forceCloseLine"/>
                                                                         </div>
                                                                         <div class="col-xs-2 column">
                                                                             <label style="margin-top: 8px">警告线</label>
                                                                         </div>
                                                                         <div class="col-xs-4 column">
-                                                                            <input class="form-control" value="" type="number" id="warningLine"/>
+                                                                            <input class="form-control" value=""
+                                                                                   type="number"
+                                                                                   id="normal-warningLine"/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row clearfix">
@@ -400,8 +416,9 @@
                                                                                 <div class="row clearfix">
                                                                                     <div class="col-xs-3 column">
                                                                                         <div class='input-group date'
-                                                                                             id='datetimepickerFrom'>
-                                                                                            <input type='text' id="fromTime"
+                                                                                             id='normal-datetimepickerFrom'>
+                                                                                            <input type='text'
+                                                                                                   id="normal-fromTime"
                                                                                                    class="form-control"/>
                                                                                             <span class="input-group-addon">
                                                                                                 <span class="glyphicon glyphicon-time"></span>
@@ -409,12 +426,13 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-xs-1 column">
-                                                                                       到
+                                                                                        到
                                                                                     </div>
                                                                                     <div class="col-xs-3 column">
                                                                                         <div class='input-group date'
-                                                                                             id='datetimepickerTo'>
-                                                                                            <input type='text' id="toTime"
+                                                                                             id='normal-datetimepickerTo'>
+                                                                                            <input type='text'
+                                                                                                   id="normal-toTime"
                                                                                                    class="form-control"/>
                                                                                             <span class="input-group-addon">
                                                                                                 <span class="glyphicon glyphicon-time"></span>
@@ -423,10 +441,10 @@
                                                                                     </div>
                                                                                     <script type="text/javascript">
                                                                                         $(function () {
-                                                                                            $('#datetimepickerFrom').datetimepicker({
+                                                                                            $('#normal-datetimepickerFrom').datetimepicker({
                                                                                                 format: 'HH:mm'
                                                                                             });
-                                                                                            $('#datetimepickerTo').datetimepicker({
+                                                                                            $('#normal-datetimepickerTo').datetimepicker({
                                                                                                 format: 'HH:mm'
                                                                                             });
                                                                                         });
@@ -434,25 +452,28 @@
                                                                                     <div class="col-xs-3 column">
                                                                                         <div class="form-group">
                                                                                             <div class="radio row clearfix"
-                                                                                                 id="stockType">
+                                                                                                 id="normal-stockType">
                                                                                                 <div class="col-xs-12 column">
                                                                                                     <label><input
                                                                                                             type="radio"
-                                                                                                            name="instrumentType" id="defauleType"
+                                                                                                            name="normal-instrumentType"
+                                                                                                            id="normal-defauleType"
                                                                                                             >默认品种</label>
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div class="radio row clearfix">
                                                                                                 <div class="col-xs-6 column">
                                                                                                     <label style="margin-top: 8px"><input
-                                                                                                            type="radio" id="chosenType"
-                                                                                                            name="instrumentType">品种</label>
+                                                                                                            type="radio"
+                                                                                                            id="normal-chosenType"
+                                                                                                            name="normal-instrumentType">品种</label>
                                                                                                 </div>
                                                                                                 <div class="col-xs-6 column">
                                                                                                     <input class="form-control"
                                                                                                            type="text"
                                                                                                            style="float: left;"
-                                                                                                           value="" id="chosenTypeName"
+                                                                                                           value=""
+                                                                                                           id="normal-chosenTypeName"
                                                                                                            placeholder="品种"/>
                                                                                                 </div>
                                                                                             </div>
@@ -462,7 +483,8 @@
                                                                                         <div class="form-group">
                                                                                             <div class="row clearfix">
                                                                                                 <div class="col-xs-12 column">
-                                                                                                    <button type="button" id="overnight-add"
+                                                                                                    <button type="button"
+                                                                                                            id="normal-overnight-add"
                                                                                                             class="btn btn-success btn-sm">
                                                                                                         添加
                                                                                                     </button>
@@ -470,7 +492,8 @@
                                                                                             </div>
                                                                                             <div class="row clearfix">
                                                                                                 <div class="col-xs-12 column">
-                                                                                                    <button type="button" id="overnight-delete"
+                                                                                                    <button type="button"
+                                                                                                            id="normal-overnight-delete"
                                                                                                             class="btn btn-warning btn-sm"
                                                                                                             style="margin-top: 10px">
                                                                                                         删除
@@ -485,7 +508,7 @@
                                                                                         <div class="well"
                                                                                              style="max-height: 400px; overflow: auto;">
                                                                                             <ul class="list-group checked-list-box"
-                                                                                                id="overnightUL">
+                                                                                                id="normal-overnightUL">
                                                                                             </ul>
                                                                                         </div>
                                                                                     </div>
@@ -500,7 +523,8 @@
                                                                                         <label style="margin-top: 8px">总仓位预警</label>
                                                                                     </div>
                                                                                     <div class="col-xs-6 column">
-                                                                                        <input class="form-control" id="inDayPos-warning"
+                                                                                        <input class="form-control"
+                                                                                               id="inDayPos-warning"
                                                                                                value=""/>
                                                                                     </div>
                                                                                 </div>
@@ -509,7 +533,8 @@
                                                                                         <label style="margin-top: 8px">总仓位上限</label>
                                                                                     </div>
                                                                                     <div class="col-xs-6 column">
-                                                                                        <input class="form-control" id="inDayPos-totalLimit"
+                                                                                        <input class="form-control"
+                                                                                               id="inDayPos-totalLimit"
                                                                                                value=""/>
                                                                                     </div>
                                                                                 </div>
@@ -518,11 +543,13 @@
                                                                                         <label style="margin-top: 8px">品种代码</label>
                                                                                     </div>
                                                                                     <div class="col-xs-4 column">
-                                                                                        <input class="form-control" id="inDayPos-instrument"
+                                                                                        <input class="form-control"
+                                                                                               id="inDayPos-instrument"
                                                                                                value=""/>
                                                                                     </div>
                                                                                     <div class="col-xs-4 column">
-                                                                                        <button type="button" id="inDayPos-add"
+                                                                                        <button type="button"
+                                                                                                id="inDayPos-add"
                                                                                                 class="btn btn-success btn-sm">
                                                                                             添加
                                                                                         </button>
@@ -533,11 +560,13 @@
                                                                                         <label style="margin-top: 8px">仓位上限</label>
                                                                                     </div>
                                                                                     <div class="col-xs-4 column">
-                                                                                        <input class="form-control" id="inDayPos-limit"
+                                                                                        <input class="form-control"
+                                                                                               id="inDayPos-limit"
                                                                                                value=""/>
                                                                                     </div>
                                                                                     <div class="col-xs-4 column">
-                                                                                        <button type="button" id="inDayPos-delete"
+                                                                                        <button type="button"
+                                                                                                id="inDayPos-delete"
                                                                                                 class="btn btn-warning btn-sm">
                                                                                             删除
                                                                                         </button>
@@ -564,7 +593,8 @@
                                                                                         <label style="margin-top: 8px">总仓位上限</label>
                                                                                     </div>
                                                                                     <div class="col-xs-6 column">
-                                                                                        <input class="form-control" id="overPos-totalLimit"
+                                                                                        <input class="form-control"
+                                                                                               id="overPos-totalLimit"
                                                                                                value=""/>
                                                                                     </div>
                                                                                 </div>
@@ -573,11 +603,13 @@
                                                                                         <label style="margin-top: 8px">品种代码</label>
                                                                                     </div>
                                                                                     <div class="col-xs-4 column">
-                                                                                        <input class="form-control" id="overPos-instrument"
+                                                                                        <input class="form-control"
+                                                                                               id="overPos-instrument"
                                                                                                value=""/>
                                                                                     </div>
                                                                                     <div class="col-xs-4 column">
-                                                                                        <button type="button" id="overPos-add"
+                                                                                        <button type="button"
+                                                                                                id="overPos-add"
                                                                                                 class="btn btn-success btn-sm">
                                                                                             添加
                                                                                         </button>
@@ -588,11 +620,13 @@
                                                                                         <label style="margin-top: 8px">仓位上限</label>
                                                                                     </div>
                                                                                     <div class="col-xs-4 column">
-                                                                                        <input class="form-control" id="overPos-limit"
+                                                                                        <input class="form-control"
+                                                                                               id="overPos-limit"
                                                                                                value=""/>
                                                                                     </div>
                                                                                     <div class="col-xs-4 column">
-                                                                                        <button type="button" id="overPos-delete"
+                                                                                        <button type="button"
+                                                                                                id="overPos-delete"
                                                                                                 class="btn btn-warning btn-sm">
                                                                                             删除
                                                                                         </button>
@@ -614,8 +648,473 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div role="tabpanel" class="tab-pane" id="profile">456</div>
-                                                            <div role="tabpanel" class="tab-pane" id="messages">789
+                                                            <div role="tabpanel" class="tab-pane" id="abs">
+                                                                <div class="container">
+                                                                    <div class="row clearfix" style="padding-top: 15px">
+                                                                        <div class="col-xs-2 column">
+                                                                            <label style="margin-top: 8px">强平线</label>
+                                                                        </div>
+                                                                        <div class="col-xs-4 column">
+                                                                            <input class="form-control" value=""
+                                                                                   type="number"
+                                                                                   id="abs-forceCloseLine"/>
+                                                                        </div>
+                                                                        <div class="col-xs-2 column">
+                                                                            <label style="margin-top: 8px">警告线</label>
+                                                                        </div>
+                                                                        <div class="col-xs-4 column">
+                                                                            <input class="form-control" value=""
+                                                                                   type="number" id="abs-warningLine"/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row clearfix">
+                                                                        <fieldset style="margin-top: 10px">
+                                                                            <legend>隔夜时间设置</legend>
+                                                                            <div class="container" style="width: 750px">
+                                                                                <div class="row clearfix">
+                                                                                    <div class="col-xs-3 column">
+                                                                                        <div class='input-group date'
+                                                                                             id='abs-datetimepickerFrom'>
+                                                                                            <input type='text'
+                                                                                                   id="abs-fromTime"
+                                                                                                   class="form-control"/>
+                                                                                            <span class="input-group-addon">
+                                                                                                <span class="glyphicon glyphicon-time"></span>
+                                                                                            </span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-xs-1 column">
+                                                                                        到
+                                                                                    </div>
+                                                                                    <div class="col-xs-3 column">
+                                                                                        <div class='input-group date'
+                                                                                             id='abs-datetimepickerTo'>
+                                                                                            <input type='text'
+                                                                                                   id="abs-toTime"
+                                                                                                   class="form-control"/>
+                                                                                            <span class="input-group-addon">
+                                                                                                <span class="glyphicon glyphicon-time"></span>
+                                                                                            </span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <script type="text/javascript">
+                                                                                        $(function () {
+                                                                                            $('#abs-datetimepickerFrom').datetimepicker({
+                                                                                                format: 'HH:mm'
+                                                                                            });
+                                                                                            $('#abs-datetimepickerTo').datetimepicker({
+                                                                                                format: 'HH:mm'
+                                                                                            });
+                                                                                        });
+                                                                                    </script>
+                                                                                    <div class="col-xs-3 column">
+                                                                                        <div class="form-group">
+                                                                                            <div class="radio row clearfix"
+                                                                                                 id="abs-stockType">
+                                                                                                <div class="col-xs-12 column">
+                                                                                                    <label><input
+                                                                                                            type="radio"
+                                                                                                            name="abs-instrumentType"
+                                                                                                            id="abs-defauleType"
+                                                                                                            >默认品种</label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="radio row clearfix">
+                                                                                                <div class="col-xs-6 column">
+                                                                                                    <label style="margin-top: 8px"><input
+                                                                                                            type="radio"
+                                                                                                            id="abs-chosenType"
+                                                                                                            name="abs-instrumentType">品种</label>
+                                                                                                </div>
+                                                                                                <div class="col-xs-6 column">
+                                                                                                    <input class="form-control"
+                                                                                                           type="text"
+                                                                                                           style="float: left;"
+                                                                                                           value=""
+                                                                                                           id="abs-chosenTypeName"
+                                                                                                           placeholder="品种"/>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-xs-2 column">
+                                                                                        <div class="form-group">
+                                                                                            <button type="button"
+                                                                                                    id="abs-overnight-add"
+                                                                                                    class="btn btn-success btn-sm">
+                                                                                                添加
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </fieldset>
+                                                                    </div>
+                                                                    <div class="row clearfix">
+                                                                        <fieldset style="margin-top: 10px">
+                                                                            <legend>风控条件</legend>
+                                                                            <div class="container" style="width: 750px">
+                                                                                <div class="row clearfix">
+                                                                                    <div class="col-xs-3 column">
+                                                                                        当净值达到范围
+                                                                                    </div>
+                                                                                    <div class="col-xs-3 column">
+                                                                                        <input class="form-control"
+                                                                                               id="abs-lower"
+                                                                                               value=""/>
+                                                                                    </div>
+                                                                                    <div class="col-xs-1 column">到</div>
+                                                                                    <div class="col-xs-3 column">
+                                                                                        <input class="form-control"
+                                                                                               id="abs-upper"
+                                                                                               value=""/>
+                                                                                    </div>
+                                                                                    <div class="col-xs-2 column">
+                                                                                        时，设定风控
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row clearfix"
+                                                                                     style="margin-top: 10px">
+                                                                                    <div class="col-xs-2 column">
+                                                                                        <select class="form-control"
+                                                                                                id="abs-inDayOrOvernight">
+                                                                                            <option>日内</option>
+                                                                                            <option>隔夜</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="col-xs-2 column">
+                                                                                        <label style="margin-top: 8px">总仓位上限</label>
+                                                                                    </div>
+                                                                                    <div class="col-xs-3 column">
+                                                                                        <input class="form-control"
+                                                                                               id="abs-totalLimit"
+                                                                                               value=""/></div>
+                                                                                    <div class="col-xs-2 column">
+                                                                                        <label style="margin-top: 8px">单品种上限</label>
+                                                                                    </div>
+                                                                                    <div class="col-xs-3 column">
+                                                                                        <input class="form-control"
+                                                                                               id="abs-singleLimit"
+                                                                                               value=""/>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row clearfix">
+                                                                                    <fieldset style="margin-top: 10px">
+                                                                                        <legend>具体品种仓位设置</legend>
+                                                                                        <div class="container"
+                                                                                             style="width: 700px">
+                                                                                            <div class="row clearfix">
+                                                                                                <div class="col-xs-2 column">
+                                                                                                    <label style="margin-top: 8px">品种代码</label>
+                                                                                                </div>
+                                                                                                <div class="col-xs-3 column">
+                                                                                                    <input class="form-control"
+                                                                                                           id="abs-instrument"
+                                                                                                           value=""/>
+                                                                                                </div>
+                                                                                                <div class="col-xs-2 column">
+                                                                                                    <label style="margin-top: 8px">仓位上限</label>
+                                                                                                </div>
+                                                                                                <div class="col-xs-3 column">
+                                                                                                    <input class="form-control"
+                                                                                                           id="abs-limit"
+                                                                                                           value=""/>
+                                                                                                </div>
+                                                                                                <div class="col-xs-1 column">
+                                                                                                    <button type="button"
+                                                                                                            id="abs-instrument-add"
+                                                                                                            class="btn btn-success btn-sm">
+                                                                                                        添加
+                                                                                                    </button>
+                                                                                                </div>
+                                                                                                <div class="col-xs-1 column">
+                                                                                                    <button type="button"
+                                                                                                            id="abs-instrument-delete"
+                                                                                                            class="btn btn-warning btn-sm">
+                                                                                                        删除
+                                                                                                    </button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="row clearfix"
+                                                                                                 style="margin-top: 10px">
+                                                                                                <div class="col-xs-12 column">
+                                                                                                    <div class="well"
+                                                                                                         style="max-height: 400px; overflow: auto;">
+                                                                                                        <ul class="list-group checked-list-box"
+                                                                                                            id="abs-instrumentUL">
+                                                                                                        </ul>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </fieldset>
+                                                                                </div>
+                                                                                <div class="row clearfix">
+                                                                                    <div class="form-group"
+                                                                                         style="float: right;">
+                                                                                        <button type="button"
+                                                                                                id="abs-condition-add"
+                                                                                                class="btn btn-success btn-sm">
+                                                                                            添加
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </fieldset>
+                                                                    </div>
+                                                                    <div class="row clearfix">
+                                                                        <div class="col-xs-12 column">
+                                                                            <div class="well"
+                                                                                 style="max-height: 400px; overflow: auto;">
+                                                                                <ul class="list-group checked-list-box"
+                                                                                    id="abs-overnightUL">
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row clearfix">
+                                                                        <div class="form-group" style="float: right;">
+                                                                            <button type="button" id="abs-delete"
+                                                                                    class="btn btn-warning btn-sm">
+                                                                                删除
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div role="tabpanel" class="tab-pane" id="loss">                                                                <div class="container">
+                                                                <div class="row clearfix" style="padding-top: 15px">
+                                                                    <div class="col-xs-2 column">
+                                                                        <label style="margin-top: 8px">强平线</label>
+                                                                    </div>
+                                                                    <div class="col-xs-4 column">
+                                                                        <input class="form-control" value=""
+                                                                               type="number"
+                                                                               id="loss-forceCloseLine"/>
+                                                                    </div>
+                                                                    <div class="col-xs-2 column">
+                                                                        <label style="margin-top: 8px">警告线</label>
+                                                                    </div>
+                                                                    <div class="col-xs-4 column">
+                                                                        <input class="form-control" value=""
+                                                                               type="number" id="loss-warningLine"/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row clearfix">
+                                                                    <fieldset style="margin-top: 10px">
+                                                                        <legend>隔夜时间设置</legend>
+                                                                        <div class="container" style="width: 750px">
+                                                                            <div class="row clearfix">
+                                                                                <div class="col-xs-3 column">
+                                                                                    <div class='input-group date'
+                                                                                         id='loss-datetimepickerFrom'>
+                                                                                        <input type='text'
+                                                                                               id="loss-fromTime"
+                                                                                               class="form-control"/>
+                                                                                            <span class="input-group-addon">
+                                                                                                <span class="glyphicon glyphicon-time"></span>
+                                                                                            </span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xs-1 column">
+                                                                                    到
+                                                                                </div>
+                                                                                <div class="col-xs-3 column">
+                                                                                    <div class='input-group date'
+                                                                                         id='loss-datetimepickerTo'>
+                                                                                        <input type='text'
+                                                                                               id="loss-toTime"
+                                                                                               class="form-control"/>
+                                                                                            <span class="input-group-addon">
+                                                                                                <span class="glyphicon glyphicon-time"></span>
+                                                                                            </span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <script type="text/javascript">
+                                                                                    $(function () {
+                                                                                        $('#loss-datetimepickerFrom').datetimepicker({
+                                                                                            format: 'HH:mm'
+                                                                                        });
+                                                                                        $('#loss-datetimepickerTo').datetimepicker({
+                                                                                            format: 'HH:mm'
+                                                                                        });
+                                                                                    });
+                                                                                </script>
+                                                                                <div class="col-xs-3 column">
+                                                                                    <div class="form-group">
+                                                                                        <div class="radio row clearfix"
+                                                                                             id="loss-stockType">
+                                                                                            <div class="col-xs-12 column">
+                                                                                                <label><input
+                                                                                                        type="radio"
+                                                                                                        name="loss-instrumentType"
+                                                                                                        id="loss-defauleType"
+                                                                                                        >默认品种</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="radio row clearfix">
+                                                                                            <div class="col-xs-6 column">
+                                                                                                <label style="margin-top: 8px"><input
+                                                                                                        type="radio"
+                                                                                                        id="loss-chosenType"
+                                                                                                        name="loss-instrumentType">品种</label>
+                                                                                            </div>
+                                                                                            <div class="col-xs-6 column">
+                                                                                                <input class="form-control"
+                                                                                                       type="text"
+                                                                                                       style="float: left;"
+                                                                                                       value=""
+                                                                                                       id="loss-chosenTypeName"
+                                                                                                       placeholder="品种"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xs-2 column">
+                                                                                    <div class="form-group">
+                                                                                        <button type="button"
+                                                                                                id="loss-overnight-add"
+                                                                                                class="btn btn-success btn-sm">
+                                                                                            添加
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="row clearfix">
+                                                                    <fieldset style="margin-top: 10px">
+                                                                        <legend>风控条件</legend>
+                                                                        <div class="container" style="width: 750px">
+                                                                            <div class="row clearfix">
+                                                                                <div class="col-xs-3 column">
+                                                                                    当亏损达到范围
+                                                                                </div>
+                                                                                <div class="col-xs-3 column">
+                                                                                    <input class="form-control"
+                                                                                           id="loss-lower"
+                                                                                           value=""/>
+                                                                                </div>
+                                                                                <div class="col-xs-1 column">到</div>
+                                                                                <div class="col-xs-3 column">
+                                                                                    <input class="form-control"
+                                                                                           id="loss-upper"
+                                                                                           value=""/>
+                                                                                </div>
+                                                                                <div class="col-xs-2 column">
+                                                                                    时，设定风控
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row clearfix"
+                                                                                 style="margin-top: 10px">
+                                                                                <div class="col-xs-2 column">
+                                                                                    <select class="form-control"
+                                                                                            id="loss-inDayOrOvernight">
+                                                                                        <option>日内</option>
+                                                                                        <option>隔夜</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="col-xs-2 column">
+                                                                                    <label style="margin-top: 8px">总仓位上限</label>
+                                                                                </div>
+                                                                                <div class="col-xs-3 column">
+                                                                                    <input class="form-control"
+                                                                                           id="loss-totalLimit"
+                                                                                           value=""/></div>
+                                                                                <div class="col-xs-2 column">
+                                                                                    <label style="margin-top: 8px">单品种上限</label>
+                                                                                </div>
+                                                                                <div class="col-xs-3 column">
+                                                                                    <input class="form-control"
+                                                                                           id="loss-singleLimit"
+                                                                                           value=""/>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row clearfix">
+                                                                                <fieldset style="margin-top: 10px">
+                                                                                    <legend>具体品种仓位设置</legend>
+                                                                                    <div class="container"
+                                                                                         style="width: 700px">
+                                                                                        <div class="row clearfix">
+                                                                                            <div class="col-xs-2 column">
+                                                                                                <label style="margin-top: 8px">品种代码</label>
+                                                                                            </div>
+                                                                                            <div class="col-xs-3 column">
+                                                                                                <input class="form-control"
+                                                                                                       id="loss-instrument"
+                                                                                                       value=""/>
+                                                                                            </div>
+                                                                                            <div class="col-xs-2 column">
+                                                                                                <label style="margin-top: 8px">仓位上限</label>
+                                                                                            </div>
+                                                                                            <div class="col-xs-3 column">
+                                                                                                <input class="form-control"
+                                                                                                       id="loss-limit"
+                                                                                                       value=""/>
+                                                                                            </div>
+                                                                                            <div class="col-xs-1 column">
+                                                                                                <button type="button"
+                                                                                                        id="loss-instrument-add"
+                                                                                                        class="btn btn-success btn-sm">
+                                                                                                    添加
+                                                                                                </button>
+                                                                                            </div>
+                                                                                            <div class="col-xs-1 column">
+                                                                                                <button type="button"
+                                                                                                        id="loss-instrument-delete"
+                                                                                                        class="btn btn-warning btn-sm">
+                                                                                                    删除
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="row clearfix"
+                                                                                             style="margin-top: 10px">
+                                                                                            <div class="col-xs-12 column">
+                                                                                                <div class="well"
+                                                                                                     style="max-height: 400px; overflow: auto;">
+                                                                                                    <ul class="list-group checked-list-box"
+                                                                                                        id="loss-instrumentUL">
+                                                                                                    </ul>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </fieldset>
+                                                                            </div>
+                                                                            <div class="row clearfix">
+                                                                                <div class="form-group"
+                                                                                     style="float: right;">
+                                                                                    <button type="button"
+                                                                                            id="loss-condition-add"
+                                                                                            class="btn btn-success btn-sm">
+                                                                                        添加
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="row clearfix">
+                                                                    <div class="col-xs-12 column">
+                                                                        <div class="well"
+                                                                             style="max-height: 400px; overflow: auto;">
+                                                                            <ul class="list-group checked-list-box"
+                                                                                id="loss-overnightUL">
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row clearfix">
+                                                                    <div class="form-group" style="float: right;">
+                                                                        <button type="button" id="loss-delete"
+                                                                                class="btn btn-warning btn-sm">
+                                                                            删除
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
                                                             </div>
                                                         </div>
 
@@ -642,20 +1141,17 @@
                                        cellspacing="0" width="100%">
 
                                     <div class="riskManagerToolbar" style="float:left">
-                                        <button type="button" class="btn btn-default btn-lg" id="risk-add"
-                                                data-toggle="modal"
-                                                >
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <button type="button" class="btn btn-success" id="risk-add"
+                                                data-toggle="modal">
+                                            添加风控设置
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="risk-update"
-                                                data-toggle="modal"
-                                                >
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <button type="button" class="btn btn-warning" id="risk-update"
+                                                data-toggle="modal">
+                                            修改风控设置
                                         </button>
-                                        <button type="button" class="btn btn-default btn-lg" id="risk-delete"
-                                                data-toggle="modal"
-                                                >
-                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <button type="button" class="btn btn-danger" id="risk-delete"
+                                                data-toggle="modal">
+                                            删除风控设置
                                         </button>
                                     </div>
                                     <thead>
@@ -905,7 +1401,10 @@
                 "scrollCollapse": false,
                 "paging": false,
                 columnDefs: [
-                    { width: '50px', targets: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22] }
+                    {
+                        width: '50px',
+                        targets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
+                    }
                 ],
                 "dom": '<"riskManagerToolbar"f>rlpti',
                 "language": {
@@ -920,6 +1419,25 @@
         }
     }
 
+    function ulToString(ul){
+        var result;
+        $(ul).find("li").each(function (idx, li) {
+            if (idx == 0){
+                result = $(li).text();
+            }
+            else{
+                result += ";" + $(li).text();
+            }
+        });
+        return result;
+    }
+
+    function stringToUL(input, ul){
+        var array = input.split(";");
+        for (var i = 0; i < array.length; i++) {
+            ul.append($("<li class='list-group-item'>").text(array[i]));
+        }
+    }
 
 </script>
 
@@ -940,37 +1458,102 @@
     });
 
     //modal 确定 逻辑处理
-    $(document).on("click", "#newAccountModal .btn-primary", function () {
-        var channel = $("#newAccountModal #channel")[0].value;
-        var company = $("#newAccountModal #company")[0].value;
-        var server = $("#newAccountModal #server")[0].value;
-        var userId = $("#newAccountModal #userId")[0].value;
-        var userPassword = $("#newAccountModal #userPassword")[0].value;
+    function sendRequest(event) {
+
+        var data;
+        if (event === undefined){
+            var dataToDelete = riskManagerData[selectedIndex];
+            data = {
+                State: 2,
+                编号: dataToDelete[0]
+            };
+        }else {
+            data = {
+                State: event.data.state,
+                编号:0,
+                组名称:null,
+                允许交易合约:null,
+                不允许交易合约:null,
+                禁止开仓时间段:null,
+                减仓时间段:null,
+                风险度警告线:null,
+                风险度警告线详细:null,
+                风险度禁开线:null,
+                风险度禁开线详细:null,
+                权益警告线:null,
+                权益强平线:null,
+                隔夜减仓线:null,
+                隔夜减仓线详细:null,
+                每日撤单次数上限:null,
+                亏损预警:null,
+                亏损强平:null,
+                亏损日内限制:null,
+                亏损隔夜限制:null,
+                净值预警:null,
+                净值强平:null,
+                净值日内限制:null,
+                净值隔夜限制:null
+            };
+            if (event.data.state == 3)
+                data["编号"] = riskManagerData[selectedIndex][0];
+            data["组名称"] = $("#groupName").val();
+            //交易合约限制
+            if ($("#black").prop("checked")) {//不允许交易合约
+                data["不允许交易合约"] = $("textarea").val();
+            } else {//允许交易合约
+                data["允许交易合约"] = $("textarea").val();
+            }
+
+            if ($('.nav-tabs .active').index() == 0) {
+                data["权益强平线"] = $("#normal-forceCloseLine").val();
+                data["权益警告线"] = $("#normal-warningLine").val();
+                data["减仓时间段"] = ulToString($("#normal-overnightUL"));
+                data["风险度警告线"] = $("#inDayPos-warning").val();
+                data["风险度禁开线"] = $("#inDayPos-totalLimit").val();
+                data["风险度禁开线详细"] = ulToString($("#inDayPosUL"));
+                data["隔夜减仓线"] = $("#overPos-totalLimit").val();
+                data["隔夜减仓线详细"] = ulToString($("#overPosUL"));
+            } else if ($('.nav-tabs .active').index() == 1) {
+                data["净值强平"] = $("#abs-forceCloseLine").val();
+                data["净值预警"] = $("#abs-warningLine").val();
+                if ($("#abs-inDayOrOvernight option:selected").index() == 0) {
+                    data["净值日内限制"] = ulToString($("#abs-overnightUL"));
+                } else {
+                    data["净值隔夜限制"] = ulToString($("#abs-overnightUL"));
+                }
+            } else {
+                data["亏损强平"] = $("#loss-forceCloseLine").val();
+                data["亏损预警"] = $("#loss-warningLine").val();
+                if ($("#loss-inDayOrOvernight option:selected").index() == 0) {
+                    data["亏损日内限制"] = ulToString($("#loss-overnightUL"));
+                } else {
+                    data["亏损隔夜限制"] = ulToString($("#loss-overnightUL"));
+                }
+            }
+        }
+//        "编号","组名称","允许交易合约","不允许交易合约","禁止开仓时间段","减仓时间段","风险度警告线","风险度警告线详细","风险度禁开线","风险度禁开线详细",
+// "权益警告线","权益强平线","隔夜减仓线","隔夜减仓线详细","每日撤单次数上限","亏损预警","亏损强平","亏损日内限制","亏损隔夜限制","净值预警","净值强平",
+// "净值日内限制","净值隔夜限制"
 
         //TODO: 应该做 validate
         //ajax 发送插入
 
-        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/InsertData.php";
+        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/RiskManage/InsertData.php";
 
         $.ajax({
             url: hostpath,
             type: "get", //send it through get method
-            data: {
-                Channel: channel,
-                CompanyName: company,
-                CompanyServer: server,
-                AccountId: userId,
-                AccountPassword: userPassword
-            },
+            data: data,
             success: function (response) {
                 alert("Data Loaded: " + response);
+                refreshData(1);
             },
             error: function (xhr) {
                 //Do Something to handle error
             }
         });
 
-    });
+    }
 
     function ifHideMainAccountToolBar(flag) {
 
@@ -983,7 +1566,7 @@
         }
     }
 
-    function setupRiskManageInfo(){
+    function setupRiskManageInfo() {
         $("#newRiskModal #black").prop("checked", true);
         var exchangeSelect = $("#newRiskModal #exchange");
         for (var i = 0; i < instrumentData.length; i++) {
@@ -992,7 +1575,7 @@
                 text: instrumentData[i]["Key"]
             }))
         }
-        exchangeSelect.on('change', function(){
+        exchangeSelect.on('change', function () {
             var exchangeSelect = $("#newRiskModal #instrument");
             var instrumentDictArray = instrumentData[this.value]["Value"];
             console.log(instrumentDictArray);
@@ -1006,33 +1589,104 @@
         })
         exchangeSelect.eq(0).attr('selected', 'selected');
         exchangeSelect.trigger('change');
-        $("#newRiskModal #defauleType").prop("checked", true);
+        $("#newRiskModal #normal-defauleType").prop("checked", true);
+        $("#newRiskModal #abs-defauleType").prop("checked", true);
+        $("#newRiskModal #loss-defauleType").prop("checked", true);
+        $('.nav-tabs li.active').removeClass("active");
+    }
+
+    function fillRiskModal(){
+        var riskGroupData = riskManagerData[selectedIndex];
+        $("#groupName").val(riskGroupData[1]);
+        if (riskGroupData[2]){//白名单
+            $("#white").prop("checked",true);
+            $("textarea").val(riskGroupData[3]);
+        }else{
+            $("#black").prop("checked",true);
+            $("textarea").val(riskGroupData[4]);
+        }
+        if (riskGroupData[11] > 0 || (riskGroupData[20] < 0 && riskGroupData[16] < 0)){//普通
+
+            $('.nav-tabs li').eq(0).addClass("active");
+
+            $("#normal-forceCloseLine").val(riskGroupData[10]);
+            $("#normal-warningLine").val(riskGroupData[11]);
+            stringToUL(riskGroupData[5],$("#normal-overnightUL"));
+
+            $("#inDayPos-warning").val(riskGroupData[6]);
+            $("#inDayPos-totalLimit").val(riskGroupData[8]);
+            stringToUL(riskGroupData[9],$("#inDayPosUL"));
+
+            $("#overPos-totalLimit").val(riskGroupData[12]);
+            stringToUL(riskGroupData[13],$("#overPosUL"));
+
+        }else if (riskGroupData[20] > 0){//净值
+
+            $('.nav-tabs li').eq(1).addClass("active");
+
+            $("#abs-forceCloseLine").val(riskGroupData[19]);
+            $("#abs-warningLine").val(riskGroupData[20]);
+
+            if (riskGroupData[21]){//日内
+                $("#abs-inDayOrOvernight").eq(0).prop("selected", true);
+                stringToUL(riskGroupData[21],$("#abs-overnightUL"));
+            }else{
+                $("#abs-inDayOrOvernight").eq(1).prop("selected", true);
+                stringToUL(riskGroupData[22],$("#abs-overnightUL"));
+            }
+        }else {//亏损
+
+            $('.nav-tabs li').eq(2).addClass("active");
+
+            $("#loss-forceCloseLine").val(riskGroupData[15]);
+            $("#loss-warningLine").val(riskGroupData[16]);
+
+            if (riskGroupData[17]){//日内
+                $("#loss-inDayOrOvernight").eq(0).prop("selected", true);
+                stringToUL(riskGroupData[17],$("#loss-overnightUL"));
+            }else{
+                $("#loss-inDayOrOvernight").eq(1).prop("selected", true);
+                stringToUL(riskGroupData[18],$("#loss-overnightUL"));
+            }
+        }
     }
 
     $(document).on("click", "#risk-add", function () {
-
-//        $(".modal-body").append(texts.toArray().join(", "));
-        // As pointed out in comments,
-        // it is superfluous to have to manually call the modal.
         setupRiskManageInfo();
         updateCheckBox();
+        $('.nav-tabs li').eq(0).addClass("active");//切换到普通tab
+        $(document).on("click", "#newRiskModal .btn-primary", {state: 1}, sendRequest);
         $('#riskModal').modal('show');
     });
+
+    $(document).on("click", "#risk-update", function () {
+        setupRiskManageInfo();
+        fillRiskModal();
+        updateCheckBox();
+        $(document).on("click", "#newRiskModal .btn-primary", {state: 3}, sendRequest);
+        $('#riskModal').modal('show');
+    });
+
+    $(document).on("click", "#risk-delete", function () {
+        sendRequest();
+    });
+
+    ////////////////////////////////////////////普通风控逻辑部分////////////////////////////////////////////
 
     //添加合约限制
     $(document).on("click", "#rest-add", function () {
         var newRestriction = $("#newRiskModal #instrument option:selected").text();
-        if ($('#main').prop('checked')){
+        if ($('#main').prop('checked')) {
             newRestriction += "_主力";
         }
-        if ($('#minor').prop('checked')){
+        if ($('#minor').prop('checked')) {
             newRestriction += "_次主力";
         }
 
         var restrictionText = $("textarea");
-        if (!restrictionText.val()){
+        if (!restrictionText.val()) {
             restrictionText.val(newRestriction)
-        }else{
+        } else {
             restrictionText.val(restrictionText.val() + ";" + newRestriction);
         }
     });
@@ -1045,9 +1699,9 @@
     //清除全部主力
     $(document).on("click", "#rest-addAllMain", function () {
         var restrictionText = $("textarea");
-        if (!restrictionText.val()){
+        if (!restrictionText.val()) {
             restrictionText.val("全部主力合约")
-        }else{
+        } else {
             restrictionText.val(restrictionText.val() + ";" + "全部主力合约");
         }
     });
@@ -1055,25 +1709,25 @@
     //清除全部次主力
     $(document).on("click", "#rest-addAllMinor", function () {
         var restrictionText = $("textarea");
-        if (!restrictionText.val()){
+        if (!restrictionText.val()) {
             restrictionText.val("全部次主力合约")
-        }else{
+        } else {
             restrictionText.val(restrictionText.val() + ";" + "全部次主力合约");
         }
     });
 
     //添加隔夜设置
-    $(document).on("click", "#overnight-add", function () {
-        var overnightSetting = $("#fromTime").val() + "-" + $("#toTime").val();
-        if ($('#chosenType').prop('checked')){
-            overnightSetting += " " + $("#chosenTypeName").val();
+    $(document).on("click", "#normal-overnight-add", function () {
+        var overnightSetting = $("#normal-fromTime").val() + "-" + $("#normal-toTime").val();
+        if ($('#normal-chosenType').prop('checked')) {
+            overnightSetting += " " + $("#normal-chosenTypeName").val();
         }
-        $("#overnightUL").append($("<li class='list-group-item'>").text(overnightSetting));
+        $("#normal-overnightUL").append($("<li class='list-group-item'>").text(overnightSetting));
         updateCheckBox();
     });
 
     //删除隔夜设置
-    $(document).on("click", "#overnight-delete", function () {
+    $(document).on("click", "#normal-overnight-delete", function () {
         $("#overnightUL li.active").remove();
     });
 
@@ -1100,6 +1754,92 @@
     $(document).on("click", "#overPos-delete", function () {
         $("#overPosUL li.active").remove();
     });
+
+    ////////////////////////////////////////////end of 普通风控逻辑部分////////////////////////////////////////////
+
+    ////////////////////////////////////////////净值风控逻辑部分////////////////////////////////////////////
+
+
+    //添加隔夜设置
+    $(document).on("click", "#abs-overnight-add", function () {
+        var overnightSetting = $("#abs-fromTime").val() + "-" + $("#abs-toTime").val();
+        if ($('#abs-chosenType').prop('checked')) {
+            overnightSetting += " " + $("#abs-chosenTypeName").val();
+        }
+        $("#abs-overnightUL").append($("<li class='list-group-item'>").text(overnightSetting));
+        updateCheckBox();
+    });
+
+    //添加具体品种仓位设置
+    $(document).on("click", "#abs-instrument-add", function () {
+        var instrumentSetting = $("#abs-instrument").val() + "*" + $("#abs-limit").val();
+        $("#abs-instrumentUL").append($("<li class='list-group-item'>").text(instrumentSetting));
+        updateCheckBox();
+    });
+
+    //删除具体品种仓位设置
+    $(document).on("click", "#abs-instrument-delete", function () {
+        $("#abs-instrumentUL li.active").remove();
+    });
+
+    //添加风控条件设置
+    $(document).on("click", "#abs-condition-add", function () {
+        var conditionSetting = $("#abs-lower").val() + "," + $("#abs-upper").val() + "," + $("#abs-totalLimit").val() + "," + $("#abs-singleLimit").val();
+        $("#abs-instrumentUL li").each(function (idx, li) {
+            conditionSetting += "," + $(li).text();
+        });
+        $("#abs-overnightUL").append($("<li class='list-group-item'>").text(conditionSetting));
+        updateCheckBox();
+    });
+
+    //删除设置
+    $(document).on("click", "#abs-delete", function () {
+        $("#abs-overnightUL li.active").remove();
+    });
+
+    ////////////////////////////////////////////end of 净值风控逻辑部分////////////////////////////////////////////
+
+    ////////////////////////////////////////////亏损风控逻辑部分////////////////////////////////////////////
+
+
+    //添加隔夜设置
+    $(document).on("click", "#loss-overnight-add", function () {
+        var overnightSetting = $("#loss-fromTime").val() + "-" + $("#loss-toTime").val();
+        if ($('#loss-chosenType').prop('checked')) {
+            overnightSetting += " " + $("#loss-chosenTypeName").val();
+        }
+        $("#loss-overnightUL").append($("<li class='list-group-item'>").text(overnightSetting));
+        updateCheckBox();
+    });
+
+    //添加具体品种仓位设置
+    $(document).on("click", "#loss-instrument-add", function () {
+        var instrumentSetting = $("#loss-instrument").val() + "*" + $("#loss-limit").val();
+        $("#loss-instrumentUL").append($("<li class='list-group-item'>").text(instrumentSetting));
+        updateCheckBox();
+    });
+
+    //删除具体品种仓位设置
+    $(document).on("click", "#loss-instrument-delete", function () {
+        $("#loss-instrumentUL li.active").remove();
+    });
+
+    //添加风控条件设置
+    $(document).on("click", "#loss-condition-add", function () {
+        var conditionSetting = $("#loss-lower").val() + "," + $("#loss-upper").val() + "," + $("#loss-totalLimit").val() + "," + $("#loss-singleLimit").val();
+        $("#loss-instrumentUL li").each(function (idx, li) {
+            conditionSetting += "," + $(li).text();
+        });
+        $("#loss-overnightUL").append($("<li class='list-group-item'>").text(conditionSetting));
+        updateCheckBox();
+    });
+
+    //删除设置
+    $(document).on("click", "#loss-delete", function () {
+        $("#loss-overnightUL li.active").remove();
+    });
+
+    ////////////////////////////////////////////end of 亏损风控逻辑部分////////////////////////////////////////////
 
 
 </script>
