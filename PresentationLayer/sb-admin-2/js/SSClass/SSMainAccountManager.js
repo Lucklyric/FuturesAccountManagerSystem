@@ -13,6 +13,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
 
     this.currentAllInstrumentIdDic=[];
     this.currentTableData = [];
+    this.currentPosTableData = [];
     this.mainAccouts = [];
     this.needCheckQueue = [];
     //this.positionCheckQueue = [];
@@ -349,7 +350,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                 Method:"getNeedSyncPositions"
             },
             success: function (data) {
-
+                console.log(data);
                 data = JSON.parse(data);
                 console.log(data);
                 ssMainAccounttManagerInstance.currentOriginPos = data['ColOriginDBPos'];
@@ -360,6 +361,10 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
 
                 for (var i = 0 ; i < ssMainAccounttManagerInstance.currentQueryPos.length ; i++) {
                     var curPos = ssMainAccounttManagerInstance.currentQueryPos[i];
+                    var tmpRawData = [];
+                    tmpRawData.push("");
+                    tmpRawData.push(curPos['Pos']['InstrumentID']);
+
                     if (ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]===undefined){
                         ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']] =[];
                         ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query'] =[];
@@ -370,12 +375,173 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                         ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin']['kong'] =0;
                     }
                     if(curPos['Pos']['LongOrShort'] == 'true'){
+                        tmpRawData.push('多');
+
                         ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query']['duo'] += curPos['Pos']['Volume'];;
                     }else{
+                        tmpRawData.push('空');
                         ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query']['kong'] += curPos['Pos']['Volume'];;
                     }
-
+                    tmpRawData.push(curPos['Pos']['OpenPrice']);
+                    tmpRawData.push(curPos['Pos']['Volume']);
+                    tmpRawData.push(curPos['OpenDay']);
+                    tmpRawData.push('投机');
+                    ssMainAccounttManagerInstance.currentPosTableData.push(tmpRawData);
                 }
+                console.log(ssMainAccounttManagerInstance.currentPosTableData);
+                if ($.fn.dataTable.isDataTable(table)) {
+                    table.DataTable().clear();
+                    for (var i = 0; i <  ssMainAccounttManagerInstance.currentPosTableData.length; i++) {
+                        table.DataTable().row.add( ssMainAccounttManagerInstance.currentPosTableData[i]);
+                    }
+                    table.DataTable().draw();
+
+                }else {
+                    table.DataTable({
+                        "processing": true,
+                        "data": ssMainAccounttManagerInstance.currentPosTableData,
+                        "scrollY": "366px",
+                        "scrollCollapse": false,
+                        "dom": '<"mainSyncPositionToolbar"f>rlpti',
+                        "paging": false,
+                        "language": {
+                            "search": "搜索:",
+                            "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
+                            "infoEmpty": "显示 0 到 0 共 0 记录",
+                            "emptyTable": "暂无可显示数据",
+                            "processing": "正在加载......"
+                        }
+                    });
+
+                    table.on('click', 'tr', function () { //绑定点击事件刷新子账户
+                        ifHideSubAccountToolBar(false);
+                        if ( $(this).hasClass('selected') ) {
+                            //$(this).removeClass('selected');
+                        }
+                        else {
+                            table.DataTable().$('tr.selected').removeClass('selected');
+                            $(this).addClass('selected');
+                        }
+                    } );
+
+                    $("#pos-add").on('click',function(){
+                        var container = $('#syncPositionTable,div.dataTables_scrollBody');
+                        var newLength = table.DataTable().data().length;
+                        table.DataTable().row.add( [
+                            '',
+                            '',
+                            '',
+                            '',
+                            '',
+                            '',
+                            '投机'
+                        ] ).draw();
+                        table.DataTable().$('tr.selected').removeClass('selected');
+                        table.DataTable().row(newLength).nodes().to$().addClass('selected');
+                        table.DataTable().cell(newLength, 0).nodes().to$().append($('<select style="float: right; width: 100%" >'));
+                        for (var j = 0; j < ssMainAccounttManagerInstance.curSubAccounts.length; j++) {
+                            table.DataTable().cell(newLength, 0).nodes().to$().find('select').append($('<option>', {
+                                value: ssMainAccounttManagerInstance.curSubAccounts[j][0],
+                                text: ssMainAccounttManagerInstance.curSubAccounts[j][1]
+                            }));
+                        }
+                        table.DataTable().cell(newLength, 1).nodes().to$().append($('<select style="float: right; width: 100%" >'));
+                        for (var key in ssMainAccounttManagerInstance.currentAllInstrumentIdDic) {
+                            table.DataTable().cell(newLength, 1).nodes().to$().find('select').append($('<option>', {
+                                value: key,
+                                text: key
+                            }));
+                        }
+                        table.DataTable().cell(newLength, 2).nodes().to$().append($('<select style="float: right; width: 100%" >'));
+
+                        table.DataTable().cell(newLength, 2).nodes().to$().find('select').append($('<option>', {
+                            value: 'true',
+                            text: "多"
+                        }));
+                        table.DataTable().cell(newLength, 2).nodes().to$().find('select').append($('<option>', {
+                            value: 'false',
+                            text: "空"
+                        }));
+                        table.DataTable().cell(newLength, 3).nodes().to$().append($('<input style="float: right; width: 100%" >'));
+                        table.DataTable().cell(newLength, 3).nodes().to$().find('input').val("0");
+
+
+                        table.DataTable().cell(newLength, 4).nodes().to$().append($('<input style="float: right; width: 100%" >'));
+                        table.DataTable().cell(newLength, 4).nodes().to$().find('input').val("0");
+
+
+                        table.DataTable().cell(newLength, 5).nodes().to$().append($('<input style="float: right; width: 100%" >'));
+                        table.DataTable().cell(newLength, 5).nodes().to$().find('input').val("0000-00-00");
+                        container.scrollTop(1000000);
+                    });
+                    $("#pos-delete").on('click',function(){
+                        var container = $('#syncPositionTable,div.dataTables_scrollBody');
+                        var tmpOffset = container.scrollTop();
+                        table.DataTable()
+                            .rows( '.selected' )
+                            .remove()
+                            .draw();
+
+                        container.scrollTop(tmpOffset);
+                    });
+                }
+
+                for (var i = 0; i < ssMainAccounttManagerInstance.currentPosTableData.length; i++) {
+                    table.DataTable().cell(i, 0).nodes().to$().append($('<select style="float: right; width: 100%" >'));
+                    for (var j = 0; j < ssMainAccounttManagerInstance.curSubAccounts.length; j++) {
+                        table.DataTable().cell(i, 0).nodes().to$().find('select').append($('<option>', {
+                            value: ssMainAccounttManagerInstance.curSubAccounts[j][0],
+                            text: ssMainAccounttManagerInstance.curSubAccounts[j][1]
+                        }));
+                    }
+
+                    var text =  table.DataTable().cell(i, 1).nodes().to$().text();
+                    table.DataTable().cell(i, 1).nodes().to$().text("");
+                    table.DataTable().cell(i, 1).nodes().to$().append($('<select style="float: right; width: 100%" >'));
+                    for (var key in ssMainAccounttManagerInstance.currentAllInstrumentIdDic) {
+                        table.DataTable().cell(i, 1).nodes().to$().find('select').append($('<option>', {
+                            value: key,
+                            text: key
+                        }));
+                    }
+                    table.DataTable().cell(i, 1).nodes().to$().find('select').val(text);
+
+                    table.DataTable().cell(i, 2).nodes().to$().append($('<select style="float: right; width: 100%" >'));
+
+                    var duoText =  table.DataTable().cell(i, 2).nodes().to$().text();
+                    table.DataTable().cell(i, 2).nodes().to$().text("");
+                    table.DataTable().cell(i, 2).nodes().to$().append($('<select style="float: right; width: 100%" >'));
+
+                    table.DataTable().cell(i, 2).nodes().to$().find('select').append($('<option>', {
+                            value: 'true',
+                            text: "多"
+                        }));
+                    table.DataTable().cell(i, 2).nodes().to$().find('select').append($('<option>', {
+                        value: 'false',
+                        text: "空"
+                    }));
+                    var inValue = 'true';
+                    if (duoText == "空") inValue ='false';
+                    table.DataTable().cell(i, 2).nodes().to$().find('select').val(inValue);
+
+                    var duoText =  table.DataTable().cell(i, 3).nodes().to$().text();
+                    table.DataTable().cell(i, 3).nodes().to$().text("");
+                    table.DataTable().cell(i, 3).nodes().to$().append($('<input style="float: right; width: 100%" >'));
+                    table.DataTable().cell(i, 3).nodes().to$().find('input').val(duoText);
+
+
+                    var duoText =  table.DataTable().cell(i, 4).nodes().to$().text();
+                    table.DataTable().cell(i, 4).nodes().to$().text("");
+                    table.DataTable().cell(i, 4).nodes().to$().append($('<input style="float: right; width: 100%" >'));
+                    table.DataTable().cell(i, 4).nodes().to$().find('input').val(duoText);
+
+
+                    var duoText =  table.DataTable().cell(i, 5).nodes().to$().text();
+                    table.DataTable().cell(i, 5).nodes().to$().text("");
+                    table.DataTable().cell(i, 5).nodes().to$().append($('<input style="float: right; width: 100%" >'));
+                    table.DataTable().cell(i, 5).nodes().to$().find('input').val(duoText);
+                }
+
 
                 for (var i = 0 ; i < ssMainAccounttManagerInstance.currentOriginPos.length ; i++) {
                     var curPos = ssMainAccounttManagerInstance.currentOriginPos[i];
@@ -394,8 +560,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                         ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin']['kong'] += curPos['Pos']['Volume'];;
                     }
                 }
-
-console.log(ssMainAccounttManagerInstance.currentAllInstrumentIdDic);
+                
                 /***
                  * 整合数据分析
                  */
@@ -403,6 +568,8 @@ console.log(ssMainAccounttManagerInstance.currentAllInstrumentIdDic);
                 for (var key in ssMainAccounttManagerInstance.currentAllInstrumentIdDic){
                     var originPos = ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['origin']['duo'];
                     var queryPos =ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['query']['duo'];
+
+
                     if (originPos!=queryPos) {
                         ssMainAccounttManagerInstance.duoPosText += key + " 交易所" + originPos + "手，" + "本地" + queryPos + "手，需";
                         if (originPos < queryPos) {
@@ -435,10 +602,25 @@ console.log(ssMainAccounttManagerInstance.currentAllInstrumentIdDic);
                 $("#kongCang").text( ssMainAccounttManagerInstance.kongPosText);
 
 
+
+
+
             },
             error: function (xhr) {
                 //Do Something to handle error
             }
         });
+    }
+
+    /***
+     * 提交当前的报单同步信息
+     * @param index
+     */
+    this.submitSyncPositionStream = function(index){
+        var dataStream="adminID="+ssMainAccounttManagerInstance.accoutId+"&adminPwd="+ssMainAccounttManagerInstance.accoutPwd+"&mainAccountID="+(ssMainAccounttManagerInstance.mainAccouts[index][0]);
+        dataStream += "&numDelete="+ssMainAccounttManagerInstance.currentQueryPos.length;
+        dataStream += "&numAdd="+ssMainAccounttManagerInstance.positionSyncTable.DataTable().data().length;
+
+        console.log(dataStream);
     }
 }

@@ -21,7 +21,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("userid"=>$userid,"password"=>$password, "sMainAccountID"=>$mainAccountID);
+            $data = array("adminid"=>$userid,"adminpw"=>$password, "sMainAccountID"=>$mainAccountID);
             $data_string = json_encode($data);
             $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetMainAccountConnectStatus');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -41,7 +41,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("userid"=>$userid,"password"=>$password, "sMainAccountID"=>$mainAccountID);
+            $data = array("adminid"=>$userid,"adminpw"=>$password, "sMainAccountID"=>$mainAccountID);
             $data_string = json_encode($data);
             $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetMainAccountConnectStatus');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -61,7 +61,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("userid"=>$userid,"password"=>$password, "sMainAccountID"=>$mainAccountID);
+            $data = array("adminid"=>$userid,"adminpw"=>$password, "sMainAccountID"=>$mainAccountID);
             $data_string = json_encode($data);
             $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetNeedSyncOrders');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -81,7 +81,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("userid"=>$userid,"password"=>$password, "sMainAccountID"=>$mainAccountID);
+            $data = array("adminid"=>$userid,"adminpw"=>$password, "sMainAccountID"=>$mainAccountID);
             $data_string = json_encode($data);
             $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetNeedSyncPosition');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -125,7 +125,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("userid"=>$userid,"password"=>$password,"tablename" => "MainAccount");
+            $data = array("adminid"=>$userid,"adminpw"=>$password,"tablename" => "MainAccount");
             $data_string = json_encode($data);
             $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/LoadTableData');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");

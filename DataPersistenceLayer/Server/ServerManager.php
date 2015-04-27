@@ -19,7 +19,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("userid"=>$userid,"password"=>$password,"port" => "10083");
+            $data = array("adminid"=>$userid,"adminpw"=>$password,"port" => "10083");
             $data_string = json_encode($data);
             $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetAllBrokersInfo');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -40,7 +40,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("userid"=>$userid,"password"=>$password);
+            $data = array("adminid"=>$userid,"adminpw"=>$password);
             $data_string = json_encode($data);
             $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetAllTradableInstrumentsAndProps');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -63,7 +63,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("userid"=>$userid,"password"=>$password,"tablename" => "log");
+            $data = array("adminid"=>$userid,"adminpw"=>$password,"tablename" => "log");
             $data_string = json_encode($data);
             $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/loadtabledata');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -85,7 +85,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("userid"=>$userid,"password"=>$password,"port" => "10083");
+            $data = array("adminid"=>$userid,"adminpw"=>$password,"port" => "10083");
             $data_string = json_encode($data);
             $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetServerState');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -108,7 +108,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("userid"=>$userid,"password"=>$password,"port" => "10083");
+            $data = array("adminid"=>$userid,"adminpw"=>$password,"port" => "10083");
             $data_string = json_encode($data);
             $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetLoggedInSubAccountCount');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -130,7 +130,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("userid"=>$userid,"password"=>$password,"port" => "10083");
+            $data = array("adminid"=>$userid,"adminpw"=>$password,"port" => "10083");
             $data_string = json_encode($data);
             $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/ConnectAllSPServerMainAccounts');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -152,7 +152,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("userid"=>$userid,"password"=>$password,"port" => "10083");
+            $data = array("adminid"=>$userid,"adminpw"=>$password,"port" => "10083");
             $data_string = json_encode($data);
             $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/RestartSharpSpeedServer');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");

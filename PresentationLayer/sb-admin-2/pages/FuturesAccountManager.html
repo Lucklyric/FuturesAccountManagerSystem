@@ -430,12 +430,12 @@
                                                 <div class="row clearfix">
                                                     <div class="col-md-6 column">
 
-                                                            <textarea style="width: 100%;height: 250px;overflow:-moz-scrollbars-vertical;overflow-y:auto;" id="duoCang" readonly>
+                                                            <textarea style="width: 100%;height: 196px;overflow:-moz-scrollbars-vertical;overflow-y:auto;" id="duoCang" readonly>
                                                             </textarea>
                                                     </div>
                                                     <div class="col-md-6 column">
 
-                                                            <textarea style="width: 100%;height: 250px;overflow:-moz-scrollbars-vertical;overflow-y:auto;"  id ="kongCang" readonly>
+                                                            <textarea style="width: 100%;height: 196px;overflow:-moz-scrollbars-vertical;overflow-y:auto;"  id ="kongCang" readonly>
                                                             </textarea>
                                                     </div>
                                                 </div>
@@ -1371,11 +1371,14 @@
             mainAccountManager.updateCurrentMainAccountOrderInfo(selectedIndex,$("#syncOrderTable"));
             $('#mainSyncOrder').modal('show');
         }else if(mainAccounts[selectedIndex][7].localeCompare("需要持仓同步") == 0){
-           mainAccountManager.updateCurrentMainAccountPositionInfo(selectedIndex,$("#syncOrderTable"));
+           mainAccountManager.updateCurrentMainAccountPositionInfo(selectedIndex,$("#syncPositionTable"));
             $('#mainSyncPosition').modal('show');
         }
         $(document).on("click", "#newMainSyncOrder .btn-primary", function(){
             mainAccountManager.submitSyncOrderStream(selectedIndex)
+        });
+        $(document).on("click", "#newMainSyncPosition .btn-primary", function(){
+            mainAccountManager.submitSyncPositionStream(selectedIndex)
         });
 
     });

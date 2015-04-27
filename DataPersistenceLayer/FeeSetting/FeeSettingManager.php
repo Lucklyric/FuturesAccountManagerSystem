@@ -19,7 +19,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("userid"=>$userid,"password"=>$password,"tablename" => "Commission");
+            $data = array("adminid"=>$userid,"adminpw"=>$password,"tablename" => "Commission");
             $data_string = json_encode($data);
             $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/loadtabledata');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
