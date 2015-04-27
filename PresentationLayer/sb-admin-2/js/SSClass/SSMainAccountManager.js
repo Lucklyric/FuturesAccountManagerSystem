@@ -355,7 +355,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                 console.log(data);
                 ssMainAccounttManagerInstance.currentOriginPos = data['ColOriginDBPos'];
                 ssMainAccounttManagerInstance.currentQueryPos = data['ColQueryPos'];
-                ssMainAccounttManagerInstance.currentTableData = [];
+                ssMainAccounttManagerInstance.currentPosTableData = [];
 
                 ssMainAccounttManagerInstance.currentAllInstrumentIdDic =[];
 
@@ -481,7 +481,6 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                             .rows( '.selected' )
                             .remove()
                             .draw();
-
                         container.scrollTop(tmpOffset);
                     });
                 }
@@ -617,10 +616,69 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
      * @param index
      */
     this.submitSyncPositionStream = function(index){
+        console.log("持仓同步功能");
         var dataStream="adminID="+ssMainAccounttManagerInstance.accoutId+"&adminPwd="+ssMainAccounttManagerInstance.accoutPwd+"&mainAccountID="+(ssMainAccounttManagerInstance.mainAccouts[index][0]);
         dataStream += "&numDelete="+ssMainAccounttManagerInstance.currentQueryPos.length;
         dataStream += "&numAdd="+ssMainAccounttManagerInstance.positionSyncTable.DataTable().data().length;
+        /***
+         * 需要删除的信息
+         */
+        for (var i = 0; i < ssMainAccounttManagerInstance.currentQueryPos.length; i++) {
+            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['Pos']['InstrumentID'];
+            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['Pos']['LongOrShort'];
+            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['Pos']['TodayOrHistoryPos'];
+            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['Pos']['OpenPrice'];
+            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['Pos']['Volume'];
+            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['PosID'];
+            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['OpenDay'];
+            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['SubAccountID'];
+            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['SubAccountUserID'];
+            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['PosProfit'];
+        }
+        /***
+         * 需要增加的信息
+         */
+       var currentTable = ssMainAccounttManagerInstance.positionSyncTable.DataTable().data();
+        console.log('表长度'+currentTable.length);
+        for (var i = 0; i < currentTable.length; i++) {
+            dataStream += "&test=" + currentTable[i][1];
+            if ( currentTable[i][1] == "空"){
+                dataStream += "&test=" + 'false';
+            }else{
+                dataStream += "&test=" + 'true';
+            }
+            if(new Date(currentTable[i][5]).getTime() < new Date().getTime())
+            {
+                dataStream += "&test=" + 'false';
+                console.log('小于今天'+i
+                );
+            }else{
+                dataStream += "&test=" + 'true';
+            }
+            dataStream += "&test=" + currentTable[i][3];
+            dataStream += "&test=" + currentTable[i][4];
+            dataStream += "&test=" + "test";
+            dataStream += "&test=" + currentTable[i][0];
+            dataStream += "&test=" + currentTable[i][0];
+            dataStream += "&test=" + 'test';
+        }
 
-        console.log(dataStream);
+        //console.log(dataStream);
+        $.ajax({
+            url: ssMainAccounttManagerInstance.hostpath,
+            type: "get", //send it through get method
+            //dataType: "json",
+            contentType: "application/json",
+            data: {
+                Data: dataStream,
+                Method: "onSyncPosition"
+            },
+            success: function (response) {
+               // console.log("同步结果:"+response+".");
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
     }
 }

@@ -119,6 +119,30 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             echo $server_output;
         }
 
+        function OnRspSyncPosition($data){
+            include_once('HTTP/Request.php');
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL,$GLOBALS['serverAddress'].'SPService/SPService.svc/OnRspSyncPosition');
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS,
+                $data);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+
+
+            // receive server response ...
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            $server_output = curl_exec ($ch);
+
+            curl_close ($ch);
+            header("Content-type:text/html;charset=utf-8");
+
+            echo $server_output;
+        }
+
+
 
         function GetAllData($userid,$password)
         {

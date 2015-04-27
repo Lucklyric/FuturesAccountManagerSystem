@@ -41,4 +41,9 @@ if ($_GET["Method"] == "getMainStatus"){
     $manager = new MainAccountManager();
     $result = $manager->OnRspSyncOrders($data);
     echo json_encode($result);
+}elseif ($_GET["Method"] == "onSyncPosition") {
+    $data = isset($_GET["Data"]) ? $_GET["Data"] : "";
+    $manager = new MainAccountManager();
+    $result = $manager->OnRspSyncPosition($data);
+    echo json_encode($result);
 }
