@@ -524,134 +524,45 @@
                                                                             </div>
                                                                         </fieldset>
                                                                         <fieldset>
-                                                                            <legend>日内仓位设置</legend>
-                                                                            <div class="container" style="width: 350px">
-                                                                                <div class="row clearfix">
-                                                                                    <div class="col-xs-4 column modal-row">
-                                                                                        <label style="margin-top: 8px">总仓位预警</label>
+                                                                            <legend>风控条件</legend>
+                                                                            <div class="container" style="width: 750px">
+                                                                                <div class="row clearfix" style="margin-top:10px">
+                                                                                    <div class="col-xs-3 column">
+                                                                                        <label style="margin-top: 8px">日内总仓位上限</label>
                                                                                     </div>
-                                                                                    <div class="col-xs-6 column">
-                                                                                        <input class="form-control"
-                                                                                               id="inDayPos-warning"
-                                                                                               value=""/>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row clearfix">
-                                                                                    <div class="col-xs-4 column modal-row">
-                                                                                        <label style="margin-top: 8px">总仓位上限</label>
-                                                                                    </div>
-                                                                                    <div class="col-xs-6 column">
+                                                                                    <div class="col-xs-3 column">
                                                                                         <input class="form-control"
                                                                                                id="inDayPos-totalLimit"
                                                                                                value=""/>
                                                                                     </div>
-                                                                                </div>
-                                                                                <div class="row clearfix">
-                                                                                    <div class="col-xs-4 column modal-row">
-                                                                                        <label style="margin-top: 8px">品种代码</label>
+                                                                                    <div class="col-xs-3 column">
+                                                                                        <label style="margin-top: 8px">单股票上限</label>
                                                                                     </div>
-                                                                                    <div class="col-xs-4 column">
-                                                                                        <input class="form-control"
-                                                                                               id="inDayPos-instrument"
-                                                                                               value=""/>
-                                                                                    </div>
-                                                                                    <div class="col-xs-4 column">
-                                                                                        <button type="button"
-                                                                                                id="inDayPos-add"
-                                                                                                class="btn btn-success btn-sm">
-                                                                                            添加
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row clearfix">
-                                                                                    <div class="col-xs-4 column modal-row">
-                                                                                        <label style="margin-top: 8px">仓位上限</label>
-                                                                                    </div>
-                                                                                    <div class="col-xs-4 column">
+                                                                                    <div class="col-xs-3 column">
                                                                                         <input class="form-control"
                                                                                                id="inDayPos-limit"
                                                                                                value=""/>
                                                                                     </div>
-                                                                                    <div class="col-xs-4 column">
-                                                                                        <button type="button"
-                                                                                                id="inDayPos-delete"
-                                                                                                class="btn btn-warning btn-sm">
-                                                                                            删除
-                                                                                        </button>
-                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="row clearfix">
-                                                                                    <div class="col-xs-12 column">
-                                                                                        <div class="well"
-                                                                                             style="max-height: 400px; overflow: auto;">
-                                                                                            <ul class="list-group checked-list-box"
-                                                                                                id="inDayPosUL">
-                                                                                            </ul>
-                                                                                        </div>
+                                                                                <div class="row clearfix" style="margin-top:10px">
+                                                                                    <div class="col-xs-3 column">
+                                                                                        <label style="margin-top: 8px">隔夜总仓位上限</label>
                                                                                     </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </fieldset>
-                                                                        <fieldset>
-                                                                            <legend>隔夜仓位设置</legend>
-                                                                            <div class="container" style="width: 350px">
-                                                                                <div class="row clearfix"
-                                                                                     style="margin-top:26px; margin-bottom: 26px">
-                                                                                    <div class="col-xs-4 column modal-row">
-                                                                                        <label style="margin-top: 8px">总仓位上限</label>
-                                                                                    </div>
-                                                                                    <div class="col-xs-6 column">
+                                                                                    <div class="col-xs-3 column">
                                                                                         <input class="form-control"
                                                                                                id="overPos-totalLimit"
                                                                                                value=""/>
                                                                                     </div>
-                                                                                </div>
-                                                                                <div class="row clearfix">
-                                                                                    <div class="col-xs-4 column modal-row">
-                                                                                        <label style="margin-top: 8px">品种代码</label>
+                                                                                    <div class="col-xs-3 column">
+                                                                                        <label style="margin-top: 8px">单股票上限</label>
                                                                                     </div>
-                                                                                    <div class="col-xs-4 column">
-                                                                                        <input class="form-control"
-                                                                                               id="overPos-instrument"
-                                                                                               value=""/>
-                                                                                    </div>
-                                                                                    <div class="col-xs-4 column">
-                                                                                        <button type="button"
-                                                                                                id="overPos-add"
-                                                                                                class="btn btn-success btn-sm">
-                                                                                            添加
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row clearfix">
-                                                                                    <div class="col-xs-4 column modal-row">
-                                                                                        <label style="margin-top: 8px">仓位上限</label>
-                                                                                    </div>
-                                                                                    <div class="col-xs-4 column">
+                                                                                    <div class="col-xs-3 column">
                                                                                         <input class="form-control"
                                                                                                id="overPos-limit"
                                                                                                value=""/>
                                                                                     </div>
-                                                                                    <div class="col-xs-4 column">
-                                                                                        <button type="button"
-                                                                                                id="overPos-delete"
-                                                                                                class="btn btn-warning btn-sm">
-                                                                                            删除
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row clearfix">
-                                                                                    <div class="col-xs-12 column">
-                                                                                        <div class="well"
-                                                                                             style="max-height: 400px; overflow: auto;">
-                                                                                            <ul class="list-group checked-list-box"
-                                                                                                id="overPosUL">
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-
                                                                         </fieldset>
                                                                     </div>
                                                                 </div>
@@ -798,64 +709,13 @@
                                                                                                id="abs-totalLimit"
                                                                                                value=""/></div>
                                                                                     <div class="col-xs-2 column">
-                                                                                        <label style="margin-top: 8px">单品种上限</label>
+                                                                                        <label style="margin-top: 8px">单股票上限</label>
                                                                                     </div>
                                                                                     <div class="col-xs-3 column">
                                                                                         <input class="form-control"
                                                                                                id="abs-singleLimit"
                                                                                                value=""/>
                                                                                     </div>
-                                                                                </div>
-                                                                                <div class="row clearfix">
-                                                                                    <fieldset style="margin-top: 10px">
-                                                                                        <legend>具体品种仓位设置</legend>
-                                                                                        <div class="container"
-                                                                                             style="width: 700px">
-                                                                                            <div class="row clearfix">
-                                                                                                <div class="col-xs-2 column">
-                                                                                                    <label style="margin-top: 8px">品种代码</label>
-                                                                                                </div>
-                                                                                                <div class="col-xs-3 column">
-                                                                                                    <input class="form-control"
-                                                                                                           id="abs-instrument"
-                                                                                                           value=""/>
-                                                                                                </div>
-                                                                                                <div class="col-xs-2 column">
-                                                                                                    <label style="margin-top: 8px">仓位上限</label>
-                                                                                                </div>
-                                                                                                <div class="col-xs-3 column">
-                                                                                                    <input class="form-control"
-                                                                                                           id="abs-limit"
-                                                                                                           value=""/>
-                                                                                                </div>
-                                                                                                <div class="col-xs-1 column">
-                                                                                                    <button type="button"
-                                                                                                            id="abs-instrument-add"
-                                                                                                            class="btn btn-success btn-sm">
-                                                                                                        添加
-                                                                                                    </button>
-                                                                                                </div>
-                                                                                                <div class="col-xs-1 column">
-                                                                                                    <button type="button"
-                                                                                                            id="abs-instrument-delete"
-                                                                                                            class="btn btn-warning btn-sm">
-                                                                                                        删除
-                                                                                                    </button>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="row clearfix"
-                                                                                                 style="margin-top: 10px">
-                                                                                                <div class="col-xs-12 column">
-                                                                                                    <div class="well"
-                                                                                                         style="max-height: 400px; overflow: auto;">
-                                                                                                        <ul class="list-group checked-list-box"
-                                                                                                            id="abs-instrumentUL">
-                                                                                                        </ul>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </fieldset>
                                                                                 </div>
                                                                                 <div class="row clearfix">
                                                                                     <div class="form-group"
@@ -1031,64 +891,13 @@
                                                                                            id="loss-totalLimit"
                                                                                            value=""/></div>
                                                                                 <div class="col-xs-2 column">
-                                                                                    <label style="margin-top: 8px">单品种上限</label>
+                                                                                    <label style="margin-top: 8px">单股票上限</label>
                                                                                 </div>
                                                                                 <div class="col-xs-3 column">
                                                                                     <input class="form-control"
                                                                                            id="loss-singleLimit"
                                                                                            value=""/>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="row clearfix">
-                                                                                <fieldset style="margin-top: 10px">
-                                                                                    <legend>具体品种仓位设置</legend>
-                                                                                    <div class="container"
-                                                                                         style="width: 700px">
-                                                                                        <div class="row clearfix">
-                                                                                            <div class="col-xs-2 column">
-                                                                                                <label style="margin-top: 8px">品种代码</label>
-                                                                                            </div>
-                                                                                            <div class="col-xs-3 column">
-                                                                                                <input class="form-control"
-                                                                                                       id="loss-instrument"
-                                                                                                       value=""/>
-                                                                                            </div>
-                                                                                            <div class="col-xs-2 column">
-                                                                                                <label style="margin-top: 8px">仓位上限</label>
-                                                                                            </div>
-                                                                                            <div class="col-xs-3 column">
-                                                                                                <input class="form-control"
-                                                                                                       id="loss-limit"
-                                                                                                       value=""/>
-                                                                                            </div>
-                                                                                            <div class="col-xs-1 column">
-                                                                                                <button type="button"
-                                                                                                        id="loss-instrument-add"
-                                                                                                        class="btn btn-success btn-sm">
-                                                                                                    添加
-                                                                                                </button>
-                                                                                            </div>
-                                                                                            <div class="col-xs-1 column">
-                                                                                                <button type="button"
-                                                                                                        id="loss-instrument-delete"
-                                                                                                        class="btn btn-warning btn-sm">
-                                                                                                    删除
-                                                                                                </button>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="row clearfix"
-                                                                                             style="margin-top: 10px">
-                                                                                            <div class="col-xs-12 column">
-                                                                                                <div class="well"
-                                                                                                     style="max-height: 400px; overflow: auto;">
-                                                                                                    <ul class="list-group checked-list-box"
-                                                                                                        id="loss-instrumentUL">
-                                                                                                    </ul>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </fieldset>
                                                                             </div>
                                                                             <div class="row clearfix">
                                                                                 <div class="form-group"
