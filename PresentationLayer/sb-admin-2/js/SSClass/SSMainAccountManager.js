@@ -474,9 +474,13 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                         table.DataTable().cell(newLength, 4).nodes().to$().append($('<input style="float: right; width: 100%" >'));
                         table.DataTable().cell(newLength, 4).nodes().to$().find('input').val("0");
 
+                        var today = new Date();
+                        var dd = today.getDate();
+                        var mm = today.getMonth()+1; //January is 0!
+
 
                         table.DataTable().cell(newLength, 5).nodes().to$().append($('<input style="float: right; width: 100%" >'));
-                        table.DataTable().cell(newLength, 5).nodes().to$().find('input').val("0000-00-00");
+                        table.DataTable().cell(newLength, 5).nodes().to$().find('input').val(moment().format('YYYY-MM-DD'));
                         container.scrollTop(1000000);
                     });
                     $("#pos-delete").on('click',function(){
@@ -606,7 +610,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
 
                 $("#duoCang").text( ssMainAccounttManagerInstance.duoPosText);
                 $("#kongCang").text( ssMainAccounttManagerInstance.kongPosText);
-                
+
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -620,6 +624,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
      */
     this.submitSyncPositionStream = function(index){
         console.log("持仓同步功能");
+        var curTableAllInstrumentDic = [];
         var dataStream="adminID="+ssMainAccounttManagerInstance.accoutId+"&adminPwd="+ssMainAccounttManagerInstance.accoutPwd+"&mainAccountID="+(ssMainAccounttManagerInstance.mainAccouts[index][0]);
         dataStream += "&numDelete="+ssMainAccounttManagerInstance.currentQueryPos.length;
         dataStream += "&numAdd="+ssMainAccounttManagerInstance.positionSyncTable.DataTable().data().length;
@@ -646,6 +651,14 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
         for (var i = 0; i < currentTable.DataTable().data().length; i++) {
             dataStream += "&InstrumentID=" +  currentTable.DataTable().cell(i, 1).nodes().to$().find(':selected').val();
 
+            if (curTableAllInstrumentDic[currentTable.DataTable().cell(i, 1).nodes().to$().find(':selected').val()]===undefined){
+                curTableAllInstrumentDic[currentTable.DataTable().cell(i, 1).nodes().to$().find(':selected').val()] =[];
+                curTableAllInstrumentDic[currentTable.DataTable().cell(i, 1).nodes().to$().find(':selected').val()]['duo'] =0;
+                curTableAllInstrumentDic[currentTable.DataTable().cell(i, 1).nodes().to$().find(':selected').val()]['kong'] =0;
+            }
+
+
+
             dataStream += "&test=" + currentTable.DataTable().cell(i, 2).nodes().to$().find(':selected').val();
 
             if(new Date(currentTable.DataTable().cell(i, 5).nodes().to$().find('input').text()).getTime() < new Date().getTime())
@@ -658,6 +671,11 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
             }
             dataStream += "&test=" + currentTable.DataTable().cell(i, 3).nodes().to$().find('input').val();
             dataStream += "&test=" + currentTable.DataTable().cell(i, 4).nodes().to$().find('input').val();
+            if (currentTable.DataTable().cell(i, 2).nodes().to$().find(':selected').val() == "true"){
+                curTableAllInstrumentDic[currentTable.DataTable().cell(i, 1).nodes().to$().find(':selected').val()]['duo'] += parseInt(currentTable.DataTable().cell(i, 4).nodes().to$().find('input').val());
+            }else{
+                curTableAllInstrumentDic[currentTable.DataTable().cell(i, 1).nodes().to$().find(':selected').val()]['kong'] += parseInt(currentTable.DataTable().cell(i, 4).nodes().to$().find('input').val());
+            }
             dataStream += "&test=" + "0";
             dataStream += "&test=" + currentTable.DataTable().cell(i, 5).nodes().to$().find('input').val();
             dataStream += "&test=" + currentTable.DataTable().cell(i, 0).nodes().to$().find(':selected').val();
@@ -665,7 +683,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
             dataStream += "&test=" + '0';
         }
 
-        console.log(dataStream);
+        console.log(curTableAllInstrumentDic);
         $.ajax({
             url: ssMainAccounttManagerInstance.hostpath,
             type: "get", //send it through get method
