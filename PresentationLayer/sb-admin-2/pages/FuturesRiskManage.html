@@ -1358,7 +1358,7 @@
         console.log("开始刷新数据");
         if (flag === undefined) {
             if (sessionStorage.getItem('riskManagerData')) {
-                riskManagerData = JSON.parse(sessionStorage.getItem('riskManagerData'));
+                riskManagerData = JSON.parse(sessionStorage.getItem('futuresRiskManagerData'));
                 instrumentData = JSON.parse(sessionStorage.getItem('instrumentData'));
                 refreshMainTable();
                 return;
@@ -1377,9 +1377,11 @@
             riskManagerTableData = data.data;
             console.log(riskManagerTableData[0]);
             for (var i = 0; i < riskManagerTableData.length; i++) {
-                riskManagerData.push(riskManagerTableData[i]);
+                if (riskManagerTableData[i][1].match(/\(期货\)/g)) {
+                    riskManagerData.push(riskManagerTableData[i]);
+                }
             }
-            sessionStorage.setItem('riskManagerData', JSON.stringify(riskManagerData));
+            sessionStorage.setItem('futuresRiskManagerData', JSON.stringify(riskManagerData));
             console.log("取到数据");
             refreshMainTable();
         });
@@ -1502,9 +1504,12 @@
                 净值日内限制:null,
                 净值隔夜限制:null
             };
-            if (event.data.state == 3)
+            if (event.data.state == 3) {
                 data["编号"] = riskManagerData[selectedIndex][0];
-            data["组名称"] = $("#groupName").val();
+                data["禁止开仓时间段"] = riskManagerData[selectedIndex][4];
+            }
+
+            data["组名称"] = $("#groupName").val() + "(期货)";
             //交易合约限制
             if ($("#black").prop("checked")) {//不允许交易合约
                 data["不允许交易合约"] = $("textarea").val();
@@ -1605,20 +1610,20 @@
 
     function fillRiskModal(){
         var riskGroupData = riskManagerData[selectedIndex];
-        $("#groupName").val(riskGroupData[1]);
+        $("#groupName").val(riskGroupData[1].replace(/\(期货\)/g, ""));
         if (riskGroupData[2]){//白名单
             $("#white").prop("checked",true);
-            $("textarea").val(riskGroupData[3]);
+            $("textarea").val(riskGroupData[2]);
         }else{
             $("#black").prop("checked",true);
-            $("textarea").val(riskGroupData[4]);
+            $("textarea").val(riskGroupData[3]);
         }
         if (riskGroupData[11] > 0 || (riskGroupData[20] < 0 && riskGroupData[16] < 0)){//普通
 
             $('.nav-tabs li').eq(0).addClass("active");
 
-            $("#normal-forceCloseLine").val(riskGroupData[10]);
-            $("#normal-warningLine").val(riskGroupData[11]);
+            $("#normal-warningLine").val(riskGroupData[10]);
+            $("#normal-forceCloseLine").val(riskGroupData[11]);
             stringToUL(riskGroupData[5],$("#normal-overnightUL"));
 
             $("#inDayPos-warning").val(riskGroupData[6]);
@@ -1660,6 +1665,7 @@
     }
 
     $(document).on("click", "#risk-add", function () {
+        $(document).off("click", "#newRiskModal .btn-primary");
         setupRiskManageInfo();
         updateCheckBox();
         $('.nav-tabs li').eq(0).addClass("active");//切换到普通tab
@@ -1668,6 +1674,7 @@
     });
 
     $(document).on("click", "#risk-update", function () {
+        $(document).off("click", "#newRiskModal .btn-primary");
         setupRiskManageInfo();
         fillRiskModal();
         updateCheckBox();
@@ -1736,7 +1743,7 @@
 
     //删除隔夜设置
     $(document).on("click", "#normal-overnight-delete", function () {
-        $("#overnightUL li.active").remove();
+        $("#normal-overnightUL li.active").remove();
     });
 
     //添加日内仓位设置

@@ -318,15 +318,15 @@
                                                                 <div class="form-group">
                                                                     <select class="form-control"
                                                                             id="exchange">
+                                                                        <option>上海</option>
+                                                                        <option>深圳</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                             <div class="col-xs-3 column modal-row">
-                                                                <div class="form-group">
-                                                                    <select class="form-control"
-                                                                            id="instrument">
-                                                                    </select>
-                                                                </div>
+                                                                <input class="form-control"
+                                                                       id="instrument"
+                                                                       value="" placeholder="股票代码"/>
                                                             </div>
                                                             <div class="col-xs-2 column modal-row">
                                                                 <div class="row clearfix">
@@ -1167,7 +1167,7 @@
         console.log("开始刷新数据");
         if (flag === undefined) {
             if (sessionStorage.getItem('riskManagerData')) {
-                riskManagerData = JSON.parse(sessionStorage.getItem('riskManagerData'));
+                riskManagerData = JSON.parse(sessionStorage.getItem('stockRiskManagerData'));
                 instrumentData = JSON.parse(sessionStorage.getItem('instrumentData'));
                 refreshMainTable();
                 return;
@@ -1186,9 +1186,11 @@
             riskManagerTableData = data.data;
             console.log(riskManagerTableData[0]);
             for (var i = 0; i < riskManagerTableData.length; i++) {
-                riskManagerData.push(riskManagerTableData[i]);
+                if (riskManagerTableData[i][1].match(/\(证券\)/g)) {
+                    riskManagerData.push(riskManagerTableData[i]);
+                }
             }
-            sessionStorage.setItem('riskManagerData', JSON.stringify(riskManagerData));
+            sessionStorage.setItem('stockRiskManagerData', JSON.stringify(riskManagerData));
             console.log("取到数据");
             refreshMainTable();
         });
@@ -1311,9 +1313,11 @@
                 净值日内限制:null,
                 净值隔夜限制:null
             };
-            if (event.data.state == 3)
+            if (event.data.state == 3) {
                 data["编号"] = riskManagerData[selectedIndex][0];
-            data["组名称"] = $("#groupName").val();
+                data["禁止开仓时间段"] = riskManagerData[selectedIndex][4];
+            }
+            data["组名称"] = $("#groupName").val() + "(证券)";
             //交易合约限制
             if ($("#black").prop("checked")) {//不允许交易合约
                 data["不允许交易合约"] = $("textarea").val();
@@ -1325,11 +1329,11 @@
                 data["权益强平线"] = $("#normal-forceCloseLine").val();
                 data["权益警告线"] = $("#normal-warningLine").val();
                 data["减仓时间段"] = ulToString($("#normal-overnightUL"));
-                data["风险度警告线"] = $("#inDayPos-warning").val();
+//                data["风险度警告线"] = $("#inDayPos-warning").val();
                 data["风险度禁开线"] = $("#inDayPos-totalLimit").val();
-                data["风险度禁开线详细"] = ulToString($("#inDayPosUL"));
+                data["风险度禁开线详细"] = "证券-" + $("#inDayPos-limit").val();
                 data["隔夜减仓线"] = $("#overPos-totalLimit").val();
-                data["隔夜减仓线详细"] = ulToString($("#overPosUL"));
+                data["隔夜减仓线详细"] = "证券-" + $("#overPos-limit").val();
             } else if ($('.nav-tabs .active').index() == 1) {
                 data["净值强平"] = $("#abs-forceCloseLine").val();
                 data["净值预警"] = $("#abs-warningLine").val();
@@ -1385,27 +1389,27 @@
 
     function setupRiskManageInfo() {
         $("#newRiskModal #black").prop("checked", true);
-        var exchangeSelect = $("#newRiskModal #exchange");
-        for (var i = 0; i < instrumentData.length; i++) {
-            exchangeSelect.append($('<option>', {
-                value: i,
-                text: instrumentData[i]["Key"]
-            }))
-        }
-        exchangeSelect.on('change', function () {
-            var exchangeSelect = $("#newRiskModal #instrument");
-            var instrumentDictArray = instrumentData[this.value]["Value"];
-            console.log(instrumentDictArray);
-            exchangeSelect.empty();
-            for (var i = 0; i < instrumentDictArray.length; i++) {
-                exchangeSelect.append($('<option>', {
-                    value: i,
-                    text: instrumentDictArray[i]["Key"]
-                }))
-            }
-        })
-        exchangeSelect.eq(0).attr('selected', 'selected');
-        exchangeSelect.trigger('change');
+//        var exchangeSelect = $("#newRiskModal #exchange");
+//        for (var i = 0; i < instrumentData.length; i++) {
+//            exchangeSelect.append($('<option>', {
+//                value: i,
+//                text: instrumentData[i]["Key"]
+//            }))
+//        }
+//        exchangeSelect.on('change', function () {
+//            var exchangeSelect = $("#newRiskModal #instrument");
+//            var instrumentDictArray = instrumentData[this.value]["Value"];
+//            console.log(instrumentDictArray);
+//            exchangeSelect.empty();
+//            for (var i = 0; i < instrumentDictArray.length; i++) {
+//                exchangeSelect.append($('<option>', {
+//                    value: i,
+//                    text: instrumentDictArray[i]["Key"]
+//                }))
+//            }
+//        })
+//        exchangeSelect.eq(0).attr('selected', 'selected');
+//        exchangeSelect.trigger('change');
         $("#newRiskModal #normal-defauleType").prop("checked", true);
         $("#newRiskModal #abs-defauleType").prop("checked", true);
         $("#newRiskModal #loss-defauleType").prop("checked", true);
@@ -1414,28 +1418,28 @@
 
     function fillRiskModal(){
         var riskGroupData = riskManagerData[selectedIndex];
-        $("#groupName").val(riskGroupData[1]);
+        $("#groupName").val(riskGroupData[1].replace(/\(证券\)/g, ""));
         if (riskGroupData[2]){//白名单
             $("#white").prop("checked",true);
-            $("textarea").val(riskGroupData[3]);
+            $("textarea").val(riskGroupData[2]);
         }else{
             $("#black").prop("checked",true);
-            $("textarea").val(riskGroupData[4]);
+            $("textarea").val(riskGroupData[3]);
         }
         if (riskGroupData[11] > 0 || (riskGroupData[20] < 0 && riskGroupData[16] < 0)){//普通
 
             $('.nav-tabs li').eq(0).addClass("active");
 
-            $("#normal-forceCloseLine").val(riskGroupData[10]);
-            $("#normal-warningLine").val(riskGroupData[11]);
+            $("#normal-warningLine").val(riskGroupData[10]);
+            $("#normal-forceCloseLine").val(riskGroupData[11]);
             stringToUL(riskGroupData[5],$("#normal-overnightUL"));
 
-            $("#inDayPos-warning").val(riskGroupData[6]);
+//            $("#inDayPos-warning").val(riskGroupData[6]);
             $("#inDayPos-totalLimit").val(riskGroupData[8]);
-            stringToUL(riskGroupData[9],$("#inDayPosUL"));
+            $("#inDayPos-limit").val(riskGroupData[9].replace(/证券-/g, ""));
 
             $("#overPos-totalLimit").val(riskGroupData[12]);
-            stringToUL(riskGroupData[13],$("#overPosUL"));
+            $("#overPos-limit").val(riskGroupData[13].replace(/证券-/g, ""));
 
         }else if (riskGroupData[20] > 0){//净值
 
@@ -1469,6 +1473,7 @@
     }
 
     $(document).on("click", "#risk-add", function () {
+        $(document).off("click", "#newRiskModal .btn-primary");
         setupRiskManageInfo();
         updateCheckBox();
         $('.nav-tabs li').eq(0).addClass("active");//切换到普通tab
@@ -1477,6 +1482,7 @@
     });
 
     $(document).on("click", "#risk-update", function () {
+        $(document).off("click", "#newRiskModal .btn-primary");
         setupRiskManageInfo();
         fillRiskModal();
         updateCheckBox();
@@ -1492,7 +1498,8 @@
 
     //添加合约限制
     $(document).on("click", "#rest-add", function () {
-        var newRestriction = $("#newRiskModal #instrument option:selected").text();
+//        var newRestriction = $("#newRiskModal #instrument option:selected").text();
+        var newRestriction = $("#newRiskModal #instrument").val();
         if ($('#main').prop('checked')) {
             newRestriction += "_主力";
         }
@@ -1545,31 +1552,7 @@
 
     //删除隔夜设置
     $(document).on("click", "#normal-overnight-delete", function () {
-        $("#overnightUL li.active").remove();
-    });
-
-    //添加日内仓位设置
-    $(document).on("click", "#inDayPos-add", function () {
-        var inDaySetting = $("#inDayPos-instrument").val() + "-" + $("#inDayPos-limit").val();
-        $("#inDayPosUL").append($("<li class='list-group-item'>").text(inDaySetting));
-        updateCheckBox();
-    });
-
-    //删除日内仓位设置
-    $(document).on("click", "#inDayPos-delete", function () {
-        $("#inDayPosUL li.active").remove();
-    });
-
-    //添加隔夜仓位设置
-    $(document).on("click", "#overPos-add", function () {
-        var overSetting = $("#overPos-instrument").val() + "-" + $("#overPos-limit").val();
-        $("#overPosUL").append($("<li class='list-group-item'>").text(overSetting));
-        updateCheckBox();
-    });
-
-    //删除隔夜仓位设置
-    $(document).on("click", "#overPos-delete", function () {
-        $("#overPosUL li.active").remove();
+        $("#normal-overnightUL li.active").remove();
     });
 
     ////////////////////////////////////////////end of 普通风控逻辑部分////////////////////////////////////////////
@@ -1585,18 +1568,6 @@
         }
         $("#abs-overnightUL").append($("<li class='list-group-item'>").text(overnightSetting));
         updateCheckBox();
-    });
-
-    //添加具体品种仓位设置
-    $(document).on("click", "#abs-instrument-add", function () {
-        var instrumentSetting = $("#abs-instrument").val() + "*" + $("#abs-limit").val();
-        $("#abs-instrumentUL").append($("<li class='list-group-item'>").text(instrumentSetting));
-        updateCheckBox();
-    });
-
-    //删除具体品种仓位设置
-    $(document).on("click", "#abs-instrument-delete", function () {
-        $("#abs-instrumentUL li.active").remove();
     });
 
     //添加风控条件设置
@@ -1627,18 +1598,6 @@
         }
         $("#loss-overnightUL").append($("<li class='list-group-item'>").text(overnightSetting));
         updateCheckBox();
-    });
-
-    //添加具体品种仓位设置
-    $(document).on("click", "#loss-instrument-add", function () {
-        var instrumentSetting = $("#loss-instrument").val() + "*" + $("#loss-limit").val();
-        $("#loss-instrumentUL").append($("<li class='list-group-item'>").text(instrumentSetting));
-        updateCheckBox();
-    });
-
-    //删除具体品种仓位设置
-    $(document).on("click", "#loss-instrument-delete", function () {
-        $("#loss-instrumentUL li.active").remove();
     });
 
     //添加风控条件设置
