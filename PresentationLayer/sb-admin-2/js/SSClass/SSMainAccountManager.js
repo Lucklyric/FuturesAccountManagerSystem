@@ -570,7 +570,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                 /***
                  * 整合数据分析
                  */
-                ssMainAccounttManagerInstance.duoPosText = "     多仓\n[主账户"+ssMainAccounttManagerInstance.mainAccouts[index][0]+']\n';
+                ssMainAccounttManagerInstance.duoPosText = "     多仓\n";
                 for (var key in ssMainAccounttManagerInstance.currentAllInstrumentIdDic){
                     var originPos = ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['origin']['duo'];
                     var queryPos =ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['query']['duo'];
@@ -587,7 +587,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                     ssMainAccounttManagerInstance.duoPosText+="\n";
                 }
 
-                ssMainAccounttManagerInstance.kongPosText = "     空仓\n[主账户"+ssMainAccounttManagerInstance.mainAccouts[index][0]+']\n';
+                ssMainAccounttManagerInstance.kongPosText = "     空仓\n";
                 for (var key in ssMainAccounttManagerInstance.currentAllInstrumentIdDic){
                     var originPos = ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['origin']['kong'];
                     var queryPos = ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['query']['kong'];
@@ -606,11 +606,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
 
                 $("#duoCang").text( ssMainAccounttManagerInstance.duoPosText);
                 $("#kongCang").text( ssMainAccounttManagerInstance.kongPosText);
-
-
-
-
-
+                
             },
             error: function (xhr) {
                 //Do Something to handle error
