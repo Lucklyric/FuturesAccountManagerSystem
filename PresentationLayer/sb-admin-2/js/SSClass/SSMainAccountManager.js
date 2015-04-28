@@ -353,8 +353,12 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                 console.log(data);
                 data = JSON.parse(data);
                 console.log(data);
-                ssMainAccounttManagerInstance.currentOriginPos = data['ColOriginDBPos'];
-                ssMainAccounttManagerInstance.currentQueryPos = data['ColQueryPos'];
+                /**
+                 * 这边我的QueryPos和ColOrigin弄反了
+                 * 为了快速改我就在取数据这先反过来取
+                 */
+                ssMainAccounttManagerInstance.currentOriginPos = data['ColQueryPos'];
+                ssMainAccounttManagerInstance.currentQueryPos = data['ColOriginDBPos'];
                 ssMainAccounttManagerInstance.currentPosTableData = [];
 
                 ssMainAccounttManagerInstance.currentAllInstrumentIdDic =[];
@@ -376,7 +380,6 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                     }
                     if(curPos['Pos']['LongOrShort'] == 'true'){
                         tmpRawData.push('多');
-
                         ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query']['duo'] += curPos['Pos']['Volume'];;
                     }else{
                         tmpRawData.push('空');
@@ -388,6 +391,8 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                     tmpRawData.push('投机');
                     ssMainAccounttManagerInstance.currentPosTableData.push(tmpRawData);
                 }
+
+
                 console.log(ssMainAccounttManagerInstance.currentPosTableData);
                 if ($.fn.dataTable.isDataTable(table)) {
                     table.DataTable().clear();
@@ -559,7 +564,9 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                         ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin']['kong'] += curPos['Pos']['Volume'];;
                     }
                 }
-                
+
+
+                console.log(ssMainAccounttManagerInstance.currentAllInstrumentIdDic);
                 /***
                  * 整合数据分析
                  */
@@ -638,16 +645,14 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
         /***
          * 需要增加的信息
          */
-       var currentTable = ssMainAccounttManagerInstance.positionSyncTable.DataTable().data();
-        console.log('表长度'+currentTable.length);
-        for (var i = 0; i < currentTable.length; i++) {
-            dataStream += "&test=" + currentTable[i][1];
-            if ( currentTable[i][1] == "空"){
-                dataStream += "&test=" + 'false';
-            }else{
-                dataStream += "&test=" + 'true';
-            }
-            if(new Date(currentTable[i][5]).getTime() < new Date().getTime())
+       var currentTable = ssMainAccounttManagerInstance.positionSyncTable;
+
+        for (var i = 0; i < currentTable.DataTable().data().length; i++) {
+            dataStream += "&InstrumentID=" +  currentTable.DataTable().cell(i, 1).nodes().to$().find(':selected').val();
+
+            dataStream += "&test=" + currentTable.DataTable().cell(i, 2).nodes().to$().find(':selected').val();
+
+            if(new Date(currentTable.DataTable().cell(i, 5).nodes().to$().find('input').text()).getTime() < new Date().getTime())
             {
                 dataStream += "&test=" + 'false';
                 console.log('小于今天'+i
@@ -655,15 +660,16 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
             }else{
                 dataStream += "&test=" + 'true';
             }
-            dataStream += "&test=" + currentTable[i][3];
-            dataStream += "&test=" + currentTable[i][4];
-            dataStream += "&test=" + "test";
-            dataStream += "&test=" + currentTable[i][0];
-            dataStream += "&test=" + currentTable[i][0];
-            dataStream += "&test=" + 'test';
+            dataStream += "&test=" + currentTable.DataTable().cell(i, 3).nodes().to$().find('input').val();
+            dataStream += "&test=" + currentTable.DataTable().cell(i, 4).nodes().to$().find('input').val();
+            dataStream += "&test=" + "0";
+            dataStream += "&test=" + currentTable.DataTable().cell(i, 5).nodes().to$().find('input').val();
+            dataStream += "&test=" + currentTable.DataTable().cell(i, 0).nodes().to$().find(':selected').val();
+            dataStream += "&test=" + currentTable.DataTable().cell(i, 0).nodes().to$().find(':selected').val();
+            dataStream += "&test=" + '0';
         }
 
-        //console.log(dataStream);
+        console.log(dataStream);
         $.ajax({
             url: ssMainAccounttManagerInstance.hostpath,
             type: "get", //send it through get method
@@ -674,7 +680,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                 Method: "onSyncPosition"
             },
             success: function (response) {
-               // console.log("同步结果:"+response+".");
+               console.log("同步结果:"+response+".");
             },
             error: function (xhr) {
                 //Do Something to handle error
