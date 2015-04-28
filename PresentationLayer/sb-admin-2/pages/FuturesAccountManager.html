@@ -742,19 +742,19 @@
             $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/BrokersInfo.php', function (data) {
 
                 //allBrokersInfo = data;
-                allBrokersInfo['0'] = new Array();
-                allBrokersInfo['1'] = new Array();
-                allBrokersInfo['2'] = new Array();
-                allBrokersInfo['4'] = new Array();
+                allBrokersInfo['CTP'] = new Array();
+                allBrokersInfo['金仕达'] = new Array();
+                allBrokersInfo['恒生期货'] = new Array();
+                allBrokersInfo['恒生证券'] = new Array();
                 for (var i = 0; i < data.length; i++) {
                     var tmpInfo = [];
                     tmpInfo.push(data[i].mapServer2MarketDataAddresses);
                     tmpInfo.push(data[i].sBrokerName);
 
-                    if (allBrokersInfo[data[i].eChannel]) {
-                        allBrokersInfo[data[i].eChannel].push(tmpInfo);
+                    if (allBrokersInfo[data[i].sChannel]) {
+                        allBrokersInfo[data[i].sChannel].push(tmpInfo);
                     } else {
-                        allBrokersInfo[data[i].eChannel] = [];
+                        allBrokersInfo[data[i].sChannel] = [];
                     }
                 }
                 sessionStorage.setItem('allBrokerInfo',JSON.stringify(allBrokersInfo));
@@ -1258,22 +1258,22 @@
         var mainChannelOption = $("#newAccountModal #channel");
         mainChannelOption.empty();
         mainChannelOption.append($('<option>', {
-                    value:'0',
+                    value:'CTP',
                     text: 'CTP'
                 })
         )
         mainChannelOption.append($('<option>', {
-                    value:'1',
+                    value:'金仕达',
                     text: '金仕达'
                 })
         )
         mainChannelOption.append($('<option>', {
-                    value:'2',
+                    value:'恒生期货',
                     text: '恒生期货'
                 })
         )
         mainChannelOption.append($('<option>', {
-                    value:'4',
+                    value:'恒生期货',
                     text: '恒生证券'
                 })
         )
