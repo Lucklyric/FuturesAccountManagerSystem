@@ -1374,7 +1374,7 @@
             riskManagerTableData = data.data;
             console.log(riskManagerTableData[0]);
             for (var i = 0; i < riskManagerTableData.length; i++) {
-                if (riskManagerTableData[i][1].match(/\(期货\)/g)) {
+                if (riskManagerTableData[i][1].match(/\(期货/g)) {
                     riskManagerData.push(riskManagerTableData[i]);
                 }
             }
@@ -1427,7 +1427,7 @@
     }
 
     function ulToString(ul){
-        var result;
+        var result = null;
         $(ul).find("li").each(function (idx, li) {
             if (idx == 0){
                 result = $(li).text();
@@ -1506,7 +1506,7 @@
                 data["禁止开仓时间段"] = riskManagerData[selectedIndex][4];
             }
 
-            data["组名称"] = $("#groupName").val() + "(期货)";
+            data["组名称"] = $("#groupName").val() + "(期货";
             //交易合约限制
             if ($("#black").prop("checked")) {//不允许交易合约
                 data["不允许交易合约"] = $("textarea").val();
@@ -1515,6 +1515,7 @@
             }
 
             if ($('.nav-tabs .active').index() == 0) {
+                data["组名称"] += "普通)";
                 data["权益强平线"] = $("#normal-forceCloseLine").val();
                 data["权益警告线"] = $("#normal-warningLine").val();
                 data["减仓时间段"] = ulToString($("#normal-overnightUL"));
@@ -1524,6 +1525,7 @@
                 data["隔夜减仓线"] = $("#overPos-totalLimit").val();
                 data["隔夜减仓线详细"] = ulToString($("#overPosUL"));
             } else if ($('.nav-tabs .active').index() == 1) {
+                data["组名称"] += "净值)";
                 data["净值强平"] = $("#abs-forceCloseLine").val();
                 data["净值预警"] = $("#abs-warningLine").val();
                 if ($("#abs-inDayOrOvernight option:selected").index() == 0) {
@@ -1532,6 +1534,7 @@
                     data["净值隔夜限制"] = ulToString($("#abs-overnightUL"));
                 }
             } else {
+                data["组名称"] += "亏损)";
                 data["亏损强平"] = $("#loss-forceCloseLine").val();
                 data["亏损预警"] = $("#loss-warningLine").val();
                 if ($("#loss-inDayOrOvernight option:selected").index() == 0) {
@@ -1607,7 +1610,7 @@
 
     function fillRiskModal(){
         var riskGroupData = riskManagerData[selectedIndex];
-        $("#groupName").val(riskGroupData[1].replace(/\(期货\)/g, ""));
+        $("#groupName").val(riskGroupData[1].replace(/\(期货..\)/g, ""));
         if (riskGroupData[2]){//白名单
             $("#white").prop("checked",true);
             $("textarea").val(riskGroupData[2]);
@@ -1615,9 +1618,7 @@
             $("#black").prop("checked",true);
             $("textarea").val(riskGroupData[3]);
         }
-        if (riskGroupData[11] > 0 || (riskGroupData[20] < 0 && riskGroupData[16] < 0)){//普通
-
-            $('.nav-tabs li').eq(0).addClass("active");
+        if (riskGroupData[1].match(/普通\)/g, "")){//普通
 
             $("#normal-warningLine").val(riskGroupData[10]);
             $("#normal-forceCloseLine").val(riskGroupData[11]);
@@ -1630,9 +1631,9 @@
             $("#overPos-totalLimit").val(riskGroupData[12]);
             stringToUL(riskGroupData[13],$("#overPosUL"));
 
-        }else if (riskGroupData[20] > 0){//净值
+            $('.nav-tabs a[href="#normal"]').trigger('click');
 
-            $('.nav-tabs li').eq(1).addClass("active");
+        }else if (riskGroupData[1].match(/净值\)/g, "")){//净值
 
             $("#abs-forceCloseLine").val(riskGroupData[19]);
             $("#abs-warningLine").val(riskGroupData[20]);
@@ -1644,9 +1645,10 @@
                 $("#abs-inDayOrOvernight").eq(1).prop("selected", true);
                 stringToUL(riskGroupData[22],$("#abs-overnightUL"));
             }
-        }else {//亏损
 
-            $('.nav-tabs li').eq(2).addClass("active");
+            $('.nav-tabs a[href="#abs"]').trigger('click');
+
+        }else {//亏损
 
             $("#loss-forceCloseLine").val(riskGroupData[15]);
             $("#loss-warningLine").val(riskGroupData[16]);
@@ -1658,6 +1660,8 @@
                 $("#loss-inDayOrOvernight").eq(1).prop("selected", true);
                 stringToUL(riskGroupData[18],$("#loss-overnightUL"));
             }
+
+            $('.nav-tabs a[href="#loss"]').trigger('click');
         }
     }
 
@@ -1708,7 +1712,7 @@
         $("textarea").val("");
     });
 
-    //清除全部主力
+    //添加全部主力
     $(document).on("click", "#rest-addAllMain", function () {
         var restrictionText = $("textarea");
         if (!restrictionText.val()) {
@@ -1718,7 +1722,7 @@
         }
     });
 
-    //清除全部次主力
+    //添加全部次主力
     $(document).on("click", "#rest-addAllMinor", function () {
         var restrictionText = $("textarea");
         if (!restrictionText.val()) {
