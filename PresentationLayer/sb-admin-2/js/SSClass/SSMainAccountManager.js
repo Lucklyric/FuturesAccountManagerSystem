@@ -20,7 +20,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
     this.redrawCallback = redrawCallBack;
     this.orderSyncTable;
     this.positionSyncTable;
-
+    this.isTimerRunning = false;
     this.curSubAccounts =[];
     this.duoPosText="";
     this.kongPosText="";
@@ -52,7 +52,10 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
             }
 
         }
-        setInterval(this.checkTimerFunction, 5000);
+        if (!this.isTimerRunning) {
+            setInterval(this.checkTimerFunction, 5000);
+            this.isTimerRunning = true;
+        }
     }
 
     /***
@@ -110,6 +113,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
      * @constructor
      */
     this.ConnectMainAccount = function(index) {
+        console.log('链接'+this.mainAccouts[index][0]);
         $.ajax({
             url: this.hostpath,
             type: "get", //send it through get method
@@ -122,7 +126,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                 Method: "connectMain"
             },
             success: function (response) {
-
+                console.log("链接"+ssMainAccounttManagerInstance.mainAccouts[index][0]+'结果'+response);
             },
             error: function (xhr) {
                 //Do Something to handle error

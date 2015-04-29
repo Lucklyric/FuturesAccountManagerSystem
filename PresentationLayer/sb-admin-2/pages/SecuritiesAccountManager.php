@@ -1,175 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>锋利资产管理系统</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-
-    <!-- DataTables CSS -->
-
-    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css"
-          rel="stylesheet">
-
-
-    <!-- DataTables Responsive CSS -->
-    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-
-<br/>
-<div id = "wrapper">
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-        <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html">锋利资产管理系统v1.0.0.1</a>
-        </div>
-        <!-- /.navbar-header -->
-
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <p id = "onlineCount" class="navbar-text">在线人数：0人</p>
-            </li>
-            <li>
-                <p id = "serverStatus" class="navbar-text">服务器状态：关闭</p>
-            </li>
-            <li>
-                <button id = "connectMainAccount" class="btn btn-info navbar-btn" style="margin-right: 5px">连接主账户</button>
-            </li>
-            <li>
-                <button id = "restartServer" class="btn btn-primary navbar-btn" style="margin-right: 5px">重启服务器</button>
-            </li>
-
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> 账户资料</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-            </li>
-        </ul>
-
-        <!-- /.navbar-top-links -->
-            <!-- /.dropdown -->
-        <!-- /.navbar-top-links -->
-        </div>
-        <div class="navbar-default sidebar" role="navigation" style="margin-top:5px">
-            <div class="sidebar-nav navbar-collapse" style="margin-top:0px">
-                <ul class="nav" id="side-menu">
-                    <li>
-                        <a href="index.html"><i class="fa fa-th-list fa-fw"></i> 账户管理<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="FuturesAccountManager.html">期货账户管理</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-cny fa-fw"></i> 资金管理<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="SubAccountOutMoney.html">子账户出金</a>
-                            </li>
-                            <li>
-                                <a href="SubAccountInMoney.html">子账户入金</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-tachometer fa-fw"></i> 风控管理<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="FuturesRiskManage.html">期货风控设置</a>
-                            </li>
-                            <li>
-                                <a href="StockRiskManage.html">证券风控设置</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="FeeSetting.html"><i class="fa fa-bar-chart-o fa-fw"></i> 费率管理</a>
-                    </li>
-                    <li>
-                        <a href="RiskMonitorManager.html"><i class="fa fa-user fa-fw"></i> 风控员员管理</a>
-                    </li>
-                    <!--<li>-->
-                        <!--<a href="AdminManager.html"><i class="fa fa-user fa-fw"></i> 管理员管理</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="OperationManager.html"><i class="fa fa-check fa-fw"></i> 业务审核</a>-->
-                    <!--</li>-->
-                    <li>
-                        <a href="#"><i class="fa fa-search fa-fw"></i> 数据查询<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">出入金查询</a>
-                            </li>
-                            <li>
-                                <a href="#l">交易记录查询</a>
-                            </li>
-                            <li>
-                                <a href="#l">资金曲线查询</a>
-                            </li>
-                            <li>
-                                <a href="#l">业务审批查询</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-
-
-                </ul>
-            </div>
-            <!-- /.sidebar-collapse -->
-        </div>
-        <!-- /.navbar-static-side -->
-            <!--</div>-->
-    </nav>
-
+<?php
+include_once("Template.php");
+?>
     <div id="page-wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">期货账户管理</h3>
+                    <h3 class="page-header">证券账户管理</h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -227,7 +63,7 @@
                                                 <div class="form-group">
                                                     <label for="userId">账户ID</label>
                                                     <input class="form-control" style="float: right; width: 50%" type="text" name="userId" id="userId"
-                                                            value="" placeholder="账户ID"/>
+                                                           value="" placeholder="账户ID"/>
                                                 </div>
 
                                                 <div class="form-group">
@@ -328,139 +164,6 @@
                                 </div>
                                 <!-- /.modal -->
 
-                                <!-- Modal -->
-                                <div class="modal modal-wide fade"  tabindex="-1" role="dialog" id="mainSyncOrder"
-                                     aria-labelledby="newSubAccountLabel" aria-hidden="true">
-                                    <div class="modal-dialog" id="newMainSyncOrder">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-hidden="true">&times;</button>
-                                                <h4 id="newMainSyncOrder-title" class="modal-title">报单同步</h4>
-                                            </div>
-                                            <div class="modal-body" >
-                                                <table id="syncOrderTable" class="table table-striped table-bordered table-hover"
-                                                       cellspacing="0" width="100%">
-
-                                                    <thead>
-                                                    <tr>
-                                                        <th>子账户ID</th>
-                                                        <th>主账户编号</th>
-                                                        <th>保单系统编号</th>
-                                                        <th>合约名称</th>
-                                                        <th>买卖</th>
-                                                        <th>开平</th>
-                                                        <th>平今平昨</th>
-                                                        <th>状态</th>
-                                                        <th>成交均价</th>
-                                                        <th>成交数量</th>
-                                                        <th>成交时间</th>
-
-                                                    </tr>
-                                                    </thead>
-
-                                                    <tfoot>
-                                                    <tr>
-                                                        <th>子账户ID</th>
-                                                        <th>主账户编号</th>
-                                                        <th>保单系统编号</th>
-                                                        <th>合约名称</th>
-                                                        <th>买卖</th>
-                                                        <th>开平</th>
-                                                        <th>平今平昨</th>
-                                                        <th>状态</th>
-                                                        <th>成交均价</th>
-                                                        <th>成交数量</th>
-                                                        <th>成交时间</th>
-
-                                                    </tr>
-                                                    </tfoot>
-                                                </table>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">取消
-                                                </button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-                                <!-- /.modal -->
-                                <div class="modal modal-wide fade"  tabindex="-1" role="dialog" id="mainSyncPosition"
-                                     aria-labelledby="newSubAccountLabel" aria-hidden="true">
-                                    <div class="modal-dialog" id="newMainSyncPosition">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-hidden="true">&times;</button>
-                                                <h4 id= "newMainSyncPosition-title" class="modal-title">持仓同步</h4>
-                                            </div>
-                                            <div class="modal-body" >
-                                                <table id="syncPositionTable" class="table table-striped table-bordered table-hover"
-                                                       cellspacing="0" width="100%">
-                                                    <div class="mainSyncPositionToolbar" style="float:left">
-                                                        <button type="button" class="btn btn-success" id="pos-add" data-toggle="modal">
-                                                            添加
-                                                        </button>
-                                                        <button type="button" class="btn btn-danger" id="pos-delete" data-toggle="modal">
-                                                            删除
-                                                        </button>
-                                                    </div>
-                                                    <thead>
-                                                    <tr>
-                                                        <th>子账户ID</th>
-                                                        <th>合约名称</th>
-                                                        <th>多空</th>
-                                                        <th>持仓均价</th>
-                                                        <th>数量</th>
-                                                        <th>开仓日期</th>
-                                                        <th>报单类型</th>
-                                                    </tr>
-                                                    </thead>
-
-                                                    <tfoot>
-                                                    <tr>
-                                                        <th>子账户ID</th>
-                                                        <th>合约名称</th>
-                                                        <th>多空</th>
-                                                        <th>持仓均价</th>
-                                                        <th>数量</th>
-                                                        <th>开仓日期</th>
-                                                        <th>报单类型</th>
-                                                    </tr>
-                                                    </tfoot>
-                                                </table>
-                                                <div class="row clearfix">
-                                                    <div class="col-md-6 column">
-
-                                                            <textarea style="width: 100%;height: 196px;overflow:-moz-scrollbars-vertical;overflow-y:auto;" id="duoCang" readonly>
-                                                            </textarea>
-                                                    </div>
-                                                    <div class="col-md-6 column">
-
-                                                            <textarea style="width: 100%;height: 196px;overflow:-moz-scrollbars-vertical;overflow-y:auto;"  id ="kongCang" readonly>
-                                                            </textarea>
-                                                    </div>
-                                                </div>
-
-
-
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">取消
-                                                </button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-
-
 
                                 <table id="mainAccounts" class="table table-striped table-bordered table-hover"
                                        cellspacing="0" width="100%">
@@ -475,9 +178,6 @@
                                         <button type="button" class="btn btn-danger" id="main-delete" data-toggle="modal">
                                             删除主账户
                                         </button>
-                                        <button type="button" class="btn btn-primary" id="main-sync" data-toggle="modal">
-                                           同步
-                                        </button>
                                     </div>
                                     <thead>
                                     <tr>
@@ -488,8 +188,6 @@
                                         <th>账户ID</th>
                                         <th>账户密码</th>
                                         <th>静态权益</th>
-                                        <th>同步状态</th>
-
                                     </tr>
                                     </thead>
 
@@ -502,8 +200,6 @@
                                         <th>账户ID</th>
                                         <th>账户密码</th>
                                         <th>静态权益</th>
-                                        <th>同步状态</th>
-
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -529,7 +225,6 @@
                                         <button type="button" class="btn btn-danger" id="sub-delete" data-toggle="modal">
                                             删除子账户
                                         </button>
-
                                     </div>
                                     <thead>
                                     <tr>
@@ -597,9 +292,7 @@
 <script src="../../../Source/DataTable-Plugins/api/fnProcessingIndicator.js"></script>
 
 <script src="../js/SSClass/SSToolBar.js"></script>
-<script src="../js/SSClass/SSMainAccountManager.js" charset="gb2312"></script>
 <script src="../js/SSClass/dataTables.scroller.js"></script>
-<script src="../js/SSClass/moment.js"></script>
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
 
@@ -618,21 +311,18 @@
     var selectedIndex = 0;  //mainSelectedIndex
     var subSelectedIndex = 0;  //subSelectedIndex
     var toolBarManger = new SSToolBar($("#restartServer"),$("#connectMainAccount"),$("#onlineCount"),$("#serverStatus"));
-    var mainAccountManager = new SSMainAccountManager("frankzch","123456",function(){
-        refreshMainAccountsTable();
-    });
-
     /**
      * Document加载完毕 更新数据刷新Table绑定点击事件
      */
     $(document).ready(function () {
-        refreshBrokerInfo(1);
-        refreshRiskGroupInfo(1);
-        refreshMoneyRationInfo(1);
+        refreshBrokerInfo();
+        refreshRiskGroupInfo();
+        refreshMoneyRationInfo();
         ifHideMainAccountToolBar(true);
         ifHideSubAccountToolBar(true);
         refreshMainAccountsTable();
-        refreshData(1); //更新数据
+        refreshData(); //更新数据
+
         $('#mainAccounts').on('click', 'tr', function () { //绑定点击事件刷新子账户
 
             selectedIndex = mainAccountTable.row(this).index();
@@ -640,7 +330,6 @@
             updateSubAccounts(selectedIndex);
             refreshSubAccountsTable();
             ifHideMainAccountToolBar(false);
-            subSelectedIndex = 0;
             if(curSubAccounts.length == 0) {
                 ifHideSubAccountToolBar(true);
             }else{
@@ -685,9 +374,10 @@
         if (flag === undefined){
             if (sessionStorage.getItem('mainAccountTableData')){
                 mainAccountTableData = JSON.parse(sessionStorage.getItem('mainAccountTableData'));
-                mainAccounts = JSON.parse(sessionStorage.getItem('mainAccountData'));
+                for (var i = 0; i < mainAccountTableData.length; i++) {
+                    mainAccounts.push(mainAccountTableData[i].inf);
+                }
                 //console.log(mainAccounts);
-                mainAccountManager.InitMainAccountsCheckList(mainAccounts);
                 refreshMainAccountsTable();
                 updateSubAccounts(selectedIndex);
                 refreshSubAccountsTable();
@@ -704,15 +394,11 @@
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
             mainAccountTableData = data.data;
             sessionStorage.setItem('mainAccountTableData',JSON.stringify(mainAccountTableData));
-            console.log(mainAccountTableData);
+            // console.log(mainAccountTableData);
             console.log("走到这里了");
-
             for (var i = 0; i < mainAccountTableData.length; i++) {
                 mainAccounts.push(mainAccountTableData[i].inf);
-                mainAccounts[mainAccounts.length-1].push("获取中");
             }
-            sessionStorage.setItem('mainAccountData',JSON.stringify(mainAccounts));
-            mainAccountManager.InitMainAccountsCheckList(mainAccounts);
             //console.log(mainAccounts);
             refreshMainAccountsTable();
             updateSubAccounts(selectedIndex);
@@ -726,7 +412,6 @@
         });
     }
 
-
     /**
      * 取得交易所详情信息
      */
@@ -737,29 +422,29 @@
                 return;
             }
         }
-            console.log("开始获取交易所信息");
-            $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/BrokersInfo.php', function (data) {
+        console.log("开始获取交易所信息");
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/BrokersInfo.php', function (data) {
 
-                //allBrokersInfo = data;
-                allBrokersInfo['CTP'] = new Array();
-                allBrokersInfo['金仕达'] = new Array();
-                allBrokersInfo['恒生期货'] = new Array();
-                allBrokersInfo['恒生证券'] = new Array();
-                for (var i = 0; i < data.length; i++) {
-                    var tmpInfo = [];
-                    tmpInfo.push(data[i].mapServer2MarketDataAddresses);
-                    tmpInfo.push(data[i].sBrokerName);
+            //allBrokersInfo = data;
+            allBrokersInfo['0'] = new Array();
+            allBrokersInfo['1'] = new Array();
+            allBrokersInfo['2'] = new Array();
+            allBrokersInfo['4'] = new Array();
+            for (var i = 0; i < data.length; i++) {
+                var tmpInfo = [];
+                tmpInfo.push(data[i].mapServer2MarketDataAddresses);
+                tmpInfo.push(data[i].sBrokerName);
 
-                    if (allBrokersInfo[data[i].sChannel]) {
-                        allBrokersInfo[data[i].sChannel].push(tmpInfo);
-                    } else {
-                        allBrokersInfo[data[i].sChannel] = [];
-                    }
+                if (allBrokersInfo[data[i].eChannel]) {
+                    allBrokersInfo[data[i].eChannel].push(tmpInfo);
+                } else {
+                    allBrokersInfo[data[i].eChannel] = [];
                 }
-                sessionStorage.setItem('allBrokerInfo',JSON.stringify(allBrokersInfo));
-                console.log("获取到交易所信息");
-                console.log(allBrokersInfo);
-            });
+            }
+            sessionStorage.setItem('allBrokerInfo',JSON.stringify(allBrokersInfo));
+            console.log("获取到交易所信息");
+            console.log(allBrokersInfo);
+        });
     }
 
     /**
@@ -815,19 +500,17 @@
             curSubAccounts.push(mainAccountTableData[index].subs[i]);
             curSubAccounts[curSubAccounts.length-1][8] = mainAccountTableData[index].inf[4];
         }
-        mainAccountManager.curSubAccounts = curSubAccounts;
     }
 
     /**
      * 刷新主账户表格
      */
     function refreshMainAccountsTable() {
-        ifHideMainAccountToolBar();
         var container = $('#mainAccounts,div.dataTables_scrollBody');
         if ($.fn.dataTable.isDataTable('#mainAccounts')) {
             var tmpOffset = container.scrollTop();
             var table = $('#mainAccounts').dataTable();
-           // var scrollPos=mainAccountTable.scrollTop();
+            // var scrollPos=mainAccountTable.scrollTop();
             mainAccountTable.clear();
             for (var i = 0; i < mainAccounts.length; i++) {
                 mainAccountTable.row.add(mainAccounts[i]);
@@ -916,19 +599,9 @@
         if(mainAccounts.length == 0){
             $('#main-update').hide();
             $('#main-delete').hide();
-            $('#main-sync').hide();
-            return;
         }else{
             $('#main-update').show();
             $('#main-delete').show();
-        }
-
-        if (mainAccounts[selectedIndex][7].localeCompare("获取中")==0 || mainAccounts[selectedIndex][7].localeCompare("已同步") == 0){
-            console.log(mainAccounts[selectedIndex][7]+"开启同步");
-            $('#main-sync').hide();
-        }else{
-
-            $('#main-sync').show();
         }
     }
 
@@ -1257,22 +930,22 @@
         var mainChannelOption = $("#newAccountModal #channel");
         mainChannelOption.empty();
         mainChannelOption.append($('<option>', {
-                    value:'CTP',
+                    value:'0',
                     text: 'CTP'
                 })
         )
         mainChannelOption.append($('<option>', {
-                    value:'金仕达',
+                    value:'1',
                     text: '金仕达'
                 })
         )
         mainChannelOption.append($('<option>', {
-                    value:'恒生期货',
+                    value:'2',
                     text: '恒生期货'
                 })
         )
         mainChannelOption.append($('<option>', {
-                    value:'恒生期货',
+                    value:'4',
                     text: '恒生证券'
                 })
         )
@@ -1340,8 +1013,8 @@
         riskControlOptions.empty();
         for (var i = 0; i < riskGroups.length; i++) {
             riskControlOptions.append($('<option>', {
-                        value: riskGroups[i][1],
-                        text: riskGroups[i][1]
+                        value: riskGroups[i][0],
+                        text: riskGroups[i][0]
                     })
             )
         }
@@ -1367,30 +1040,10 @@
         $(document).on("click", "#newSubModal .btn-primary", updateSubAccount);
         $('#subModal').modal('show');
     });
-   // $(document).on("click", "#newSubModal .btn-primary", updateSubAccount);
 
 
     $(document).on("click", "#sub-delete", function () {
         deleteSubAccount(curSubAccounts[subSelectedIndex]);
-    });
-
-    $(document).on("click", "#main-sync", function () {
-        if (mainAccounts[selectedIndex][7].localeCompare("需要报单同步") == 0){
-            $('#newMainSyncOrder-title').text('报单同步 主账户:'+mainAccounts[selectedIndex][4]+" 通道:"+mainAccounts[selectedIndex][1]+" 经纪公司:"+mainAccounts[selectedIndex][2]);
-            mainAccountManager.updateCurrentMainAccountOrderInfo(selectedIndex,$("#syncOrderTable"));
-            $('#mainSyncOrder').modal('show');
-        }else if(mainAccounts[selectedIndex][7].localeCompare("需要持仓同步") == 0){
-            $('#newMainSyncPosition-title').text('持仓同步 主账户:'+mainAccounts[selectedIndex][4]+" 通道:"+mainAccounts[selectedIndex][1]+" 经纪公司:"+mainAccounts[selectedIndex][2]);
-           mainAccountManager.updateCurrentMainAccountPositionInfo(selectedIndex,$("#syncPositionTable"));
-            $('#mainSyncPosition').modal('show');
-        }
-
-    });
-    $(document).on("click", "#newMainSyncOrder .btn-primary", function(){
-        mainAccountManager.submitSyncOrderStream(selectedIndex)
-    });
-    $(document).on("click", "#newMainSyncPosition .btn-primary", function(){
-        mainAccountManager.submitSyncPositionStream(selectedIndex)
     });
 
     //理论上来说添加修改以后都应该刷新
