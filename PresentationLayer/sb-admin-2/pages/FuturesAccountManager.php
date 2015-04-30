@@ -827,6 +827,8 @@ include_once("Template.php");
 
         $(modal + " #userId").val(data[4]);
         $(modal + " #userPassword").val(data[5]);
+        $(modal + " #userId").attr('disabled','disabled');
+
     }
 
     //填充MainModal
@@ -836,6 +838,8 @@ include_once("Template.php");
         $(modal + " #subPassword").val(data[2]);
         $(modal + " #subName").val(data[6]);
         $(modal + " #subContact").val(data[7]);
+
+        $(modal + " #subId").attr('disabled','disabled');
 
         var mainArray = $(modal + " #mainAccount option");
         for (var i = 0; i < mainArray.length; i++){
@@ -1090,6 +1094,7 @@ include_once("Template.php");
         //clear existing info
         $("#newAccountModal #userId").val("");
         $("#newAccountModal #userPassword").val("");
+        $("#newAccountModal #userId").removeAttr('disabled');
 
         var mainChannelOption = $("#newAccountModal #channel");
         mainChannelOption.empty();
@@ -1163,6 +1168,7 @@ include_once("Template.php");
         $("#newSubModal #subPassword").val("");
         $("#newSubModal #subName").val("");
         $("#newSubModal #subContact").val("");
+        $("#newSubModal #subId").removeAttr('disabled');
 
         var mainAccountOption = $("#newSubModal #mainAccount");
         mainAccountOption.empty();
