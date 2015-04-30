@@ -594,10 +594,11 @@ include_once("Template.php");
         $("#newRiskManagerModal #riskManagerName").val("");
         $("#newRiskManagerModal #riskManagerContact").val("");
 
+        $("#newRiskManagerModal #riskManagerAccount").removeAttr('disabled');
+
         //add subAccounts
         var subAccountUL = $("#newRiskManagerModal #subAccountUL");
         subAccountUL.empty();
-        alert("subaccouts:" + subAccounts.length);
         for (var i = 0; i < subAccounts.length; i++) {
             subAccountUL.append($("<li class='list-group-item'>").text(subAccounts[i][1]));
         }
@@ -611,6 +612,8 @@ include_once("Template.php");
         $("#newRiskManagerModal #riskManagerPassword").val(riskManagerInfo[2]);
         $("#newRiskManagerModal #riskManagerName").val(riskManagerInfo[4]);
         $("#newRiskManagerModal #riskManagerContact").val(riskManagerInfo[5]);
+
+        $("#newRiskManagerModal #riskManagerAccount").attr('disabled','disabled');
 
         var subAccountArray = riskManagerInfo[3].split(",");
 

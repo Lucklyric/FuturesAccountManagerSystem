@@ -1445,6 +1445,7 @@ include_once("Template.php");
     }
 
     function setupRiskManageInfo() {
+        $("#groupName").removeAttr('disabled');
         $("#newRiskModal #black").prop("checked", true);
         var exchangeSelect = $("#newRiskModal #exchange");
         exchangeSelect.empty();
@@ -1477,6 +1478,8 @@ include_once("Template.php");
     function fillRiskModal(){
         var riskGroupData = riskManagerData[selectedIndex];
         $("#groupName").val(riskGroupData[1].replace(/\(期货..\)/g, ""));
+        $("#groupName").attr('disabled','disabled');
+
         if (riskGroupData[2]){//白名单
             $("#white").prop("checked",true);
             $("textarea").val(riskGroupData[2]);

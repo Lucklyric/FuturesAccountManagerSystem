@@ -479,6 +479,11 @@ include_once("Template.php");
 
     //设置费率信息
     function setupFeesettingInfo() {
+        $("#new").removeAttr('disabled');
+        $("#existing").removeAttr('disabled');
+        $("#existingGroup").removeAttr('disabled');
+        $("#feesettingGroup").removeAttr('disabled');
+
         var existingGroupSelect = $("#existingGroup");
         existingGroupSelect.empty();
         for (var i = 0; i < feeSettingData.length; i++) {
@@ -523,6 +528,11 @@ include_once("Template.php");
 
         $("#existing").trigger('click');
         $("#existingGroup").val(feesettingRowData[1]);
+
+        $("#new").attr('disabled','disabled');
+        $("#existing").attr('disabled','disabled');
+        $("#existingGroup").attr('disabled','disabled');
+        $("#feesettingGroup").attr('disabled','disabled');
 
         for (var i = 0; i < instrumentData.length; i++) {
             var found = -1;
