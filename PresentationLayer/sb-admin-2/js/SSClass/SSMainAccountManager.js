@@ -90,7 +90,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                     }else if(tmpResponse == "需要持仓同步"){
 
                         ssMainAccounttManagerInstance.mainAccouts[index][7] = "需要持仓同步";
-                    }else if(tmpResponse == "已链接"){
+                    }else if(tmpResponse == "已连接"){
                         ssMainAccounttManagerInstance.mainAccouts[index][7] = "已同步";
                         ssMainAccounttManagerInstance.needCheckQueue.splice(index,1);
                     }else{
