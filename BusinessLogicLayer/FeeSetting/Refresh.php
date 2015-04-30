@@ -60,13 +60,11 @@ $FinalCombine = array();
 
 if ($obj) {
     foreach ($obj->ColRowData as $colRawData) {
-        $AllFeeRows = array();
-        if (!isset($colRawData[7])) $colRawData[7]=null;
-        $NewRow = new FeeSettingRowClass($colRawData[1], $colRawData[2], $colRawData[3], $colRawData[4], $colRawData[5], $colRawData[6], $colRawData[7]);
-        array_push($AllFeeRows, $colRawData[1], $colRawData[2], $colRawData[3], $colRawData[4], $colRawData[5], $colRawData[6], $colRawData[7]);
-        array_push($FinalCombine, $AllFeeRows);
-
-        //   echo "<br>";
+//        $AllFeeRows = array();
+//        if (!isset($colRawData[7])) $colRawData[7]=null;
+//        $NewRow = new FeeSettingRowClass($colRawData[1], $colRawData[2], $colRawData[3], $colRawData[4], $colRawData[5], $colRawData[6], $colRawData[7]);
+//        array_push($AllFeeRows, $colRawData[1], $colRawData[2], $colRawData[3], $colRawData[4], $colRawData[5], $colRawData[6], $colRawData[7]);
+        array_push($FinalCombine, $colRawData);
     }
 } else {
     echo "Server in maitenance, cannot get MainRows.";

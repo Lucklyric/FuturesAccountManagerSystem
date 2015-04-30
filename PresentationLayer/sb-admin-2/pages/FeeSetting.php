@@ -31,19 +31,6 @@ include_once("Template.php");
                                 </div>
 
                             </div>
-
-                            <!--<div class="row">-->
-                            <!--<span>交易费=期货公司交易的</span>-->
-                            <!--<div class="col-xs-2">-->
-                            <!--<input type="text" class="form-control" id ='ration1' text='1'>倍-->
-                            <!--</div>-->
-                            <!--<div class="col-xs-2">-->
-                            <!--<span>保证金=期货公司交易的</span><input type="text" class="form-control" id="ration2"text="1">倍-->
-                            <!--</div>-->
-
-
-                            <!--</div>-->
-
                         </div>
                     </div>
                     <div class="panel panel-default">
@@ -73,10 +60,10 @@ include_once("Template.php");
                                                         </div>
                                                         <div class="col-md-4 column modal-row">
                                                             <div class="form-group">
-                                                                <div class="radio row clearfix" id="newOrUseExisting">
+                                                                <div class="radio row clearfix">
                                                                     <div style="margin-top: 8px"
                                                                          class="col-md-6 column modal-row">
-                                                                        <label><input type="radio"
+                                                                        <label><input type="radio" id="new"
                                                                                       name="newOrUseExisting" onclick="handleNewGroup()">新建组</label>
                                                                     </div>
                                                                     <div class="col-md-6 column modal-row">
@@ -89,7 +76,7 @@ include_once("Template.php");
                                                                 <div class="radio row clearfix">
                                                                     <div style="margin-top: 8px"
                                                                          class="col-md-6 column modal-row">
-                                                                        <label><input type="radio" name="newOrUseExisting" onclick="handleUseExistingGroup()">使用已有组</label>
+                                                                        <label><input type="radio" id="existing" name="newOrUseExisting" onclick="handleUseExistingGroup()">使用已有组</label>
                                                                     </div>
                                                                     <div class="col-md-6 column modal-row">
                                                                         <select class="form-control" id="existingGroup">
@@ -105,8 +92,16 @@ include_once("Template.php");
                                                             <label style="margin-top: 8px">交易所</label>
                                                         </div>
                                                         <div class="col-md-4 column modal-row">
-                                                            <select class="form-control" id="channel">
-                                                                <option>1</option>
+                                                            <select class="form-control" id="exchange">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-2 column modal-row">
+                                                            <label style="margin-top: 8px">品种</label>
+                                                        </div>
+                                                        <div class="col-md-4 column modal-row">
+                                                            <select class="form-control" id="instrument">
                                                             </select>
                                                         </div>
                                                     </div>
@@ -116,9 +111,9 @@ include_once("Template.php");
                                                         </div>
                                                         <div class="col-md-4 column modal-row">
                                                             <select class="form-control" id="feeType">
-                                                                <option>固定金额</option>
-                                                                <option>百分比</option>
-                                                                <option>万分比</option>
+                                                                <option value="绝对值">绝对值</option>
+                                                                <option value="百分比">百分比</option>
+                                                                <option value="万分比">万分比</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -203,6 +198,7 @@ include_once("Template.php");
                                     </div>
                                     <thead>
                                     <tr>
+                                        <th>编号</th>
                                         <th>组名称</th>
                                         <th>合约</th>
                                         <th>开仓手续费</th>
@@ -215,6 +211,7 @@ include_once("Template.php");
 
                                     <tfoot>
                                     <tr>
+                                        <th>编号</th>
                                         <th>组名称</th>
                                         <th>合约</th>
                                         <th>开仓手续费</th>
@@ -268,6 +265,7 @@ include_once("Template.php");
      * 定义全局变量
      */
 
+    var instrumentData;
     var feeSettingGroups = {};
     var feeSettingTable;
     var feeSettingTableData;
@@ -293,10 +291,7 @@ include_once("Template.php");
                 feeSettingTable.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
             }
-            $('.modal-dialog').modal('show');
         });
-
-
     });
 </script>
 
@@ -314,19 +309,24 @@ include_once("Template.php");
         if (flag === undefined) {
             if (sessionStorage.getItem('ratioTypes')) {
                 feeSettingData = JSON.parse(sessionStorage.getItem('ratioTypes'));
+                instrumentData = JSON.parse(sessionStorage.getItem('instrumentData'));
                 refreshMainTable();
                 return;
             }
         }
+
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/GetAllTradableInstrumentsAndProps.php', function (data) {
+            instrumentData = data.mapExchange2Category2Prop;
+            console.log(instrumentData[0]);
+            sessionStorage.setItem('instrumentData', JSON.stringify(instrumentData));
+            console.log("取到数据");
+        });
 
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/Refresh.php', function (data) {
             feeSettingTableData = data.data;
             console.log(feeSettingTableData[0]);
             for (var i = 0; i < feeSettingTableData.length; i++) {
                 feeSettingData.push(feeSettingTableData[i]);
-//                if (!(feeSettingTableData[i][0] in feeSettingGroups)){
-//                    feeSettingGroups[feeSettingTableData[i][0]] = 1;
-//                }
             }
             console.log("取到数据");
             sessionStorage.setItem('ratioTypes', JSON.stringify(feeSettingData));
@@ -390,6 +390,18 @@ include_once("Template.php");
     $('#confirmRatio').on('click', function () {
         console.log("提交比例修改");
     });
+
+    //clear modal everytime
+    $('#feesettingModal').on('hidden.bs.modal', function (e) {
+        $(this)
+            .find("input,textarea,select")
+            .val('')
+            .end()
+            .find("input[type=checkbox], input[type=radio]")
+            .prop("checked", "")
+            .end();
+    });
+
 </script>
 
 <script>
@@ -404,236 +416,156 @@ include_once("Template.php");
         $("#newFeesettingModal #feesettingGroup").attr('disabled','disabled');
     }
 
-//    function addNewAdminManager(){
-//        //    $Id="12";
-////    $Name="GCtest";
-////    $Password="testpass";
-////    $SubMain="1";
-////    $Restriction="2";
-////    $UserName="GameCloud";
-////    $Contact="CA";
-//
-//        //modal 确定 逻辑处理
-//        var checkedMainAccounts = getCheckedItems().toString();
-//        var adminManagerAccount = $("#newAdminManagerModal #adminManagerAccount").val();
-//        var adminManagerPassword = $("#newAdminManagerModal #adminManagerPassword").val();
-//        var adminManagerName = $("#newAdminManagerModal #adminManagerName").val();
-//        var adminManagerContact = $("#newAdminManagerModal #adminManagerContact").val();
-//        var accountAdmin = $("#newAdminManagerModal #accountAdmin :selected").val();
-//        var moneyAdmin = $("#newAdminManagerModal #moneyAdmin :selected").val();
-//        var riskAdmin = $("#newAdminManagerModal #riskAdmin :selected").val();
-//        var rateAdmin = $("#newAdminManagerModal #rateAdmin :selected").val();
-//        var riskManagerAdmin = $("#newAdminManagerModal #riskManagerAdmin :selected").val();
-//        var restriction = "0-" + accountAdmin + ",1-" + moneyAdmin + ",2-" + riskAdmin + ",3-" + rateAdmin + ",4-" + riskManagerAdmin;
-//
-//        alert(checkedMainAccounts);
-//
-//        //TODO: 应该做 validate
-//        //ajax 发送插入
-//
-//        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Administrator/InsertData.php";
-//
-//        $.ajax({
-//            url: hostpath,
-//            type: "get", //send it through get method
-//            data:{
-//                Id: 0,
-//                Name: adminManagerAccount,
-//                Password: adminManagerPassword,
-//                SubMain: checkedMainAccounts,
-//                Restriction: restriction,
-//                UserName: adminManagerName,
-//                Contact: adminManagerContact,
-//                State: 1
-//            },
-//            success: function(response) {
-//                alert( "Data Loaded: " + response);
-//            },
-//            error: function(xhr) {
-//                //Do Something to handle error
-//            }
-//        });
-//    }
+    function sendRequest(event) {
 
-//    function updateAdminManager(){
-//
-//        var adminManagerInfo = adminManagerData[selectedIndex];
-//        var systemId = adminManagerInfo[0];
-//
-//        var checkedMainAccounts = getCheckedItems().toString();
-//        var adminManagerAccount = $("#newAdminManagerModal #adminManagerAccount").val();
-//        var adminManagerPassword = $("#newAdminManagerModal #adminManagerPassword").val();
-//        var adminManagerName = $("#newAdminManagerModal #adminManagerName").val();
-//        var adminManagerContact = $("#newAdminManagerModal #adminManagerContact").val();
-//        var accountAdmin = $("#newAdminManagerModal #accountAdmin :selected").val();
-//        var moneyAdmin = $("#newAdminManagerModal #moneyAdmin :selected").val();
-//        var riskAdmin = $("#newAdminManagerModal #riskAdmin :selected").val();
-//        var rateAdmin = $("#newAdminManagerModal #rateAdmin :selected").val();
-//        var riskManagerAdmin = $("#newAdminManagerModal #riskManagerAdmin :selected").val();
-//        var restriction = "0-" + accountAdmin + ",1-" + moneyAdmin + ",2-" + riskAdmin + ",3-" + rateAdmin + ",4-" + riskManagerAdmin;
-//
-//        alert(checkedMainAccounts);
-//
-//        //TODO: 应该做 validate
-//        //ajax 发送插入
-//
-//        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Administrator/InsertData.php";
-//
-//        $.ajax({
-//            url: hostpath,
-//            type: "get", //send it through get method
-//            data:{
-//                Id: systemId,
-//                Name: adminManagerAccount,
-//                Password: adminManagerPassword,
-//                SubMain: checkedMainAccounts,
-//                Restriction: restriction,
-//                UserName: adminManagerName,
-//                Contact: adminManagerContact,
-//                State: 3
-//            },
-//            success: function(response) {
-//                alert( "Data Loaded: " + response);
-//            },
-//            error: function(xhr) {
-//                //Do Something to handle error
-//            }
-//        });
-//    }
+       // ["编号","组名称","合约","开仓手续费","平仓手续费","平今手续费","手续费类型","保证金比例"]
 
-//    function deleteAdminManager(){
-//        var adminManagerInfo = adminManagerData[selectedIndex];
-//
-//        var adminManagerAccount = adminManagerInfo[1];
-//        var adminManagerPassword = adminManagerInfo[2];
-//        var checkedMainAccounts = adminManagerInfo[3];
-//        var systemId = adminManagerInfo[0];
-//        var adminManagerName = adminManagerInfo[5];
-//        var adminManagerContact = adminManagerInfo[6];
-//        var restriction = adminManagerInfo[4];
-//
-//        //TODO: 应该做 validate
-//        //ajax 发送插入
-//
-//        //TODO: PHP有问题，修改PHP
-//        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Administrator/InsertData.php";
-//
-//        $.ajax({
-//            url: hostpath,
-//            type: "get", //send it through get method
-//            data:{
-//                Name: adminManagerAccount,
-//                Password: adminManagerPassword,
-//                SubMain: checkedMainAccounts,
-//                Id: systemId,
-//                Restriction: restriction,
-//                UserName: adminManagerName,
-//                Contact: adminManagerContact,
-//                State: 2
-//            },
-//            success: function(response) {
-//                alert( "Data Loaded: " + response);
-//            },
-//            error: function(xhr) {
-//                //Do Something to handle error
-//            }
-//        });
-//    }
+        var data;
+        if (event === undefined){
+            var dataToDelete = feeSettingData[selectedIndex];
+            data = {
+                State: 2,
+                编号: dataToDelete[0]
+            };
+        }else {
+            data = {
+                State: event.data.state,
+                编号: 0,
+                组名称: null,
+                合约: null,
+                开仓手续费: null,
+                平仓手续费: null,
+                平今手续费: null,
+                手续费类型: null,
+                保证金比例: null
+            };
+            if (event.data.state == 3) {
+                data["编号"] = feeSettingData[selectedIndex][0];
+            }
 
-    //设置费率信息
-    function setFeesettingInfo() {
-        //clear existing contents
-        $("#newFeesettingModal #openPositionFee").val("");
-        $("#newFeesettingModal #closePositionFee").val("");
-        $("#newFeesettingModal #closeNowFee").val("");
-        $("#newFeesettingModal #deposit").val("");
+            if ($("#newFeesettingModal #new").prop("checked")) {
+                data["组名称"] = $("#feesettingGroup").val();
+            } else {
+                data["组名称"] = $("#newFeesettingModal #existingGroup option:selected").text();
+            }
 
-        for (var groupName in feeSettingGroups){
-            alert(groupName);
+            data["合约"] = $("#newFeesettingModal #instrument option:selected").text();
+            data["开仓手续费"] = $("#openPositionFee").val();
+            data["平仓手续费"] = $("#closePositionFee").val();
+            data["平今手续费"] = $("#closeNowFee").val();
+            data["手续费类型"] = $("#feeType option:selected").text();
+            data["保证金比例"] = $("#deposit").val();
         }
-//        $("#newAdminManagerModal #accountAdmin option").eq(0).attr("selected","selected");
-//        $("#newAdminManagerModal #moneyAdmin option").eq(0).attr("selected","selected");
-//        $("#newAdminManagerModal #riskAdmin option").eq(0).attr("selected","selected");
-//        $("#newAdminManagerModal #rateAdmin option").eq(0).attr("selected","selected");
-//        $("#newAdminManagerModal #riskManagerAdmin option").eq(0).attr("selected","selected");
-//
-//        //add mainAccounts
-//        var mainAccountUL = $("#newAdminManagerModal #mainAccountUL");
-//        mainAccountUL.empty();
-//        for (var i = 0; i < mainAccountTableData.length; i++) {
-//            mainAccountUL.append($("<li class='list-group-item'>").text(mainAccountTableData[i].inf[0]));
-//        }
-//
-//        updateCheckBox();
+
+        //TODO: 应该做 validate
+        //ajax 发送插入
+
+        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/InsertData.php";
+
+        $.ajax({
+            url: hostpath,
+            type: "get", //send it through get method
+            data: data,
+            success: function (response) {
+                alert("Data Loaded: " + response);
+                refreshData(1);
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+
     }
 
-//    function fillAdminManagerModal(){
-//        var adminManagerInfo = adminManagerData[selectedIndex];
-//
-//        $("#newAdminManagerModal #adminManagerAccount").val(adminManagerInfo[1]);
-//        $("#newAdminManagerModal #adminManagerPassword").val(adminManagerInfo[2]);
-//        $("#newAdminManagerModal #adminManagerName").val(adminManagerInfo[5]);
-//        $("#newAdminManagerModal #adminManagerContact").val(adminManagerInfo[6]);
-//
-//        var mainAccountArray = adminManagerInfo[3].split(",");
-//
-//        $("#mainAccountUL li").each(function (idx, li) {
-//            var subId = $(li).text();
-//            if (mainAccountArray.indexOf(subId) > -1) //找到
-//                $(li).click();  //高亮
-//        });
-//
-//        var restrictionArray = adminManagerInfo[4].split(",");
-//
-//        var accountAdmin = restrictionArray[0].slice(-1);
-//        var accountAdminOption = $("#newAdminManagerModal #accountAdmin option");
-//        accountAdminOption.eq(accountAdmin).attr('selected', 'selected');
-//
-//        var moneyAdmin = restrictionArray[1].slice(-1);
-//        var moneyAdminOption = $("#newAdminManagerModal #moneyAdmin option");
-//        moneyAdminOption.eq(moneyAdmin).attr('selected', 'selected');
-//
-//        var riskAdmin = restrictionArray[2].slice(-1);
-//        var riskAdminOption = $("#newAdminManagerModal #riskAdmin option");
-//        riskAdminOption.eq(riskAdmin).attr('selected', 'selected');
-//
-//        var rateAdmin = restrictionArray[3].slice(-1);
-//        var rateAdminOption = $("#newAdminManagerModal #rateAdmin option");
-//        rateAdminOption.eq(rateAdmin).attr('selected', 'selected');
-//
-//        var riskManagerAdmin = restrictionArray[4].slice(-1);
-//        var riskManagerAdminOption = $("#newAdminManagerModal #riskManagerAdmin option");
-//        riskManagerAdminOption.eq(riskManagerAdmin).attr('selected', 'selected');
-//
-//    }
+    //设置费率信息
+    function setupFeesettingInfo() {
+        var existingGroupSelect = $("#existingGroup");
+        existingGroupSelect.empty();
+        for (var i = 0; i < feeSettingData.length; i++) {
+            if ($("#existingGroup option[value=" + feeSettingData[i][2] + "]").length == 0) {
+                existingGroupSelect.append($('<option>', {
+                    value: feeSettingData[i][1],
+                    text: feeSettingData[i][1]
+                }));
+            }
+        }
 
-//    function getCheckedItems () {
-//        var checkedItems = [], counter = 0;
-//        $("#mainAccountUL li.active").each(function (idx, li) {
-//            checkedItems[counter] = $(li).text();
-//            counter++;
-//        });
-//        return checkedItems;
-//    }
+        var exchangeSelect = $("#newFeesettingModal #exchange");
+        exchangeSelect.empty();
+        for (var i = 0; i < instrumentData.length; i++) {
+            exchangeSelect.append($('<option>', {
+                value: i,
+                text: instrumentData[i]["Key"]
+            }))
+        }
+        exchangeSelect.on('change', function () {
+            var instrumentSelect = $("#newFeesettingModal #instrument");
+            var instrumentDictArray = instrumentData[this.value]["Value"];
+            console.log(instrumentDictArray);
+            instrumentSelect.empty();
+            for (var i = 0; i < instrumentDictArray.length; i++) {
+                instrumentSelect.append($('<option>', {
+                    value: i,
+                    text: instrumentDictArray[i]["Key"]
+                }))
+            }
+        });
+
+        exchangeSelect.eq(0).attr('selected', 'selected');
+        exchangeSelect.trigger('change');
+        $("#newFeesettingModal #new").trigger('click');
+        $("#feeType").val("绝对值");
+    }
+
+    function fillFeesettingModal(){
+
+        var feesettingRowData = feeSettingData[selectedIndex];
+
+        $("#existing").trigger('click');
+        $("#existingGroup").val(feesettingRowData[1]);
+
+        for (var i = 0; i < instrumentData.length; i++) {
+            var found = -1;
+            var instArray = instrumentData[i]["Value"];
+            for (var j = 0; j < instArray.length; j++){
+                if (feesettingRowData[2] == instArray[j]["Key"]){
+                    found = j;
+                    $("#newFeesettingModal #exchange").val(i);
+                    $("#newFeesettingModal #exchange").trigger('change');
+                    $("#newFeesettingModal #instrument").val(found);
+                    break;
+                }
+            }
+            if (found > -1) break;
+        }
+
+        $("#openPositionFee").val(feesettingRowData[3]);
+        $("#closePositionFee").val(feesettingRowData[4]);
+        $("#closeNowFee").val(feesettingRowData[5]);
+        $("#feeType").val(feesettingRowData[6]);
+        $("#deposit").val(feesettingRowData[7]);
+
+    }
 
     $(document).on("click", "#feesetting-add", function () {
         $(document).off("click", "#newFeesettingModal .btn-primary");
-        setFeesettingInfo();
-//        $(document).on("click", "#newFeesettingModal .btn-primary", addNewAdminManager);
+        setupFeesettingInfo();
+        $(document).on("click", "#newFeesettingModal .btn-primary", {state: 1}, sendRequest);
         $('#feesettingModal').modal('show');
     });
 
-//    $(document).on("click", "#admin-update", function () {
-//        $(document).off("click", "#newAdminManagerModal .btn-primary");
-//        setAdminManagerInfo();
-//        fillAdminManagerModal();
-//        $(document).on("click", "#newAdminManagerModal .btn-primary", updateAdminManager);
-//        $('#adminManagerModal').modal('show');
-//    });
+    $(document).on("click", "#feesetting-update", function () {
+        $(document).off("click", "#newFeesettingModal .btn-primary");
+        setupFeesettingInfo();
+        fillFeesettingModal();
+        $(document).on("click", "#newFeesettingModal .btn-primary", {state: 3}, sendRequest);
+        $('#feesettingModal').modal('show');
+    });
 
-//    $(document).on("click", "#admin-delete", function () {
-//        deleteAdminManager();
-//    });
+    $(document).on("click", "#feesetting-delete", function () {
+        sendRequest();
+    });
+
 </script>
 
 </body>

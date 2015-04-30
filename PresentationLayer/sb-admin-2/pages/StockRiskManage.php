@@ -61,8 +61,6 @@ include_once("Template.php");
         src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
 
-<![endif]-->
-
 <style>
     .state-icon {
         left: -5px;
@@ -189,14 +187,6 @@ include_once("Template.php");
                                                                        id="instrument"
                                                                        value="" placeholder="股票代码"/>
                                                             </div>
-                                                            <div class="col-xs-2 column modal-row">
-                                                                <div class="row clearfix">
-                                                                    <input type="checkbox" id="main"> 主力</input>
-                                                                </div>
-                                                                <div class="row clearfix">
-                                                                    <input type="checkbox" id="minor"> 次主力</input>
-                                                                </div>
-                                                            </div>
                                                             <div class="col-xs-2 column">
                                                                 <button type="button" id="rest-add"
                                                                         class="btn btn-default form-control"
@@ -215,20 +205,6 @@ include_once("Template.php");
                                                                 <textarea class="form-control" rows="5"></textarea>
                                                             </div>
                                                             <div class="col-xs-2 column">
-                                                                <div class="row clearfix">
-                                                                    <button type="button" class="btn btn-default"
-                                                                            id="rest-addAllMain"
-                                                                            style="margin-top: 10px; margin-left: 15px">
-                                                                        添加全部主力
-                                                                    </button>
-                                                                </div>
-                                                                <div class="row clearfix">
-                                                                    <button type="button" class="btn btn-default"
-                                                                            id="rest-addAllMinor"
-                                                                            style="margin-top: 10px; margin-left: 15px">
-                                                                        添加全部次主力
-                                                                    </button>
-                                                                </div>
                                                                 <div class="row clearfix">
                                                                     <button type="button" class="btn btn-default"
                                                                             id="rest-addST"
@@ -1372,12 +1348,6 @@ include_once("Template.php");
     $(document).on("click", "#rest-add", function () {
 //        var newRestriction = $("#newRiskModal #instrument option:selected").text();
         var newRestriction = $("#newRiskModal #instrument").val();
-        if ($('#main').prop('checked')) {
-            newRestriction += "_主力";
-        }
-        if ($('#minor').prop('checked')) {
-            newRestriction += "_次主力";
-        }
 
         var restrictionText = $("textarea");
         if (!restrictionText.val()) {
@@ -1390,26 +1360,6 @@ include_once("Template.php");
     //清除合约限制
     $(document).on("click", "#rest-clear", function () {
         $("textarea").val("");
-    });
-
-    //添加全部主力
-    $(document).on("click", "#rest-addAllMain", function () {
-        var restrictionText = $("textarea");
-        if (!restrictionText.val()) {
-            restrictionText.val("全部主力合约")
-        } else {
-            restrictionText.val(restrictionText.val() + ";" + "全部主力合约");
-        }
-    });
-
-    //添加全部次主力
-    $(document).on("click", "#rest-addAllMinor", function () {
-        var restrictionText = $("textarea");
-        if (!restrictionText.val()) {
-            restrictionText.val("全部次主力合约")
-        } else {
-            restrictionText.val(restrictionText.val() + ";" + "全部次主力合约");
-        }
     });
 
     //添加ST

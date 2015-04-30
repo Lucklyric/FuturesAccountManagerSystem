@@ -139,7 +139,7 @@ include_once("Template.php");
 
                                 <!--Modal-->
                                 <div class="modal fade" tabindex="-1" role="dialog" id="riskModal"
-                                     aria-labelledby="newMainAccountLabel" aria-hidden="true">
+                                     aria-labelledby="riskModal" aria-hidden="true">
                                     <div class="modal-dialog" id="newRiskModal">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -1447,6 +1447,7 @@ include_once("Template.php");
     function setupRiskManageInfo() {
         $("#newRiskModal #black").prop("checked", true);
         var exchangeSelect = $("#newRiskModal #exchange");
+        exchangeSelect.empty();
         for (var i = 0; i < instrumentData.length; i++) {
             exchangeSelect.append($('<option>', {
                 value: i,
@@ -1454,12 +1455,12 @@ include_once("Template.php");
             }))
         }
         exchangeSelect.on('change', function () {
-            var exchangeSelect = $("#newRiskModal #instrument");
+            var instrumentSelect = $("#newRiskModal #instrument");
             var instrumentDictArray = instrumentData[this.value]["Value"];
             console.log(instrumentDictArray);
-            exchangeSelect.empty();
+            instrumentSelect.empty();
             for (var i = 0; i < instrumentDictArray.length; i++) {
-                exchangeSelect.append($('<option>', {
+                instrumentSelect.append($('<option>', {
                     value: i,
                     text: instrumentDictArray[i]["Key"]
                 }))
