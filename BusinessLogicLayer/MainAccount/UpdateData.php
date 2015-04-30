@@ -40,7 +40,7 @@ $MaxMoney="200";
 //$data="";
 if($TableName && $State && $Channel && $CompanyName && $CompanyServer && $AccountId && $AccountPassword && $MaxMoney){
     $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=0"."&通道=".$Channel."&经纪公司名称=".$CompanyName."&经纪公司服务器=".$CompanyServer."&账户ID=".$AccountId."&账户密码=".$AccountPassword."&静态权益=".$StaticEquity."&最大可分配金额=".$MaxMoney;
-    echo $data;
+   // echo $data;
 }else{
 //        $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=0"."&通道=".$Channel."&经纪公司名称=".$CompanyName."&经纪公司服务器=".$CompanyServer."&账户ID=".$AccountId."&账户密码=".$AccountPassword."&静态权益=".$StaticEquity."&最大可分配金额=".$MaxMoney;
 //        echo $data;
@@ -49,7 +49,7 @@ if($TableName && $State && $Channel && $CompanyName && $CompanyServer && $Accoun
 }
 
 //echo $data;
-echo "<br>";
+
 
 $testAccount = new MainAccountManager();
 $SubAccount = new SubAccountManager();

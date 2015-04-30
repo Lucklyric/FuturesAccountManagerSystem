@@ -893,6 +893,8 @@ include_once("Template.php");
             },
             success: function (response) {
                // alert("Data Loaded: " + response);
+                $('#generalNotificationBody').text(response);
+                $('#generalNotification').modal('show');
                 refreshData(1);
             },
             error: function (xhr) {
@@ -925,6 +927,8 @@ include_once("Template.php");
             },
             success: function (response) {
                // alert("Data Loaded: " + response);
+                $('#generalNotificationBody').text(response);
+                $('#generalNotification').modal('show');
                 refreshData(1);
             },
             error: function (xhr) {
@@ -957,6 +961,8 @@ include_once("Template.php");
             },
             success: function (response) {
                 //alert("Data Loaded: " + response);
+                $('#generalNotificationBody').text(response);
+                $('#generalNotification').modal('show');
                 selectedIndex = 0;
                 refreshData(1);
             },
@@ -995,6 +1001,8 @@ include_once("Template.php");
                 ContactInfo: subContact
             },
             success: function (response) {
+                $('#generalNotificationBody').text(response);
+                $('#generalNotification').modal('show');
                 //alert("Data Loaded: " + response);
                 refreshData(1);
             },
@@ -1032,6 +1040,8 @@ include_once("Template.php");
             },
             success: function (response) {
                // alert("Data Loaded: " + response);
+                $('#generalNotificationBody').text(response);
+                $('#generalNotification').modal('show');
                 refreshData(1);
             },
             error: function (xhr) {
@@ -1053,7 +1063,8 @@ include_once("Template.php");
                 SubSystemId: subSystemId
             },
             success: function (response) {
-
+                $('#generalNotificationBody').text(response);
+                $('#generalNotification').modal('show');
                 subSelectedIndex = 0;
                 refreshData(1);
             },

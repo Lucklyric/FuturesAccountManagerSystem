@@ -16,7 +16,7 @@ if ($TableName) {
     foreach ($_GET as $key => $value) {
         $data .= "&" . $key . "=" . $value;
     }
-    echo $data;
+   // echo $data;
 } else {
 
     echo "Some data is missing!";
@@ -24,7 +24,7 @@ if ($TableName) {
 }
 
 //echo $data;
-echo "<br>";
+
 
 $testAccount = new FeeSettingManager();
 if ($data) {

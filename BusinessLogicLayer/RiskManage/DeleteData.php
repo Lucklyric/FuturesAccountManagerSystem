@@ -34,16 +34,14 @@
     
     if($TableName && $State && $Id && $GroupName && $TradePermitTime && $OpenPositionForbiddenTime && $SellSharesTime && $RiskAlertLine && $RiskAlertLog && $RiskForbiddenLine && $RiskForbiddenLog && $EquityAlertLine &&  $EquityBalanceLine && $OvernightSellShareLine && $OvernightSellShareDetail && $DayLimitation){
         $data=$initialdata.$port."&AdminAccount=".$AdminAccount."&AdminPassword=".$AdminPassword."&TableName=".$TableName."&RowState=".$State."&编号=".$Id."&组名称=".$GroupName."&允许交易合约=".$TradePermitTime."&禁止开仓时间段=".$OpenPositionForbiddenTime."&减仓时间段=".$SellSharesTime."&风险度警告线=".$RiskAlertLine."&风险度警告线详细=".$RiskAlertLog."&风险度禁开线=".$RiskForbiddenLine."&风险度禁开线详细=".$RiskForbiddenLog."&权益警告线=".$EquityAlertLine."&权益强平线=".$EquityBalanceLine."&隔夜减仓线=".$OvernightSellShareLine."&隔夜减仓线详细=".$OvernightSellShareDetail."&每日撤单次数上限=".$DayLimitation;
-        echo $data;
+        //echo $data;
     }else{
         
         echo "Some data is missing!";
         
     }
     
-    //echo $data;
-    echo "<br>";
-    
+
     $RiskManager = new RiskManager();
     if($data){
         

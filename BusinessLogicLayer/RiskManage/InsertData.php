@@ -18,15 +18,13 @@
         {
             $data .= "&".$key."=".$value;
         }
-        echo $data;
+       // echo $data;
     }else{
     
         echo "Some data is missing!";
     
     }
-    
-    //echo $data;
-    echo "<br>";
+
     
     $RiskManager = new RiskManager();
     if($data){

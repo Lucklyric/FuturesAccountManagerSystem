@@ -35,7 +35,7 @@
     $data="";
     if($TableName && $State && $Channel && $CompanyName && $CompanyServer && $AccountId && $AccountPassword){
     $data=$initialdata.$TableName."&state=".$State."&通道=".$Channel."&经纪公司=".$CompanyName."&经纪公司服务器=".$CompanyServer."&账户ID=".$AccountId."&账户密码=".$AccountPassword;
-        echo $data;
+       // echo $data;
     }else{
     
         echo "Some data is missing!";

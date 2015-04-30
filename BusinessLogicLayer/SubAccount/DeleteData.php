@@ -48,16 +48,15 @@
     if($TableName && $State ){
         $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".
             $SubSystemId;
-        echo "This is hardcoded test data:<br>";
-        echo $data;
+//        echo "This is hardcoded test data:<br>";
+//        echo $data;
     }else{
         
         echo "Some data is missing!";
         
     }
     
-    //echo $data;
-    echo "<br>";
+
     
     $testAccount = new SubAccountManager();
     if($data){

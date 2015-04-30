@@ -43,16 +43,14 @@
     $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$Id.
         "&子账户名称=".$SubAccountName."&主账户编号=".$MainId."&出入金=".$InAndOut."&更新时间=".$UpdateTime."&优先劣后=".
         $Priority."&备注=".$Comment;
-        echo $data;
+        //echo $data;
     }else{
     
         echo "Some data is missing!";
     
     }
     
-    //echo $data;
-    echo "<br>";
-    
+
     $SettlementAccount = new SettlementAccountManager();
    
     if($data){

@@ -35,7 +35,7 @@
     //admin=frankzch&password=123456&tablename=Admin&state=1&编号=1&名称=test&密码=new&附属主账户=0.1&模块权限=0.2&姓名=0.1&联系方式=1
     if($TableName && $State ){
         $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$Id."&名称=".$Name."&密码=".$Password."&附属主账户=".$SubMain."&模块权限=".$Restriction."&姓名=".$UserName."&联系方式=".$Contact;
-        echo $data;
+       // echo $data;
     }else{
         
         echo "Some data is missing!";
@@ -43,7 +43,7 @@
     }
     
     //echo $data;
-    echo "<br>";
+
     
     $testAccount = new AdministratorManager();
     if($data){

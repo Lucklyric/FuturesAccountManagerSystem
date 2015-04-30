@@ -48,8 +48,7 @@
     
     }
     
-    //echo $data;
-    echo "<br>";
+
 
     $testAccount = new MainAccountManager();
     $SubAccount = new SubAccountManager();

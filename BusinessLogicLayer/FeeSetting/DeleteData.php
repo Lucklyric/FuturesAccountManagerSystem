@@ -36,7 +36,7 @@
     
     if($TableName && $State){
         $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$Id."&组名称=".$GroupName."&合约=".$Contract."&开仓手续费=".$OpenPositionFee."&平仓手续费=".$EqualPositionFee."&平今手续费=".$EqualNowFee."&手续费类型=".$FeeType."&保证金比例=".$EnsurementsPercentage;
-        echo $data;
+        //echo $data;
     }else{
         
         echo "Some data is missing!";
@@ -44,7 +44,7 @@
     }
     
     //echo $data;
-    echo "<br>";
+
     
     $testAccount = new FeeSettingManager();
     if($data){
