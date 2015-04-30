@@ -371,26 +371,26 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                     var curPos = ssMainAccounttManagerInstance.currentQueryPos[i];
                     var tmpRawData = [];
                     tmpRawData.push("");
-                    tmpRawData.push(curPos['Pos']['InstrumentID']);
+                    tmpRawData.push(curPos['InstrumentID']);
 
-                    if (ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]===undefined){
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']] =[];
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query'] =[];
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin'] =[];
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query']['duo'] =0;
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query']['kong'] =0;
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin']['duo'] =0;
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin']['kong'] =0;
+                    if (ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]===undefined){
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']] =[];
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['query'] =[];
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['origin'] =[];
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['query']['duo'] =0;
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['query']['kong'] =0;
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['origin']['duo'] =0;
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['origin']['kong'] =0;
                     }
-                    if(curPos['Pos']['LongOrShort'] == 'true'){
+                    if(curPos['LongOrShort'] == 'true'){
                         tmpRawData.push('多');
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query']['duo'] += curPos['Pos']['Volume'];;
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['query']['duo'] += curPos['Volume'];
                     }else{
                         tmpRawData.push('空');
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query']['kong'] += curPos['Pos']['Volume'];;
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['query']['kong'] += curPos['Volume'];
                     }
-                    tmpRawData.push(curPos['Pos']['OpenPrice']);
-                    tmpRawData.push(curPos['Pos']['Volume']);
+                    tmpRawData.push(curPos['OpenPrice']);
+                    tmpRawData.push(curPos['Volume']);
                     tmpRawData.push(curPos['OpenDay']);
                     tmpRawData.push('投机');
                     ssMainAccounttManagerInstance.currentPosTableData.push(tmpRawData);
@@ -557,19 +557,19 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
 
                 for (var i = 0 ; i < ssMainAccounttManagerInstance.currentOriginPos.length ; i++) {
                     var curPos = ssMainAccounttManagerInstance.currentOriginPos[i];
-                    if (ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]===undefined){
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']] =[];
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query'] =[];
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin'] =[];
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query']['duo'] =0;
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['query']['kong'] =0;
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin']['duo'] =0;
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin']['kong'] =0;
+                    if (ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]===undefined){
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']] =[];
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['query'] =[];
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['origin'] =[];
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['query']['duo'] =0;
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['query']['kong'] =0;
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['origin']['duo'] =0;
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['origin']['kong'] =0;
                     }
-                    if(curPos['Pos']['LongOrShort'] == 'true'){
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin']['duo'] += curPos['Pos']['Volume'];;
+                    if(curPos['LongOrShort'] == 'true'){
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['origin']['duo'] += curPos['Volume'];
                     }else{
-                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['Pos']['InstrumentID']]['origin']['kong'] += curPos['Pos']['Volume'];;
+                        ssMainAccounttManagerInstance.currentAllInstrumentIdDic[curPos['InstrumentID']]['origin']['kong'] += curPos['Volume'];
                     }
                 }
 
@@ -636,11 +636,11 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
          * 需要删除的信息
          */
         for (var i = 0; i < ssMainAccounttManagerInstance.currentQueryPos.length; i++) {
-            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['Pos']['InstrumentID'];
-            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['Pos']['LongOrShort'];
-            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['Pos']['TodayOrHistoryPos'];
-            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['Pos']['OpenPrice'];
-            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['Pos']['Volume'];
+            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['InstrumentID'];
+            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['LongOrShort'];
+            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['TodayOrHistoryPos'];
+            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['OpenPrice'];
+            dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['Volume'];
             dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['PosID'];
             dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['OpenDay'];
             dataStream += "&test="+ ssMainAccounttManagerInstance.currentQueryPos[i]['SubAccountID'];
