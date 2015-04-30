@@ -130,7 +130,7 @@ include_once("Template.php");
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            入金
+                            风控
                         </div>
 
                         <div class="panel-body">
@@ -1487,7 +1487,7 @@ include_once("Template.php");
             $("#black").prop("checked",true);
             $("textarea").val(riskGroupData[3]);
         }
-        if (riskGroupData[1].match(/普通\)/g, "")){//普通
+        if (riskGroupData[1].match(/普通\)/g)){//普通
 
             $("#normal-warningLine").val(riskGroupData[10]);
             $("#normal-forceCloseLine").val(riskGroupData[11]);
@@ -1502,7 +1502,7 @@ include_once("Template.php");
 
             $('.nav-tabs a[href="#normal"]').trigger('click');
 
-        }else if (riskGroupData[1].match(/净值\)/g, "")){//净值
+        }else if (riskGroupData[1].match(/净值\)/g)){//净值
 
             $("#abs-forceCloseLine").val(riskGroupData[19]);
             $("#abs-warningLine").val(riskGroupData[20]);

@@ -89,77 +89,22 @@ include_once("Template.php");
                                                     </div>
                                                     <div class="row clearfix">
                                                         <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px">交易所</label>
+                                                            <label style="margin-top: 8px">品种代码</label>
                                                         </div>
                                                         <div class="col-md-4 column modal-row">
-                                                            <select class="form-control" id="exchange">
-                                                            </select>
+                                                            <input class="form-control" type="text"
+                                                                   name="instrument" id="instrument"
+                                                                   value="" placeholder="品种代码(必填)"/>
                                                         </div>
                                                     </div>
                                                     <div class="row clearfix">
                                                         <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px">品种</label>
-                                                        </div>
-                                                        <div class="col-md-4 column modal-row">
-                                                            <select class="form-control" id="instrument">
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row clearfix">
-                                                        <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px">手续费类型</label>
-                                                        </div>
-                                                        <div class="col-md-4 column modal-row">
-                                                            <select class="form-control" id="feeType">
-                                                                <option value="绝对值">绝对值</option>
-                                                                <option value="百分比">百分比</option>
-                                                                <option value="万分比">万分比</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row clearfix">
-                                                        <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px">开仓手续费</label>
+                                                            <label style="margin-top: 8px">手续费率</label>
                                                         </div>
                                                         <div class="col-md-4 column modal-row">
                                                             <input class="form-control" type="text"
                                                                    name="openPositionFee" id="openPositionFee"
-                                                                   value="" placeholder="开仓手续费(必填)"/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row clearfix">
-                                                        <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px">平仓手续费</label>
-                                                        </div>
-                                                        <div class="col-md-4 column modal-row">
-                                                            <input class="form-control" type="text"
-                                                                   name="closePositionFee" id="closePositionFee"
-                                                                   value="" placeholder="平仓手续费(必填)"/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row clearfix">
-                                                        <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px">平今手续费</label>
-                                                        </div>
-                                                        <div class="col-md-4 column modal-row">
-                                                            <input class="form-control" type="text"
-                                                                   name="closeNowFee" id="closeNowFee"
-                                                                   value="" placeholder="平今手续费(必填)"/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row clearfix">
-                                                        <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px">保证金比例</label>
-                                                        </div>
-                                                        <div class="col-md-4 column modal-row">
-                                                            <input class="form-control" type="text"
-                                                                   name="deposit" id="deposit"
-                                                                   value="" placeholder="保证金比例(可选)"/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row clearfix">
-                                                        <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px">(保证金填0代表使用默认值)</label>
+                                                                   value="" placeholder="手续费率(必填)"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -307,8 +252,8 @@ include_once("Template.php");
         console.log("开始刷新数据");
         //mainAccountTable.fnProcessingIndicator();
         if (flag === undefined) {
-            if (sessionStorage.getItem('ratioTypes')) {
-                feeSettingData = JSON.parse(sessionStorage.getItem('ratioTypes'));
+            if (sessionStorage.getItem('stockFeeData')) {
+                feeSettingData = JSON.parse(sessionStorage.getItem('stockFeeData'));
                 instrumentData = JSON.parse(sessionStorage.getItem('instrumentData'));
                 refreshMainTable();
                 return;
@@ -326,11 +271,12 @@ include_once("Template.php");
             feeSettingTableData = data.data;
             console.log(feeSettingTableData[0]);
             for (var i = 0; i < feeSettingTableData.length; i++) {
-                if (feeSettingTableData[i][1].match(/\(期货\)/)){
+                if (feeSettingTableData[i][1].match(/\(证券\)/)){
                     feeSettingData.push(feeSettingTableData[i]);
-                }            }
+                }
+            }
             console.log("取到数据");
-            sessionStorage.setItem('ratioTypes', JSON.stringify(feeSettingData));
+            sessionStorage.setItem('stockFeeData', JSON.stringify(feeSettingData));
             refreshMainTable();
         });
     }
@@ -445,17 +391,17 @@ include_once("Template.php");
             }
 
             if ($("#newFeesettingModal #new").prop("checked")) {
-                data["组名称"] = $("#feesettingGroup").val() + "(期货)";
+                data["组名称"] = $("#feesettingGroup").val() + "(证券)";
             } else {
-                data["组名称"] = $("#newFeesettingModal #existingGroup option:selected").text() + "(期货)";
+                data["组名称"] = $("#newFeesettingModal #existingGroup option:selected").text() + "(证券)";
             }
 
-            data["合约"] = $("#newFeesettingModal #instrument option:selected").text();
+            data["合约"] = $("#newFeesettingModal #instrument").val();
             data["开仓手续费"] = $("#openPositionFee").val();
-            data["平仓手续费"] = $("#closePositionFee").val();
-            data["平今手续费"] = $("#closeNowFee").val();
-            data["手续费类型"] = $("#feeType option:selected").text();
-            data["保证金比例"] = $("#deposit").val();
+            data["平仓手续费"] = $("#openPositionFee").val();
+            data["平今手续费"] = $("#openPositionFee").val();
+            data["手续费类型"] = "万分比";
+            data["保证金比例"] = 0;
         }
 
         //TODO: 应该做 validate
@@ -490,37 +436,13 @@ include_once("Template.php");
         for (var i = 0; i < feeSettingData.length; i++) {
             if ($("#existingGroup option[value='" + feeSettingData[i][1] + "']").length == 0) {
                 existingGroupSelect.append($('<option>', {
-                    value: feeSettingData[i][1].replace(/\(期货\)/g, ""),
-                    text: feeSettingData[i][1].replace(/\(期货\)/g, "")
+                    value: feeSettingData[i][1].replace(/\(证券\)/g, ""),
+                    text: feeSettingData[i][1].replace(/\(证券\)/g, "")
                 }));
             }
         }
 
-        var exchangeSelect = $("#newFeesettingModal #exchange");
-        exchangeSelect.empty();
-        for (var i = 0; i < instrumentData.length; i++) {
-            exchangeSelect.append($('<option>', {
-                value: i,
-                text: instrumentData[i]["Key"]
-            }))
-        }
-        exchangeSelect.on('change', function () {
-            var instrumentSelect = $("#newFeesettingModal #instrument");
-            var instrumentDictArray = instrumentData[this.value]["Value"];
-            console.log(instrumentDictArray);
-            instrumentSelect.empty();
-            for (var i = 0; i < instrumentDictArray.length; i++) {
-                instrumentSelect.append($('<option>', {
-                    value: i,
-                    text: instrumentDictArray[i]["Key"]
-                }))
-            }
-        });
-
-        exchangeSelect.eq(0).attr('selected', 'selected');
-        exchangeSelect.trigger('change');
         $("#newFeesettingModal #new").trigger('click');
-        $("#feeType").val("绝对值");
     }
 
     function fillFeesettingModal(){
@@ -528,34 +450,15 @@ include_once("Template.php");
         var feesettingRowData = feeSettingData[selectedIndex];
 
         $("#existing").trigger('click');
-        $("#existingGroup").val(feesettingRowData[1].replace(/\(期货\)/g, ""));
+        $("#existingGroup").val(feesettingRowData[1].replace(/\(证券\)/g, ""));
 
         $("#new").attr('disabled','disabled');
         $("#existing").attr('disabled','disabled');
         $("#existingGroup").attr('disabled','disabled');
         $("#feesettingGroup").attr('disabled','disabled');
 
-        for (var i = 0; i < instrumentData.length; i++) {
-            var found = -1;
-            var instArray = instrumentData[i]["Value"];
-            for (var j = 0; j < instArray.length; j++){
-                if (feesettingRowData[2] == instArray[j]["Key"]){
-                    found = j;
-                    $("#newFeesettingModal #exchange").val(i);
-                    $("#newFeesettingModal #exchange").trigger('change');
-                    $("#newFeesettingModal #instrument").val(found);
-                    break;
-                }
-            }
-            if (found > -1) break;
-        }
-
+        $("#instrument").val(feesettingRowData[2]);
         $("#openPositionFee").val(feesettingRowData[3]);
-        $("#closePositionFee").val(feesettingRowData[4]);
-        $("#closeNowFee").val(feesettingRowData[5]);
-        $("#feeType").val(feesettingRowData[6]);
-        $("#deposit").val(feesettingRowData[7]);
-
     }
 
     $(document).on("click", "#feesetting-add", function () {
