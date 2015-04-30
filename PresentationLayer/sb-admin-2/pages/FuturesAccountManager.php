@@ -922,6 +922,7 @@ include_once("Template.php");
                 Channel: channel,
                 CompanyName: company,
                 CompanyServer: server,
+                MainNo :mainAccounts[selectedIndex][0],
                 AccountId: userId,
                 AccountPassword: userPassword
             },
@@ -1036,7 +1037,8 @@ include_once("Template.php");
                 RiskManagementGroup: riskControl,
                 MoneyRatio: rate,
                 UserName: subName,
-                ContactInfo: subContact
+                ContactInfo: subContact,
+                SubSystemId: curSubAccounts[subSelectedIndex][0]
             },
             success: function (response) {
                // alert("Data Loaded: " + response);

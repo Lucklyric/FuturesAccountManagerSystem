@@ -46,12 +46,11 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
 
         for (var i = 0 ; i < this.mainAccouts.length ;i++){
 
-
             if (mainAccounts[i][7].localeCompare("ÒÑÍ¬²½")){
                 this.needCheckQueue.push(i);
             }
-
         }
+
         if (!this.isTimerRunning) {
             setInterval(this.checkTimerFunction, 5000);
             this.isTimerRunning = true;

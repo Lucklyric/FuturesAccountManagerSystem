@@ -19,6 +19,7 @@ $AccountPassword=isset($_GET["AccountPassword"]) ? $_GET["AccountPassword"] :"";
 $StaticEquity=isset($_GET["StaticEquity"]) ? $_GET["StaticEquity"] :"";
 $State=isset($_GET["State"]) ? $_GET["State"] :"";
 $TableName=isset($_GET["TableName"]) ? $_GET["TableName"] :"";
+$MainNo=isset($_GET["MainNo"]) ? $_GET["MainNo"] :"";
 
 $AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
 $AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
@@ -39,8 +40,8 @@ $StaticEquity="0.1";
 $MaxMoney="200";
 //$data="";
 if($TableName && $State && $Channel && $CompanyName && $CompanyServer && $AccountId && $AccountPassword && $MaxMoney){
-    $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=0"."&通道=".$Channel."&经纪公司名称=".$CompanyName."&经纪公司服务器=".$CompanyServer."&账户ID=".$AccountId."&账户密码=".$AccountPassword."&静态权益=".$StaticEquity."&最大可分配金额=".$MaxMoney;
-   // echo $data;
+    $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$MainNo."&通道=".$Channel."&经纪公司名称=".$CompanyName."&经纪公司服务器=".$CompanyServer."&账户ID=".$AccountId."&账户密码=".$AccountPassword."&静态权益=".$StaticEquity."&最大可分配金额=".$MaxMoney;
+    echo $data;
 }else{
 //        $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=0"."&通道=".$Channel."&经纪公司名称=".$CompanyName."&经纪公司服务器=".$CompanyServer."&账户ID=".$AccountId."&账户密码=".$AccountPassword."&静态权益=".$StaticEquity."&最大可分配金额=".$MaxMoney;
 //        echo $data;
