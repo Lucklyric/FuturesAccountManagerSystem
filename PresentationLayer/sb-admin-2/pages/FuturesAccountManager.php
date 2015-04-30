@@ -870,7 +870,7 @@ include_once("Template.php");
         var userId = $("#newAccountModal #userId")[0].value;
         var userPassword = $("#newAccountModal #userPassword")[0].value;
 
-        alert(channel + company + server);
+        //alert(channel + company + server);
 
         //TODO: 应该做 validate
         //ajax 发送插入
@@ -888,7 +888,7 @@ include_once("Template.php");
                 AccountPassword: userPassword
             },
             success: function (response) {
-                alert("Data Loaded: " + response);
+               // alert("Data Loaded: " + response);
                 refreshData(1);
             },
             error: function (xhr) {
@@ -920,7 +920,7 @@ include_once("Template.php");
                 AccountPassword: userPassword
             },
             success: function (response) {
-                alert("Data Loaded: " + response);
+               // alert("Data Loaded: " + response);
                 refreshData(1);
             },
             error: function (xhr) {
@@ -952,7 +952,7 @@ include_once("Template.php");
                 AccountPassword: userPassword
             },
             success: function (response) {
-                alert("Data Loaded: " + response);
+                //alert("Data Loaded: " + response);
                 selectedIndex = 0;
                 refreshData(1);
             },
@@ -971,7 +971,7 @@ include_once("Template.php");
         var subName = $("#newSubModal #subName")[0].value;
         var subContact = $("#newSubModal #subContact")[0].value;
 
-        alert(mainAccount);
+        //alert(mainAccount);
 
         //TODO: 应该做 validate
         //ajax 发送插入
@@ -991,7 +991,7 @@ include_once("Template.php");
                 ContactInfo: subContact
             },
             success: function (response) {
-                alert("Data Loaded: " + response);
+                //alert("Data Loaded: " + response);
                 refreshData(1);
             },
             error: function (xhr) {
@@ -1027,7 +1027,7 @@ include_once("Template.php");
                 ContactInfo: subContact
             },
             success: function (response) {
-                alert("Data Loaded: " + response);
+               // alert("Data Loaded: " + response);
                 refreshData(1);
             },
             error: function (xhr) {
@@ -1049,7 +1049,7 @@ include_once("Template.php");
                 SubSystemId: subSystemId
             },
             success: function (response) {
-                alert("Data Loaded: " + response);
+
                 subSelectedIndex = 0;
                 refreshData(1);
             },
