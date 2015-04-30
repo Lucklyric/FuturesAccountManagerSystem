@@ -165,7 +165,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="FeeSetting.php"><i class="fa fa-bar-chart-o fa-fw"></i> 费率管理</a>
+                        <a href="FuturesFeeSetting.php"><i class="fa fa-bar-chart-o fa-fw"></i> 费率管理</a>
                     </li>
                     <li>
                         <a href="RiskMonitorManager.php"><i class="fa fa-user fa-fw"></i> 风控员员管理</a>
