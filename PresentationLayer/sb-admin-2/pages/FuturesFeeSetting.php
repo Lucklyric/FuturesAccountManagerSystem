@@ -461,7 +461,7 @@ include_once("Template.php");
         //TODO: 应该做 validate
         //ajax 发送插入
 
-        var hostpath = "http://localhost/webclient.csapp/FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/InsertData.php";
+        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/InsertData.php";
 
         $.ajax({
             url: hostpath,

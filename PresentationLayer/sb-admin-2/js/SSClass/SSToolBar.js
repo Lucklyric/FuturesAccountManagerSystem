@@ -46,10 +46,10 @@ function SSToolBar(restartServer,connectMainAccount,onlineCount,serverStatus){
         console.log("SSToolBar开始刷新服务器状态");
         $.getJSON('../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/ServerState.php', function (data) {
             console.log("服务器状态"+data);
-            if (data == "0"){
-               parent.serverStatusJq.text("服务器状态：关闭");
+            //if (data == "0"){
+               parent.serverStatusJq.text("服务器状态："+data);
                 setCookie('toolBarStatus-CID1', parent.serverStatusJq.text(),15*1/24/60/60);
-            }
+            //}
         });
         console.log("SSToolBar开始刷新在线人数");
         $.getJSON('../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/GetLoggedInSubAccountCount.php', function (data) {

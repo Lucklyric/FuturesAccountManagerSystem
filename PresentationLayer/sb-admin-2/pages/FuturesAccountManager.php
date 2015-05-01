@@ -514,8 +514,6 @@ include_once("Template.php");
     function refreshData(flag) {
         mainAccounts = [];
 
-
-
         var table = $('#mainAccounts').dataTable();
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
