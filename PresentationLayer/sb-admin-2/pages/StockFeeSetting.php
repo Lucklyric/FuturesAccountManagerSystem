@@ -305,6 +305,7 @@ include_once("Template.php");
                 "scrollY": "500px",
                 "scrollCollapse": false,
                 "paging": false,
+                "scrollX": true,
                 "dom": '<"riskManagerToolbar"f>rlpti',
                 "language": {
                     "search": "搜索:",

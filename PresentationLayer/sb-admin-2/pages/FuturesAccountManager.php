@@ -543,8 +543,10 @@ include_once("Template.php");
             console.log("走到这里了");
 
             for (var i = 0; i < mainAccountTableData.length; i++) {
-                mainAccounts.push(mainAccountTableData[i].inf);
-                mainAccounts[mainAccounts.length-1].push("获取中");
+                if (mainAccountTableData[i].inf[1]!="恒生证券"){
+                    mainAccounts.push(mainAccountTableData[i].inf);
+                    mainAccounts[mainAccounts.length-1].push("获取中");
+                }
             }
             sessionStorage.setItem('mainAccountData',JSON.stringify(mainAccounts));
             mainAccountManager.InitMainAccountsCheckList(mainAccounts);
@@ -646,9 +648,16 @@ include_once("Template.php");
      */
     function updateSubAccounts(index) {
         curSubAccounts = [];
-        for (var i = 0; i < mainAccountTableData[index].subs.length; i++) {
-            curSubAccounts.push(mainAccountTableData[index].subs[i]);
-            curSubAccounts[curSubAccounts.length-1][8] = mainAccountTableData[index].inf[4];
+        if (mainAccounts.length>0) {
+            for (var j = 0; j < mainAccountTableData.length; j++) {
+                if (mainAccountTableData[j].inf[0] == mainAccounts[index][0]) {
+                    for (var i = 0; i < mainAccountTableData[j].subs.length; i++) {
+                        curSubAccounts.push(mainAccountTableData[j].subs[i]);
+                        curSubAccounts[curSubAccounts.length - 1][8] = mainAccountTableData[j].inf[4];
+                    }
+                    break;
+                }
+            }
         }
         mainAccountManager.curSubAccounts = curSubAccounts;
     }
@@ -658,20 +667,19 @@ include_once("Template.php");
      */
     function refreshMainAccountsTable() {
         ifHideMainAccountToolBar();
-        var container = $('#mainAccounts,div.dataTables_scrollBody');
+        //alert('刷新主账户列表');
+        var containerMain = $('#mainAccounts,div.dataTables_scrollBody');
         if ($.fn.dataTable.isDataTable('#mainAccounts')) {
-            var tmpOffset = container.scrollTop();
+            var tmpOffset = containerMain.scrollTop();
             var table = $('#mainAccounts').dataTable();
            // var scrollPos=mainAccountTable.scrollTop();
             mainAccountTable.clear();
             for (var i = 0; i < mainAccounts.length; i++) {
                 mainAccountTable.row.add(mainAccounts[i]);
             }
+            containerMain.scrollTop(tmpOffset);
             mainAccountTable.draw();
-
             table.fnProcessingIndicator(false);      // off
-            container.scrollTop(tmpOffset);
-
         }
         else {
             console.log("开始构建主表");
@@ -679,6 +687,7 @@ include_once("Template.php");
                 "processing": true,
                 "data": mainAccounts,
                 "scrollY": "200px",
+                "scrollX": true,
                 "scrollCollapse": false,
                 "paging": false,
                 "dom": '<"mainAccountToolbar"f>rlpti',
@@ -699,21 +708,23 @@ include_once("Template.php");
      * 刷新子账户表格
      */
     function refreshSubAccountsTable() {
-        var container = $('#subAccounts,div.dataTables_scrollBody');
+       // alert('刷新子账户列表');
+        var containerSub = $('#subAccounts,div.dataTables_scrollBody');
         if ($.fn.dataTable.isDataTable('#subAccounts')) {
-            var tmpOffset = container.scrollTop();
+            var tmpOffset = containerSub.scrollTop();
             subAccountTable.clear();
             for (var i = 0; i < curSubAccounts.length; i++) {
                 subAccountTable.row.add(curSubAccounts[i]);
             }
+            containerSub.scrollTop(tmpOffset);
             subAccountTable.draw();
-            container.scrollTop(tmpOffset);
         }
         else {
             subAccountTable = $('#subAccounts').DataTable({
                 "processing": true,
                 "data": curSubAccounts,
                 "scrollY": "500px",
+                "scrollX": true,
                 "scrollCollapse": true,
                 "paging": false,
                 "dom": '<"subAccountToolbar"f>rlpti',
@@ -826,6 +837,9 @@ include_once("Template.php");
         $(modal + " #userId").val(data[4]);
         $(modal + " #userPassword").val(data[5]);
         $(modal + " #userId").attr('disabled','disabled');
+        $(modal + " #channel").attr('disabled','disabled');
+        $(modal + " #company").attr('disabled','disabled');
+        $(modal + " #server").attr('disabled','disabled');
 
     }
 
@@ -1122,11 +1136,6 @@ include_once("Template.php");
         mainChannelOption.append($('<option>', {
                     value:'恒生期货',
                     text: '恒生期货'
-                })
-        )
-        mainChannelOption.append($('<option>', {
-                    value:'恒生期货',
-                    text: '恒生证券'
                 })
         )
         mainChannelOption.on('change', function(){

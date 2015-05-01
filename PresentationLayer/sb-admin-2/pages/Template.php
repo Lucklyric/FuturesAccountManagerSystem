@@ -139,6 +139,9 @@
                             <li>
                                 <a href="FuturesAccountManager.php">期货账户管理</a>
                             </li>
+                            <li>
+                                <a href="SecuritiesAccountManager.php">期货账户管理</a>
+                            </li>
                         </ul>
                     </li>
                     <li>

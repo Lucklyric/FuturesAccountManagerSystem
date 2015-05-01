@@ -92,8 +92,14 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                     }else if(tmpResponse == "已连接"){
                         ssMainAccounttManagerInstance.mainAccouts[index][7] = "已同步";
                         ssMainAccounttManagerInstance.needCheckQueue.splice(index,1);
-                    }else{
+                    }else if(tmpResponse == "连接错误"){
+                        ssMainAccounttManagerInstance.mainAccouts[index][7] = "连接错误";
                         ssMainAccounttManagerInstance.ConnectMainAccount(index);
+                        if (ssMainAccounttManagerInstance.needCheckQueue.length == 1){
+                            ssMainAccounttManagerInstance.needCheckQueue =[];
+                        }else {
+                            ssMainAccounttManagerInstance.needCheckQueue.splice(index, 1);
+                        }
                     }
                }
                 sessionStorage.setItem('mainAccountData',JSON.stringify(ssMainAccounttManagerInstance.mainAccouts));
@@ -433,7 +439,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                     } );
 
                     $("#pos-add").on('click',function(){
-                        var container = $('#syncPositionTable,div.dataTables_scrollBody');
+                        var containerSyncPos = $('#syncPositionTable,div.dataTables_scrollBody');
                         var newLength = table.DataTable().data().length;
                         table.DataTable().row.add( [
                             '',
@@ -484,16 +490,16 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
 
                         table.DataTable().cell(newLength, 5).nodes().to$().append($('<input style="float: right; width: 100%" >'));
                         table.DataTable().cell(newLength, 5).nodes().to$().find('input').val(moment().format('YYYY-MM-DD'));
-                        container.scrollTop(1000000);
+                        containerSyncPos.scrollTop(1000000);
                     });
                     $("#pos-delete").on('click',function(){
-                        var container = $('#syncPositionTable,div.dataTables_scrollBody');
-                        var tmpOffset = container.scrollTop();
+                        var containerSyncPos = $('#syncPositionTable,div.dataTables_scrollBody');
+                        var tmpOffset = containerSyncPos.scrollTop();
                         table.DataTable()
                             .rows( '.selected' )
                             .remove()
                             .draw();
-                        container.scrollTop(tmpOffset);
+                        containerSyncPos.scrollTop(tmpOffset);
                     });
                 }
 
