@@ -184,7 +184,7 @@ include_once("Template.php");
                                         <th>编号</th>
                                         <th>名称</th>
                                         <th>密码</th>
-                                        <th>附属主账户</th>
+                                        <th>附属子账户</th>
                                         <th>姓名</th>
                                         <th>联系方式</th>
                                     </tr>
@@ -195,7 +195,7 @@ include_once("Template.php");
                                         <th>编号</th>
                                         <th>名称</th>
                                         <th>密码</th>
-                                        <th>附属主账户</th>
+                                        <th>附属子账户</th>
                                         <th>姓名</th>
                                         <th>联系方式</th>
                                     </tr>
@@ -217,6 +217,10 @@ include_once("Template.php");
     <!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
+<?php
+include_once("ModalTemplate.php");
+?>
+
 
 <!-- jQuery -->
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -478,7 +482,8 @@ include_once("Template.php");
                     State: 1
                 },
                 success: function(response) {
-                    alert( "Data Loaded: " + response);
+                    $('#generalNotificationBody').text(response);
+                    $('#generalNotification').modal('show');
                     refreshData(1);
                 },
                 error: function(xhr) {
@@ -519,7 +524,8 @@ include_once("Template.php");
                 State: 3
             },
             success: function(response) {
-                alert( "Data Loaded: " + response);
+                $('#generalNotificationBody').text(response);
+                $('#generalNotification').modal('show');
                 refreshData(1);
             },
             error: function(xhr) {
@@ -558,7 +564,8 @@ include_once("Template.php");
                 State: 2
             },
             success: function(response) {
-                alert( "Data Loaded: " + response);
+                $('#generalNotificationBody').text(response);
+                $('#generalNotification').modal('show');
                 selectedIndex = 0;
                 refreshData(1);
             },

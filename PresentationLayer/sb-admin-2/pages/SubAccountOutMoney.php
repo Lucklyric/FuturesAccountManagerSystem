@@ -143,6 +143,10 @@ include_once("Template.php");
     <!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
+<?php
+include_once("ModalTemplate.php");
+?>
+
 
 <!-- jQuery -->
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -362,7 +366,8 @@ include_once("Template.php");
                 MainId: mainAccountId
             },
             success: function (response) {
-                alert("Data Loaded: " + response);
+                $('#generalNotificationBody').text(response);
+                $('#generalNotification').modal('show');
                 refreshData(1);
             },
             error: function (xhr) {

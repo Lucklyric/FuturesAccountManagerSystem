@@ -230,6 +230,9 @@ include_once("Template.php");
     <!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
+<?php
+include_once("ModalTemplate.php");
+?>
 
 <!-- jQuery -->
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -498,7 +501,8 @@ include_once("Template.php");
                 State: 1
             },
             success: function(response) {
-                alert( "Data Loaded: " + response);
+                $('#generalNotificationBody').text(response);
+                $('#generalNotification').modal('show');
                 refreshData(1);
             },
             error: function(xhr) {
@@ -545,7 +549,8 @@ include_once("Template.php");
                 State: 3
             },
             success: function(response) {
-                alert( "Data Loaded: " + response);
+                $('#generalNotificationBody').text(response);
+                $('#generalNotification').modal('show');
                 refreshData(1);
             },
             error: function(xhr) {
@@ -585,7 +590,8 @@ include_once("Template.php");
                 State: 2
             },
             success: function(response) {
-                alert( "Data Loaded: " + response);
+                $('#generalNotificationBody').text(response);
+                $('#generalNotification').modal('show');
                 selectedIndex = 0;
                 refreshData(1);
             },

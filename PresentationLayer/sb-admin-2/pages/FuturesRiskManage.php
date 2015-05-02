@@ -1004,7 +1004,7 @@ include_once("Template.php");
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                                 </button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">确定
+                                                <button type="button" class="btn btn-primary">确定
                                                 </button>
                                             </div>
                                         </div>
@@ -1104,6 +1104,9 @@ include_once("Template.php");
     <!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
+<?php
+include_once("ModalTemplate.php");
+?>
 
 <script>
     //http://bootsnipp.com/snippets/featured/checked-list-group
@@ -1379,6 +1382,12 @@ include_once("Template.php");
                 data["禁止开仓时间段"] = riskManagerData[selectedIndex][4];
             }
 
+            if (!$("#groupName").val()){
+                $("#alertNotificationBody").text("风控组名不能为空");
+                $("#generalAlert").modal('show');
+                return;
+            }
+
             data["组名称"] = $("#groupName").val() + "(期货";
             //交易合约限制
             if ($("#black").prop("checked")) {//不允许交易合约
@@ -1431,13 +1440,16 @@ include_once("Template.php");
             type: "get", //send it through get method
             data: data,
             success: function (response) {
-                alert("Data Loaded: " + response);
+                $('#generalNotificationBody').text(response);
+                $('#generalNotification').modal('show');
                 refreshData(1);
             },
             error: function (xhr) {
                 //Do Something to handle error
             }
         });
+
+        $('#riskModal').modal('hide');
 
     }
 
