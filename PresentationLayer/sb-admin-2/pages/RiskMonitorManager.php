@@ -454,7 +454,7 @@ include_once("Template.php");
     function addNewRiskManager(){
         if (subAccounts.length == 0)return;
         //modal 确定 逻辑处理
-            var checkedSubAccounts = getCheckedItems().toString();
+            var checkedSubAccounts = getCheckedItems().join(";");
             var riskManagerAccount = $("#newRiskManagerModal #riskManagerAccount").val();
             var riskManagerPassword = $("#newRiskManagerModal #riskManagerPassword").val();
             var riskManagerName = $("#newRiskManagerModal #riskManagerName").val();
@@ -492,7 +492,7 @@ include_once("Template.php");
         //modal 确定 逻辑处理
         var riskManagerInfo = riskMonitorData[selectedIndex];
 
-        var checkedSubAccounts = getCheckedItems().toString();
+        var checkedSubAccounts = getCheckedItems().join(";");
         var riskManagerAccount = $("#newRiskManagerModal #riskManagerAccount").val();
         var riskManagerPassword = $("#newRiskManagerModal #riskManagerPassword").val();
         var riskManagerName = $("#newRiskManagerModal #riskManagerName").val();
@@ -616,7 +616,7 @@ include_once("Template.php");
 
         $("#newRiskManagerModal #riskManagerAccount").attr('disabled','disabled');
 
-        var subAccountArray = riskManagerInfo[3].split(",");
+        var subAccountArray = riskManagerInfo[3].split(";");
 
         $("#subAccountUL li").each(function (idx, li) {
             var subId = $(li).text();

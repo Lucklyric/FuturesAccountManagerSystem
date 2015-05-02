@@ -99,7 +99,7 @@ include_once("Template.php");
                                                     </div>
                                                     <div class="row clearfix">
                                                         <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px">手续费率</label>
+                                                            <label style="margin-top: 8px">手续费率(万分之)</label>
                                                         </div>
                                                         <div class="col-md-4 column modal-row">
                                                             <input class="form-control" type="text"

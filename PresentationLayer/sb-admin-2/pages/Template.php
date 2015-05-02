@@ -179,7 +179,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="RiskMonitorManager.php"><i class="fa fa-user fa-fw"></i> 风控员员管理</a>
+                        <a href="RiskMonitorManager.php"><i class="fa fa-user fa-fw"></i> 风控员管理</a>
                     </li>
                     <!--<li>-->
                     <!--<a href="AdminManager.html"><i class="fa fa-user fa-fw"></i> 管理员管理</a>-->
