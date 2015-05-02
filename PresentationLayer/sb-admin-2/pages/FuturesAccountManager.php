@@ -12,14 +12,14 @@ include_once("Template.php");
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
+
+                    <div id="mainDiv" class="panel panel-default">
                         <div class="panel-heading">
                             主账户
                         </div>
 
                         <div class="panel-body">
                             <div class="dataTable_wrapper">
-
 
                                 <!--Modal-->
                                 <div class="modal fade" tabindex="-1" role="dialog" id="accountModal"
@@ -272,12 +272,12 @@ include_once("Template.php");
                                                 <div class="row clearfix">
                                                     <div class="col-md-6 column">
 
-                                                            <textarea style="width: 100%;height: 196px;overflow:-moz-scrollbars-vertical;overflow-y:auto;" id="duoCang" readonly>
+                                                            <textarea style="width: 100%;height: 96px;overflow:-moz-scrollbars-vertical;overflow-y:auto;" id="duoCang" readonly>
                                                             </textarea>
                                                     </div>
                                                     <div class="col-md-6 column">
 
-                                                            <textarea style="width: 100%;height: 196px;overflow:-moz-scrollbars-vertical;overflow-y:auto;"  id ="kongCang" readonly>
+                                                            <textarea style="width: 100%;height: 96px;overflow:-moz-scrollbars-vertical;overflow-y:auto;"  id ="kongCang" readonly>
                                                             </textarea>
                                                     </div>
                                                 </div>
@@ -347,13 +347,13 @@ include_once("Template.php");
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
+                    <div id="subDiv" class="panel panel-default">
                         <div class="panel-heading">
                             子账户
                         </div>
                         <div class="panel-body">
                             <div class="dataTable_wrapper">
-                                <table id="subAccounts" class="table table-striped table-bordered table-hover"
+                                <table id="subAccountsTable" class="table table-striped table-bordered table-hover"
                                        cellspacing="0"
                                        width="100%">
                                     <div class="subAccountToolbar" style="float:left">
@@ -404,6 +404,7 @@ include_once("Template.php");
                         </div>
                     </div>
 
+
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -415,7 +416,9 @@ include_once("Template.php");
     <!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
-
+<?php
+include_once("ModalTemplate.php");
+?>
 <!-- jQuery -->
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -492,7 +495,7 @@ include_once("Template.php");
             }
         } );
 
-        $('#subAccounts').on('click', 'tr', function () { //绑定点击事件刷新子账户
+        $('#subAccountsTable').on('click', 'tr', function () { //绑定点击事件刷新子账户
             ifHideSubAccountToolBar(false);
             subSelectedIndex = subAccountTable.row(this).index();
             if ( $(this).hasClass('selected') ) {
@@ -604,7 +607,7 @@ include_once("Template.php");
      */
     function refreshRiskGroupInfo(flag){
         if (flag === undefined){
-            if (sessionStorage.getItem('riskGroups')){
+            if (sessionStorage.getItem('riskGroupsFutures')){
                 riskGroups = JSON.parse(sessionStorage.getItem('riskGroups'));
                 return;
             }
@@ -614,9 +617,11 @@ include_once("Template.php");
             riskGroups=[];
             console.log("取到风控组信息");
             for (var i = 0; i < data.data.length; i++) {
-                riskGroups.push(data.data[i]);
+                if (data.data[i][1].indexOf('期货') != -1){
+                    riskGroups.push(data.data[i]);
+                }
             }
-            sessionStorage.setItem('riskGroups',JSON.stringify(riskGroups));
+            sessionStorage.setItem('riskGroupsFutures',JSON.stringify(riskGroups));
         });
     }
 
@@ -668,17 +673,17 @@ include_once("Template.php");
     function refreshMainAccountsTable() {
         ifHideMainAccountToolBar();
         //alert('刷新主账户列表');
-        var containerMain = $('#mainAccounts,div.dataTables_scrollBody');
+        var containerMain =  $('#mainAccounts').closest('div.dataTables_scrollBody');
         if ($.fn.dataTable.isDataTable('#mainAccounts')) {
             var tmpOffset = containerMain.scrollTop();
             var table = $('#mainAccounts').dataTable();
-           // var scrollPos=mainAccountTable.scrollTop();
+            console.log("主账户滑动"+tmpOffset);
             mainAccountTable.clear();
             for (var i = 0; i < mainAccounts.length; i++) {
                 mainAccountTable.row.add(mainAccounts[i]);
             }
-            containerMain.scrollTop(tmpOffset);
             mainAccountTable.draw();
+            containerMain.scrollTop(tmpOffset);
             table.fnProcessingIndicator(false);      // off
         }
         else {
@@ -708,19 +713,20 @@ include_once("Template.php");
      * 刷新子账户表格
      */
     function refreshSubAccountsTable() {
-       // alert('刷新子账户列表');
-        var containerSub = $('#subAccounts,div.dataTables_scrollBody');
-        if ($.fn.dataTable.isDataTable('#subAccounts')) {
-            var tmpOffset = containerSub.scrollTop();
+      // alert('刷新子账户列表');
+        var containerSub = $('#subAccountsTable').closest('div.dataTables_scrollBody');
+        if ($.fn.dataTable.isDataTable('#subAccountsTable')) {
+            var tmpOffsetcur = containerSub.scrollTop();
+            console.log("滑动offset"+tmpOffsetcur);
             subAccountTable.clear();
             for (var i = 0; i < curSubAccounts.length; i++) {
                 subAccountTable.row.add(curSubAccounts[i]);
             }
-            containerSub.scrollTop(tmpOffset);
             subAccountTable.draw();
+            containerSub.scrollTop(tmpOffsetcur);
         }
         else {
-            subAccountTable = $('#subAccounts').DataTable({
+            subAccountTable = $('#subAccountsTable').DataTable({
                 "processing": true,
                 "data": curSubAccounts,
                 "scrollY": "500px",
@@ -850,7 +856,6 @@ include_once("Template.php");
         $(modal + " #subPassword").val(data[2]);
         $(modal + " #subName").val(data[6]);
         $(modal + " #subContact").val(data[7]);
-
         $(modal + " #subId").attr('disabled','disabled');
 
         var mainArray = $(modal + " #mainAccount option");
@@ -876,6 +881,7 @@ include_once("Template.php");
                 break;
             }
         }
+        $(modal + " #mainAccount").attr('disabled','disabled');
 
     }
 
@@ -905,7 +911,13 @@ include_once("Template.php");
             },
             success: function (response) {
                // alert("Data Loaded: " + response);
-                $('#generalNotificationBody').text(response);
+                response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
+
                 $('#generalNotification').modal('show');
                 refreshData(1);
             },
@@ -940,7 +952,12 @@ include_once("Template.php");
             },
             success: function (response) {
                // alert("Data Loaded: " + response);
-                $('#generalNotificationBody').text(response);
+                response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
                 $('#generalNotification').modal('show');
                 refreshData(1);
             },
@@ -974,7 +991,12 @@ include_once("Template.php");
             },
             success: function (response) {
                 //alert("Data Loaded: " + response);
-                $('#generalNotificationBody').text(response);
+                response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
                 $('#generalNotification').modal('show');
                 selectedIndex = 0;
                 refreshData(1);
@@ -1014,7 +1036,11 @@ include_once("Template.php");
                 ContactInfo: subContact
             },
             success: function (response) {
-                $('#generalNotificationBody').text(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
                 $('#generalNotification').modal('show');
                 //alert("Data Loaded: " + response);
                 refreshData(1);
@@ -1054,7 +1080,12 @@ include_once("Template.php");
             },
             success: function (response) {
                // alert("Data Loaded: " + response);
-                $('#generalNotificationBody').text(response);
+                response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
                 $('#generalNotification').modal('show');
                 refreshData(1);
             },
@@ -1077,7 +1108,12 @@ include_once("Template.php");
                 SubSystemId: subSystemId
             },
             success: function (response) {
-                $('#generalNotificationBody').text(response);
+                response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
                 $('#generalNotification').modal('show');
                 subSelectedIndex = 0;
                 refreshData(1);
@@ -1163,7 +1199,6 @@ include_once("Template.php");
         fillMainModal("#accountModal", mainAccounts[selectedIndex]);
         //绑定回调
         $(document).on("click", "#newAccountModal .btn-primary", updateAccount);
-
         $('#accountModal').modal('show');
     });
 
@@ -1176,6 +1211,7 @@ include_once("Template.php");
     $(document).on("click", "#sub-add", function () {
         if (mainAccounts.length == 0) return;
         //绑定回调
+        $("#newSubAccountLabel").text("新建子账户 主账户:"+mainAccounts[selectedIndex][4]+" 通道:"+mainAccounts[selectedIndex][1]+" 经纪公司:"+mainAccounts[selectedIndex][2]);
         $(document).off("click", "#newSubModal .btn-primary");
         $(document).on("click", "#newSubModal .btn-primary", newSubAccount);
         setSubAccountInfo();
@@ -1189,7 +1225,7 @@ include_once("Template.php");
         $("#newSubModal #subName").val("");
         $("#newSubModal #subContact").val("");
         $("#newSubModal #subId").removeAttr('disabled');
-
+        $("#newSubModal #mainAccount").attr('disabled','disabled');
         var mainAccountOption = $("#newSubModal #mainAccount");
         mainAccountOption.empty();
         for (var i = 0; i < mainAccounts.length; i++) {
@@ -1217,11 +1253,20 @@ include_once("Template.php");
                     })
             )
         }
+        var mainArray = $("#newSubModal #mainAccount option");
+        for (var i = 0; i < mainArray.length; i++){
+            if (mainArray.eq(i).text() == mainAccounts[selectedIndex][4]){
+                mainArray.eq(i).attr('selected', 'selected');
+                break;
+            }
+        }
     }
 
     //显示update sub modal
     $(document).on("click", "#sub-update", function () {
         if (mainAccounts.length == 0) return;
+        $("#newSubAccountLabel").text("新建子账户 主账户:"+mainAccounts[selectedIndex][4]+" 通道:"+mainAccounts[selectedIndex][1]+" 经纪公司:"+mainAccounts[selectedIndex][2]);
+
         //if (riskGroups.length == 0 || ratioTypes.length == 0) return;
         $(document).off("click", "#newSubModal .btn-primary");
         setSubAccountInfo();

@@ -414,7 +414,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                     table.DataTable({
                         "processing": true,
                         "data": ssMainAccounttManagerInstance.currentPosTableData,
-                        "scrollY": "366px",
+                        "scrollY": "166px",
                         "scrollCollapse": false,
                         "dom": '<"mainSyncPositionToolbar"f>rlpti',
                         "paging": false,
@@ -583,24 +583,23 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                 /***
                  * 整合数据分析
                  */
-                ssMainAccounttManagerInstance.duoPosText = "     多仓\n";
+                ssMainAccounttManagerInstance.duoPosText = "     多仓同步提示\n";
                 for (var key in ssMainAccounttManagerInstance.currentAllInstrumentIdDic){
                     var originPos = ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['origin']['duo'];
                     var queryPos =ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['query']['duo'];
-
-
                     if (originPos!=queryPos) {
                         ssMainAccounttManagerInstance.duoPosText += key + " 交易所" + originPos + "手，" + "本地" + queryPos + "手，需";
                         if (originPos < queryPos) {
-                            ssMainAccounttManagerInstance.duoPosText += "删除" + queryPos - originPos + "手";
+                            ssMainAccounttManagerInstance.duoPosText += "删除" + (queryPos - originPos) + "手";
                         } else if (originPos > queryPos) {
-                            ssMainAccounttManagerInstance.duoPosText += "增加" + originPos - queryPos + "手";
+                            ssMainAccounttManagerInstance.duoPosText += "增加" + (originPos - queryPos) + "手";
                         }
+                        ssMainAccounttManagerInstance.duoPosText+="\n";
                     }
-                    ssMainAccounttManagerInstance.duoPosText+="\n";
+
                 }
 
-                ssMainAccounttManagerInstance.kongPosText = "     空仓\n";
+                ssMainAccounttManagerInstance.kongPosText = "     空仓同步提示\n";
                 for (var key in ssMainAccounttManagerInstance.currentAllInstrumentIdDic){
                     var originPos = ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['origin']['kong'];
                     var queryPos = ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['query']['kong'];
@@ -611,8 +610,9 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                         } else if(originPos > queryPos) {
                             ssMainAccounttManagerInstance.kongPosText += "增加" + (originPos - queryPos) + "手";
                         }
+                        ssMainAccounttManagerInstance.kongPosText+="\n";
                     }
-                    ssMainAccounttManagerInstance.kongPosText+="\n";
+
                 }
 
 
