@@ -91,19 +91,27 @@ include_once("Template.php");
 
     fieldset {
         border: 1px solid #DDD;
-        padding: 1.4em 1.4em 1.4em 1.4em;
-        margin: 0 0 1.5em 0;
+        padding: 0.5em 1.5em 1em 1.5em;
+        margin: 0 0 1em 0;
         display: inline-block;
     }
 
     legend {
         font-size: 1.2em;
         font-weight: bold;
+        width:inherit;
+        padding:0 10px;
+        border-bottom:none;
     }
 
     .modal-content {
         width: 900px;
         margin-left: -150px;
+    }
+
+    .modal .modal-body {
+        max-height: 580px;
+        overflow-y: auto;
     }
 
     .container {
@@ -147,8 +155,8 @@ include_once("Template.php");
                                             <div class="modal-body">
 
                                                 <div class="row clearfix modal-row">
-                                                    <div class="col-xs-2 column">
-                                                        <label style="margin-top: 8px">风控组名称</label>
+                                                    <div class="col-xs-4 column">
+                                                        <label style="margin-top: 5px">风控组名称</label>
                                                     </div>
                                                     <div class="col-xs-4 column">
                                                         <input class="form-control" value=""
@@ -190,7 +198,7 @@ include_once("Template.php");
                                                             <div class="col-xs-2 column">
                                                                 <button type="button" id="rest-add"
                                                                         class="btn btn-default form-control"
-                                                                        style="margin-top: 10px">添加
+                                                                        style="margin-top: 5px">添加
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -198,7 +206,7 @@ include_once("Template.php");
                                                             <div class="col-xs-3 column">
                                                                 <button type="button" id="rest-clear"
                                                                         class="btn btn-default form-control"
-                                                                        style="margin-top: 10px">清除
+                                                                        style="margin-top: 5px">清除
                                                                 </button>
                                                             </div>
                                                             <div class="col-xs-7 column modal-row">
@@ -208,7 +216,7 @@ include_once("Template.php");
                                                                 <div class="row clearfix">
                                                                     <button type="button" class="btn btn-default"
                                                                             id="rest-addST"
-                                                                            style="margin-top: 10px; margin-left: 15px">
+                                                                            style="margin-top: 5px; margin-left: 15px">
                                                                         ST股票
                                                                     </button>
                                                                 </div>
@@ -245,7 +253,7 @@ include_once("Template.php");
                                                                 <div class="container">
                                                                     <div class="row clearfix" style="padding-top: 15px">
                                                                         <div class="col-xs-2 column">
-                                                                            <label style="margin-top: 8px">强平线</label>
+                                                                            <label style="margin-top: 5px">强平线</label>
                                                                         </div>
                                                                         <div class="col-xs-4 column">
                                                                             <input class="form-control" value=""
@@ -253,7 +261,7 @@ include_once("Template.php");
                                                                                    id="normal-forceCloseLine"/>
                                                                         </div>
                                                                         <div class="col-xs-2 column">
-                                                                            <label style="margin-top: 8px">警告线</label>
+                                                                            <label style="margin-top: 5px">警告线</label>
                                                                         </div>
                                                                         <div class="col-xs-4 column">
                                                                             <input class="form-control" value=""
@@ -262,7 +270,7 @@ include_once("Template.php");
                                                                         </div>
                                                                     </div>
                                                                     <div class="row clearfix">
-                                                                        <fieldset style="margin-top: 10px">
+                                                                        <fieldset style="margin-top: 5px">
                                                                             <legend>隔夜时间设置</legend>
                                                                             <div class="container" style="width: 750px">
                                                                                 <div class="row clearfix">
@@ -315,7 +323,7 @@ include_once("Template.php");
                                                                                             </div>
                                                                                             <div class="radio row clearfix">
                                                                                                 <div class="col-xs-6 column">
-                                                                                                    <label style="margin-top: 8px"><input
+                                                                                                    <label style="margin-top: 5px"><input
                                                                                                             type="radio"
                                                                                                             id="normal-chosenType"
                                                                                                             name="normal-instrumentType">品种</label>
@@ -347,7 +355,7 @@ include_once("Template.php");
                                                                                                     <button type="button"
                                                                                                             id="normal-overnight-delete"
                                                                                                             class="btn btn-warning btn-sm"
-                                                                                                            style="margin-top: 10px">
+                                                                                                            style="margin-top: 5px">
                                                                                                         删除
                                                                                                     </button>
                                                                                                 </div>
@@ -356,7 +364,7 @@ include_once("Template.php");
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="row clearfix">
-                                                                                    <div class="col-xs-12 column">
+                                                                                    <div class="col-xs-12 column" style="margin-top: 5px">
                                                                                         <div class="well"
                                                                                              style="max-height: 400px; overflow: auto;">
                                                                                             <ul class="list-group checked-list-box"
@@ -372,7 +380,7 @@ include_once("Template.php");
                                                                             <div class="container" style="width: 750px">
                                                                                 <div class="row clearfix" style="margin-top:10px">
                                                                                     <div class="col-xs-3 column">
-                                                                                        <label style="margin-top: 8px">日内总仓位上限</label>
+                                                                                        <label style="margin-top: 5px">日内总仓位上限</label>
                                                                                     </div>
                                                                                     <div class="col-xs-3 column">
                                                                                         <input class="form-control"
@@ -380,7 +388,7 @@ include_once("Template.php");
                                                                                                value=""/>
                                                                                     </div>
                                                                                     <div class="col-xs-3 column">
-                                                                                        <label style="margin-top: 8px">单股票上限</label>
+                                                                                        <label style="margin-top: 5px">单股票上限</label>
                                                                                     </div>
                                                                                     <div class="col-xs-3 column">
                                                                                         <input class="form-control"
@@ -390,7 +398,7 @@ include_once("Template.php");
                                                                                 </div>
                                                                                 <div class="row clearfix" style="margin-top:10px">
                                                                                     <div class="col-xs-3 column">
-                                                                                        <label style="margin-top: 8px">隔夜总仓位上限</label>
+                                                                                        <label style="margin-top: 5px">隔夜总仓位上限</label>
                                                                                     </div>
                                                                                     <div class="col-xs-3 column">
                                                                                         <input class="form-control"
@@ -398,7 +406,7 @@ include_once("Template.php");
                                                                                                value=""/>
                                                                                     </div>
                                                                                     <div class="col-xs-3 column">
-                                                                                        <label style="margin-top: 8px">单股票上限</label>
+                                                                                        <label style="margin-top: 5px">单股票上限</label>
                                                                                     </div>
                                                                                     <div class="col-xs-3 column">
                                                                                         <input class="form-control"
@@ -415,7 +423,7 @@ include_once("Template.php");
                                                                 <div class="container">
                                                                     <div class="row clearfix" style="padding-top: 15px">
                                                                         <div class="col-xs-2 column">
-                                                                            <label style="margin-top: 8px">强平线</label>
+                                                                            <label style="margin-top: 5px">强平线</label>
                                                                         </div>
                                                                         <div class="col-xs-4 column">
                                                                             <input class="form-control" value=""
@@ -423,7 +431,7 @@ include_once("Template.php");
                                                                                    id="abs-forceCloseLine"/>
                                                                         </div>
                                                                         <div class="col-xs-2 column">
-                                                                            <label style="margin-top: 8px">警告线</label>
+                                                                            <label style="margin-top: 5px">警告线</label>
                                                                         </div>
                                                                         <div class="col-xs-4 column">
                                                                             <input class="form-control" value=""
@@ -431,7 +439,7 @@ include_once("Template.php");
                                                                         </div>
                                                                     </div>
                                                                     <div class="row clearfix">
-                                                                        <fieldset style="margin-top: 10px">
+                                                                        <fieldset style="margin-top: 5px">
                                                                             <legend>隔夜时间设置</legend>
                                                                             <div class="container" style="width: 750px">
                                                                                 <div class="row clearfix">
@@ -484,7 +492,7 @@ include_once("Template.php");
                                                                                             </div>
                                                                                             <div class="radio row clearfix">
                                                                                                 <div class="col-xs-6 column">
-                                                                                                    <label style="margin-top: 8px"><input
+                                                                                                    <label style="margin-top: 5px"><input
                                                                                                             type="radio"
                                                                                                             id="abs-chosenType"
                                                                                                             name="abs-instrumentType">品种</label>
@@ -514,7 +522,7 @@ include_once("Template.php");
                                                                         </fieldset>
                                                                     </div>
                                                                     <div class="row clearfix">
-                                                                        <fieldset style="margin-top: 10px">
+                                                                        <fieldset style="margin-top: 5px">
                                                                             <legend>风控条件</legend>
                                                                             <div class="container" style="width: 750px">
                                                                                 <div class="row clearfix">
@@ -537,7 +545,7 @@ include_once("Template.php");
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="row clearfix"
-                                                                                     style="margin-top: 10px">
+                                                                                     style="margin-top: 5px">
                                                                                     <div class="col-xs-2 column">
                                                                                         <select class="form-control"
                                                                                                 id="abs-inDayOrOvernight">
@@ -546,14 +554,14 @@ include_once("Template.php");
                                                                                         </select>
                                                                                     </div>
                                                                                     <div class="col-xs-2 column">
-                                                                                        <label style="margin-top: 8px">总仓位上限</label>
+                                                                                        <label style="margin-top: 5px">总仓位上限</label>
                                                                                     </div>
                                                                                     <div class="col-xs-3 column">
                                                                                         <input class="form-control"
                                                                                                id="abs-totalLimit"
                                                                                                value=""/></div>
                                                                                     <div class="col-xs-2 column">
-                                                                                        <label style="margin-top: 8px">单股票上限</label>
+                                                                                        <label style="margin-top: 5px">单股票上限</label>
                                                                                     </div>
                                                                                     <div class="col-xs-3 column">
                                                                                         <input class="form-control"
@@ -561,7 +569,7 @@ include_once("Template.php");
                                                                                                value=""/>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="row clearfix">
+                                                                                <div class="row clearfix" style="margin-top: 5px">
                                                                                     <div class="form-group"
                                                                                          style="float: right;">
                                                                                         <button type="button"
@@ -575,7 +583,7 @@ include_once("Template.php");
                                                                         </fieldset>
                                                                     </div>
                                                                     <div class="row clearfix">
-                                                                        <div class="col-xs-12 column">
+                                                                        <div class="col-xs-12 column" style="margin-top: 5px">
                                                                             <div class="well"
                                                                                  style="max-height: 400px; overflow: auto;">
                                                                                 <ul class="list-group checked-list-box"
@@ -597,7 +605,7 @@ include_once("Template.php");
                                                             <div role="tabpanel" class="tab-pane" id="loss">                                                                <div class="container">
                                                                 <div class="row clearfix" style="padding-top: 15px">
                                                                     <div class="col-xs-2 column">
-                                                                        <label style="margin-top: 8px">强平线</label>
+                                                                        <label style="margin-top: 5px">强平线</label>
                                                                     </div>
                                                                     <div class="col-xs-4 column">
                                                                         <input class="form-control" value=""
@@ -605,7 +613,7 @@ include_once("Template.php");
                                                                                id="loss-forceCloseLine"/>
                                                                     </div>
                                                                     <div class="col-xs-2 column">
-                                                                        <label style="margin-top: 8px">警告线</label>
+                                                                        <label style="margin-top: 5px">警告线</label>
                                                                     </div>
                                                                     <div class="col-xs-4 column">
                                                                         <input class="form-control" value=""
@@ -613,7 +621,7 @@ include_once("Template.php");
                                                                     </div>
                                                                 </div>
                                                                 <div class="row clearfix">
-                                                                    <fieldset style="margin-top: 10px">
+                                                                    <fieldset style="margin-top: 5px">
                                                                         <legend>隔夜时间设置</legend>
                                                                         <div class="container" style="width: 750px">
                                                                             <div class="row clearfix">
@@ -666,7 +674,7 @@ include_once("Template.php");
                                                                                         </div>
                                                                                         <div class="radio row clearfix">
                                                                                             <div class="col-xs-6 column">
-                                                                                                <label style="margin-top: 8px"><input
+                                                                                                <label style="margin-top: 5px"><input
                                                                                                         type="radio"
                                                                                                         id="loss-chosenType"
                                                                                                         name="loss-instrumentType">品种</label>
@@ -696,7 +704,7 @@ include_once("Template.php");
                                                                     </fieldset>
                                                                 </div>
                                                                 <div class="row clearfix">
-                                                                    <fieldset style="margin-top: 10px">
+                                                                    <fieldset style="margin-top: 5px">
                                                                         <legend>风控条件</legend>
                                                                         <div class="container" style="width: 750px">
                                                                             <div class="row clearfix">
@@ -719,7 +727,7 @@ include_once("Template.php");
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row clearfix"
-                                                                                 style="margin-top: 10px">
+                                                                                 style="margin-top: 5px">
                                                                                 <div class="col-xs-2 column">
                                                                                     <select class="form-control"
                                                                                             id="loss-inDayOrOvernight">
@@ -728,14 +736,14 @@ include_once("Template.php");
                                                                                     </select>
                                                                                 </div>
                                                                                 <div class="col-xs-2 column">
-                                                                                    <label style="margin-top: 8px">总仓位上限</label>
+                                                                                    <label style="margin-top: 5px">总仓位上限</label>
                                                                                 </div>
                                                                                 <div class="col-xs-3 column">
                                                                                     <input class="form-control"
                                                                                            id="loss-totalLimit"
                                                                                            value=""/></div>
                                                                                 <div class="col-xs-2 column">
-                                                                                    <label style="margin-top: 8px">单股票上限</label>
+                                                                                    <label style="margin-top: 5px">单股票上限</label>
                                                                                 </div>
                                                                                 <div class="col-xs-3 column">
                                                                                     <input class="form-control"
@@ -743,7 +751,7 @@ include_once("Template.php");
                                                                                            value=""/>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row clearfix">
+                                                                            <div class="row clearfix" style="margin-top: 5px">
                                                                                 <div class="form-group"
                                                                                      style="float: right;">
                                                                                     <button type="button"
@@ -757,7 +765,7 @@ include_once("Template.php");
                                                                     </fieldset>
                                                                 </div>
                                                                 <div class="row clearfix">
-                                                                    <div class="col-xs-12 column">
+                                                                    <div class="col-xs-12 column" style="margin-top: 5px">
                                                                         <div class="well"
                                                                              style="max-height: 400px; overflow: auto;">
                                                                             <ul class="list-group checked-list-box"
