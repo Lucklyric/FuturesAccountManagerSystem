@@ -78,7 +78,7 @@ include_once("Template.php");
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                                 </button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                                                <button type="button" class="btn btn-primary">确定</button>
                                             </div>
                                         </div>
                                         <!-- /.modal-content -->
@@ -101,13 +101,13 @@ include_once("Template.php");
 
 
                                                 <div class="form-group">
-                                                    <label for="subId">子账户ID</label>
+                                                    <label for="subId">子账户ID*</label>
                                                     <input  class="form-control" style="float: right; width: 50%" type="text" name="userId" id="subId"
                                                             value="" placeholder="账户ID"/>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="subPassword">子账户密码</label>
+                                                    <label for="subPassword">子账户密码*</label>
                                                     <input  class="form-control" style="float: right; width: 50%" type="password" name="subPassword"
                                                             id="subPassword" value="" placeholder="账户密码"/>
                                                 </div>
@@ -122,7 +122,7 @@ include_once("Template.php");
 
                                                 <div class="form-group">
 
-                                                    <label for="riskControl">风控</label>
+                                                    <label for="riskControl">风控*</label>
 
                                                     <select  style="float: right; width: 50%" class="form-control" id="riskControl">
                                                         <option></option>
@@ -156,7 +156,7 @@ include_once("Template.php");
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                                 </button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                                                <button type="button" class="btn btn-primary">确定</button>
                                             </div>
                                         </div>
                                         <!-- /.modal-content -->
@@ -217,7 +217,7 @@ include_once("Template.php");
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                                 </button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
+                                                <button type="button" class="btn btn-primary">提交</button>
                                             </div>
                                         </div>
                                         <!-- /.modal-content -->
@@ -898,7 +898,7 @@ include_once("ModalTemplate.php");
         //ajax 发送插入
 
         var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/InsertData.php";
-
+        $('#accountModal').modal('hide');
         $.ajax({
             url: hostpath,
             type: "get", //send it through get method
@@ -938,7 +938,7 @@ include_once("ModalTemplate.php");
         //ajax 发送插入
 
         var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/UpdateData.php";
-
+        $('#accountModal').modal('hide');
         $.ajax({
             url: hostpath,
             type: "get", //send it through get method
@@ -1022,7 +1022,13 @@ include_once("ModalTemplate.php");
         //ajax 发送插入
 
         var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/InsertData.php";
-
+        var checkResult =validateSubAccountInfo();
+        if (checkResult != ""){
+            $("#alertNotificationBody").text(checkResult);
+            $("#generalAlert").modal('show');
+            return;
+        }
+        $('#subModal').modal('hide');
         $.ajax({
             url: hostpath,
             type: "get", //send it through get method
@@ -1036,6 +1042,7 @@ include_once("ModalTemplate.php");
                 ContactInfo: subContact
             },
             success: function (response) {
+                response = JSON.parse(response);
                 if(response==''){
                     $('#generalNotificationBody').text('成功');
                 }else{
@@ -1062,7 +1069,13 @@ include_once("ModalTemplate.php");
 
         //TODO: 应该做 validate
         //ajax 发送插入
-
+        var checkResult =validateSubAccountInfo();
+        if (checkResult != ""){
+            $("#alertNotificationBody").text(checkResult);
+            $("#generalAlert").modal('show');
+            return;
+        }
+        $('#subModal').modal('hide');
         var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/UpdateData.php";
 
         $.ajax({
@@ -1259,6 +1272,16 @@ include_once("ModalTemplate.php");
                 mainArray.eq(i).attr('selected', 'selected');
                 break;
             }
+        }
+    }
+
+    function validateSubAccountInfo(){
+        if ($("#newSubModal #subId").val() == ""){
+            return "请输入子账户ID";
+        }else if ( $("#newSubModal #subPassword").val() == ""){
+            return "请输入子账户密码";
+        }else{
+            return "";
         }
     }
 

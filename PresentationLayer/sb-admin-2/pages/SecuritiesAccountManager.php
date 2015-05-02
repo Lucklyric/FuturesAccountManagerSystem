@@ -78,7 +78,7 @@ include_once("Template.php");
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                             </button>
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                                            <button type="button" class="btn btn-primary">确定</button>
                                         </div>
                                     </div>
                                     <!-- /.modal-content -->
@@ -101,13 +101,13 @@ include_once("Template.php");
 
 
                                             <div class="form-group">
-                                                <label for="subId">子账户ID</label>
+                                                <label for="subId">子账户ID*</label>
                                                 <input  class="form-control" style="float: right; width: 50%" type="text" name="userId" id="subId"
                                                         value="" placeholder="账户ID"/>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="subPassword">子账户密码</label>
+                                                <label for="subPassword">子账户密码*</label>
                                                 <input  class="form-control" style="float: right; width: 50%" type="password" name="subPassword"
                                                         id="subPassword" value="" placeholder="账户密码"/>
                                             </div>
@@ -122,7 +122,7 @@ include_once("Template.php");
 
                                             <div class="form-group">
 
-                                                <label for="riskControl">风控</label>
+                                                <label for="riskControl">风控*</label>
 
                                                 <select  style="float: right; width: 50%" class="form-control" id="riskControl">
                                                     <option></option>
@@ -156,7 +156,7 @@ include_once("Template.php");
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                             </button>
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                                            <button type="button" class="btn btn-primary">确定</button>
                                         </div>
                                     </div>
                                     <!-- /.modal-content -->
@@ -217,7 +217,7 @@ include_once("Template.php");
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                             </button>
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
+                                            <button type="button" class="btn btn-primary">提交</button>
                                         </div>
                                     </div>
                                     <!-- /.modal-content -->
@@ -272,12 +272,12 @@ include_once("Template.php");
                                             <div class="row clearfix">
                                                 <div class="col-md-6 column">
 
-                                                            <textarea style="width: 100%;height: 196px;overflow:-moz-scrollbars-vertical;overflow-y:auto;" id="duoCang" readonly>
+                                                            <textarea style="width: 100%;height: 96px;overflow:-moz-scrollbars-vertical;overflow-y:auto;" id="duoCang" readonly>
                                                             </textarea>
                                                 </div>
                                                 <div class="col-md-6 column">
 
-                                                            <textarea style="width: 100%;height: 196px;overflow:-moz-scrollbars-vertical;overflow-y:auto;"  id ="kongCang" readonly>
+                                                            <textarea style="width: 100%;height: 96px;overflow:-moz-scrollbars-vertical;overflow-y:auto;"  id ="kongCang" readonly>
                                                             </textarea>
                                                 </div>
                                             </div>
@@ -607,8 +607,8 @@ include_once("ModalTemplate.php");
      */
     function refreshRiskGroupInfo(flag){
         if (flag === undefined){
-            if (sessionStorage.getItem('riskGroups')){
-                riskGroups = JSON.parse(sessionStorage.getItem('riskGroups'));
+            if (sessionStorage.getItem('riskGroupsSecurity')){
+                riskGroups = JSON.parse(sessionStorage.getItem('riskGroupsSecurity'));
                 return;
             }
         }
@@ -617,9 +617,11 @@ include_once("ModalTemplate.php");
             riskGroups=[];
             console.log("取到风控组信息");
             for (var i = 0; i < data.data.length; i++) {
-                riskGroups.push(data.data[i]);
+                if (data.data[i][1].indexOf('证券') != -1){
+                    riskGroups.push(data.data[i]);
+                }
             }
-            sessionStorage.setItem('riskGroups',JSON.stringify(riskGroups));
+            sessionStorage.setItem('riskGroupsSecurity',JSON.stringify(riskGroups));
         });
     }
 
@@ -896,7 +898,7 @@ include_once("ModalTemplate.php");
         //ajax 发送插入
 
         var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/InsertData.php";
-
+        $('#accountModal').modal('hide');
         $.ajax({
             url: hostpath,
             type: "get", //send it through get method
@@ -909,7 +911,13 @@ include_once("ModalTemplate.php");
             },
             success: function (response) {
                 // alert("Data Loaded: " + response);
-                $('#generalNotificationBody').text(response);
+                response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
+
                 $('#generalNotification').modal('show');
                 refreshData(1);
             },
@@ -930,7 +938,7 @@ include_once("ModalTemplate.php");
         //ajax 发送插入
 
         var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/UpdateData.php";
-
+        $('#accountModal').modal('hide');
         $.ajax({
             url: hostpath,
             type: "get", //send it through get method
@@ -944,7 +952,12 @@ include_once("ModalTemplate.php");
             },
             success: function (response) {
                 // alert("Data Loaded: " + response);
-                $('#generalNotificationBody').text(response);
+                response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
                 $('#generalNotification').modal('show');
                 refreshData(1);
             },
@@ -978,7 +991,12 @@ include_once("ModalTemplate.php");
             },
             success: function (response) {
                 //alert("Data Loaded: " + response);
-                $('#generalNotificationBody').text(response);
+                response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
                 $('#generalNotification').modal('show');
                 selectedIndex = 0;
                 refreshData(1);
@@ -1004,7 +1022,13 @@ include_once("ModalTemplate.php");
         //ajax 发送插入
 
         var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/InsertData.php";
-
+        var checkResult =validateSubAccountInfo();
+        if (checkResult != ""){
+            $("#alertNotificationBody").text(checkResult);
+            $("#generalAlert").modal('show');
+            return;
+        }
+        $('#subModal').modal('hide');
         $.ajax({
             url: hostpath,
             type: "get", //send it through get method
@@ -1018,7 +1042,12 @@ include_once("ModalTemplate.php");
                 ContactInfo: subContact
             },
             success: function (response) {
-                $('#generalNotificationBody').text(response);
+                response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
                 $('#generalNotification').modal('show');
                 //alert("Data Loaded: " + response);
                 refreshData(1);
@@ -1040,7 +1069,13 @@ include_once("ModalTemplate.php");
 
         //TODO: 应该做 validate
         //ajax 发送插入
-
+        var checkResult =validateSubAccountInfo();
+        if (checkResult != ""){
+            $("#alertNotificationBody").text(checkResult);
+            $("#generalAlert").modal('show');
+            return;
+        }
+        $('#subModal').modal('hide');
         var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/UpdateData.php";
 
         $.ajax({
@@ -1058,7 +1093,12 @@ include_once("ModalTemplate.php");
             },
             success: function (response) {
                 // alert("Data Loaded: " + response);
-                $('#generalNotificationBody').text(response);
+                response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
                 $('#generalNotification').modal('show');
                 refreshData(1);
             },
@@ -1081,7 +1121,12 @@ include_once("ModalTemplate.php");
                 SubSystemId: subSystemId
             },
             success: function (response) {
-                $('#generalNotificationBody').text(response);
+                response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
                 $('#generalNotification').modal('show');
                 subSelectedIndex = 0;
                 refreshData(1);
@@ -1132,7 +1177,6 @@ include_once("ModalTemplate.php");
                 text: '恒生证券'
             })
         )
-
         mainChannelOption.on('change', function(){
             setMainAccountCompanyInfo(this.value)
         });
@@ -1170,6 +1214,7 @@ include_once("ModalTemplate.php");
     $(document).on("click", "#sub-add", function () {
         if (mainAccounts.length == 0) return;
         //绑定回调
+        $("#newSubAccountLabel").text("新建子账户 主账户:"+mainAccounts[selectedIndex][4]+" 通道:"+mainAccounts[selectedIndex][1]+" 经纪公司:"+mainAccounts[selectedIndex][2]);
         $(document).off("click", "#newSubModal .btn-primary");
         $(document).on("click", "#newSubModal .btn-primary", newSubAccount);
         setSubAccountInfo();
@@ -1220,9 +1265,21 @@ include_once("ModalTemplate.php");
         }
     }
 
+    function validateSubAccountInfo(){
+        if ($("#newSubModal #subId").val() == ""){
+            return "请输入子账户ID";
+        }else if ( $("#newSubModal #subPassword").val() == ""){
+            return "请输入子账户密码";
+        }else{
+            return "";
+        }
+    }
+
     //显示update sub modal
     $(document).on("click", "#sub-update", function () {
         if (mainAccounts.length == 0) return;
+        $("#newSubAccountLabel").text("新建子账户 主账户:"+mainAccounts[selectedIndex][4]+" 通道:"+mainAccounts[selectedIndex][1]+" 经纪公司:"+mainAccounts[selectedIndex][2]);
+
         //if (riskGroups.length == 0 || ratioTypes.length == 0) return;
         $(document).off("click", "#newSubModal .btn-primary");
         setSubAccountInfo();

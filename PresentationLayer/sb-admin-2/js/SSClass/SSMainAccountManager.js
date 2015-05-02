@@ -703,7 +703,12 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                 Method: "onSyncPosition"
             },
             success: function (response) {
-               console.log("同步结果:"+response+".");
+                response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
             },
             error: function (xhr) {
                 //Do Something to handle error
