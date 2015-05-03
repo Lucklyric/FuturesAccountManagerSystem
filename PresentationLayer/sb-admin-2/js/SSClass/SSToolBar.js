@@ -44,7 +44,7 @@ function SSToolBar(restartServer,connectMainAccount,onlineCount,serverStatus){
 
     this.callRefresh = function (){
         console.log("SSToolBar开始刷新服务器状态");
-        $.getJSON('../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/ServerState.php?UserId='+superAdminId+'&Password='+superAdminPwd, function (data) {
+        $.getJSON('../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/ServerState.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             console.log("服务器状态"+data);
             //if (data == "0"){
                parent.serverStatusJq.text("服务器状态："+data);
@@ -52,7 +52,7 @@ function SSToolBar(restartServer,connectMainAccount,onlineCount,serverStatus){
             //}
         });
         console.log("SSToolBar开始刷新在线人数");
-        $.getJSON('../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/GetLoggedInSubAccountCount?UserId='+superAdminId+'&Password='+superAdminPwd, function (data) {
+        $.getJSON('../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/GetLoggedInSubAccountCount.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             console.log("在线人数"+data);
             parent.onlineCounJq.text("在线人数："+data+"人");
             setCookie('toolBarCount-CID1', parent.onlineCounJq.text(),15*1/24/60/60);
@@ -72,7 +72,7 @@ function SSToolBar(restartServer,connectMainAccount,onlineCount,serverStatus){
         parent.serverStatusJq.text("服务器状态：请求重启...");
         console.log("开始请求服务器状态")
         //parent.manualRefreah();
-        $.getJSON('../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/RestartSharpSpeedServer.php?UserId='+superAdminId+'&Password='+superAdminPwd, function (data) {
+        $.getJSON('../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/RestartSharpSpeedServer.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             console.log("服务器状态"+data);
             if (data == ""){
                 parent.serverStatusJq.text("服务器状态：正在重启...");
@@ -83,7 +83,7 @@ function SSToolBar(restartServer,connectMainAccount,onlineCount,serverStatus){
     this.connectMainAccoutJq.on('click', function() {
         console.log("SSToolBar-连接");
         parent.serverStatusJq.text("服务器状态：请求链接...");
-        $.getJSON('../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/ConnectAllSPServerMainAccounts.php?UserId='+superAdminId+'&Password='+superAdminPwd, function (data) {
+        $.getJSON('../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/ConnectAllSPServerMainAccounts.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             console.log("服务器状态"+data);
             if (data == ""){
                 parent.serverStatusJq.text("服务器状态:正在链接...");

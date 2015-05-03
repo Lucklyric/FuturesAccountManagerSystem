@@ -385,7 +385,7 @@ include_once("ModalTemplate.php");
             }
         }
         //mainAccountTable.fnProcessingIndicator();
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Administrator/Refresh.php?UserId='+superAdminId+'&Password='+superAdminPwd, function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Administrator/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             adminManagerTableData = data.data;
             console.log(adminManagerTableData[0]);
             for (var i = 0; i < adminManagerTableData.length; i++) {
@@ -447,7 +447,7 @@ include_once("ModalTemplate.php");
                 return;
             }
         }
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php?UserId='+superAdminId+'&Password='+superAdminPwd, function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             mainAccountTableData = data.data;
             sessionStorage.setItem('mainAccountTableData', JSON.stringify(mainAccountTableData));
             console.log(mainAccountTableData);
@@ -498,7 +498,10 @@ include_once("ModalTemplate.php");
                 Restriction: restriction,
                 UserName: adminManagerName,
                 Contact: adminManagerContact,
-                State: 1
+                State: 1,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
+
             },
             success: function(response) {
                 $('#generalNotificationBody').text(response);
@@ -546,7 +549,9 @@ include_once("ModalTemplate.php");
                 Restriction: restriction,
                 UserName: adminManagerName,
                 Contact: adminManagerContact,
-                State: 3
+                State: 3,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function(response) {
                 $('#generalNotificationBody').text(response);
@@ -587,7 +592,9 @@ include_once("ModalTemplate.php");
                 Restriction: restriction,
                 UserName: adminManagerName,
                 Contact: adminManagerContact,
-                State: 2
+                State: 2,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function(response) {
                 $('#generalNotificationBody').text(response);

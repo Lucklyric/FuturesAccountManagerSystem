@@ -26,8 +26,7 @@
     $MaxMoney=isset($_GET["MaxMoney"]) ? $_GET["MaxMoney"] :"";
   
     $TableName="MainAccount";
-    $AdminAccount="frankzch";
-    $AdminPassword="123456";
+
     $State="1";
     
 //    $Channel="CTP";

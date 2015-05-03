@@ -541,7 +541,7 @@ include_once("ModalTemplate.php");
             }
         }
         //mainAccountTable.fnProcessingIndicator();
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             mainAccountTableData = data.data;
             sessionStorage.setItem('mainAccountTableData',JSON.stringify(mainAccountTableData));
             console.log(mainAccountTableData);
@@ -580,7 +580,7 @@ include_once("ModalTemplate.php");
             }
         }
             console.log("开始获取交易所信息");
-            $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/BrokersInfo.php', function (data) {
+            $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/BrokersInfo.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
 
                 //allBrokersInfo = data;
                 allBrokersInfo['CTP'] = new Array();
@@ -615,7 +615,7 @@ include_once("ModalTemplate.php");
             }
         }
         console.log("开始获取风控组信息");
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskManage/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskManage/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             riskGroups=[];
             console.log("取到风控组信息");
             for (var i = 0; i < data.data.length; i++) {
@@ -638,7 +638,7 @@ include_once("ModalTemplate.php");
             }
         }
         console.log("开始获取费率组信息");
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             ratioTypes=[];
             console.log("取到费率组信息");
             for (var i = 0; i < data.data.length; i++) {
@@ -911,7 +911,9 @@ include_once("ModalTemplate.php");
                 CompanyName: company,
                 CompanyServer: server,
                 AccountId: userId,
-                AccountPassword: userPassword
+                AccountPassword: userPassword,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function (response) {
                // alert("Data Loaded: " + response);
@@ -952,7 +954,9 @@ include_once("ModalTemplate.php");
                 CompanyServer: server,
                 MainNo :mainAccounts[selectedIndex][0],
                 AccountId: userId,
-                AccountPassword: userPassword
+                AccountPassword: userPassword,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function (response) {
                // alert("Data Loaded: " + response);
@@ -991,7 +995,9 @@ include_once("ModalTemplate.php");
                 CompanyName: company,
                 CompanyServer: server,
                 AccountId: userId,
-                AccountPassword: userPassword
+                AccountPassword: userPassword,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function (response) {
                 //alert("Data Loaded: " + response);
@@ -1043,7 +1049,9 @@ include_once("ModalTemplate.php");
                 RiskManagementGroup: riskControl,
                 MoneyRatio: rate,
                 UserName: subName,
-                ContactInfo: subContact
+                ContactInfo: subContact,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function (response) {
                 response = JSON.parse(response);
@@ -1093,7 +1101,9 @@ include_once("ModalTemplate.php");
                 MoneyRatio: rate,
                 UserName: subName,
                 ContactInfo: subContact,
-                SubSystemId: curSubAccounts[subSelectedIndex][0]
+                SubSystemId: curSubAccounts[subSelectedIndex][0],
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function (response) {
                 //alert("Data Loaded: " + response);
@@ -1122,7 +1132,9 @@ include_once("ModalTemplate.php");
             url: hostpath,
             type: "get", //send it through get method
             data: {
-                SubSystemId: subSystemId
+                SubSystemId: subSystemId,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function (response) {
                 response = JSON.parse(response);

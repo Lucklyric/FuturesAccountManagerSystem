@@ -26,8 +26,7 @@
     $TableName="Operation";
     $State="3";
     
-    $AdminAccount="frankzch";
-    $AdminPassword="123456";
+
     $Id="188";
     $Functions="test";
     $Operator="new";

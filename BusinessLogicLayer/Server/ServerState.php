@@ -6,17 +6,16 @@
     $path = "../../..";
     //echo $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
    include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/Server/ServerManager.php";
-    
-    $UserId=isset($_GET["UserId"]) ? $_GET["UserId"] :"";
-    $Password=isset($_GET["Password"]) ? $_GET["Password"] :"";
-   // $UserId="frankzch";
-   // $Password="123456";
-    
-    $testAccount = new ServerManager();
+
+$AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
+$AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
+
+
+$testAccount = new ServerManager();
     
     //echo "<br>GetAllMainAccountData: <br>";
     
-    $rawData=$testAccount->GetServerState($UserId,$Password);
+    $rawData=$testAccount->GetServerState($AdminAccount,$AdminPassword);
 
     echo $rawData;
     

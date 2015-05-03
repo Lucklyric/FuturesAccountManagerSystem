@@ -6,17 +6,14 @@
     $path = "../../..";
     //echo $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MainAccountManager.php";
     include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/MoneyInAndOut/MoneyInAndOut.php";
-    $UserId=isset($_GET["UserId"]) ? $_GET["UserId"] :"";
-    $Password=isset($_GET["Password"]) ? $_GET["Password"] :"";
- 
-    $UserId="frankzch";
-    $Password="123456";
+$AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
+$AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
     
     $MoneyInAndOut = new MoneyInAndOut();
     
     //echo "<br>GetAllMainAccountData: <br>";
     
-    $rawData=$MoneyInAndOut->GetAllData($UserId,$Password);
+    $rawData=$MoneyInAndOut->GetAllData($AdminAccount,$AdminPassword);
     
    // echo($rawData);
     

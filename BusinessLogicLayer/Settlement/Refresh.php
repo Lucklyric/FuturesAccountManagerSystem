@@ -11,18 +11,15 @@
     include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/SubAccount/SubAccountManager.php";
     include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/Settlement/SettlementAccountManager.php";
     include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/Settlement/SettlementRowClass.php";
-    
-    $UserId=isset($_GET["UserId"]) ? $_GET["UserId"] :"";
-    $Password=isset($_GET["Password"]) ? $_GET["Password"] :"";
- 
-    $UserId="frankzch";
-    $Password="123456";
+
+$AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
+$AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
     
     $SettlementAccount = new SettlementAccountManager();
     
     //echo "<br>GetAllMainAccountData: <br>";
     
-    $rawData=$SettlementAccount->GetAllData($UserId,$Password);
+    $rawData=$SettlementAccount->GetAllData($AdminAccount,$AdminPassword);
     
    // echo($rawData);
     

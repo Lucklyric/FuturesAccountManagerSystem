@@ -16,9 +16,8 @@
     $Restriction=isset($_GET["Restriction"]) ? $_GET["Restriction"] :"";
     $UserName=isset($_GET["UserName"]) ? $_GET["UserName"] :"";
     $Contact=isset($_GET["Contact"]) ? $_GET["Contact"] :"";
-    
-//    $AdminAccount="frankzch";
-//    $AdminPassword="123456";
+    $AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
+    $AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
     
     $TableName="Admin";
     $State="3";

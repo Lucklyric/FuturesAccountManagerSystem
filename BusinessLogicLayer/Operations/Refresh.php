@@ -33,18 +33,16 @@
             echo "Object $obj does not belong to a subclass of $class\n";
         }
     }
-    
-    $UserId=isset($_GET["UserId"]) ? $_GET["UserId"] :"";
-    $Password=isset($_GET["Password"]) ? $_GET["Password"] :"";
-    $UserId="frankzch";
-    $Password="123456";
+
+$AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
+$AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
     
     
     $testAccount = new OperationsManager();
     
     //echo "<br>GetAllMainAccountData: <br>";
     
-    $rawData=$testAccount->GetAllData($UserId,$Password);
+    $rawData=$testAccount->GetAllData($AdminAccount,$AdminPassword);
     
     //echo($rawData);
     

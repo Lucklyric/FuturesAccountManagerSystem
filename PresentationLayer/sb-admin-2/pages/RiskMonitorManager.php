@@ -374,7 +374,7 @@ include_once("ModalTemplate.php");
                 return;
             }
         }
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskMonitors/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskMonitors/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             riskMonitorTableData = data.data;
             console.log(riskMonitorTableData[0]);
             for (var i = 0; i < riskMonitorTableData.length; i++) {
@@ -398,7 +398,7 @@ include_once("ModalTemplate.php");
         }
         //mainAccountTable.fnProcessingIndicator();
 
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             subAccounts = [];
             for (var i = 0; i < data.data.length; i++) {
                 subAccounts.push(data.data[i]);
@@ -479,7 +479,9 @@ include_once("ModalTemplate.php");
                     Name: riskManagerName,
                     Contact: riskManagerContact,
                     SystemId : 0,
-                    State: 1
+                    State: 1,
+                    AdminAccount: superAdminId,
+                    AdminPassword: superAdminPwd
                 },
                 success: function(response) {
                     $('#generalNotificationBody').text(response);
@@ -521,7 +523,9 @@ include_once("ModalTemplate.php");
                 Name: riskManagerName,
                 Contact: riskManagerContact,
                 SystemId : systemId,
-                State: 3
+                State: 3,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function(response) {
                 $('#generalNotificationBody').text(response);
@@ -561,7 +565,9 @@ include_once("ModalTemplate.php");
                 Name: riskManagerName,
                 Contact: riskManagerContact,
                 SystemId : systemId,
-                State: 2
+                State: 2,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function(response) {
                 $('#generalNotificationBody').text(response);

@@ -37,8 +37,7 @@
     $AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
     $AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
     
-    $AdminAccount="frankzch";
-    $AdminPassword="123456";
+
     $TableName="RiskManage";
     $State="2";
     $Id="0";

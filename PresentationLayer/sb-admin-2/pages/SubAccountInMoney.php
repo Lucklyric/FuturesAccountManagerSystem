@@ -222,7 +222,7 @@ include_once("ModalTemplate.php");
             }
         }
         //mainAccountTable.fnProcessingIndicator();
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             subAccountTableData = data.data;
             // subAccounts.push(subAccountTableData);
             for (var i = 0; i < subAccountTableData.length; i++) {
@@ -245,7 +245,7 @@ include_once("ModalTemplate.php");
                 return;
             }
         }
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             mainAccountTableData = data.data;
             sessionStorage.setItem('mainAccountTableData', JSON.stringify(mainAccountTableData));
             console.log(mainAccountTableData);
@@ -362,7 +362,9 @@ include_once("ModalTemplate.php");
                 InAndOut: amount,
                 Priority: preferredMoney,
                 Id: subId,
-                MainId: mainAccountId
+                MainId: mainAccountId,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function (response) {
                 $('#generalNotificationBody').text(response);

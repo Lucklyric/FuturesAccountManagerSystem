@@ -321,7 +321,7 @@ include_once("ModalTemplate.php");
                 return;
             }
         }
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Operations/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Operations/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             operationManagerTableData = data.data;
             console.log(operationManagerTableData[0]);
             for (var i = 0; i < operationManagerTableData.length; i++) {
@@ -402,7 +402,9 @@ include_once("ModalTemplate.php");
                 CompanyName: company,
                 CompanyServer: server,
                 AccountId: userId,
-                AccountPassword: userPassword
+                AccountPassword: userPassword,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function(response) {
                 $('#generalNotificationBody').text(response);

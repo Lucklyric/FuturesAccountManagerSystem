@@ -37,11 +37,9 @@
             echo "Object $obj does not belong to a subclass of $class\n";
         }
     }
-    
-    $UserId=isset($_GET["UserId"]) ? $_GET["UserId"] :"";
-    $Password=isset($_GET["Password"]) ? $_GET["Password"] :"";
-    $UserId="frankzch";
-    $Password="123456";
+
+$AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
+$AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
     
     $SubAccount = new SubAccountManager();
     $SettlementAccount = new SettlementAccountManager();
@@ -52,7 +50,7 @@
     //echo($rawData);
     
     //echo "<br>Split test:<br>";
-    $subRawData=$SubAccount->GetAllData($UserId,$Password);
+    $subRawData=$SubAccount->GetAllData($AdminAccount,$AdminPassword);
     echo $subRawData;
     
     //echo "<br>Split test:<br>";

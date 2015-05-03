@@ -27,8 +27,7 @@
     $TableName="MoneyInAndOut";
     $State="1";
     
-    $AdminAccount="frankzch";
-    $AdminPassword="123456";
+
 //    $Id="36";
 //    $SubAccountName="1001";
 //    $MainId=8;
