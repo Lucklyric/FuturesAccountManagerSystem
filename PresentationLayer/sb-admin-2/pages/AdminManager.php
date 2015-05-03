@@ -345,6 +345,7 @@ include_once("ModalTemplate.php");
      * Document加载完毕 更新数据刷新Table绑定点击事件
      */
     $(document).ready(function () {
+
         ifHideMainAccountToolBar(true);
         refreshMainTable(1);
         refreshData(1); //更新数据

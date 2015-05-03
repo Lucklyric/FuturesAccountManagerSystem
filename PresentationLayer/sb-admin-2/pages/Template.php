@@ -220,7 +220,9 @@
         <!--</div>-->
     </nav>
     <script>
-        $.ajaxSetup({ cache: false });
+        $(document).ready(function () {
+            $.ajaxSetup({ cache: false });
+        });
         var superAdminId = "frankzch";
         var superAdminPwd = "123456";
     </script>
