@@ -90,7 +90,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
 
                         ssMainAccounttManagerInstance.mainAccouts[index][7] = "需要持仓同步";
                     }else if(tmpResponse == "已连接"){
-                        ssMainAccounttManagerInstance.mainAccouts[index][7] = "已同步";
+                        ssMainAccounttManagerInstance.mainAccouts[index][7] = "已连接";
                         ssMainAccounttManagerInstance.needCheckQueue.splice(index,1);
                     }else if(tmpResponse == "连接错误"){
                         ssMainAccounttManagerInstance.mainAccouts[index][7] = "连接错误";
@@ -100,6 +100,9 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                         }else {
                             ssMainAccounttManagerInstance.needCheckQueue.splice(index, 1);
                         }
+                    }else if(tmpResponse == "未启动"){
+                        ssMainAccounttManagerInstance.mainAccouts[index][7] = "未启动";
+                        ssMainAccounttManagerInstance.ConnectMainAccount(index);
                     }
                }
                 sessionStorage.setItem('mainAccountData',JSON.stringify(ssMainAccounttManagerInstance.mainAccouts));

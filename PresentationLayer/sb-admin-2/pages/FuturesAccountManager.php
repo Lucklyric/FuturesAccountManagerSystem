@@ -325,7 +325,7 @@ include_once("Template.php");
                                         <th>账户ID</th>
                                         <th>账户密码</th>
                                         <th>静态权益</th>
-                                        <th>同步状态</th>
+                                        <th>状态</th>
 
                                     </tr>
                                     </thead>
@@ -339,7 +339,7 @@ include_once("Template.php");
                                         <th>账户ID</th>
                                         <th>账户密码</th>
                                         <th>静态权益</th>
-                                        <th>同步状态</th>
+                                        <th>状态</th>
 
                                     </tr>
                                     </tfoot>

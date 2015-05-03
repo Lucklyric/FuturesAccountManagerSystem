@@ -368,7 +368,12 @@ include_once("ModalTemplate.php");
                 AdminPassword: superAdminPwd
             },
             success: function (response) {
-                $('#generalNotificationBody').text(response);
+                response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
                 $('#generalNotification').modal('show');
                 refreshData(1);
             },

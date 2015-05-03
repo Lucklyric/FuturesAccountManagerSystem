@@ -479,7 +479,12 @@ include_once("ModalTemplate.php");
             type: "get", //send it through get method
             data: data,
             success: function (response) {
-                $('#generalNotificationBody').text(response);
+                response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
                 $('#generalNotification').modal('show');
                 refreshData(1);
             },
