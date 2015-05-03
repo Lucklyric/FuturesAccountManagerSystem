@@ -346,9 +346,9 @@ include_once("ModalTemplate.php");
      */
     $(document).ready(function () {
         ifHideMainAccountToolBar(true);
-        refreshMainTable();
-        refreshData(); //更新数据
-        refreshMainAccounts();//更新主账户数据
+        refreshMainTable(1);
+        refreshData(1); //更新数据
+        refreshMainAccounts(1);//更新主账户数据
 
         $('#adminManagerTable').on('click', 'tr', function () { //绑定点击事件刷新子账户
             selectedIndex = adminManagerTable.row(this).index();

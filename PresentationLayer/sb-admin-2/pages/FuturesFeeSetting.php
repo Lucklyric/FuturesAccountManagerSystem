@@ -332,7 +332,8 @@ include_once("ModalTemplate.php");
             for (var i = 0; i < feeSettingTableData.length; i++) {
                 if (feeSettingTableData[i][1].match(/\(期货\)/)){
                     feeSettingData.push(feeSettingTableData[i]);
-                }            }
+                }
+            }
             console.log("取到数据");
             sessionStorage.setItem('ratioTypes', JSON.stringify(feeSettingData));
             refreshMainTable();

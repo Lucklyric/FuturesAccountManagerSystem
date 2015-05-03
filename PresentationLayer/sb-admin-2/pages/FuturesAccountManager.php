@@ -444,6 +444,7 @@ include_once("ModalTemplate.php");
 <script src="../dist/js/sb-admin-2.js"></script>
 
 <script>
+    $.ajaxSetup({ cache: false });
     /**
      * 定义全局变量
      */
@@ -518,6 +519,7 @@ include_once("ModalTemplate.php");
         mainAccounts = [];
 
         var table = $('#mainAccounts').dataTable();
+
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
         if (flag === undefined){
@@ -543,7 +545,7 @@ include_once("ModalTemplate.php");
             mainAccountTableData = data.data;
             sessionStorage.setItem('mainAccountTableData',JSON.stringify(mainAccountTableData));
             console.log(mainAccountTableData);
-            console.log("走到这里了");
+            console.log("主账户主账户主账户走到这里了");
 
             for (var i = 0; i < mainAccountTableData.length; i++) {
                 if (mainAccountTableData[i].inf[1]!="恒生证券"){
