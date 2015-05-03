@@ -430,11 +430,17 @@ include_once("ModalTemplate.php");
         if (event === undefined){
             var dataToDelete = feeSettingData[selectedIndex];
             data = {
+                admin: superAdminId,
+                password: superAdminPwd,
+                tablename: "Commission",
                 State: 2,
                 编号: dataToDelete[0]
             };
         }else {
             data = {
+                admin: superAdminId,
+                password: superAdminPwd,
+                tablename: "Commission",
                 State: event.data.state,
                 编号: 0,
                 组名称: null,

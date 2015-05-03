@@ -7,21 +7,15 @@ $path = "../../..";
 include $path . "/FuturesAccountManagerSystem/DataPersistenceLayer/FeeSetting/FeeSettingManager.php";
 include $path . "/FuturesAccountManagerSystem/DataPersistenceLayer/FeeSetting/FeeSettingRowClass.php";
 
-$AdminAccount = "frankzch";
-$AdminPassword = "123456";
-$TableName = "Commission";
-
-if ($TableName) {
-    $data = "admin=" . $AdminAccount . "&password=" . $AdminPassword . "&tablename=" . $TableName;
-    foreach ($_GET as $key => $value) {
+$data = "";
+foreach ($_GET as $key => $value) {
+    if (strlen($data) == 0) {
+        $data .= $key . "=" . $value;
+    } else {
         $data .= "&" . $key . "=" . $value;
     }
-   // echo $data;
-} else {
-
-    echo "Some data is missing!";
-
 }
+
 
 //echo $data;
 

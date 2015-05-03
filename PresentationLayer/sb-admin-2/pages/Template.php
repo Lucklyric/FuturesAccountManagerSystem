@@ -74,6 +74,12 @@
             padding: 10px;
             max-width: 350px;
         }
+
+        .modal .modal-body {
+            max-height: 580px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
     </style>
 
 

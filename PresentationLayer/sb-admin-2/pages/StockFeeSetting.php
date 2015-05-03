@@ -89,16 +89,6 @@ include_once("Template.php");
                                                     </div>
                                                     <div class="row clearfix">
                                                         <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px">品种代码</label>
-                                                        </div>
-                                                        <div class="col-md-4 column modal-row">
-                                                            <input class="form-control" type="text"
-                                                                   name="instrument" id="instrument"
-                                                                   value="" placeholder="品种代码(必填)"/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row clearfix">
-                                                        <div class="col-md-2 column modal-row">
                                                             <label style="margin-top: 8px">手续费率(万分之)</label>
                                                         </div>
                                                         <div class="col-md-4 column modal-row">
@@ -369,17 +359,25 @@ include_once("ModalTemplate.php");
 
     function sendRequest(event) {
 
-       // ["编号","组名称","合约","开仓手续费","平仓手续费","平今手续费","手续费类型","保证金比例"]
+        //$data = "admin=" . $AdminAccount . "&password=" . $AdminPassword . "&tablename=" . $TableName;
+
+        // ["编号","组名称","合约","开仓手续费","平仓手续费","平今手续费","手续费类型","保证金比例"]
 
         var data;
         if (event === undefined){
             var dataToDelete = feeSettingData[selectedIndex];
             data = {
+                admin: superAdminId,
+                password: superAdminPwd,
+                tablename: "Commission",
                 State: 2,
                 编号: dataToDelete[0]
             };
         }else {
             data = {
+                admin: superAdminId,
+                password: superAdminPwd,
+                tablename: "Commission",
                 State: event.data.state,
                 编号: 0,
                 组名称: null,
@@ -400,7 +398,7 @@ include_once("ModalTemplate.php");
                 data["组名称"] = $("#newFeesettingModal #existingGroup option:selected").text() + "(证券)";
             }
 
-            data["合约"] = $("#newFeesettingModal #instrument").val();
+            data["合约"] = "证券";
             data["开仓手续费"] = $("#openPositionFee").val();
             data["平仓手续费"] = $("#openPositionFee").val();
             data["平今手续费"] = $("#openPositionFee").val();
@@ -462,7 +460,6 @@ include_once("ModalTemplate.php");
         $("#existingGroup").attr('disabled','disabled');
         $("#feesettingGroup").attr('disabled','disabled');
 
-        $("#instrument").val(feesettingRowData[2]);
         $("#openPositionFee").val(feesettingRowData[3]);
     }
 
