@@ -34,17 +34,15 @@ function class_parentage($obj, $class)
     }
 }
 
-$UserId = isset($_GET["UserId"]) ? $_GET["UserId"] : "";
-$Password = isset($_GET["Password"]) ? $_GET["Password"] : "";
-$UserId = "frankzch";
-$Password = "123456";
+$AdminAccount=isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] :"";
+$AdminPassword=isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] :"";
 
 
 $FeeSettingManager = new FeeSettingManager();
 
 //echo "<br>GetAllMainAccountData: <br>";
 
-$rawData = $FeeSettingManager->GetAllData($UserId, $Password);
+$rawData = $FeeSettingManager->GetAllData($AdminAccount, $AdminPassword);
 
 //echo($rawData);
 

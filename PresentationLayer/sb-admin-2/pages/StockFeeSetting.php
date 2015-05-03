@@ -253,14 +253,14 @@ include_once("ModalTemplate.php");
             }
         }
 
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/GetAllTradableInstrumentsAndProps.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/GetAllTradableInstrumentsAndProps.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             instrumentData = data.mapExchange2Category2Prop;
             console.log(instrumentData[0]);
             sessionStorage.setItem('instrumentData', JSON.stringify(instrumentData));
             console.log("取到数据");
         });
 
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             feeSettingTableData = data.data;
             console.log(feeSettingTableData[0]);
             for (var i = 0; i < feeSettingTableData.length; i++) {

@@ -1238,7 +1238,7 @@ include_once("ModalTemplate.php");
             }
         }
 
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/GetAllTradableInstrumentsAndProps.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/GetAllTradableInstrumentsAndProps.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             instrumentData = data.mapExchange2Category2Prop;
             console.log(instrumentData[0]);
             sessionStorage.setItem('instrumentData', JSON.stringify(instrumentData));
@@ -1246,7 +1246,7 @@ include_once("ModalTemplate.php");
         });
 
         //mainAccountTable.fnProcessingIndicator();
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskManage/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskManage/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             riskManagerTableData = data.data;
             console.log(riskManagerTableData[0]);
             for (var i = 0; i < riskManagerTableData.length; i++) {
