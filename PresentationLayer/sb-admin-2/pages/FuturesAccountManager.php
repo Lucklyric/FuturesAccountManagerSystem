@@ -640,7 +640,9 @@ include_once("ModalTemplate.php");
             ratioTypes=[];
             console.log("取到费率组信息");
             for (var i = 0; i < data.data.length; i++) {
-                ratioTypes.push(data.data[i]);
+                if (data.data[i][1].indexOf('期货') != -1){
+                    ratioTypes.push(data.data[i]);
+                }
             }
             sessionStorage.setItem('ratioTypes',JSON.stringify(ratioTypes));
         });
@@ -1092,7 +1094,7 @@ include_once("ModalTemplate.php");
                 SubSystemId: curSubAccounts[subSelectedIndex][0]
             },
             success: function (response) {
-               // alert("Data Loaded: " + response);
+                //alert("Data Loaded: " + response);
                 response = JSON.parse(response);
                 if(response==''){
                     $('#generalNotificationBody').text('成功');
@@ -1261,8 +1263,8 @@ include_once("ModalTemplate.php");
         ratioTypesOptions.empty();
         for (var i = 0; i < ratioTypes.length; i++) {
             ratioTypesOptions.append($('<option>', {
-                        value: ratioTypes[i][0],
-                        text: ratioTypes[i][0]
+                        value: ratioTypes[i][1],
+                        text: ratioTypes[i][1]
                     })
             )
         }

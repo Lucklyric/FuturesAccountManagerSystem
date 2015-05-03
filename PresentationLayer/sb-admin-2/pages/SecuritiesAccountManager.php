@@ -1092,7 +1092,7 @@ include_once("ModalTemplate.php");
                 SubSystemId: curSubAccounts[subSelectedIndex][0]
             },
             success: function (response) {
-                // alert("Data Loaded: " + response);
+                 //alert("Data Loaded: " + response);
                 response = JSON.parse(response);
                 if(response==''){
                     $('#generalNotificationBody').text('成功');

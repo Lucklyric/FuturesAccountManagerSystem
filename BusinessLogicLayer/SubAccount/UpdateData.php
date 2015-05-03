@@ -42,14 +42,14 @@
     //$RiskManagementGroup="test";
     //$RateGroupName="test";
     //$MoneyAccount="123";
-    $MoneyRatio="1:2";
+   // $MoneyRatio="1:2";
     $SecondMain="False";
     $State="3";
     
     if($TableName && $State ){
-        $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$SubSystemId."&子账户ID=".$SubId."&子账户密码=".$SubPass."&限制使用=".$Restriction."&创建时间=".$CreateTime."&最后登录时间=".$LastLoginTime."&用户姓名=".$UserName."&联系方式=".$ContactInfo."&主账户编号=".$MainId."&风控组名称=".$RiskManagementGroup."&费率组名称=".$RateGroupName."&初始配资比例=".$MoneyRatio."&二级主账户=".$SecondMain;
+        $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$SubSystemId."&子账户ID=".$SubId."&子账户密码=".$SubPass."&限制使用=".$Restriction."&创建时间=".$CreateTime."&最后登录时间=".$LastLoginTime."&用户姓名=".$UserName."&联系方式=".$ContactInfo."&主账户编号=".$MainId."&风控组名称=".$RiskManagementGroup."&费率组名称=".$MoneyRatio."&初始配资比例=".$MoneyRatio."&二级主账户=".$SecondMain;
 //        echo "This is hardcoded test data:<br>";
-//        echo $data;
+ //       echo $data;
     }else{
         
         echo "Some data is missing!";
