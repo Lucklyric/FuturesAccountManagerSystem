@@ -385,7 +385,7 @@ include_once("ModalTemplate.php");
             }
         }
         //mainAccountTable.fnProcessingIndicator();
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Administrator/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Administrator/Refresh.php?UserId='+superAdminId+'&Password='+superAdminPwd, function (data) {
             adminManagerTableData = data.data;
             console.log(adminManagerTableData[0]);
             for (var i = 0; i < adminManagerTableData.length; i++) {
@@ -447,7 +447,7 @@ include_once("ModalTemplate.php");
                 return;
             }
         }
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php?UserId='+superAdminId+'&Password='+superAdminPwd, function (data) {
             mainAccountTableData = data.data;
             sessionStorage.setItem('mainAccountTableData', JSON.stringify(mainAccountTableData));
             console.log(mainAccountTableData);

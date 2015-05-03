@@ -9,8 +9,8 @@
     
     $UserId=isset($_GET["UserId"]) ? $_GET["UserId"] :"";
     $Password=isset($_GET["Password"]) ? $_GET["Password"] :"";
-    $UserId="frankzch";
-    $Password="123456";
+   // $UserId="frankzch";
+   // $Password="123456";
     
     $testAccount = new ServerManager();
     

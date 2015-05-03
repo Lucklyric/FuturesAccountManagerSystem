@@ -17,8 +17,8 @@
     $UserName=isset($_GET["UserName"]) ? $_GET["UserName"] :"";
     $Contact=isset($_GET["Contact"]) ? $_GET["Contact"] :"";
     
-    $AdminAccount="frankzch";
-    $AdminPassword="123456";
+   $AdminAccount="frankzch";
+//    $AdminPassword="123456";
     
     $TableName="Admin";
     $State="2";

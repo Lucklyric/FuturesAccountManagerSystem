@@ -213,3 +213,8 @@
         <!-- /.navbar-static-side -->
         <!--</div>-->
     </nav>
+    <script>
+        $.ajaxSetup({ cache: false });
+        var superAdminId = "frankzch";
+        var superAdminPwd = "123456";
+    </script>

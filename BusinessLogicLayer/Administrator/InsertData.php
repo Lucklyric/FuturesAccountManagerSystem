@@ -18,8 +18,8 @@
     $Contact=isset($_GET["Contact"]) ? $_GET["Contact"] :"";
     $State=isset($_GET["State"]) ? $_GET["State"] :"";
     
-    $AdminAccount="frankzch";
-    $AdminPassword="123456";
+//    $AdminAccount="frankzch";
+//    $AdminPassword="123456";
     
     $TableName="Admin";
 //    $State="1";

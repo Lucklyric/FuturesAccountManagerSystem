@@ -444,7 +444,7 @@ include_once("ModalTemplate.php");
 <script src="../dist/js/sb-admin-2.js"></script>
 
 <script>
-    $.ajaxSetup({ cache: false });
+
     /**
      * 定义全局变量
      */
@@ -459,7 +459,7 @@ include_once("ModalTemplate.php");
     var selectedIndex = 0;  //mainSelectedIndex
     var subSelectedIndex = 0;  //subSelectedIndex
     var toolBarManger = new SSToolBar($("#restartServer"),$("#connectMainAccount"),$("#onlineCount"),$("#serverStatus"));
-    var mainAccountManager = new SSMainAccountManager("frankzch","123456",function(){
+    var mainAccountManager = new SSMainAccountManager(superAdminId,superAdminPwd,function(){
         refreshMainAccountsTable();
     });
 
