@@ -183,8 +183,8 @@ include_once("ModalTemplate.php");
      */
     $(document).ready(function () {
         refreshMainTable();
-        refreshData(); //更新数据
-        refreshMainSubAccounts();
+        refreshData(1); //更新数据
+        refreshMainSubAccounts(1);
 
         $('#subAccountMoneyTable').on('click', 'tr', function () { //绑定点击事件刷新子账户
             selectedIndex = subAccountTable.row(this).index();

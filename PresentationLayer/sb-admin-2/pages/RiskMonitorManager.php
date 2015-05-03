@@ -335,9 +335,9 @@ include_once("ModalTemplate.php");
      */
     $(document).ready(function () {
         ifHideMainAccountToolBar(true);
-        refreshSubAccounts();
+        refreshSubAccounts(1);
         refreshMainTable();
-        refreshData(); //更新数据
+        refreshData(1); //更新数据
 
         $('#riskMonitorTable').on('click', 'tr', function () { //绑定点击事件刷新子账户
             selectedIndex = riskMonitorTable.row(this).index();
