@@ -7,9 +7,9 @@
  */
 ?>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="generalNotification"
+<div class="modal fade"  tabindex="-1" role="dialog" id="generalNotification"
      aria-labelledby="newMainAccountLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width:266px">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"
@@ -17,7 +17,7 @@
                 <h3 class="modal-title" id="notificationLabel">提示</h3>
             </div>
             <div class="modal-body">
-                <h4 id="generalNotificationBody">成功</h4>
+                <h4 style="text-align:center" id="generalNotificationBody">成功</h4>
             </div>
             <div class="modal-footer">
 
@@ -31,7 +31,7 @@
 
 <div class="modal fade" tabindex="-1" role="dialog" id="generalAlert"
      aria-labelledby="newMainAccountLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width:266px">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"
@@ -39,7 +39,7 @@
                 <h3 class="modal-title" id="alertLabel">提示</h3>
             </div>
             <div class="modal-body">
-                <h4 id="alertNotificationBody">成功</h4>
+                <h4 style="text-align:center" id="generalNotificationBody">成功</h4>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消
