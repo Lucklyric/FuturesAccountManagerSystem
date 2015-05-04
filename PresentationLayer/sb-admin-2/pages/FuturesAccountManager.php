@@ -217,7 +217,7 @@ include_once("Template.php");
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                                 </button>
-                                                <button type="button" class="btn btn-primary">提交</button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
                                             </div>
                                         </div>
                                         <!-- /.modal-content -->
@@ -289,7 +289,7 @@ include_once("Template.php");
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                                 </button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
+                                                <button type="button" class="btn btn-primary" >提交</button>
                                             </div>
                                         </div>
                                         <!-- /.modal-content -->
@@ -586,7 +586,7 @@ include_once("ModalTemplate.php");
                 //allBrokersInfo = data;
                 allBrokersInfo['CTP'] = new Array();
                 allBrokersInfo['金仕达'] = new Array();
-                allBrokersInfo['恒生期货'] = new Array();
+                allBrokersInfo['恒生'] = new Array();
                 allBrokersInfo['恒生证券'] = new Array();
                 for (var i = 0; i < data.length; i++) {
                     var tmpInfo = [];
@@ -891,7 +891,7 @@ include_once("ModalTemplate.php");
     }
 
     function newAccount() {
-        var channel = $("#newAccountModal #channel :selected").text();
+        var channel = $("#newAccountModal #channel :selected").val();
         var company = $("#newAccountModal #company :selected").text();
         var server = $("#newAccountModal #server :selected").text();
         var userId = $("#newAccountModal #userId")[0].value;
@@ -935,7 +935,7 @@ include_once("ModalTemplate.php");
     }
 
     function updateAccount() {
-        var channel = $("#newAccountModal #channel :selected").text();
+        var channel = $("#newAccountModal #channel :selected").val();
         var company = $("#newAccountModal #company :selected").text();
         var server = $("#newAccountModal #server :selected").text();
         var userId = $("#newAccountModal #userId")[0].value;
@@ -1200,12 +1200,12 @@ include_once("ModalTemplate.php");
                 })
         )
         mainChannelOption.append($('<option>', {
-                    value:'恒生期货',
+                    value:'恒生',
                     text: '恒生期货'
                 })
         )
         mainChannelOption.on('change', function(){
-            setMainAccountCompanyInfo(this.value)
+            setMainAccountCompanyInfo(this.value);
         });
         mainChannelOption.eq(0).attr('selected', 'selected');
         mainChannelOption.trigger('change');

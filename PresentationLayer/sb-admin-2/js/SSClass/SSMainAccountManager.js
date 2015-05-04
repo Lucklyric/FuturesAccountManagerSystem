@@ -47,7 +47,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
         for (var i = 0 ; i < this.mainAccouts.length ;i++){
 
             if (mainAccounts[i][7].localeCompare("已同步")){
-                this.needCheckQueue.push(i);
+                this.needCheckQueue.push(mainAccounts[i][0]);
             }
         }
 
@@ -63,7 +63,11 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
      * @constructor
      */
     this.GetMainAccountStatus = function(index) {
-
+        for (var i = 0 ; i < ssMainAccounttManagerInstance.mainAccouts.length ; i++){
+            if (ssMainAccounttManagerInstance.mainAccouts[i][0] == index){
+                index = i;
+            }
+        }
         //alert(this.mainAccouts);
         //alert(ssMainAccounttManagerInstance.mainAccouts[index][0]),
         $.ajax({
@@ -91,14 +95,14 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                         ssMainAccounttManagerInstance.mainAccouts[index][7] = "需要持仓同步";
                     }else if(tmpResponse == "已连接"){
                         ssMainAccounttManagerInstance.mainAccouts[index][7] = "已连接";
-                        ssMainAccounttManagerInstance.needCheckQueue.splice(index,1);
+                        ssMainAccounttManagerInstance.needCheckQueue.splice(ssMainAccounttManagerInstance.needCheckQueue.indexOf(ssMainAccounttManagerInstance.mainAccouts[index][0]),1);
                     }else if(tmpResponse == "连接错误"){
                         ssMainAccounttManagerInstance.mainAccouts[index][7] = "连接错误";
                         ssMainAccounttManagerInstance.ConnectMainAccount(index);
                         if (ssMainAccounttManagerInstance.needCheckQueue.length == 1){
                             ssMainAccounttManagerInstance.needCheckQueue =[];
                         }else {
-                            ssMainAccounttManagerInstance.needCheckQueue.splice(index, 1);
+                            ssMainAccounttManagerInstance.needCheckQueue.splice(ssMainAccounttManagerInstance.needCheckQueue.indexOf(ssMainAccounttManagerInstance.mainAccouts[index][0]),1);
                         }
                     }else if(tmpResponse == "未启动"){
                         ssMainAccounttManagerInstance.mainAccouts[index][7] = "未启动";
@@ -169,6 +173,9 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                 success: function (data) {
                     console.log(data);
                     data = JSON.parse(data);
+
+                    if(data.length == 0) return;
+
                     ssMainAccounttManagerInstance.currentChangedOrders = data["ColChangedOrders"];
 
                     ssMainAccounttManagerInstance.currentMissingOrders = data['ColMissingOrders'];
@@ -197,7 +204,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                         }else{
                             tmpTableRowData.push('平昨');
                         }
-                        tmpTableRowData.push(curRowData['Status']);
+                        tmpTableRowData.push(curRowData['sStatus']);
                         tmpTableRowData.push(curRowData['TradedPrice']);
                         tmpTableRowData.push(curRowData['TradedVolume']);
                         tmpTableRowData.push(curRowData['TradedTime']);
@@ -228,7 +235,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                         }else{
                             tmpTableRowData.push('平昨');
                         }
-                        tmpTableRowData.push(curRowData['Status']);
+                        tmpTableRowData.push(curRowData['sStatus']);
                         tmpTableRowData.push(curRowData['TradedPrice']);
                         tmpTableRowData.push(curRowData['TradedVolume']);
                         tmpTableRowData.push(curRowData['TradedTime']);
@@ -299,7 +306,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
             dataStream +=  "&field="+ssMainAccounttManagerInstance.currentChangedOrders[i]['Order']['TradedVolume'];
             dataStream +=  "&field="+ssMainAccounttManagerInstance.currentChangedOrders[i]['Order']['TradedPrice'];
             dataStream +=  "&field="+ssMainAccounttManagerInstance.currentChangedOrders[i]['Order']['TradedTime'];
-            dataStream +=  "&field="+ssMainAccounttManagerInstance.currentChangedOrders[i]['Order']['Status'];
+            dataStream +=  "&field="+ssMainAccounttManagerInstance.currentChangedOrders[i]['Order']['sStatus'];
             //}
             dataStream += "&DBiD="+ssMainAccounttManagerInstance.currentChangedOrders[i]['OrderDBID'];
             dataStream += "&subID="+ssMainAccounttManagerInstance.orderSyncTable.DataTable().cell(rowIndex, 0).nodes().to$().find(':selected').val();
@@ -318,7 +325,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
             dataStream +=  "&field="+ssMainAccounttManagerInstance.currentMissingOrders[i]['Order']['TradedVolume'];
             dataStream +=  "&field="+ssMainAccounttManagerInstance.currentMissingOrders[i]['Order']['TradedPrice'];
             dataStream +=  "&field="+ssMainAccounttManagerInstance.currentMissingOrders[i]['Order']['TradedTime'];
-            dataStream +=  "&field="+ssMainAccounttManagerInstance.currentMissingOrders[i]['Order']['Status'];
+            dataStream +=  "&field="+ssMainAccounttManagerInstance.currentMissingOrders[i]['Order']['sStatus'];
             dataStream += "&DBiD="+ssMainAccounttManagerInstance.currentMissingOrders[i]['OrderDBID'];
             dataStream += "&subID="+ssMainAccounttManagerInstance.orderSyncTable.DataTable().cell(rowIndex, 0).nodes().to$().find(':selected').val();
             rowIndex++;
@@ -335,7 +342,12 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                 Method: "onSyncOrder"
             },
             success: function (response) {
-                console.log("同步结果:"+response+".");
+               // response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -637,6 +649,17 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
     this.submitSyncPositionStream = function(index){
         console.log("持仓同步功能");
         var curTableAllInstrumentDic = [];
+        for (var key in ssMainAccounttManagerInstance.currentAllInstrumentIdDic) {
+            var originDuoPos = ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['origin']['duo'];
+            var originKongPos = ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['origin']['kong'];
+            if (curTableAllInstrumentDic[key]===undefined){
+                curTableAllInstrumentDic[key] =[];
+                curTableAllInstrumentDic[key]['duo'] =0;
+                curTableAllInstrumentDic[key]['kong'] =0;
+            }
+        }
+
+
         var dataStream="adminID="+ssMainAccounttManagerInstance.accoutId+"&adminPwd="+ssMainAccounttManagerInstance.accoutPwd+"&mainAccountID="+(ssMainAccounttManagerInstance.mainAccouts[index][0]);
         dataStream += "&numDelete="+ssMainAccounttManagerInstance.currentQueryPos.length;
         dataStream += "&numAdd="+ssMainAccounttManagerInstance.positionSyncTable.DataTable().data().length;
@@ -663,11 +686,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
         for (var i = 0; i < currentTable.DataTable().data().length; i++) {
             dataStream += "&InstrumentID=" +  currentTable.DataTable().cell(i, 1).nodes().to$().find(':selected').val();
 
-            if (curTableAllInstrumentDic[currentTable.DataTable().cell(i, 1).nodes().to$().find(':selected').val()]===undefined){
-                curTableAllInstrumentDic[currentTable.DataTable().cell(i, 1).nodes().to$().find(':selected').val()] =[];
-                curTableAllInstrumentDic[currentTable.DataTable().cell(i, 1).nodes().to$().find(':selected').val()]['duo'] =0;
-                curTableAllInstrumentDic[currentTable.DataTable().cell(i, 1).nodes().to$().find(':selected').val()]['kong'] =0;
-            }
+
 
 
 
@@ -696,10 +715,29 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
         }
 
         console.log(curTableAllInstrumentDic);
+
+        /***
+         * validate 数量
+         */
+        var validateResult = true;
+        for (var key in ssMainAccounttManagerInstance.currentAllInstrumentIdDic) {
+            var originDuoPos = ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['origin']['duo'];
+            var originKongPos = ssMainAccounttManagerInstance.currentAllInstrumentIdDic[key]['origin']['kong'];
+            if (curTableAllInstrumentDic[key]['duo'] != originDuoPos || curTableAllInstrumentDic[key]['kong'] != originKongPos){
+                validateResult = false;
+                break;
+            }
+        }
+        if (!validateResult){
+            $('#generalNotificationBody').text('仓位信息有误,请重新确认');
+            $('#generalNotification').modal('show');
+            return;
+        }
+        $('#mainSyncPosition').modal('hide');
         $.ajax({
             url: ssMainAccounttManagerInstance.hostpath,
             type: "get", //send it through get method
-            //dataType: "json",
+            dataType: "json",
             contentType: "application/json",
             data: {
                 Data: dataStream,
