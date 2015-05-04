@@ -94,13 +94,13 @@ include_once("Template.php");
 
         fieldset {
             border: 1px solid #DDD;
-            padding: 0.5em 1.5em 1em 1.5em;
-            margin: 0 0 1em 0;
+            padding: 0 1.5em 0 1.5em;
+            margin: 0 0 0.5em 0;
             display: inline-block;
         }
 
         legend {
-            font-size: 1.2em;
+            font-size: 1em;
             font-weight: bold;
             width:inherit;
             padding:0 10px;
@@ -1315,11 +1315,44 @@ include_once("ModalTemplate.php");
         return result;
     }
 
-    function stringToUL(input, ul){
+    function stringToUL(input, ul, surfix){
+        if (surfix === undefined)
+            surfix = "";
         var array = input.split(";");
         for (var i = 0; i < array.length; i++) {
-            ul.append($("<li class='list-group-item'>").text(array[i]));
+            if (array[i])
+                ul.append($("<li class='list-group-item'>").text(array[i] + surfix));
         }
+    }
+
+    function getInDayString(ul){
+        var result = null;
+        $(ul).find("li").each(function (idx, li) {
+            var entry = $(li).text();
+            if (entry.match(/\(日内\)/g)){//match
+                if (result == null) {
+                    result = entry.replace(/\(日内\)/g, "");
+                }else{
+                    result += ";" + entry.replace(/\(日内\)/g, "");
+                }
+            }
+        });
+        return result;
+    }
+
+    function getOverString(ul){
+        var result = null;
+        $(ul).find("li").each(function (idx, li) {
+            var entry = $(li).text();
+            if (entry.match(/\(隔夜\)/g)){//match
+                if (result == null) {
+                    result = entry.replace(/\(隔夜\)/g, "");
+                }else{
+                    result += ";" + entry.replace(/\(隔夜\)/g, "");
+                }
+            }
+        });
+        return result;
     }
 
 </script>
@@ -1416,20 +1449,14 @@ include_once("ModalTemplate.php");
                 data["组名称"] += "净值)";
                 data["净值强平"] = $("#abs-forceCloseLine").val();
                 data["净值预警"] = $("#abs-warningLine").val();
-                if ($("#abs-inDayOrOvernight option:selected").index() == 0) {
-                    data["净值日内限制"] = ulToString($("#abs-overnightUL"));
-                } else {
-                    data["净值隔夜限制"] = ulToString($("#abs-overnightUL"));
-                }
+                data["净值日内限制"] = getInDayString($("#abs-overnightUL"));
+                data["净值隔夜限制"] = getOverString($("#abs-overnightUL"));
             } else {
                 data["组名称"] += "亏损)";
                 data["亏损强平"] = $("#loss-forceCloseLine").val();
                 data["亏损预警"] = $("#loss-warningLine").val();
-                if ($("#loss-inDayOrOvernight option:selected").index() == 0) {
-                    data["亏损日内限制"] = ulToString($("#loss-overnightUL"));
-                } else {
-                    data["亏损隔夜限制"] = ulToString($("#loss-overnightUL"));
-                }
+                data["亏损日内限制"] = getInDayString($("#loss-overnightUL"));
+                data["亏损隔夜限制"] = getOverString($("#loss-overnightUL"));
             }
         }
 //        "编号","组名称","允许交易合约","不允许交易合约","禁止开仓时间段","减仓时间段","风险度警告线","风险度警告线详细","风险度禁开线","风险度禁开线详细",
@@ -1538,13 +1565,9 @@ include_once("ModalTemplate.php");
             $("#abs-forceCloseLine").val(riskGroupData[19]);
             $("#abs-warningLine").val(riskGroupData[20]);
 
-            if (riskGroupData[21]){//日内
-                $("#abs-inDayOrOvernight").eq(0).prop("selected", true);
-                stringToUL(riskGroupData[21],$("#abs-overnightUL"));
-            }else{
-                $("#abs-inDayOrOvernight").eq(1).prop("selected", true);
-                stringToUL(riskGroupData[22],$("#abs-overnightUL"));
-            }
+            stringToUL(riskGroupData[21],$("#abs-overnightUL"), "(日内)");
+            stringToUL(riskGroupData[22],$("#abs-overnightUL"), "(隔夜)");
+            $("#abs-inDayOrOvernight").eq(0).prop("selected", true);
 
             $('.nav-tabs a[href="#abs"]').trigger('click');
 
@@ -1553,13 +1576,9 @@ include_once("ModalTemplate.php");
             $("#loss-forceCloseLine").val(riskGroupData[15]);
             $("#loss-warningLine").val(riskGroupData[16]);
 
-            if (riskGroupData[17]){//日内
-                $("#loss-inDayOrOvernight").eq(0).prop("selected", true);
-                stringToUL(riskGroupData[17],$("#loss-overnightUL"));
-            }else{
-                $("#loss-inDayOrOvernight").eq(1).prop("selected", true);
-                stringToUL(riskGroupData[18],$("#loss-overnightUL"));
-            }
+            stringToUL(riskGroupData[17],$("#loss-overnightUL"), "(日内)");
+            stringToUL(riskGroupData[18],$("#loss-overnightUL"), "(隔夜)");
+            $("#loss-inDayOrOvernight").eq(0).prop("selected", true);
 
             $('.nav-tabs a[href="#loss"]').trigger('click');
         }
@@ -1682,6 +1701,7 @@ include_once("ModalTemplate.php");
         if ($('#abs-chosenType').prop('checked')) {
             overnightSetting += " " + $("#abs-chosenTypeName").val();
         }
+        overnightSetting += "(隔夜)";
         $("#abs-overnightUL").append($("<li class='list-group-item'>").text(overnightSetting));
         updateCheckBox();
     });
@@ -1704,6 +1724,13 @@ include_once("ModalTemplate.php");
         $("#abs-instrumentUL li").each(function (idx, li) {
             conditionSetting += "," + $(li).text();
         });
+
+        if ($("#abs-inDayOrOvernight option:selected").index() == 0) {//日内
+            conditionSetting += "(日内)";
+        } else {//隔夜
+            conditionSetting += "(隔夜)";
+        }
+
         $("#abs-overnightUL").append($("<li class='list-group-item'>").text(conditionSetting));
         updateCheckBox();
     });
@@ -1724,6 +1751,7 @@ include_once("ModalTemplate.php");
         if ($('#loss-chosenType').prop('checked')) {
             overnightSetting += " " + $("#loss-chosenTypeName").val();
         }
+        overnightSetting += "(隔夜)";
         $("#loss-overnightUL").append($("<li class='list-group-item'>").text(overnightSetting));
         updateCheckBox();
     });
@@ -1746,6 +1774,13 @@ include_once("ModalTemplate.php");
         $("#loss-instrumentUL li").each(function (idx, li) {
             conditionSetting += "," + $(li).text();
         });
+
+        if ($("#loss-inDayOrOvernight option:selected").index() == 0) {//日内
+            conditionSetting += "(日内)";
+        } else {//隔夜
+            conditionSetting += "(隔夜)";
+        }
+
         $("#loss-overnightUL").append($("<li class='list-group-item'>").text(conditionSetting));
         updateCheckBox();
     });

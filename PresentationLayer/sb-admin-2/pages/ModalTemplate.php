@@ -39,7 +39,7 @@
                 <h3 class="modal-title" id="alertLabel">提示</h3>
             </div>
             <div class="modal-body">
-                <h4 style="text-align:center" id="generalNotificationBody">成功</h4>
+                <h4 style="text-align:center" id="alertNotificationBody">成功</h4>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消
