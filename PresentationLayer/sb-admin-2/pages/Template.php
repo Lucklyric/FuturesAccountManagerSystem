@@ -266,8 +266,6 @@
             }else{
                 self.location='http://121.40.131.144/Report/Shared/login.html';
             }
-//                        var superAdminId = 'frankzch';
-//                        var superAdminPwd = '123456';
         $(document).ready(function () {
             $.ajaxSetup({ cache: false });
         });
