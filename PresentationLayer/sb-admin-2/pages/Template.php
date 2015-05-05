@@ -17,8 +17,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>锋利资产管理系统</title>
-    <link rel="shortcut icon" href="../dist/images/favicon.ico" />
+    <title>锋利资产管理系统2015版本</title>
+    <link rel="shortcut icon" href="../dist/images/favicon.ico"/>
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -86,9 +86,11 @@
 </head>
 
 <br/>
-<div id = "wrapper">
+
+<div id="wrapper">
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0 background-color: rgb(202,86,72);">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation"
+         style="margin-bottom: 0 background-color: rgb(202,86,72);">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -103,13 +105,14 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <p id = "onlineCount" class="navbar-text">在线人数：0人</p>
+                    <p id="onlineCount" class="navbar-text">在线人数：0人</p>
                 </li>
                 <li>
-                    <p id = "serverStatus" class="navbar-text">服务器状态：关闭</p>
+                    <p id="serverStatus" class="navbar-text">服务器状态：关闭</p>
                 </li>
                 <li>
-                    <button id = "restartServer" class="btn btn-primary navbar-btn" style="margin-right: 5px">重启服务器</button>
+                    <button id="restartServer" class="btn btn-primary navbar-btn" style="margin-right: 5px">重启服务器
+                    </button>
                 </li>
 
                 <li class="dropdown">
@@ -122,7 +125,8 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="http://121.40.131.144/Report/Shared/login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+                        <li><a href="http://121.40.131.144/Report/Shared/login.html"><i
+                                    class="fa fa-sign-out fa-fw"></i> 登出</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -255,19 +259,22 @@
             document.cookie = cname + "=" + escape(cvalue) + ((min == null) ? "" : ";expires=" + exdate.toGMTString());
         }
 
-        var tmp_account=getAdminCookie('sharpspeedadminaccount');
-        var tmp_password=getAdminCookie('sharpspeedadminpassword');
-            console.log("取到Admin cookies:"+tmp_account+tmp_password);
-            if (tmp_account!=null && tmp_account!="" && tmp_password!=null && tmp_password!="" ) {
-                var superAdminId = tmp_account;
-                var superAdminPwd = tmp_password;
-                setAdminCookie('sharpspeedadminaccount', superAdminId,20);
-                setAdminCookie('sharpspeedadminpassword', superAdminPwd,20);
-            }else{
-                self.location='http://121.40.131.144/Report/Shared/login.html';
-            }
+        var tmp_account = getAdminCookie('sharpspeedadminaccount');
+        var tmp_password = getAdminCookie('sharpspeedadminpassword');
+        console.log("取到Admin cookies:" + tmp_account + tmp_password);
+        if (tmp_account != null && tmp_account != "" && tmp_password != null && tmp_password != "") {
+            var superAdminId = tmp_account;
+            var superAdminPwd = tmp_password;
+            setAdminCookie('sharpspeedadminaccount', superAdminId, 20);
+            setAdminCookie('sharpspeedadminpassword', superAdminPwd, 20);
+        } else {
+            self.location = 'http://121.40.131.144/Report/Shared/login.html';
+        }
+//        var superAdminId = "frankzch";
+//        var superAdminPwd = "123456";
+
         $(document).ready(function () {
-            $.ajaxSetup({ cache: false });
+            $.ajaxSetup({cache: false});
         });
 
     </script>

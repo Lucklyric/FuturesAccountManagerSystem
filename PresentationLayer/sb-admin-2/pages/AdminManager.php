@@ -746,7 +746,13 @@ include_once("ModalTemplate.php");
     });
 
     $(document).on("click", "#admin-delete", function () {
-        deleteAdminManager();
+        $('#alertNotificationBody').text('确认要删除该管理员？');
+        $('#generalAlert').modal('show');
+        $(document).off("click", "#generalAlert .btn-primary");
+        $(document).on("click", "#generalAlert .btn-primary", function(){
+            deleteAdminManager();
+        });
+
     });
 
 </script>

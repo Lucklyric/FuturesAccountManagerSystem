@@ -688,7 +688,13 @@ include_once("ModalTemplate.php");
     });
 
     $(document).on("click", "#riskManager-delete", function () {
-        deleteRiskManager();
+        $('#alertNotificationBody').text('确认要删除该风控员？');
+        $('#generalAlert').modal('show');
+        $(document).off("click", "#generalAlert .btn-primary");
+        $(document).on("click", "#generalAlert .btn-primary", function(){
+            deleteRiskManager();
+        });
+
     });
 
 </script>

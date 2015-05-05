@@ -1235,7 +1235,13 @@ include_once("ModalTemplate.php");
     });
 
     $(document).on("click", "#main-delete", function () {
-        deleteAccount(mainAccounts[selectedIndex]);
+        $('#alertNotificationBody').text('确认要删除该主账户？');
+        $('#generalAlert').modal('show');
+        $(document).off("click", "#generalAlert .btn-primary");
+        $(document).on("click", "#generalAlert .btn-primary", function(){
+            deleteAccount(mainAccounts[selectedIndex]);
+        });
+
     });
 
 
@@ -1321,7 +1327,13 @@ include_once("ModalTemplate.php");
 
 
     $(document).on("click", "#sub-delete", function () {
-        deleteSubAccount(curSubAccounts[subSelectedIndex]);
+        $('#alertNotificationBody').text('确认要删除该子账户？');
+        $('#generalAlert').modal('show');
+        $(document).off("click", "#generalAlert .btn-primary");
+        $(document).on("click", "#generalAlert .btn-primary", function(){
+            deleteSubAccount(curSubAccounts[subSelectedIndex]);
+        });
+       // deleteSubAccount(curSubAccounts[subSelectedIndex]);
     });
 
     $(document).on("click", "#main-sync", function () {

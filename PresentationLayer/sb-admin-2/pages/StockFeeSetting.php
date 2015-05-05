@@ -459,7 +459,12 @@ include_once("ModalTemplate.php");
     });
 
     $(document).on("click", "#feesetting-delete", function () {
-        sendRequest();
+        $('#alertNotificationBody').text('确认要删除该记录？');
+        $('#generalAlert').modal('show');
+        $(document).off("click", "#generalAlert .btn-primary");
+        $(document).on("click", "#generalAlert .btn-primary", function(){
+            sendRequest();
+        });
     });
 
 </script>
