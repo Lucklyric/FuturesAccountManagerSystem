@@ -338,6 +338,8 @@ include_once("ModalTemplate.php");
             sessionStorage.setItem('ratioTypes', JSON.stringify(feeSettingData));
             refreshMainTable();
         });
+        setAdminCookie("sharpspeedadminaccount", superAdminId, 30*1/24/60);
+        setAdminCookie("sharpspeedadminpassword", superAdminPwd, 30*1/24/60);
     }
 
 

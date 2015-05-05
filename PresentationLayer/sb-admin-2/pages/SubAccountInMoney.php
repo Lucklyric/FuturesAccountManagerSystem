@@ -232,7 +232,8 @@ include_once("ModalTemplate.php");
             sessionStorage.setItem('localSettlement',JSON.stringify(subAccounts));
             refreshMainTable();
         });
-
+        setAdminCookie("sharpspeedadminaccount", superAdminId, 30*1/24/60);
+        setAdminCookie("sharpspeedadminpassword", superAdminPwd, 30*1/24/60);
     }
 
     /**
@@ -250,6 +251,8 @@ include_once("ModalTemplate.php");
             sessionStorage.setItem('mainAccountTableData', JSON.stringify(mainAccountTableData));
             console.log(mainAccountTableData);
         });
+        setAdminCookie("sharpspeedadminaccount", superAdminId, 30*1/24/60);
+        setAdminCookie("sharpspeedadminpassword", superAdminPwd, 30*1/24/60);
     }
 
     /**
