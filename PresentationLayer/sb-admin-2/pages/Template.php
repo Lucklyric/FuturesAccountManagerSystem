@@ -18,7 +18,7 @@
     <meta name="author" content="">
 
     <title>锋利资产管理系统</title>
-
+    <link rel="shortcut icon" href="../dist/images/favicon.ico" />
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -256,18 +256,19 @@
         }
 
 
-        var tmp_account=getAdminCookie('sharpspeedadminaccount');
-        var tmp_password=getAdminCookie('sharpspeedadminpassword');
-            console.log("取到Admin cookies:"+tmp_account+tmp_password);
-            if (tmp_account!=null && tmp_account!="" && tmp_password!=null && tmp_password!="" ) {
-                var superAdminId = tmp_account;
-                var superAdminPwd = tmp_password;
-                setAdminCookie('sharpspeedadminaccount', superAdminId,20);
-                setAdminCookie('sharpspeedadminpassword', superAdminId,20);
-            }else{
-                self.location='http://121.40.131.144/Report/Shared/login.html';
-            }
-
+//        var tmp_account=getAdminCookie('sharpspeedadminaccount');
+//        var tmp_password=getAdminCookie('sharpspeedadminpassword');
+//            console.log("取到Admin cookies:"+tmp_account+tmp_password);
+//            if (tmp_account!=null && tmp_account!="" && tmp_password!=null && tmp_password!="" ) {
+//                var superAdminId = tmp_account;
+//                var superAdminPwd = tmp_password;
+//                setAdminCookie('sharpspeedadminaccount', superAdminId,20);
+//                setAdminCookie('sharpspeedadminpassword', superAdminId,20);
+//            }else{
+//                self.location='http://121.40.131.144/Report/Shared/login.html';
+//            }
+                        var superAdminId = 'frankzch';
+                        var superAdminPwd = '123456';
         $(document).ready(function () {
             $.ajaxSetup({ cache: false });
         });
