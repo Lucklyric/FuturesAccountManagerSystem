@@ -1258,8 +1258,8 @@ include_once("ModalTemplate.php");
             console.log("取到数据");
             refreshMainTable();
         });
-        setAdminCookie("sharpspeedadminaccount", superAdminId, 30*1/24/60);
-        setAdminCookie("sharpspeedadminpassword", superAdminPwd, 30*1/24/60);
+        setAdminCookie("sharpspeedadminaccount", superAdminId, 20);
+        setAdminCookie("sharpspeedadminpassword", superAdminPwd, 20);
     }
     /**
      * 刷新主账户表格

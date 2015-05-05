@@ -384,8 +384,8 @@ include_once("ModalTemplate.php");
             sessionStorage.setItem('riskMonitorData', JSON.stringify(riskMonitorData));
             refreshMainTable();
         });
-        setAdminCookie("sharpspeedadminaccount", superAdminId, 30*1/24/60);
-        setAdminCookie("sharpspeedadminpassword", superAdminPwd, 30*1/24/60);
+        setAdminCookie("sharpspeedadminaccount", superAdminId, 20);
+        setAdminCookie("sharpspeedadminpassword", superAdminPwd, 20);
     }
     /**
      * 刷新子账户
