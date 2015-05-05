@@ -109,9 +109,6 @@
                     <p id = "serverStatus" class="navbar-text">服务器状态：关闭</p>
                 </li>
                 <li>
-                    <button id = "connectMainAccount" class="btn btn-info navbar-btn" style="margin-right: 5px">连接主账户</button>
-                </li>
-                <li>
                     <button id = "restartServer" class="btn btn-primary navbar-btn" style="margin-right: 5px">重启服务器</button>
                 </li>
 
@@ -125,7 +122,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
+                        <li><a href="http://121.40.131.144/Report/Shared/login.html"><i class="fa fa-sign-out fa-fw"></i> 登出</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -245,40 +242,34 @@
     <script src="../dist/js/sb-admin-2.js"></script>
     <script>
         function getAdminCookie(cname) {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for(var i=0; i<ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0)==' ') c = c.substring(1);
-                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            var arr = document.cookie.match(new RegExp("(^| )" + cname + "=([^;]*)(;|$)"));
+            if (arr != null) {
+                return decodeURIComponent(arr[2]);
             }
-            return "";
+            return null;
         }
 
-        function setAdminCookie(cname, cvalue, exdays) {
-            var d = new Date();
-            d.setTime(d.getTime() + (exdays*24*60*60*1000));
-            var expires = "expires="+d.toUTCString();
-            document.cookie = cname + "=" + cvalue + "; " + expires;
+        function setAdminCookie(cname, cvalue, min) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getTime() + min * 60 * 1000);
+            document.cookie = cname + "=" + escape(cvalue) + ((min == null) ? "" : ";expires=" + exdate.toGMTString());
         }
 
-        function checkAdminCookie()
-        {
-            var tmp_status=getCookie('toolBarStatus-CID');
-            console.log("取到cookies:"+tmp_status);
-            if (tmp_status!=null && tmp_status!="") {
-                parent.serverStatusJq.text(tmp_status);
+
+        var tmp_account=getAdminCookie('sharpspeedadminaccount');
+        var tmp_password=getAdminCookie('sharpspeedadminpassword');
+            console.log("取到Admin cookies:"+tmp_account+tmp_password);
+            if (tmp_account!=null && tmp_account!="" && tmp_password!=null && tmp_password!="" ) {
+                var superAdminId = tmp_account;
+                var superAdminPwd = tmp_password;
+                setAdminCookie('sharpspeedadminaccount', superAdminId,20);
+                setAdminCookie('sharpspeedadminpassword', superAdminId,20);
+            }else{
+                self.location='http://121.40.131.144/Report/Shared/login.html';
             }
-            tmp_status=getCookie('toolBarCount-CID1');
-            console.log("取到cookies:"+tmp_status);
-            if (tmp_status!=null && tmp_status!="") {
-                parent.onlineCounJq.text(tmp_status);
-            }
-        }
-        self.location='http://121.40.131.144/Report/Shared/login.html';
+
         $(document).ready(function () {
             $.ajaxSetup({ cache: false });
         });
-        var superAdminId = "frankzch";
-        var superAdminPwd = "123456";
+
     </script>
