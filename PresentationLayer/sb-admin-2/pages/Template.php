@@ -197,16 +197,19 @@
                         <a href="#"><i class="fa fa-search fa-fw"></i> 数据查询<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">出入金查询</a>
+                                <a href="../../../../Report/View/DailyReport.aspx">资金及交易明细查询</a>
                             </li>
                             <li>
-                                <a href="#l">交易记录查询</a>
+                                <a href="../../../../Report/View/DailyReport.aspx">出入金查询</a>
                             </li>
                             <li>
-                                <a href="#l">资金曲线查询</a>
+                                <a href="../../../../Report/View/DailyReport.aspx">历史报单查询修改</a>
                             </li>
                             <li>
-                                <a href="#l">业务审批查询</a>
+                                <a href="../../../../Report/View/DailyReport.aspx">历史盘前仓位查询修改</a>
+                            </li>
+                            <li>
+                                <a href="../../../../Report/View/DailyReport.aspx">合约收盘结算价修改</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
