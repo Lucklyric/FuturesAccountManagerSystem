@@ -20,11 +20,11 @@ include_once("Template.php");
                             <div class="form-inline" role="form">
                                 <div class="form-group">
                                     交易费=期货公司交易的
-                                    <input class="form-control" id="ratio1" type="text">倍
+                                    <input class="form-control" id="margin" type="text">倍
                                 </div>
                                 <div class="form-group">
                                     手续费=期货公司交易的
-                                    <input class="form-control" id="ratio2" type="text">倍
+                                    <input class="form-control" id="commission" type="text">倍
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-primary" id="confirmRatio">确定</button>
@@ -274,6 +274,7 @@ include_once("ModalTemplate.php");
     var feeSettingTable;
     var feeSettingTableData;
     var feeSettingData = [];
+    var multiplierData;
     var selectedIndex = 0;  //mainSelectedIndex
     var toolBarManger = new SSToolBar($("#restartServer"), $("#connectMainAccount"), $("#onlineCount"), $("#serverStatus"));
     /**
@@ -314,6 +315,7 @@ include_once("ModalTemplate.php");
             if (sessionStorage.getItem('ratioTypes')) {
                 feeSettingData = JSON.parse(sessionStorage.getItem('ratioTypes'));
                 instrumentData = JSON.parse(sessionStorage.getItem('instrumentData'));
+                multiplierData = JSON.parse(sessionStorage.getItem('multiplierData'));
                 refreshMainTable();
                 return;
             }
@@ -338,6 +340,15 @@ include_once("ModalTemplate.php");
             sessionStorage.setItem('ratioTypes', JSON.stringify(feeSettingData));
             refreshMainTable();
         });
+
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/RefreshMultipliers.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
+            multiplierData = data;
+            console.log(multiplierData);
+            console.log("取到数据");
+            sessionStorage.setItem('multiplierData', JSON.stringify(multiplierData));
+            refreshMultipliers();
+        });
+
         setAdminCookie("sharpspeedadminaccount", superAdminId, 30*1/24/60);
         setAdminCookie("sharpspeedadminpassword", superAdminPwd, 30*1/24/60);
     }
@@ -379,6 +390,11 @@ include_once("ModalTemplate.php");
         }
     }
 
+    function refreshMultipliers(){
+        $("#margin").val(multiplierData.Margin);
+        $("#commission").val(multiplierData.Commission);
+    }
+
 </script>
 
 <script>
@@ -393,11 +409,6 @@ include_once("ModalTemplate.php");
             $('#feesetting-delete').show();
         }
     }
-
-    //提交比例修改
-    $('#confirmRatio').on('click', function () {
-        console.log("提交比例修改");
-    });
 
     //clear modal everytime
     $('#feesettingModal').on('hidden.bs.modal', function (e) {
@@ -422,6 +433,36 @@ include_once("ModalTemplate.php");
     function handleUseExistingGroup(){
         $("#newFeesettingModal #existingGroup").removeAttr('disabled');
         $("#newFeesettingModal #feesettingGroup").attr('disabled','disabled');
+    }
+
+    function saveMultipliers(){
+
+        var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/SaveMultiplier.php";
+
+        $.ajax({
+            url: hostpath,
+            type: "get", //send it through get method
+            data: {
+                adminid: superAdminId,
+                adminpw: superAdminPwd,
+                dCommissionFeeMultiplier: $("#commission").val(),
+                dMarginRateMultiplier: $("#margin").val()
+            },
+            success: function (response) {
+                response = JSON.parse(response);
+                if(response==''){
+                    $('#generalNotificationBody').text('成功');
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
+                $('#generalNotification').modal('show');
+                refreshData(1);
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+
     }
 
     function sendRequest(event) {
@@ -594,6 +635,10 @@ include_once("ModalTemplate.php");
 
     $(document).on("click", "#feesetting-delete", function () {
         sendRequest();
+    });
+
+    $(document).on("click", "#confirmRatio", function () {
+        saveMultipliers();
     });
 
 </script>

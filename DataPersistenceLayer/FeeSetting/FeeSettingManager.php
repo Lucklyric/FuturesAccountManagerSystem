@@ -36,12 +36,12 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             return $result;
         }
    
-        function GetCommissionFeeMultiplier()
+        function GetCommissionFeeMultiplier($userid,$password)
         {
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("port" => "10083");
+            $data = array("adminid"=>$userid,"adminpw"=>$password);
             $data_string = json_encode($data);
             $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetCommissionFeeMultiplier');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -58,14 +58,14 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             return $result;
         }
         
-        function GetMarginRateMultiplier()
+        function GetMarginRateMultiplier($userid,$password)
         {
             include_once('HTTP/Request.php');
             //$next="abc";
             //return $next;
-            $data = array("port" => "10083");
+            $data = array("adminid"=>$userid,"adminpw"=>$password);
             $data_string = json_encode($data);
-            $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/     GetMarginRateMultiplier');
+            $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetMarginRateMultiplier');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -160,6 +160,29 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             echo $server_output;
             
             
+        }
+
+        function SaveStandardFeeMultiplier($data){
+
+            include_once('HTTP/Request.php');
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL,$GLOBALS['serverAddress'].'SPService/SPService.svc/SaveStandardFeeMultiplier');
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS,
+                $data);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+            // receive server response ...
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            $server_output = curl_exec ($ch);
+
+            curl_close ($ch);
+            header("Content-type:text/html;charset=utf-8");
+
+            echo $server_output;
+
         }
         
 

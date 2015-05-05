@@ -13,28 +13,6 @@ include_once("Template.php");
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            基础费率设置
-                        </div>
-                        <div class="panel-body">
-
-                            <div class="form-inline" role="form">
-                                <div class="form-group">
-                                    交易费=期货公司交易的
-                                    <input class="form-control" id="ratio1" type="text">倍
-                                </div>
-                                <div class="form-group">
-                                    手续费=期货公司交易的
-                                    <input class="form-control" id="ratio2" type="text">倍
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn btn-primary" id="confirmRatio">确定</button>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
                             管理
                         </div>
 
@@ -328,11 +306,6 @@ include_once("ModalTemplate.php");
             $('#feesetting-delete').show();
         }
     }
-
-    //提交比例修改
-    $('#confirmRatio').on('click', function () {
-        console.log("提交比例修改");
-    });
 
     //clear modal everytime
     $('#feesettingModal').on('hidden.bs.modal', function (e) {
