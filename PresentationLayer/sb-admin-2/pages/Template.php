@@ -222,7 +222,60 @@
         <!-- /.navbar-static-side -->
         <!--</div>-->
     </nav>
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script
+        src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script
+        src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+    <script src="../../../Source/DataTable-Plugins/api/fnProcessingIndicator.js"></script>
+
+    <script src="../js/SSClass/SSToolBar.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
     <script>
+        function getAdminCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+
+        function setAdminCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires="+d.toUTCString();
+            document.cookie = cname + "=" + cvalue + "; " + expires;
+        }
+
+        function checkAdminCookie()
+        {
+            var tmp_status=getCookie('toolBarStatus-CID');
+            console.log("取到cookies:"+tmp_status);
+            if (tmp_status!=null && tmp_status!="") {
+                parent.serverStatusJq.text(tmp_status);
+            }
+            tmp_status=getCookie('toolBarCount-CID1');
+            console.log("取到cookies:"+tmp_status);
+            if (tmp_status!=null && tmp_status!="") {
+                parent.onlineCounJq.text(tmp_status);
+            }
+        }
+        self.location='http://121.40.131.144/Report/Shared/login.html';
         $(document).ready(function () {
             $.ajaxSetup({ cache: false });
         });
