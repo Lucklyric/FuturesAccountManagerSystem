@@ -306,7 +306,7 @@ include_once("Template.php");
                                         <button type="button"  class="btn btn-success" id="main-add" data-toggle="modal">
                                             添加主账户
                                         </button>
-                                        <button type="button" style="Display : none" class="btn btn-warning" id="main-update" data-toggle="modal">
+                                        <button type="button" class="btn btn-warning" id="main-update" data-toggle="modal">
                                             修改主账户
                                         </button>
                                         <button type="button" style="Display : none" class="btn btn-danger" id="main-delete" data-toggle="modal">
