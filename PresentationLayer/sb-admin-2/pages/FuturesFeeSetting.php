@@ -20,11 +20,11 @@ include_once("Template.php");
                             <div class="form-inline" role="form">
                                 <div class="form-group">
                                     交易费=期货公司交易的
-                                    <input class="form-control" id="margin" type="text">倍
+                                    <input class="form-control" id="commission" type="text">倍
                                 </div>
                                 <div class="form-group">
-                                    手续费=期货公司交易的
-                                    <input class="form-control" id="commission" type="text">倍
+                                    保证金=期货公司保证金的
+                                    <input class="form-control" id="margin" type="text">倍
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-primary" id="confirmRatio">确定</button>
@@ -169,7 +169,7 @@ include_once("Template.php");
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                                 </button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">确定
+                                                <button type="button" class="btn btn-primary">确定
                                                 </button>
                                             </div>
                                         </div>
@@ -187,11 +187,11 @@ include_once("Template.php");
                                                 data-toggle="modal">
                                             添加费率设置
                                         </button>
-                                        <button type="button" class="btn btn-warning" id="feesetting-update"
+                                        <button type="button" class="btn btn-warning" id="feesetting-update" style="display : none"
                                                 data-toggle="modal">
                                             修改费率设置
                                         </button>
-                                        <button type="button" class="btn btn-danger" id="feesetting-delete"
+                                        <button type="button" class="btn btn-danger" id="feesetting-delete" style="display : none"
                                                 data-toggle="modal">
                                             删除费率设置
                                         </button>
@@ -499,8 +499,18 @@ include_once("ModalTemplate.php");
             }
 
             if ($("#newFeesettingModal #new").prop("checked")) {
+                if (!$("#feesettingGroup").val()){
+                    $("#alertNotificationBody").text("费率组名不能为空");
+                    $("#generalAlert").modal('show');
+                    return;
+                }
                 data["组名称"] = $("#feesettingGroup").val() + "(期货)";
             } else {
+                if (!$("#newFeesettingModal #existingGroup option:selected").text()){
+                    $("#alertNotificationBody").text("费率组名不能为空");
+                    $("#generalAlert").modal('show');
+                    return;
+                }
                 data["组名称"] = $("#newFeesettingModal #existingGroup option:selected").text() + "(期货)";
             }
 
@@ -536,6 +546,7 @@ include_once("ModalTemplate.php");
             }
         });
 
+        $('#FeesettingModal').modal('hide');
     }
 
     //设置费率信息
