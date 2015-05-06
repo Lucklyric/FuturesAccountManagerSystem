@@ -217,7 +217,7 @@ include_once("Template.php");
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                             </button>
-                                            <button type="button" class="btn btn-primary">提交</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
                                         </div>
                                     </div>
                                     <!-- /.modal-content -->
@@ -289,7 +289,7 @@ include_once("Template.php");
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                             </button>
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
+                                            <button type="button" class="btn btn-primary" >提交</button>
                                         </div>
                                     </div>
                                     <!-- /.modal-content -->
@@ -303,16 +303,16 @@ include_once("Template.php");
                                    cellspacing="0" width="100%">
 
                                 <div class="mainAccountToolbar" style="float:left">
-                                    <button type="button" class="btn btn-success" id="main-add" data-toggle="modal">
+                                    <button type="button"  class="btn btn-success" id="main-add" data-toggle="modal">
                                         添加主账户
                                     </button>
                                     <button type="button" class="btn btn-warning" id="main-update" data-toggle="modal">
                                         修改主账户
                                     </button>
-                                    <button type="button" class="btn btn-danger" id="main-delete" data-toggle="modal">
+                                    <button type="button" style="Display : none" class="btn btn-danger" id="main-delete" data-toggle="modal">
                                         删除主账户
                                     </button>
-                                    <button type="button" class="btn btn-primary" id="main-sync" data-toggle="modal">
+                                    <button type="button" style="Display : none" class="btn btn-primary" id="main-sync" data-toggle="modal">
                                         同步
                                     </button>
                                 </div>
@@ -325,7 +325,7 @@ include_once("Template.php");
                                     <th>账户ID</th>
                                     <th>账户密码</th>
                                     <th>静态权益</th>
-                                    <th>同步状态</th>
+                                    <th>状态</th>
 
                                 </tr>
                                 </thead>
@@ -339,7 +339,7 @@ include_once("Template.php");
                                     <th>账户ID</th>
                                     <th>账户密码</th>
                                     <th>静态权益</th>
-                                    <th>同步状态</th>
+                                    <th>状态</th>
 
                                 </tr>
                                 </tfoot>
@@ -360,10 +360,10 @@ include_once("Template.php");
                                     <button type="button" class="btn btn-success" id="sub-add" data-toggle="modal">
                                         添加子账户
                                     </button>
-                                    <button type="button" class="btn btn-warning" id="sub-update" data-toggle="modal">
+                                    <button type="button" style="Display : none" class="btn btn-warning" id="sub-update" data-toggle="modal">
                                         修改子账户
                                     </button>
-                                    <button type="button" class="btn btn-danger" id="sub-delete" data-toggle="modal">
+                                    <button type="button" style="Display : none" class="btn btn-danger" id="sub-delete" data-toggle="modal">
                                         删除子账户
                                     </button>
 
@@ -444,6 +444,7 @@ include_once("ModalTemplate.php");
 <script src="../dist/js/sb-admin-2.js"></script>
 
 <script>
+
     /**
      * 定义全局变量
      */
@@ -458,7 +459,7 @@ include_once("ModalTemplate.php");
     var selectedIndex = 0;  //mainSelectedIndex
     var subSelectedIndex = 0;  //subSelectedIndex
     var toolBarManger = new SSToolBar($("#restartServer"),$("#connectMainAccount"),$("#onlineCount"),$("#serverStatus"));
-    var mainAccountManager = new SSMainAccountManager("frankzch","123456",function(){
+    var mainAccountManager = new SSMainAccountManager(superAdminId,superAdminPwd,function(){
         refreshMainAccountsTable();
     });
 
@@ -466,6 +467,7 @@ include_once("ModalTemplate.php");
      * Document加载完毕 更新数据刷新Table绑定点击事件
      */
     $(document).ready(function () {
+
         refreshBrokerInfo(1);
         refreshRiskGroupInfo(1);
         refreshMoneyRationInfo(1);
@@ -518,6 +520,7 @@ include_once("ModalTemplate.php");
         mainAccounts = [];
 
         var table = $('#mainAccounts').dataTable();
+
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
         if (flag === undefined){
@@ -539,11 +542,11 @@ include_once("ModalTemplate.php");
             }
         }
         //mainAccountTable.fnProcessingIndicator();
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             mainAccountTableData = data.data;
             sessionStorage.setItem('mainAccountTableData',JSON.stringify(mainAccountTableData));
             console.log(mainAccountTableData);
-            console.log("走到这里了");
+            console.log("主账户主账户主账户走到这里了");
 
             for (var i = 0; i < mainAccountTableData.length; i++) {
                 if (mainAccountTableData[i].inf[1]=="恒生证券"){
@@ -564,6 +567,8 @@ include_once("ModalTemplate.php");
                 ifHideSubAccountToolBar(false);
             }
         });
+        setAdminCookie("sharpspeedadminaccount", superAdminId, 20);
+        setAdminCookie("sharpspeedadminpassword", superAdminPwd, 20);
     }
 
 
@@ -578,12 +583,12 @@ include_once("ModalTemplate.php");
             }
         }
         console.log("开始获取交易所信息");
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/BrokersInfo.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/BrokersInfo.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
 
             //allBrokersInfo = data;
             allBrokersInfo['CTP'] = new Array();
             allBrokersInfo['金仕达'] = new Array();
-            allBrokersInfo['恒生期货'] = new Array();
+            allBrokersInfo['恒生'] = new Array();
             allBrokersInfo['恒生证券'] = new Array();
             for (var i = 0; i < data.length; i++) {
                 var tmpInfo = [];
@@ -607,21 +612,21 @@ include_once("ModalTemplate.php");
      */
     function refreshRiskGroupInfo(flag){
         if (flag === undefined){
-            if (sessionStorage.getItem('riskGroupsSecurity')){
-                riskGroups = JSON.parse(sessionStorage.getItem('riskGroupsSecurity'));
+            if (sessionStorage.getItem('riskGroupsFutures')){
+                riskGroups = JSON.parse(sessionStorage.getItem('riskGroups'));
                 return;
             }
         }
         console.log("开始获取风控组信息");
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskManage/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/RiskManage/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             riskGroups=[];
             console.log("取到风控组信息");
             for (var i = 0; i < data.data.length; i++) {
-                if (data.data[i][1].indexOf('证券') != -1){
+                if (data.data[i][1].indexOf('期货') == -1){
                     riskGroups.push(data.data[i]);
                 }
             }
-            sessionStorage.setItem('riskGroupsSecurity',JSON.stringify(riskGroups));
+            sessionStorage.setItem('riskGroupsFutures',JSON.stringify(riskGroups));
         });
     }
 
@@ -636,11 +641,13 @@ include_once("ModalTemplate.php");
             }
         }
         console.log("开始获取费率组信息");
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/Refresh.php', function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/FeeSetting/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             ratioTypes=[];
             console.log("取到费率组信息");
             for (var i = 0; i < data.data.length; i++) {
-                ratioTypes.push(data.data[i]);
+                if (data.data[i][1].indexOf('期货') == -1){
+                    ratioTypes.push(data.data[i]);
+                }
             }
             sessionStorage.setItem('ratioTypes',JSON.stringify(ratioTypes));
         });
@@ -775,11 +782,16 @@ include_once("ModalTemplate.php");
             $('#main-delete').show();
         }
 
-        if (mainAccounts[selectedIndex][7].localeCompare("获取中")==0 || mainAccounts[selectedIndex][7].localeCompare("已同步") == 0){
-            console.log(mainAccounts[selectedIndex][7]+"开启同步");
+//        if (mainAccounts[selectedIndex][7].localeCompare("获取中")==0 || mainAccounts[selectedIndex][7].localeCompare("已同步") == 0){
+//            console.log(mainAccounts[selectedIndex][7]+"开启同步");
+//            $('#main-sync').hide();
+//        }else{
+//
+//            $('#main-sync').show();
+//        }
+        if (mainAccounts[selectedIndex][7].indexOf('同步') == -1){
             $('#main-sync').hide();
         }else{
-
             $('#main-sync').show();
         }
     }
@@ -886,7 +898,7 @@ include_once("ModalTemplate.php");
     }
 
     function newAccount() {
-        var channel = $("#newAccountModal #channel :selected").text();
+        var channel = $("#newAccountModal #channel :selected").val();
         var company = $("#newAccountModal #company :selected").text();
         var server = $("#newAccountModal #server :selected").text();
         var userId = $("#newAccountModal #userId")[0].value;
@@ -907,7 +919,9 @@ include_once("ModalTemplate.php");
                 CompanyName: company,
                 CompanyServer: server,
                 AccountId: userId,
-                AccountPassword: userPassword
+                AccountPassword: userPassword,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function (response) {
                 // alert("Data Loaded: " + response);
@@ -928,7 +942,7 @@ include_once("ModalTemplate.php");
     }
 
     function updateAccount() {
-        var channel = $("#newAccountModal #channel :selected").text();
+        var channel = $("#newAccountModal #channel :selected").val();
         var company = $("#newAccountModal #company :selected").text();
         var server = $("#newAccountModal #server :selected").text();
         var userId = $("#newAccountModal #userId")[0].value;
@@ -948,7 +962,9 @@ include_once("ModalTemplate.php");
                 CompanyServer: server,
                 MainNo :mainAccounts[selectedIndex][0],
                 AccountId: userId,
-                AccountPassword: userPassword
+                AccountPassword: userPassword,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function (response) {
                 // alert("Data Loaded: " + response);
@@ -987,7 +1003,9 @@ include_once("ModalTemplate.php");
                 CompanyName: company,
                 CompanyServer: server,
                 AccountId: userId,
-                AccountPassword: userPassword
+                AccountPassword: userPassword,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function (response) {
                 //alert("Data Loaded: " + response);
@@ -1039,7 +1057,9 @@ include_once("ModalTemplate.php");
                 RiskManagementGroup: riskControl,
                 MoneyRatio: rate,
                 UserName: subName,
-                ContactInfo: subContact
+                ContactInfo: subContact,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function (response) {
                 response = JSON.parse(response);
@@ -1089,10 +1109,12 @@ include_once("ModalTemplate.php");
                 MoneyRatio: rate,
                 UserName: subName,
                 ContactInfo: subContact,
-                SubSystemId: curSubAccounts[subSelectedIndex][0]
+                SubSystemId: curSubAccounts[subSelectedIndex][0],
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function (response) {
-                 //alert("Data Loaded: " + response);
+                //alert("Data Loaded: " + response);
                 response = JSON.parse(response);
                 if(response==''){
                     $('#generalNotificationBody').text('成功');
@@ -1118,7 +1140,9 @@ include_once("ModalTemplate.php");
             url: hostpath,
             type: "get", //send it through get method
             data: {
-                SubSystemId: subSystemId
+                SubSystemId: subSystemId,
+                AdminAccount: superAdminId,
+                AdminPassword: superAdminPwd
             },
             success: function (response) {
                 response = JSON.parse(response);
@@ -1172,13 +1196,14 @@ include_once("ModalTemplate.php");
 
         var mainChannelOption = $("#newAccountModal #channel");
         mainChannelOption.empty();
+
         mainChannelOption.append($('<option>', {
                 value:'恒生证券',
                 text: '恒生证券'
             })
         )
         mainChannelOption.on('change', function(){
-            setMainAccountCompanyInfo(this.value)
+            setMainAccountCompanyInfo(this.value);
         });
         mainChannelOption.eq(0).attr('selected', 'selected');
         mainChannelOption.trigger('change');
@@ -1206,7 +1231,13 @@ include_once("ModalTemplate.php");
     });
 
     $(document).on("click", "#main-delete", function () {
-        deleteAccount(mainAccounts[selectedIndex]);
+        $('#alertNotificationBody').text('确认要删除该主账户？');
+        $('#generalAlert').modal('show');
+        $(document).off("click", "#generalAlert .btn-primary");
+        $(document).on("click", "#generalAlert .btn-primary", function(){
+            deleteAccount(mainAccounts[selectedIndex]);
+        });
+
     });
 
 
@@ -1251,8 +1282,8 @@ include_once("ModalTemplate.php");
         ratioTypesOptions.empty();
         for (var i = 0; i < ratioTypes.length; i++) {
             ratioTypesOptions.append($('<option>', {
-                    value: ratioTypes[i][0],
-                    text: ratioTypes[i][0]
+                    value: ratioTypes[i][1],
+                    text: ratioTypes[i][1]
                 })
             )
         }
@@ -1292,7 +1323,13 @@ include_once("ModalTemplate.php");
 
 
     $(document).on("click", "#sub-delete", function () {
-        deleteSubAccount(curSubAccounts[subSelectedIndex]);
+        $('#alertNotificationBody').text('确认要删除该子账户？');
+        $('#generalAlert').modal('show');
+        $(document).off("click", "#generalAlert .btn-primary");
+        $(document).on("click", "#generalAlert .btn-primary", function(){
+            deleteSubAccount(curSubAccounts[subSelectedIndex]);
+        });
+        // deleteSubAccount(curSubAccounts[subSelectedIndex]);
     });
 
     $(document).on("click", "#main-sync", function () {
