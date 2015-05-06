@@ -125,7 +125,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="http://121.40.131.144/Report/Shared/login.html"><i
+                        <li><a href="#" id="mainLogout"><i
                                     class="fa fa-sign-out fa-fw"></i> 登出</a>
                         </li>
                     </ul>
@@ -259,22 +259,36 @@
             document.cookie = cname + "=" + escape(cvalue) + ((min == null) ? "" : ";expires=" + exdate.toGMTString());
         }
 
-        var tmp_account = getAdminCookie('sharpspeedadminaccount');
-        var tmp_password = getAdminCookie('sharpspeedadminpassword');
-        console.log("取到Admin cookies:" + tmp_account + tmp_password);
-        if (tmp_account != null && tmp_account != "" && tmp_password != null && tmp_password != "") {
-            var superAdminId = tmp_account;
-            var superAdminPwd = tmp_password;
-            setAdminCookie('sharpspeedadminaccount', superAdminId, 20);
-            setAdminCookie('sharpspeedadminpassword', superAdminPwd, 20);
-        } else {
-            self.location = 'http://121.40.131.144/Report/Shared/login.html';
+        //删除cookies
+        function delCookie(name) {
+            var exp = new Date();
+            exp.setTime(exp.getTime() - 1);
+            var cval = getAdminCookie(name);
+            if (cval != null)
+                document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
         }
-//        var superAdminId = "frankzch";
-//        var superAdminPwd = "123456";
+
+//        var tmp_account = getAdminCookie('sharpspeedadminaccount');
+//        var tmp_password = getAdminCookie('sharpspeedadminpassword');
+//        console.log("取到Admin cookies:" + tmp_account + tmp_password);
+//        if (tmp_account != null && tmp_account != "" && tmp_password != null && tmp_password != "") {
+//            var superAdminId = tmp_account;
+//            var superAdminPwd = tmp_password;
+//            setAdminCookie('sharpspeedadminaccount', superAdminId, 20);
+//            setAdminCookie('sharpspeedadminpassword', superAdminPwd, 20);
+//        } else {
+//            self.location = 'http://121.40.131.144/Report/Shared/login.html';
+//        }
+        var superAdminId = "frankzch";
+        var superAdminPwd = "123456";
 
         $(document).ready(function () {
             $.ajaxSetup({cache: false});
+            $(document).on("click", "#mainLogout", function () {
+                delCookie('sharpspeedadminaccount');
+                delCookie('sharpspeedadminpassword');
+                self.location = 'http://121.40.131.144/Report/Shared/login.html';
+            });
         });
 
     </script>
