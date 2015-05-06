@@ -303,16 +303,16 @@ include_once("Template.php");
                                        cellspacing="0" width="100%">
 
                                     <div class="mainAccountToolbar" style="float:left">
-                                        <button type="button" class="btn btn-success" id="main-add" data-toggle="modal">
+                                        <button type="button"  class="btn btn-success" id="main-add" data-toggle="modal">
                                             添加主账户
                                         </button>
-                                        <button type="button" class="btn btn-warning" id="main-update" data-toggle="modal">
+                                        <button type="button" style="Display : none" class="btn btn-warning" id="main-update" data-toggle="modal">
                                             修改主账户
                                         </button>
-                                        <button type="button" class="btn btn-danger" id="main-delete" data-toggle="modal">
+                                        <button type="button" style="Display : none" class="btn btn-danger" id="main-delete" data-toggle="modal">
                                             删除主账户
                                         </button>
-                                        <button type="button" class="btn btn-primary" id="main-sync" data-toggle="modal">
+                                        <button type="button" style="Display : none" class="btn btn-primary" id="main-sync" data-toggle="modal">
                                            同步
                                         </button>
                                     </div>
@@ -360,10 +360,10 @@ include_once("Template.php");
                                         <button type="button" class="btn btn-success" id="sub-add" data-toggle="modal">
                                             添加子账户
                                         </button>
-                                        <button type="button" class="btn btn-warning" id="sub-update" data-toggle="modal">
+                                        <button type="button" style="Display : none" class="btn btn-warning" id="sub-update" data-toggle="modal">
                                             修改子账户
                                         </button>
-                                        <button type="button" class="btn btn-danger" id="sub-delete" data-toggle="modal">
+                                        <button type="button" style="Display : none" class="btn btn-danger" id="sub-delete" data-toggle="modal">
                                             删除子账户
                                         </button>
 
@@ -782,11 +782,16 @@ include_once("ModalTemplate.php");
             $('#main-delete').show();
         }
 
-        if (mainAccounts[selectedIndex][7].localeCompare("获取中")==0 || mainAccounts[selectedIndex][7].localeCompare("已同步") == 0){
-            console.log(mainAccounts[selectedIndex][7]+"开启同步");
+//        if (mainAccounts[selectedIndex][7].localeCompare("获取中")==0 || mainAccounts[selectedIndex][7].localeCompare("已同步") == 0){
+//            console.log(mainAccounts[selectedIndex][7]+"开启同步");
+//            $('#main-sync').hide();
+//        }else{
+//
+//            $('#main-sync').show();
+//        }
+        if (mainAccounts[selectedIndex][7].indexOf('同步') == -1){
             $('#main-sync').hide();
         }else{
-
             $('#main-sync').show();
         }
     }
