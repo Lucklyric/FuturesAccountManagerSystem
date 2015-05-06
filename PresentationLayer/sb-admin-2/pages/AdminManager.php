@@ -181,11 +181,11 @@ include_once("Template.php");
                                                 data-toggle="modal">
                                             添加管理员
                                         </button>
-                                        <button type="button" class="btn btn-warning" id="admin-update"
+                                        <button type="button" style="Display : none" class="btn btn-warning" id="admin-update"
                                                 data-toggle="modal">
                                             修改管理员
                                         </button>
-                                        <button type="button" class="btn btn-danger" id="admin-delete"
+                                        <button type="button" style="Display : none" class="btn btn-danger" id="admin-delete"
                                                 data-toggle="modal">
                                             删除管理员
                                         </button>

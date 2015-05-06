@@ -814,11 +814,11 @@ include_once("Template.php");
                                                 data-toggle="modal">
                                             添加风控设置
                                         </button>
-                                        <button type="button" class="btn btn-warning" id="risk-update"
+                                        <button type="button" style="Display : none" class="btn btn-warning" id="risk-update"
                                                 data-toggle="modal">
                                             修改风控设置
                                         </button>
-                                        <button type="button" class="btn btn-danger" id="risk-delete"
+                                        <button type="button" style="Display : none" class="btn btn-danger" id="risk-delete"
                                                 data-toggle="modal">
                                             删除风控设置
                                         </button>

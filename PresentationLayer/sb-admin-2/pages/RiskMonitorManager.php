@@ -170,11 +170,11 @@ include_once("Template.php");
                                                 data-toggle="modal">
                                             添加风控员
                                         </button>
-                                        <button type="button" class="btn btn-warning" id="riskManager-update"
+                                        <button type="button" style="Display : none" class="btn btn-warning" id="riskManager-update"
                                                 data-toggle="modal">
                                             修改风控员
                                         </button>
-                                        <button type="button" class="btn btn-danger" id="riskManager-delete"
+                                        <button type="button" style="Display : none" class="btn btn-danger" id="riskManager-delete"
                                                 data-toggle="modal">
                                             删除风控员
                                         </button>
