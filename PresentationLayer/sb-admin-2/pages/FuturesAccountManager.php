@@ -666,6 +666,11 @@ include_once("ModalTemplate.php");
                     for (var i = 0; i < mainAccountTableData[j].subs.length; i++) {
                         curSubAccounts.push(mainAccountTableData[j].subs[i]);
                         curSubAccounts[curSubAccounts.length - 1][8] = mainAccountTableData[j].inf[4];
+                        if (curSubAccounts[curSubAccounts.length - 1][3] == "False"){
+                            curSubAccounts[curSubAccounts.length - 1][3] = "否";
+                        }else{
+                            curSubAccounts[curSubAccounts.length - 1][3] = "是";
+                        }
                     }
                     break;
                 }
@@ -1193,6 +1198,9 @@ include_once("ModalTemplate.php");
         $("#newAccountModal #userId").val("");
         $("#newAccountModal #userPassword").val("");
         $("#newAccountModal #userId").removeAttr('disabled');
+        $("#newAccountModal #channel").removeAttr('disabled');
+        $("#newAccountModal #company").removeAttr('disabled');
+        $("#newAccountModal #server").removeAttr('disabled');
 
         var mainChannelOption = $("#newAccountModal #channel");
         mainChannelOption.empty();

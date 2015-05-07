@@ -267,7 +267,7 @@
             if (cval != null)
                 document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
         }
-
+//
         var tmp_account = getAdminCookie('sharpspeedadminaccount');
         var tmp_password = getAdminCookie('sharpspeedadminpassword');
         console.log("取到Admin cookies:" + tmp_account + tmp_password);
