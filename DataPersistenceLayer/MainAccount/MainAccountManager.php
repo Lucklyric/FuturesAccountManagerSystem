@@ -43,7 +43,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             //return $next;
             $data = array("adminid"=>$userid,"adminpw"=>$password, "sMainAccountID"=>$mainAccountID);
             $data_string = json_encode($data);
-            $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetMainAccountConnectStatus');
+            $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/ConnectMainAccount');
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

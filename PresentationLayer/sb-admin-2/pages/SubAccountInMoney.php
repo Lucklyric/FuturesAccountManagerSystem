@@ -89,6 +89,9 @@ include_once("Template.php");
                                        cellspacing="0" width="100%">
 
                                     <div class="subAccountToolbar" style="float:left">
+                                        <button type="button" class="btn btn-default" id="manual-refresh" data-toggle="modal">
+                                            刷新
+                                        </button>
                                         <button type="button" class="btn btn-success" id="sub-update" data-toggle="modal">
                                             子账户入金
                                         </button>
@@ -384,8 +387,16 @@ include_once("ModalTemplate.php");
             }
         });
     }
-
+    /***
+     * 手动刷新数据
+     */
+    $(document).on("click", "#manual-refresh", function () {
+        console.log("手动刷新数据");
+        refreshData(1);
+    });
     //显示inMoney modal
+
+
     $(document).on("click", "#sub-update", function () {
         $(document).off("click", "#newInMoneyModal .btn-primary");
         //绑定回调
