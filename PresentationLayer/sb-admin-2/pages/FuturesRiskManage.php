@@ -122,6 +122,10 @@ include_once("Template.php");
             width: 800px;
         }
 
+        .disabledTab{
+            pointer-events: none;
+        }
+
     </style>
 
 </head>
@@ -1372,6 +1376,9 @@ include_once("ModalTemplate.php");
                 .end()
                 .find(".checked-list-box")
                 .empty()
+                .end()
+                .find('.nav-tabs li')
+                .removeClass('disabledTab')
                 .end();
     });
 
@@ -1562,10 +1569,13 @@ include_once("ModalTemplate.php");
 
             $('.nav-tabs a[href="#normal"]').trigger('click');
 
+            $('.nav-tabs li').eq(1).addClass('disabledTab');
+            $('.nav-tabs li').eq(2).addClass('disabledTab');
+
         }else if (riskGroupData[1].match(/净值\)/g)){//净值
 
-            $("#abs-forceCloseLine").val(riskGroupData[19]);
-            $("#abs-warningLine").val(riskGroupData[20]);
+            $("#abs-warningLine").val(riskGroupData[19]);
+            $("#abs-forceCloseLine").val(riskGroupData[20]);
 
             stringToUL(riskGroupData[21],$("#abs-overnightUL"), "(日内)");
             stringToUL(riskGroupData[22],$("#abs-overnightUL"), "(隔夜)");
@@ -1573,16 +1583,22 @@ include_once("ModalTemplate.php");
 
             $('.nav-tabs a[href="#abs"]').trigger('click');
 
+            $('.nav-tabs li').eq(0).addClass('disabledTab');
+            $('.nav-tabs li').eq(2).addClass('disabledTab');
+
         }else {//亏损
 
-            $("#loss-forceCloseLine").val(riskGroupData[15]);
-            $("#loss-warningLine").val(riskGroupData[16]);
+            $("#loss-warningLine").val(riskGroupData[15]);
+            $("#loss-forceCloseLine").val(riskGroupData[16]);
 
             stringToUL(riskGroupData[17],$("#loss-overnightUL"), "(日内)");
             stringToUL(riskGroupData[18],$("#loss-overnightUL"), "(隔夜)");
             $("#loss-inDayOrOvernight").eq(0).prop("selected", true);
 
             $('.nav-tabs a[href="#loss"]').trigger('click');
+
+            $('.nav-tabs li').eq(0).addClass('disabledTab');
+            $('.nav-tabs li').eq(1).addClass('disabledTab');
         }
     }
 

@@ -337,6 +337,12 @@ include_once("ModalTemplate.php");
 
 <script>
 
+    function getFormattedDate() {
+        var date = new Date();
+        var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        return str;
+    }
+
     //填充modal
     function fillModal(){
         var subAccountId = subAccounts[selectedIndex][1];
@@ -371,6 +377,7 @@ include_once("ModalTemplate.php");
                 Priority: preferredMoney,
                 Id: subId,
                 MainId: mainAccountId,
+                UpdateTime: getFormattedDate(),
                 AdminAccount: superAdminId,
                 AdminPassword: superAdminPwd
             },
