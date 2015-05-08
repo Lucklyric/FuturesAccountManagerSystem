@@ -104,7 +104,7 @@ include_once("Template.php");
         border-bottom:none;
     }
 
-    .modal-content {
+    .riskModal {
         width: 900px;
         margin-left: -150px;
     }
@@ -146,7 +146,7 @@ include_once("Template.php");
                                 <div class="modal fade" tabindex="-1" role="dialog" id="riskModal"
                                      aria-labelledby="newMainAccountLabel" aria-hidden="true">
                                     <div class="modal-dialog" id="newRiskModal">
-                                        <div class="modal-content">
+                                        <div class="modal-content riskModal">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-hidden="true">&times;</button>

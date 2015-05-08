@@ -546,7 +546,7 @@ include_once("ModalTemplate.php");
             }
         });
 
-        $('#FeesettingModal').modal('hide');
+        $('#feesettingModal').modal('hide');
     }
 
     //设置费率信息
