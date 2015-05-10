@@ -545,6 +545,7 @@ include_once("ModalTemplate.php");
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             mainAccountTableData = data.data;
             sessionStorage.setItem('mainAccountTableData',JSON.stringify(mainAccountTableData));
+
             console.log(mainAccountTableData);
             console.log("主账户主账户主账户走到这里了");
 
@@ -554,6 +555,7 @@ include_once("ModalTemplate.php");
                     mainAccounts[mainAccounts.length-1].push("获取中");
                 }
             }
+
             sessionStorage.setItem('mainAccountData',JSON.stringify(mainAccounts));
             mainAccountManager.InitMainAccountsCheckList(mainAccounts);
             //console.log(mainAccounts);

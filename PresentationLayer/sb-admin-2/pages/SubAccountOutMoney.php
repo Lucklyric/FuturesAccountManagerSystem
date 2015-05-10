@@ -92,7 +92,7 @@ include_once("Template.php");
                                         <button type="button" class="btn btn-default" id="manual-refresh" data-toggle="modal">
                                             刷新
                                         </button>
-                                        <button type="button" class="btn btn-success" id="sub-update" data-toggle="modal">
+                                        <button type="button" style="Display : none" class="btn btn-success" id="sub-update" data-toggle="modal">
                                             子账户出金
                                         </button>
                                     </div>
