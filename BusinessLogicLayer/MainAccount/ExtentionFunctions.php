@@ -46,4 +46,13 @@ if ($_GET["Method"] == "getMainStatus"){
     $manager = new MainAccountManager();
     $result = $manager->OnRspSyncPosition($data);
     echo json_encode($result);
+}elseif ($_GET["Method"] == "disableOrEnable") {
+    $SubId = isset($_GET["SubId"]) ? $_GET["SubId"] : "";
+    $AdminAccount = isset($_GET["AdminAccount"]) ? $_GET["AdminAccount"] : "";
+    $AdminPassword = isset($_GET["AdminPassword"]) ? $_GET["AdminPassword"] : "";
+    $Enable = isset($_GET["Enable"]) ? $_GET["Enable"] : "";
+    $Source = isset($_GET["Source"]) ? $_GET["Source"] : "";
+    $manager = new MainAccountManager();
+    $result = $manager->DisableOrEnableAccountFromWeb($AdminAccount,$AdminPassword,$SubId,$Enable,$Source);
+    echo json_encode($result);
 }

@@ -756,4 +756,41 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
             }
         });
     }
+
+    this.disableOrEnableAccount = function(index,flag){
+
+        $.ajax({
+            url: this.hostpath,
+            type: "get", //send it through get method
+            dataType: "json",
+            contentType: "application/json",
+            data: {
+                AdminAccount: this.accoutId,
+                AdminPassword: this.accoutPwd,
+                SubId: this.curSubAccounts[index][1],
+                Enable: flag,
+                Source: 0,
+                Method: "disableOrEnable"
+            },
+            success: function (response) {
+                console.log("diableOrEnable"+ssMainAccounttManagerInstance.curSubAccounts[index][1]+response);
+                response = JSON.parse(response);
+                $('#generalNotificationBody').text('启用成功');
+                if(response==""){
+                    if (flag == 1){
+                        $('#generalNotificationBody').text('启用成功');
+                    }else{
+                        $('#generalNotificationBody').text('禁用成功');
+                    }
+                }else{
+                    $('#generalNotificationBody').text(response);
+                }
+                $('#generalNotification').modal('show');
+                ssMainAccounttManagerInstance.redrawCallback();
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
 }

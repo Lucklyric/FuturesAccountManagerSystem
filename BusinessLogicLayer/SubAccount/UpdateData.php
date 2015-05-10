@@ -32,7 +32,7 @@
    // $SubSystemId="24";
     //$SubId="shw9794602";
     //$SubPass="testpass";
-    $Restriction="False";
+//    $Restriction="False";
     $CreateTime="2015-4-10 17:19:22";
     $LastLoginTime="2015-4-10 17:19:23";
     //$UserName="test";

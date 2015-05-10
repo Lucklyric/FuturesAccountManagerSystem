@@ -366,7 +366,12 @@ include_once("Template.php");
                                         <button type="button" style="Display : none" class="btn btn-danger" id="sub-delete" data-toggle="modal">
                                             删除子账户
                                         </button>
-
+                                        <button type="button" style="Display : none" class="btn btn-primary" id="sub-enable" data-toggle="modal">
+                                           启用
+                                        </button>
+                                        <button type="button" style="Display : none" class="btn btn-info" id="sub-disable" data-toggle="modal">
+                                            禁止
+                                        </button>
                                     </div>
                                     <thead>
                                     <tr>
@@ -498,8 +503,10 @@ include_once("ModalTemplate.php");
         } );
 
         $('#subAccountsTable').on('click', 'tr', function () { //绑定点击事件刷新子账户
-            ifHideSubAccountToolBar(false);
+
             subSelectedIndex = subAccountTable.row(this).index();
+            ifHideSubAccountToolBar(false);
+            checkDisableEnableButton();
             if ( $(this).hasClass('selected') ) {
                 //$(this).removeClass('selected');
             }
@@ -819,12 +826,32 @@ include_once("ModalTemplate.php");
         if(curSubAccounts.length == 0){
             $('#sub-update').hide();
             $('#sub-delete').hide();
+            
         }else{
             $('#sub-update').show();
             $('#sub-delete').show();
         }
+        checkDisableEnableButton();
     }
 
+    /**
+     * checkDisableEnableButton
+     */
+    function checkDisableEnableButton(){
+        if (curSubAccounts.length == 0){
+            $('#sub-enable').hide();
+            $('#sub-disable').hide();
+        }else{
+            if (curSubAccounts[subSelectedIndex][3] == '是'){
+                $('#sub-disable').show();
+                $('#sub-enable').hide();
+            }else{
+                $('#sub-disable').hide();
+                $('#sub-enable').show();
+            }
+        }
+
+    }
 </script>
 
 <script>
@@ -1105,6 +1132,13 @@ include_once("ModalTemplate.php");
         $('#subModal').modal('hide');
         var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/UpdateData.php";
 
+        var restriction = curSubAccounts[subSelectedIndex][3];
+        if (restriction == '是'){
+            restriction = 'True';
+        }else{
+            restriction = 'False';
+        }
+      
         $.ajax({
             url: hostpath,
             type: "get", //send it through get method
@@ -1118,7 +1152,8 @@ include_once("ModalTemplate.php");
                 ContactInfo: subContact,
                 SubSystemId: curSubAccounts[subSelectedIndex][0],
                 AdminAccount: superAdminId,
-                AdminPassword: superAdminPwd
+                AdminPassword: superAdminPwd,
+                Restriction:restriction
             },
             success: function (response) {
                 //alert("Data Loaded: " + response);
@@ -1363,11 +1398,21 @@ include_once("ModalTemplate.php");
         }
 
     });
+
     $(document).on("click", "#newMainSyncOrder .btn-primary", function(){
         mainAccountManager.submitSyncOrderStream(selectedIndex)
     });
+
     $(document).on("click", "#newMainSyncPosition .btn-primary", function(){
         mainAccountManager.submitSyncPositionStream(selectedIndex)
+    });
+
+    $(document).on("click", "#sub-enable", function(){
+        mainAccountManager.disableOrEnableAccount(subSelectedIndex,1);
+    });
+
+    $(document).on("click", "#sub-disable", function(){
+        mainAccountManager.disableOrEnableAccount(subSelectedIndex,0);
     });
 
     //理论上来说添加修改以后都应该刷新

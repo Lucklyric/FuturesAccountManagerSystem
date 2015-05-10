@@ -297,8 +297,6 @@ include_once("Template.php");
                                 <!-- /.modal-dialog -->
                             </div>
 
-
-
                             <table id="mainAccounts" class="table table-striped table-bordered table-hover"
                                    cellspacing="0" width="100%">
 
@@ -326,7 +324,6 @@ include_once("Template.php");
                                     <th>账户密码</th>
                                     <th>静态权益</th>
                                     <th>状态</th>
-
                                 </tr>
                                 </thead>
 
@@ -340,7 +337,6 @@ include_once("Template.php");
                                     <th>账户密码</th>
                                     <th>静态权益</th>
                                     <th>状态</th>
-
                                 </tr>
                                 </tfoot>
                             </table>
