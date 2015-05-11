@@ -268,19 +268,19 @@
                 document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
         }
 //
-//        var tmp_account = getAdminCookie('sharpspeedadminaccount');
-//        var tmp_password = getAdminCookie('sharpspeedadminpassword');
-//        console.log("取到Admin cookies:" + tmp_account + tmp_password);
-//        if (tmp_account != null && tmp_account != "" && tmp_password != null && tmp_password != "") {
-//            var superAdminId = tmp_account;
-//            var superAdminPwd = tmp_password;
-//            setAdminCookie('sharpspeedadminaccount', superAdminId, 20);
-//            setAdminCookie('sharpspeedadminpassword', superAdminPwd, 20);
-//        } else {
-//            self.location = 'http://121.40.131.144/Report/Shared/login.html';
-//        }
-        var superAdminId = "frankzch";
-        var superAdminPwd = "123456";
+        var tmp_account = getAdminCookie('sharpspeedadminaccount');
+        var tmp_password = getAdminCookie('sharpspeedadminpassword');
+        console.log("取到Admin cookies:" + tmp_account + tmp_password);
+        if (tmp_account != null && tmp_account != "" && tmp_password != null && tmp_password != "") {
+            var superAdminId = tmp_account;
+            var superAdminPwd = tmp_password;
+            setAdminCookie('sharpspeedadminaccount', superAdminId, 20);
+            setAdminCookie('sharpspeedadminpassword', superAdminPwd, 20);
+        } else {
+            self.location = 'http://121.40.131.144/Report/Shared/login.html';
+        }
+//        var superAdminId = "frankzch";
+//        var superAdminPwd = "123456";
 
         $(document).ready(function () {
             $.ajaxSetup({cache: false});
