@@ -751,6 +751,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
                 }else{
                     $('#generalNotificationBody').text(response);
                 }
+                $('#generalNotification').modal('show');
             },
             error: function (xhr) {
                 //Do Something to handle error

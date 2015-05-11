@@ -170,6 +170,28 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             
         }
 
+        function GetSPServerAddress($userid,$password){
+            include_once('HTTP/Request.php');
+            //$next="abc";
+            //return $next;
+            $data = array("adminid"=>$userid,"adminpw"=>$password);
+            $data_string = json_encode($data);
+            $ch = curl_init($GLOBALS['serverAddress'].'SPService/SPService.svc/GetSPServerAddress');
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data_string)));
+
+            $result = curl_exec($ch);
+            curl_close($ch);
+            header("Content-type:text/html;charset=utf-8");
+
+            return $result;
+
+        }
+
     } // end of class Vegetable
 
 

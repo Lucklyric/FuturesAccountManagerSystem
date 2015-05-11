@@ -120,7 +120,7 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> 账户资料</a>
+                        <li><a href="#" id="mainInformation"><i class="fa fa-user fa-fw"></i> 账户资料</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
                         </li>
@@ -198,10 +198,10 @@
                         <a href="#"><i class="fa fa-search fa-fw"></i> 数据查询<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../../../../Report/View/DailyReport.aspx">资金及交易明细查询</a>
+                                <a href="../../../../Report/View/DailyReport.aspx">出入金查询</a>
                             </li>
                             <li>
-                                <a href="../../../../Report/View/DailyReport.aspx">出入金查询</a>
+                                <a href="../../../../Report/View/DailyReport.aspx">资金及交易明细查询</a>
                             </li>
                             <li>
                                 <a href="../../../../Report/View/DailyReport.aspx">历史报单查询修改</a>
@@ -267,7 +267,7 @@
             if (cval != null)
                 document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
         }
-//
+
         var tmp_account = getAdminCookie('sharpspeedadminaccount');
         var tmp_password = getAdminCookie('sharpspeedadminpassword');
         console.log("取到Admin cookies:" + tmp_account + tmp_password);
@@ -279,15 +279,37 @@
         } else {
             self.location = 'http://121.40.131.144/Report/Shared/login.html';
         }
-//        var superAdminId = "frankzch";
-//        var superAdminPwd = "123456";
+
+        //        var superAdminId = "frankzch";
+        //        var superAdminPwd = "123456";
 
         $(document).ready(function () {
-            $.ajaxSetup({cache: false});
             $(document).on("click", "#mainLogout", function () {
                 delCookie('sharpspeedadminaccount');
                 delCookie('sharpspeedadminpassword');
                 self.location = 'http://121.40.131.144/Report/Shared/login.html';
+            });
+
+            $(document).on("click", "#mainInformation", function () {
+                $.ajax({
+                    url: "../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/ServerExtention.php",
+                    type: "get", //send it through get method
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: {
+                        AdminAccount: superAdminId,
+                        AdminPassword: superAdminPwd
+                    },
+                    success: function (response) {
+                        var supperAccountInfo = response.split(":");
+                        $('#generalMainAccountInfoBody').html('主账户ID:' + superAdminId + "<br/>服务器地址:" + supperAccountInfo[0] + "\n服务器端口:" + supperAccountInfo[1]);
+                        $('#generalMainAccountInfo').modal('show');
+                    },
+                    error: function (xhr) {
+                        //Do Something to handle error
+                        console.log("取地址信息发生错误" + xhr);
+                    }
+                });
             });
         });
 
