@@ -297,6 +297,8 @@ include_once("Template.php");
                                 <!-- /.modal-dialog -->
                             </div>
 
+
+
                             <table id="mainAccounts" class="table table-striped table-bordered table-hover"
                                    cellspacing="0" width="100%">
 
@@ -307,7 +309,7 @@ include_once("Template.php");
                                     <button type="button" style="display : none" class="btn btn-warning" id="main-update" data-toggle="modal">
                                         修改主账户
                                     </button>
-                                    <button type="button" style="Display : none" class="btn btn-danger" id="main-delete" data-toggle="modal">
+                                    <button type="button" style="display : none" class="btn btn-danger" id="main-delete" data-toggle="modal">
                                         删除主账户
                                     </button>
                                     <button type="button" style="Display : none" class="btn btn-primary" id="main-sync" data-toggle="modal">
@@ -324,6 +326,7 @@ include_once("Template.php");
                                     <th>账户密码</th>
                                     <th>静态权益</th>
                                     <th>状态</th>
+
                                 </tr>
                                 </thead>
 
@@ -337,6 +340,7 @@ include_once("Template.php");
                                     <th>账户密码</th>
                                     <th>静态权益</th>
                                     <th>状态</th>
+
                                 </tr>
                                 </tfoot>
                             </table>
@@ -362,7 +366,12 @@ include_once("Template.php");
                                     <button type="button" style="Display : none" class="btn btn-danger" id="sub-delete" data-toggle="modal">
                                         删除子账户
                                     </button>
-
+                                    <button type="button" style="Display : none" class="btn btn-primary" id="sub-enable" data-toggle="modal">
+                                        启用
+                                    </button>
+                                    <button type="button" style="Display : none" class="btn btn-info" id="sub-disable" data-toggle="modal">
+                                        禁止
+                                    </button>
                                 </div>
                                 <thead>
                                 <tr>
@@ -457,6 +466,8 @@ include_once("ModalTemplate.php");
     var toolBarManger = new SSToolBar($("#restartServer"),$("#connectMainAccount"),$("#onlineCount"),$("#serverStatus"));
     var mainAccountManager = new SSMainAccountManager(superAdminId,superAdminPwd,function(){
         refreshMainAccountsTable();
+    },function(){
+        refreshData(1);
     });
 
     /**
@@ -494,8 +505,10 @@ include_once("ModalTemplate.php");
         } );
 
         $('#subAccountsTable').on('click', 'tr', function () { //绑定点击事件刷新子账户
-            ifHideSubAccountToolBar(false);
+
             subSelectedIndex = subAccountTable.row(this).index();
+            ifHideSubAccountToolBar(false);
+            checkDisableEnableButton();
             if ( $(this).hasClass('selected') ) {
                 //$(this).removeClass('selected');
             }
@@ -541,6 +554,7 @@ include_once("ModalTemplate.php");
         $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
             mainAccountTableData = data.data;
             sessionStorage.setItem('mainAccountTableData',JSON.stringify(mainAccountTableData));
+
             console.log(mainAccountTableData);
             console.log("主账户主账户主账户走到这里了");
 
@@ -550,6 +564,7 @@ include_once("ModalTemplate.php");
                     mainAccounts[mainAccounts.length-1].push("获取中");
                 }
             }
+
             sessionStorage.setItem('mainAccountData',JSON.stringify(mainAccounts));
             mainAccountManager.InitMainAccountsCheckList(mainAccounts);
             //console.log(mainAccounts);
@@ -586,6 +601,7 @@ include_once("ModalTemplate.php");
             allBrokersInfo['金仕达'] = new Array();
             allBrokersInfo['恒生'] = new Array();
             allBrokersInfo['恒生证券'] = new Array();
+            allBrokersInfo['锋云模拟'] = new Array();
             for (var i = 0; i < data.length; i++) {
                 var tmpInfo = [];
                 tmpInfo.push(data[i].mapServer2MarketDataAddresses);
@@ -813,15 +829,41 @@ include_once("ModalTemplate.php");
         if(curSubAccounts.length == 0){
             $('#sub-update').hide();
             $('#sub-delete').hide();
+
         }else{
             $('#sub-update').show();
             $('#sub-delete').show();
         }
+        checkDisableEnableButton();
     }
 
+    /**
+     * checkDisableEnableButton
+     */
+    function checkDisableEnableButton(){
+        if (curSubAccounts.length == 0){
+            $('#sub-enable').hide();
+            $('#sub-disable').hide();
+        }else{
+            if (curSubAccounts[subSelectedIndex][3] == '否'){
+                $('#sub-disable').show();
+                $('#sub-enable').hide();
+            }else{
+                $('#sub-disable').hide();
+                $('#sub-enable').show();
+            }
+        }
+
+    }
 </script>
 
 <script>
+
+    function getFormattedDate() {
+        var date = new Date();
+        var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        return str;
+    }
 
     //填充MainModal
     function fillMainModal(modal, data) {
@@ -1060,7 +1102,9 @@ include_once("ModalTemplate.php");
                 UserName: subName,
                 ContactInfo: subContact,
                 AdminAccount: superAdminId,
-                AdminPassword: superAdminPwd
+                AdminPassword: superAdminPwd,
+                CreateTime:getFormattedDate(),
+                LastLoginTime:getFormattedDate()
             },
             success: function (response) {
                 response = JSON.parse(response);
@@ -1099,6 +1143,13 @@ include_once("ModalTemplate.php");
         $('#subModal').modal('hide');
         var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/UpdateData.php";
 
+        var restriction = curSubAccounts[subSelectedIndex][3];
+        if (restriction == '是'){
+            restriction = 'False';
+        }else{
+            restriction = 'True';
+        }
+
         $.ajax({
             url: hostpath,
             type: "get", //send it through get method
@@ -1112,7 +1163,10 @@ include_once("ModalTemplate.php");
                 ContactInfo: subContact,
                 SubSystemId: curSubAccounts[subSelectedIndex][0],
                 AdminAccount: superAdminId,
-                AdminPassword: superAdminPwd
+                AdminPassword: superAdminPwd,
+                Restriction:restriction,
+                CreateTime:curSubAccounts[subSelectedIndex][4],
+                LastLoginTime:curSubAccounts[subSelectedIndex][5]
             },
             success: function (response) {
                 //alert("Data Loaded: " + response);
@@ -1206,6 +1260,7 @@ include_once("ModalTemplate.php");
                 text: '恒生证券'
             })
         )
+
         mainChannelOption.on('change', function(){
             setMainAccountCompanyInfo(this.value);
         });
@@ -1348,11 +1403,21 @@ include_once("ModalTemplate.php");
         }
 
     });
+
     $(document).on("click", "#newMainSyncOrder .btn-primary", function(){
         mainAccountManager.submitSyncOrderStream(selectedIndex)
     });
+
     $(document).on("click", "#newMainSyncPosition .btn-primary", function(){
         mainAccountManager.submitSyncPositionStream(selectedIndex)
+    });
+
+    $(document).on("click", "#sub-enable", function(){
+        mainAccountManager.disableOrEnableAccount(subSelectedIndex,1);
+    });
+
+    $(document).on("click", "#sub-disable", function(){
+        mainAccountManager.disableOrEnableAccount(subSelectedIndex,0);
     });
 
     //理论上来说添加修改以后都应该刷新

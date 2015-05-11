@@ -33,8 +33,8 @@
     //$SubId="shw9794602";
     //$SubPass="testpass";
 //    $Restriction="False";
-    $CreateTime="2015-4-10 17:19:22";
-    $LastLoginTime="2015-4-10 17:19:23";
+ //   $CreateTime="2015-4-10 17:19:22";
+ //   $LastLoginTime="2015-4-10 17:19:23";
     //$UserName="test";
     //$ContactInfo="test";
     //$MainId="5";

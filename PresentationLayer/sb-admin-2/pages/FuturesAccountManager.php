@@ -466,6 +466,8 @@ include_once("ModalTemplate.php");
     var toolBarManger = new SSToolBar($("#restartServer"),$("#connectMainAccount"),$("#onlineCount"),$("#serverStatus"));
     var mainAccountManager = new SSMainAccountManager(superAdminId,superAdminPwd,function(){
         refreshMainAccountsTable();
+    },function(){
+        refreshData(1);
     });
 
     /**
@@ -599,6 +601,7 @@ include_once("ModalTemplate.php");
                 allBrokersInfo['金仕达'] = new Array();
                 allBrokersInfo['恒生'] = new Array();
                 allBrokersInfo['恒生证券'] = new Array();
+                allBrokersInfo['锋云模拟'] = new Array();
                 for (var i = 0; i < data.length; i++) {
                     var tmpInfo = [];
                     tmpInfo.push(data[i].mapServer2MarketDataAddresses);
@@ -842,7 +845,7 @@ include_once("ModalTemplate.php");
             $('#sub-enable').hide();
             $('#sub-disable').hide();
         }else{
-            if (curSubAccounts[subSelectedIndex][3] == '是'){
+            if (curSubAccounts[subSelectedIndex][3] == '否'){
                 $('#sub-disable').show();
                 $('#sub-enable').hide();
             }else{
@@ -855,6 +858,12 @@ include_once("ModalTemplate.php");
 </script>
 
 <script>
+
+    function getFormattedDate() {
+        var date = new Date();
+        var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        return str;
+    }
 
     //填充MainModal
     function fillMainModal(modal, data) {
@@ -1093,7 +1102,9 @@ include_once("ModalTemplate.php");
                 UserName: subName,
                 ContactInfo: subContact,
                 AdminAccount: superAdminId,
-                AdminPassword: superAdminPwd
+                AdminPassword: superAdminPwd,
+                CreateTime:getFormattedDate(),
+                LastLoginTime:getFormattedDate()
             },
             success: function (response) {
                 response = JSON.parse(response);
@@ -1134,11 +1145,11 @@ include_once("ModalTemplate.php");
 
         var restriction = curSubAccounts[subSelectedIndex][3];
         if (restriction == '是'){
-            restriction = 'True';
-        }else{
             restriction = 'False';
+        }else{
+            restriction = 'True';
         }
-      
+
         $.ajax({
             url: hostpath,
             type: "get", //send it through get method
@@ -1153,7 +1164,9 @@ include_once("ModalTemplate.php");
                 SubSystemId: curSubAccounts[subSelectedIndex][0],
                 AdminAccount: superAdminId,
                 AdminPassword: superAdminPwd,
-                Restriction:restriction
+                Restriction:restriction,
+                CreateTime:curSubAccounts[subSelectedIndex][4],
+                LastLoginTime:curSubAccounts[subSelectedIndex][5]
             },
             success: function (response) {
                 //alert("Data Loaded: " + response);
@@ -1255,6 +1268,11 @@ include_once("ModalTemplate.php");
                     value:'恒生',
                     text: '恒生期货'
                 })
+        )
+        mainChannelOption.append($('<option>', {
+                value:'锋云模拟',
+                text: '锋云模拟'
+            })
         )
         mainChannelOption.on('change', function(){
             setMainAccountCompanyInfo(this.value);

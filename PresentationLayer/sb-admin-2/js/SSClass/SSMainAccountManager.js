@@ -1,7 +1,7 @@
 /**
  * Created by Alvin on 2015-04-21.
  */
-function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
+function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallback){
     var ssMainAccounttManagerInstance = this;
     this.hostpath = "../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/ExtentionFunctions.php";
     this.accoutId = accoutId;
@@ -18,6 +18,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
     this.needCheckQueue = [];
     //this.positionCheckQueue = [];
     this.redrawCallback = redrawCallBack;
+    this.refreshDataCallback = refreshDataCallback;
     this.orderSyncTable;
     this.positionSyncTable;
     this.isTimerRunning = false;
@@ -786,7 +787,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack){
                     $('#generalNotificationBody').text(response);
                 }
                 $('#generalNotification').modal('show');
-                ssMainAccounttManagerInstance.redrawCallback();
+                ssMainAccounttManagerInstance.refreshDataCallback();
             },
             error: function (xhr) {
                 //Do Something to handle error

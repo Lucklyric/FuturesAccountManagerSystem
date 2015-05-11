@@ -32,8 +32,8 @@
 //    $SubId="shw9794602";
 //    $SubPass="testpass";
     $Restriction="False";
-    $CreateTime="2015-4-10 17:19:22";
-    $LastLoginTime="2015-4-10 17:19:23";
+//    $CreateTime="2015-4-10 17:19:22";
+//    $LastLoginTime="2015-4-10 17:19:23";
 //    $UserName="test";
 //    $ContactInfo="test";
 //    $MainId="10";
@@ -46,7 +46,7 @@
     if($TableName && $State ){
     $data="admin=".$AdminAccount."&password=".$AdminPassword."&tablename=".$TableName."&state=".$State."&编号=".$SubSystemId."&子账户ID=".$SubId."&子账户密码=".$SubPass."&限制使用=".$Restriction."&创建时间=".$CreateTime."&最后登录时间=".$LastLoginTime."&用户姓名=".$UserName."&联系方式=".$ContactInfo."&主账户编号=".$MainId."&风控组名称=".$RiskManagementGroup."&费率组名称=".$MoneyRatio."&初始配资比例=".$MoneyRatio."&二级主账户=".$SecondMain;
 //        echo "This is hardcoded test data:<br>";
-//        echo $data;
+        //echo $data;
     }else{
     
         echo "Some data is missing!";
