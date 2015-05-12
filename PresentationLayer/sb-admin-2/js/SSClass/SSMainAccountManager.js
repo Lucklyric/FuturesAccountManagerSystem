@@ -88,7 +88,6 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
                 if (tmpResponse == "需要报单和持仓同步"){
                    ssMainAccounttManagerInstance.mainAccouts[index][7] = "需要报单同步";
                }else{
-
                     if (tmpResponse == "需要报单同步"){
                         ssMainAccounttManagerInstance.mainAccouts[index][7] = "需要报单同步";
                     }else if(tmpResponse == "需要持仓同步"){
@@ -349,6 +348,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
                 }else{
                     $('#generalNotificationBody').text(response);
                 }
+                $('#generalNotificationBody').modal('show');
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -776,7 +776,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
             },
             success: function (response) {
                 console.log("diableOrEnable"+ssMainAccounttManagerInstance.curSubAccounts[index][1]+response);
-                response = JSON.parse(response);
+                //response = JSON.parse(response);
                 $('#generalNotificationBody').text('启用成功');
                 if(response==""){
                     if (flag == 1){

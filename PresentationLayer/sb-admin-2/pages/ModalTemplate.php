@@ -54,7 +54,7 @@
 
 <div class="modal fade" tabindex="-1" role="dialog" id="generalMainAccountInfo"
      aria-labelledby="newMainAccountLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width:266px">
+    <div class="modal-dialog" style="width:326px">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"

@@ -280,10 +280,11 @@
             self.location = 'http://121.40.131.144/Report/Shared/login.html';
         }
 
-        //        var superAdminId = "frankzch";
-        //        var superAdminPwd = "123456";
+//        var superAdminId = "frankzch";
+//        var superAdminPwd = "123456";
 
         $(document).ready(function () {
+            $.ajaxSetup({cache:false});
             $(document).on("click", "#mainLogout", function () {
                 delCookie('sharpspeedadminaccount');
                 delCookie('sharpspeedadminpassword');
@@ -302,7 +303,7 @@
                     },
                     success: function (response) {
                         var supperAccountInfo = response.split(":");
-                        $('#generalMainAccountInfoBody').html('主账户ID:' + superAdminId + "<br/>服务器地址:" + supperAccountInfo[0] + "\n服务器端口:" + supperAccountInfo[1]);
+                        $('#generalMainAccountInfoBody').html('管理员账户:' + superAdminId + "<br/>服务器地址:" + supperAccountInfo[0] + ":" + supperAccountInfo[1]);
                         $('#generalMainAccountInfo').modal('show');
                     },
                     error: function (xhr) {
