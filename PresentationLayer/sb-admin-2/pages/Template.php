@@ -198,19 +198,19 @@
                         <a href="#"><i class="fa fa-search fa-fw"></i> 数据查询<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../../../../Report/View/DailyReport.aspx">出入金查询</a>
+                                <a href="../../../../Report/View/MoneyInAndOut.aspx">出入金查询</a>
                             </li>
                             <li>
                                 <a href="../../../../Report/View/DailyReport.aspx">资金及交易明细查询</a>
                             </li>
                             <li>
-                                <a href="../../../../Report/View/DailyReport.aspx">历史报单查询修改</a>
+                                <a href="../../../../Report/View/OrderMgr.aspx">历史报单查询修改</a>
                             </li>
                             <li>
-                                <a href="../../../../Report/View/DailyReport.aspx">历史盘前仓位查询修改</a>
+                                <a href="../../../../Report/View/PositionMgr.aspx">历史盘前仓位查询修改</a>
                             </li>
                             <li>
-                                <a href="../../../../Report/View/DailyReport.aspx">合约收盘结算价修改</a>
+                                <a href="../../../../Report/View/InsClosePriceMgr.aspx">合约收盘结算价修改</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -279,7 +279,7 @@
         } else {
             self.location = 'http://121.40.131.144/Report/Shared/login.html';
         }
-
+//
 //        var superAdminId = "frankzch";
 //        var superAdminPwd = "123456";
 
@@ -303,7 +303,14 @@
                     },
                     success: function (response) {
                         var supperAccountInfo = response.split(":");
-                        $('#generalMainAccountInfoBody').html('管理员账户:' + superAdminId + "<br/>服务器地址:" + supperAccountInfo[0] + ":" + supperAccountInfo[1]);
+                        var ip = "";
+                        if (supperAccountInfo[0] == "127.0.0.1"){
+                            ip = "<?php echo $_SERVER['SERVER_NAME']; ?>";
+                        }else{
+                            ip = supperAccountInfo[0];
+                        }
+
+                        $('#generalMainAccountInfoBody').html('管理员账户:' + superAdminId + "<br/>服务器地址:" + ip + ":" + supperAccountInfo[1]);
                         $('#generalMainAccountInfo').modal('show');
                     },
                     error: function (xhr) {

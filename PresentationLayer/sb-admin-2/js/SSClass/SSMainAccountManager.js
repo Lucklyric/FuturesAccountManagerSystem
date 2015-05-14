@@ -776,7 +776,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
             },
             success: function (response) {
                 console.log("diableOrEnable"+ssMainAccounttManagerInstance.curSubAccounts[index][1]+response);
-                //response = JSON.parse(response);
+                response = JSON.parse(response);
                 $('#generalNotificationBody').text('∆Ù”√≥…π¶');
                 if(response==""){
                     if (flag == 1){

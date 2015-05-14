@@ -312,6 +312,9 @@ include_once("Template.php");
                                         <button type="button" style="display : none" class="btn btn-danger" id="main-delete" data-toggle="modal">
                                             删除主账户
                                         </button>
+                                        <button type="button"  class="btn btn-success" id="sub-add" data-toggle="modal">
+                                            拆分主账户
+                                        </button>
                                         <button type="button" style="Display : none" class="btn btn-primary" id="main-sync" data-toggle="modal">
                                            同步
                                         </button>
@@ -357,9 +360,7 @@ include_once("Template.php");
                                        cellspacing="0"
                                        width="100%">
                                     <div class="subAccountToolbar" style="float:left">
-                                        <button type="button" class="btn btn-success" id="sub-add" data-toggle="modal">
-                                            添加子账户
-                                        </button>
+
                                         <button type="button" style="Display : none" class="btn btn-warning" id="sub-update" data-toggle="modal">
                                             修改子账户
                                         </button>
@@ -1352,6 +1353,11 @@ include_once("ModalTemplate.php");
         }
         var ratioTypesOptions = $("#newSubModal #rate");
         ratioTypesOptions.empty();
+        ratioTypesOptions.append($('<option>', {
+                value: "",
+                text: "默认费率"
+            })
+        );
         for (var i = 0; i < ratioTypes.length; i++) {
             ratioTypesOptions.append($('<option>', {
                         value: ratioTypes[i][1],
