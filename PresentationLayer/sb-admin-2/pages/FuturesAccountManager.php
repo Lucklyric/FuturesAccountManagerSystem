@@ -1074,7 +1074,7 @@ include_once("ModalTemplate.php");
         var subPassword = $("#newSubModal #subPassword")[0].value;
         var mainAccount = $("#newSubModal #mainAccount :selected").val();
         var riskControl = $("#newSubModal #riskControl :selected").text();
-        var rate = $("#newSubModal #rate :selected").text();
+        var rate = $("#newSubModal #rate :selected").val();
         var subName = $("#newSubModal #subName")[0].value;
         var subContact = $("#newSubModal #subContact")[0].value;
 
