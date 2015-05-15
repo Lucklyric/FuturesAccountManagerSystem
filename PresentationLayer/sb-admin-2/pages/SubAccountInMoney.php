@@ -5,7 +5,7 @@ include_once("Template.php");
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">子账户入金</h3>
+                    <h3 class="page-header">资金管理</h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -13,7 +13,7 @@ include_once("Template.php");
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            入金
+                            资金管理设置
                         </div>
 
                         <div class="panel-body">
