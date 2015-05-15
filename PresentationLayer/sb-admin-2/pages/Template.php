@@ -245,6 +245,7 @@
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
     <script>
+
         function getAdminCookie(cname) {
             var arr = document.cookie.match(new RegExp("(^| )" + cname + "=([^;]*)(;|$)"));
             if (arr != null) {
@@ -255,8 +256,9 @@
 
         function setAdminCookie(cname, cvalue, min) {
             var exdate = new Date();
-            exdate.setDate(exdate.getTime() + min * 60 * 1000);
-            document.cookie = cname + "=" + escape(cvalue) + ((min == null) ? "" : ";expires=" + exdate.toGMTString());
+            exdate.setTime(exdate.getTime() + min * 60 * 1000);
+            document.cookie = cname + "=" + escape(cvalue) + ((min == null) ? "" : ";expires=" + exdate.toGMTString())+"; path=/";
+           // console.log(cname + "=" + escape(cvalue) + ((min == null) ? "" : ";expires=" + exdate.toGMTString())+"; path=/");
         }
 
         //删除cookies
