@@ -441,8 +441,8 @@ include_once("ModalTemplate.php");
         }
         adminManagerTable.row(selectedIndex).nodes().to$().addClass('selected');
         ifHideMainAccountToolBar(true);
-        setAdminCookie("sharpspeedadminaccount", superAdminId, 30*1/24/60);
-        setAdminCookie("sharpspeedadminpassword", superAdminPwd, 30*1/24/60);
+        setAdminCookie("sharpspeedadminaccount", superAdminId, 20);
+        setAdminCookie("sharpspeedadminpassword", superAdminPwd, 20);
     }
 
     function refreshMainAccounts(flag){
@@ -457,8 +457,8 @@ include_once("ModalTemplate.php");
             sessionStorage.setItem('mainAccountTableData', JSON.stringify(mainAccountTableData));
             console.log(mainAccountTableData);
         });
-        setAdminCookie("sharpspeedadminaccount", superAdminId, 30*1/24/60);
-        setAdminCookie("sharpspeedadminpassword", superAdminPwd, 30*1/24/60);
+        setAdminCookie("sharpspeedadminaccount", superAdminId, 20);
+        setAdminCookie("sharpspeedadminpassword", superAdminPwd, 20);
     }
 
 </script>
