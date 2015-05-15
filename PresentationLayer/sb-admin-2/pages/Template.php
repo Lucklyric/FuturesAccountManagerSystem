@@ -52,7 +52,49 @@
 
 
     <![endif]-->
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script>
+        function getAdminCookie(cname) {
+            var arr = document.cookie.match(new RegExp("(^| )" + cname + "=([^;]*)(;|$)"));
+            if (arr != null) {
+                return decodeURIComponent(arr[2]);
+            }
+            return null;
+        }
 
+        function setAdminCookie(cname, cvalue, min) {
+            var exdate = new Date();
+            exdate.setTime(exdate.getTime() + min * 60 * 1000);
+            document.cookie = cname + "=" + escape(cvalue) + ((min == null) ? "" : ";expires=" + exdate.toGMTString())+"; path=/";
+            // console.log(cname + "=" + escape(cvalue) + ((min == null) ? "" : ";expires=" + exdate.toGMTString())+"; path=/");
+        }
+
+        //删除cookies
+        function delCookie(name) {
+            var exp = new Date();
+            exp.setTime(exp.getTime() - 1);
+            var cval = getAdminCookie(name);
+            if (cval != null)
+                document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+        }
+
+        var tmp_account = getAdminCookie('sharpspeedadminaccount');
+        var tmp_password = getAdminCookie('sharpspeedadminpassword');
+        console.log("取到Admin cookies:" + tmp_account + tmp_password);
+        if (tmp_account != null && tmp_account != "" && tmp_password != null && tmp_password != "") {
+            var superAdminId = tmp_account;
+            var superAdminPwd = tmp_password;
+            setAdminCookie('sharpspeedadminaccount', superAdminId, 20);
+            setAdminCookie('sharpspeedadminpassword', superAdminPwd, 20);
+        } else {
+            self.location = 'http://121.40.131.144/Report/Shared/login.html';
+        }
+
+        //        var superAdminId = "frankzch";
+        //        var superAdminPwd = "123456";
+
+    </script>
 
     <!--http://bootsnipp.com/snippets/featured/checked-list-group-->
     <style>
@@ -214,104 +256,4 @@
         <!-- /.navbar-static-side -->
         <!--</div>-->
     </nav>
-    <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-    <!-- DataTables JavaScript -->
-    <script
-        src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script
-        src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-
-    <script src="../../../Source/DataTable-Plugins/api/fnProcessingIndicator.js"></script>
-
-    <script src="../js/SSClass/SSToolBar.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
-    <script>
-
-        function getAdminCookie(cname) {
-            var arr = document.cookie.match(new RegExp("(^| )" + cname + "=([^;]*)(;|$)"));
-            if (arr != null) {
-                return decodeURIComponent(arr[2]);
-            }
-            return null;
-        }
-
-        function setAdminCookie(cname, cvalue, min) {
-            var exdate = new Date();
-            exdate.setTime(exdate.getTime() + min * 60 * 1000);
-            document.cookie = cname + "=" + escape(cvalue) + ((min == null) ? "" : ";expires=" + exdate.toGMTString())+"; path=/";
-           // console.log(cname + "=" + escape(cvalue) + ((min == null) ? "" : ";expires=" + exdate.toGMTString())+"; path=/");
-        }
-
-        //删除cookies
-        function delCookie(name) {
-            var exp = new Date();
-            exp.setTime(exp.getTime() - 1);
-            var cval = getAdminCookie(name);
-            if (cval != null)
-                document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
-        }
-
-        var tmp_account = getAdminCookie('sharpspeedadminaccount');
-        var tmp_password = getAdminCookie('sharpspeedadminpassword');
-        console.log("取到Admin cookies:" + tmp_account + tmp_password);
-        if (tmp_account != null && tmp_account != "" && tmp_password != null && tmp_password != "") {
-            var superAdminId = tmp_account;
-            var superAdminPwd = tmp_password;
-            setAdminCookie('sharpspeedadminaccount', superAdminId, 20);
-            setAdminCookie('sharpspeedadminpassword', superAdminPwd, 20);
-        } else {
-            self.location = 'http://121.40.131.144/Report/Shared/login.html';
-        }
-//
-//        var superAdminId = "frankzch";
-//        var superAdminPwd = "123456";
-
-        $(document).ready(function () {
-            $.ajaxSetup({cache:false});
-            $(document).on("click", "#mainLogout", function () {
-                delCookie('sharpspeedadminaccount');
-                delCookie('sharpspeedadminpassword');
-                self.location = 'http://121.40.131.144/Report/Shared/login.html';
-            });
-
-            $(document).on("click", "#mainInformation", function () {
-                $.ajax({
-                    url: "../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/ServerExtention.php",
-                    type: "get", //send it through get method
-                    dataType: "json",
-                    contentType: "application/json",
-                    data: {
-                        AdminAccount: superAdminId,
-                        AdminPassword: superAdminPwd
-                    },
-                    success: function (response) {
-                        var supperAccountInfo = response.split(":");
-                        var ip = "";
-                        if (supperAccountInfo[0] == "127.0.0.1"){
-                            ip = "<?php echo $_SERVER['SERVER_NAME']; ?>";
-                        }else{
-                            ip = supperAccountInfo[0];
-                        }
-
-                        $('#generalMainAccountInfoBody').html('管理员账户:' + superAdminId + "<br/>服务器地址:" + ip + ":" + supperAccountInfo[1]);
-                        $('#generalMainAccountInfo').modal('show');
-                    },
-                    error: function (xhr) {
-                        //Do Something to handle error
-                        console.log("取地址信息发生错误" + xhr);
-                    }
-                });
-            });
-        });
-
-    </script>

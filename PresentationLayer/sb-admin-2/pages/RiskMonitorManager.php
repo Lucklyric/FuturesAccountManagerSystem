@@ -218,6 +218,7 @@ include_once("Template.php");
 </div>
 <!-- /#wrapper -->
 <?php
+include_once("SharedScript.php");
 include_once("ModalTemplate.php");
 ?>
 

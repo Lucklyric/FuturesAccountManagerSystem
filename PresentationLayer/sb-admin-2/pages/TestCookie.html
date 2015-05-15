@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function getAdminCookie(cname) {
+        var arr = document.cookie.match(new RegExp("(^| )" + cname + "=([^;]*)(;|$)"));
+        if (arr != null) {
+            return decodeURIComponent(arr[2]);
+        }
+        return null;
+    }
+
+    function setAdminCookie(cname, cvalue, min) {
+        var exdate = new Date();
+        exdate.setDate(exdate.getTime() + min * 60 * 1000);
+        document.cookie = cname + "=" + escape(cvalue) + ((min == null) ? "" : ";expires=" + exdate.toGMTString())+"; path=/";
+    }
+
+    //删除cookies
+    function delCookie(name) {
+        var exp = new Date();
+        exp.setTime(exp.getTime() - 1);
+        var cval = getAdminCookie(name);
+        if (cval != null)
+            document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+    }
+
+    var tmp_account = getAdminCookie('sharpspeedadminaccount');
+    var tmp_password = getAdminCookie('sharpspeedadminpassword');
+    alert("取到Admin cookies:" + tmp_account + tmp_password);
+
+</script>
+</body>
+</html>
