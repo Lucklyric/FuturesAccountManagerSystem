@@ -92,8 +92,11 @@ include_once("Template.php");
                                         <button type="button" class="btn btn-default" id="manual-refresh" data-toggle="modal">
                                             刷新
                                         </button>
-                                        <button type="button" style="Display : none" class="btn btn-success" id="sub-update" data-toggle="modal">
+                                        <button type="button" style="Display : none" class="btn btn-success" id="sub-inMoney" data-toggle="modal">
                                             子账户入金
+                                        </button>
+                                        <button type="button" style="Display : none" class="btn btn-warning" id="sub-outMoney" data-toggle="modal">
+                                            子账户出金
                                         </button>
                                     </div>
                                     <thead>
@@ -321,15 +324,19 @@ include_once("ModalTemplate.php");
 
     function ifHideSubAccountToolBar(flag){
         if (flag){
-            $('#sub-update').hide();
+            $('#sub-inMoney').hide();
+            $('#sub-outMoney').hide();
         }else{
-            $('#sub-update').show();
+            $('#sub-inMoney').show();
+            $('#sub-outMoney').show();
         }
 
         if(subAccounts.length == 0){
-            $('#sub-update').hide();
+            $('#sub-inMoney').hide();
+            $('#sub-outMoney').hide();
         }else{
-            $('#sub-update').show();
+            $('#sub-inMoney').show();
+            $('#sub-outMoney').show();
         }
     }
 </script>
@@ -343,19 +350,27 @@ include_once("ModalTemplate.php");
     }
 
     //填充modal
-    function fillModal(){
+    function fillModal(isInMoney){
+
+        if (isInMoney == 1){
+            $("#newMainAccountLabel").text("子账户入金");
+        }else{
+            $("#newMainAccountLabel").text("子账户出金");
+        }
+
         var subAccountId = subAccounts[selectedIndex][1];
         var mainAccountInfo = returnMainAccountId(subAccountId);
         $("#newInMoneyModal #mainAccount").text(mainAccountInfo[0]);
         $("#newInMoneyModal #mainAccount").val(mainAccountInfo[1]);
         $("#newInMoneyModal #subAccount").text(subAccountId);
         $("#newInMoneyModal #preferred").prop("checked", true);
+        $("#newInMoneyModal #moneyAmount").val('');
     }
 
     //入金
-    function SubAccountInMoney() {
+    function SubAccountInMoney(event) {
         var selectedData = subAccounts[selectedIndex];
-        var amount = $("#newInMoneyModal #moneyAmount")[0].value;
+        var amount = event.data.isInMoney * $("#newInMoneyModal #moneyAmount")[0].value;
         var preferredMoney = $("input:radio[name ='inMoneyRadio']:checked").val();
         var subId = selectedData[0];
         var subAccountName = selectedData[1];
@@ -404,11 +419,19 @@ include_once("ModalTemplate.php");
     //显示inMoney modal
 
 
-    $(document).on("click", "#sub-update", function () {
+    $(document).on("click", "#sub-inMoney", function () {
         $(document).off("click", "#newInMoneyModal .btn-primary");
         //绑定回调
-        fillModal();
-        $(document).on("click", "#newInMoneyModal .btn-primary", SubAccountInMoney);
+        fillModal(1);
+        $(document).on("click", "#newInMoneyModal .btn-primary",{isInMoney: 1}, SubAccountInMoney);
+        $('#inMoneyModal').modal('show');
+    });
+
+    $(document).on("click", "#sub-outMoney", function () {
+        $(document).off("click", "#newInMoneyModal .btn-primary");
+        //绑定回调
+        fillModal(-1);
+        $(document).on("click", "#newInMoneyModal .btn-primary", {isInMoney: -1}, SubAccountInMoney);
         $('#inMoneyModal').modal('show');
     });
 </script>

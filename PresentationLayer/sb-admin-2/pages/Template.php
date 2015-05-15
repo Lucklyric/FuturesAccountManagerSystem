@@ -152,16 +152,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-cny fa-fw"></i> 资金管理<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="SubAccountOutMoney.php">子账户出金</a>
-                            </li>
-                            <li>
-                                <a href="SubAccountInMoney.php">子账户入金</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
+                        <a href="SubAccountInMoney.php"><i class="fa fa-cny fa-fw"></i> 资金管理</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-tachometer fa-fw"></i> 风控管理<span class="fa arrow"></span></a>
