@@ -29,7 +29,7 @@ function SSToolBar(restartServer,connectMainAccount,onlineCount,serverStatus){
 
     function checkCookie()
     {
-        var tmp_status=getCookie('toolBarStatus-CID');
+        var tmp_status=getCookie('toolBarStatus-CID1');
         console.log("取到cookies:"+tmp_status);
         if (tmp_status!=null && tmp_status!="") {
             parent.serverStatusJq.text(tmp_status);
