@@ -13,7 +13,7 @@ include_once("Template.php");
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            资金管理设置
+                            账户权益
                         </div>
 
                         <div class="panel-body">
