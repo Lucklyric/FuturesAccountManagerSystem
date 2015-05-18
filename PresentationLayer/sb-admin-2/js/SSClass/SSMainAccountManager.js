@@ -99,11 +99,11 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
                     }else if(tmpResponse == "连接错误"){
                         ssMainAccounttManagerInstance.mainAccouts[index][7] = "连接错误";
                         ssMainAccounttManagerInstance.ConnectMainAccount(index);
-                        if (ssMainAccounttManagerInstance.needCheckQueue.length == 1){
-                            ssMainAccounttManagerInstance.needCheckQueue =[];
-                        }else {
-                            ssMainAccounttManagerInstance.needCheckQueue.splice(ssMainAccounttManagerInstance.needCheckQueue.indexOf(ssMainAccounttManagerInstance.mainAccouts[index][0]),1);
-                        }
+                        //if (ssMainAccounttManagerInstance.needCheckQueue.length == 1){
+                        //    ssMainAccounttManagerInstance.needCheckQueue =[];
+                        //}else {
+                        //    ssMainAccounttManagerInstance.needCheckQueue.splice(ssMainAccounttManagerInstance.needCheckQueue.indexOf(ssMainAccounttManagerInstance.mainAccouts[index][0]),1);
+                        //}
                     }else if(tmpResponse == "未启动"){
                         ssMainAccounttManagerInstance.mainAccouts[index][7] = "未启动";
                         ssMainAccounttManagerInstance.ConnectMainAccount(index);

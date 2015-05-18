@@ -1,5 +1,6 @@
 <?php
 include_once("Template.php");
+include_once("SharedScript.php");
 ?>
 <!--自定义Header-->
 <head>
@@ -1109,7 +1110,6 @@ include_once("Template.php");
 </div>
 <!-- /#wrapper -->
 <?php
-include_once("SharedScript.php");
 include_once("ModalTemplate.php");
 ?>
 
