@@ -137,7 +137,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             curl_close ($ch);
             header("Content-type:text/html;charset=utf-8");
 
-            echo $server_output;
+            return $server_output;
         }
 
         function OnRspSyncPosition($data){
@@ -160,7 +160,7 @@ include $path."/FuturesAccountManagerSystem/DataPersistenceLayer/ConfigureFile.p
             curl_close ($ch);
             header("Content-type:text/html;charset=utf-8");
 
-            echo $server_output;
+            return $server_output;
         }
 
 

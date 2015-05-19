@@ -34,7 +34,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
         for (var i = 0; i < ssMainAccounttManagerInstance.needCheckQueue.length ; i++){
             ssMainAccounttManagerInstance.GetMainAccountStatus(ssMainAccounttManagerInstance.needCheckQueue[i]);
         }
-    }
+    };
 
     /***
      * 初始化检测队列
@@ -342,7 +342,10 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
                 Method: "onSyncOrder"
             },
             success: function (response) {
-               // response = JSON.parse(response);
+                console.log('同步提交结果'+response);
+                response = JSON.parse(response);
+                console.log('同步提交结果'+response);
+
                 if(response==''){
                     $('#generalNotificationBody').text('成功');
                 }else{
@@ -745,7 +748,9 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
                 Method: "onSyncPosition"
             },
             success: function (response) {
+                console.log('同步提交结果'+response);
                 response = JSON.parse(response);
+                console.log('同步提交结果'+response);
                 if(response==''){
                     $('#generalNotificationBody').text('成功');
                 }else{
@@ -754,6 +759,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
                 $('#generalNotification').modal('show');
             },
             error: function (xhr) {
+                console.log('同步提交失败');
                 //Do Something to handle error
             }
         });
