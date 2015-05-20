@@ -166,9 +166,9 @@ include_once("Template.php");
                                 <!-- /.modal -->
 
                                 <!-- Modal -->
-                                <div class="modal modal-wide fade"  tabindex="-1" role="dialog" id="mainSyncOrder"
+                                <div class="modal modal-wide fade" tabindex="-1" role="dialog" id="mainSyncOrder"
                                      aria-labelledby="newSubAccountLabel" aria-hidden="true">
-                                    <div class="modal-dialog" id="newMainSyncOrder">
+                                    <div class="modal-dialog" id="newMainSyncOrder" style="width: 900px">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"
@@ -225,10 +225,10 @@ include_once("Template.php");
                                     <!-- /.modal-dialog -->
                                 </div>
                                 <!-- /.modal -->
-                                <div class="modal modal-wide fade"  tabindex="-1" role="dialog" id="mainSyncPosition"
+                                <div class="modal modal-wide fade"   tabindex="-1" role="dialog" id="mainSyncPosition"
                                      aria-labelledby="newSubAccountLabel" aria-hidden="true">
-                                    <div class="modal-dialog" id="newMainSyncPosition">
-                                        <div class="modal-content">
+                                    <div class="modal-dialog" id="newMainSyncPosition" style="width: 900px">
+                                        <div class="modal-content" >
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-hidden="true">&times;</button>

@@ -252,7 +252,8 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
                     table.DataTable({
                         "processing": true,
                         "data": ssMainAccounttManagerInstance.currentTableData,
-                        "scrollY": "500px",
+                        "scrollY": "166px",
+                        "scrollX": true,
                         "scrollCollapse": false,
                         "paging": false,
                         "language": {
@@ -434,6 +435,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
                         "processing": true,
                         "data": ssMainAccounttManagerInstance.currentPosTableData,
                         "scrollY": "166px",
+                        "scrollX": true,
                         "scrollCollapse": false,
                         "dom": '<"mainSyncPositionToolbar"f>rlpti',
                         "paging": false,
