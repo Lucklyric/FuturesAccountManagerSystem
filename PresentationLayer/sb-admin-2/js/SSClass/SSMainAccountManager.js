@@ -152,134 +152,134 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
      * @param table 报单table
      */
     this.updateCurrentMainAccountOrderInfo = function(index,table){
-           // var tmpTable = table.dataTable();
-            //tmpTable.fnProcessingIndicator(true);
+        // var tmpTable = table.dataTable();
+        //tmpTable.fnProcessingIndicator(true);
 
 
-           // var tmpTable = table.dataTable();
-            //tmpTable.fnProcessingIndicator(true);
+        // var tmpTable = table.dataTable();
+        //tmpTable.fnProcessingIndicator(true);
         this.orderSyncTable = table;
-            $.ajax({
-                url: this.hostpath,
-                type: "get", //send it through get method
-                dataType: "json",
-                contentType: "application/json",
-                data: {
-                    AdminAccount:this.accoutId,
-                    AdminPassword:this.accoutPwd,
-                    MainId:this.mainAccouts[index][0],
-                    Method:"getNeedSyncOrders"
-                },
-                success: function (data) {
-                    console.log(data);
-                    data = JSON.parse(data);
+        $.ajax({
+            url: this.hostpath,
+            type: "get", //send it through get method
+            dataType: "json",
+            contentType: "application/json",
+            data: {
+                AdminAccount:this.accoutId,
+                AdminPassword:this.accoutPwd,
+                MainId:this.mainAccouts[index][0],
+                Method:"getNeedSyncOrders"
+            },
+            success: function (data) {
+                console.log(data);
+                data = JSON.parse(data);
 
-                    if(data.length == 0) return;
+                if(data.length == 0) return;
 
-                    ssMainAccounttManagerInstance.currentChangedOrders = data["ColChangedOrders"];
+                ssMainAccounttManagerInstance.currentChangedOrders = data["ColChangedOrders"];
 
-                    ssMainAccounttManagerInstance.currentMissingOrders = data['ColMissingOrders'];
-                    ssMainAccounttManagerInstance.currentTableData = [];
-                    for (var i = 0 ; i < ssMainAccounttManagerInstance.currentChangedOrders.length ; i++){
-                        var curRowData = ssMainAccounttManagerInstance.currentChangedOrders[i]['Order'];
-                        var tmpTableRowData = [];
-                        tmpTableRowData.push('');
-                        tmpTableRowData.push(ssMainAccounttManagerInstance.mainAccouts[index][0]);
-                        tmpTableRowData.push(curRowData['OrderSysID']);
-                        tmpTableRowData.push(curRowData['InstrumentID']);
-                        if(curRowData['BuyOrSell'] == 'true'){
-                            tmpTableRowData.push('买');
-                        }else{
-                            tmpTableRowData.push('卖');
-                        }
-
-                        if(curRowData['NewOrClose'] == 'true'){
-                            tmpTableRowData.push('开');
-                        }else{
-                            tmpTableRowData.push('平');
-                        }
-
-                        if(curRowData['CloseTodayOrHistoryPos']=='true'){
-                            tmpTableRowData.push('平今');
-                        }else{
-                            tmpTableRowData.push('平昨');
-                        }
-                        tmpTableRowData.push(curRowData['sStatus']);
-                        tmpTableRowData.push(curRowData['TradedPrice']);
-                        tmpTableRowData.push(curRowData['TradedVolume']);
-                        tmpTableRowData.push(curRowData['TradedTime']);
-                        ssMainAccounttManagerInstance.currentTableData.push(tmpTableRowData);
+                ssMainAccounttManagerInstance.currentMissingOrders = data['ColMissingOrders'];
+                ssMainAccounttManagerInstance.currentTableData = [];
+                for (var i = 0 ; i < ssMainAccounttManagerInstance.currentChangedOrders.length ; i++){
+                    var curRowData = ssMainAccounttManagerInstance.currentChangedOrders[i]['Order'];
+                    var tmpTableRowData = [];
+                    tmpTableRowData.push('');
+                    tmpTableRowData.push(ssMainAccounttManagerInstance.mainAccouts[index][0]);
+                    tmpTableRowData.push(curRowData['OrderSysID']);
+                    tmpTableRowData.push(curRowData['InstrumentID']);
+                    if(curRowData['BuyOrSell'] == 'true'){
+                        tmpTableRowData.push('买');
+                    }else{
+                        tmpTableRowData.push('卖');
                     }
-                    //TODO：后面写成function
-                    for (var i = 0 ; i < ssMainAccounttManagerInstance.currentMissingOrders.length ; i++){
-                        var curRowData = ssMainAccounttManagerInstance.currentMissingOrders[i]['Order'];
-                        var tmpTableRowData = [];
-                        tmpTableRowData.push('');
-                        tmpTableRowData.push(ssMainAccounttManagerInstance.mainAccouts[index][0]);
-                        tmpTableRowData.push(curRowData['OrderSysID']);
-                        tmpTableRowData.push(curRowData['InstrumentID']);
-                        if(curRowData['BuyOrSell'] == 'true'){
-                            tmpTableRowData.push('买');
-                        }else{
-                            tmpTableRowData.push('卖');
-                        }
 
-                        if(curRowData['NewOrClose'] == 'true'){
-                            tmpTableRowData.push('开');
-                        }else{
-                            tmpTableRowData.push('平');
-                        }
-
-                        if(curRowData['CloseTodayOrHistoryPos']=='true'){
-                            tmpTableRowData.push('平今');
-                        }else{
-                            tmpTableRowData.push('平昨');
-                        }
-                        tmpTableRowData.push(curRowData['sStatus']);
-                        tmpTableRowData.push(curRowData['TradedPrice']);
-                        tmpTableRowData.push(curRowData['TradedVolume']);
-                        tmpTableRowData.push(curRowData['TradedTime']);
-                        ssMainAccounttManagerInstance.currentTableData.push(tmpTableRowData);
+                    if(curRowData['NewOrClose'] == 'true'){
+                        tmpTableRowData.push('开');
+                    }else{
+                        tmpTableRowData.push('平');
                     }
-                    if ($.fn.dataTable.isDataTable(table)) {
-                        table.DataTable().clear();
-                        for (var i = 0; i <  ssMainAccounttManagerInstance.currentTableData.length; i++) {
-                            table.DataTable().row.add( ssMainAccounttManagerInstance.currentTableData[i]);
-                        }
-                        table.DataTable().draw();
 
-                    }else {
-                        table.DataTable({
-                            "processing": true,
-                            "data": ssMainAccounttManagerInstance.currentTableData,
-                            "scrollY": "500px",
-                            "scrollCollapse": false,
-                            "paging": false,
-                            "language": {
-                                "search": "搜索:",
-                                "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
-                                "infoEmpty": "显示 0 到 0 共 0 记录",
-                                "emptyTable": "暂无可显示数据",
-                                "processing": "正在加载......"
-                            }
-                        });
+                    if(curRowData['CloseTodayOrHistoryPos']=='true'){
+                        tmpTableRowData.push('平今');
+                    }else{
+                        tmpTableRowData.push('平昨');
                     }
-                        for (var i = 0; i < ssMainAccounttManagerInstance.currentTableData.length; i++) {
-                            table.DataTable().cell(i, 0).nodes().to$().append($('<select style="float: right; width: 100%" >'));
-                            for (var j = 0; j < ssMainAccounttManagerInstance.curSubAccounts.length; j++) {
-                                console.log(table.DataTable().cell(i, 0).nodes().to$().find('select').append($('<option>', {
-                                    value: ssMainAccounttManagerInstance.curSubAccounts[j][0],
-                                    text: ssMainAccounttManagerInstance.curSubAccounts[j][1]
-                                })));
-                            }
-                        }
-
-                },
-                error: function (xhr) {
-                    //Do Something to handle error
+                    tmpTableRowData.push(curRowData['sStatus']);
+                    tmpTableRowData.push(curRowData['TradedPrice']);
+                    tmpTableRowData.push(curRowData['TradedVolume']);
+                    tmpTableRowData.push(curRowData['TradedTime']);
+                    ssMainAccounttManagerInstance.currentTableData.push(tmpTableRowData);
                 }
-            });
-        }
+                //TODO：后面写成function
+                for (var i = 0 ; i < ssMainAccounttManagerInstance.currentMissingOrders.length ; i++){
+                    var curRowData = ssMainAccounttManagerInstance.currentMissingOrders[i]['Order'];
+                    var tmpTableRowData = [];
+                    tmpTableRowData.push('');
+                    tmpTableRowData.push(ssMainAccounttManagerInstance.mainAccouts[index][0]);
+                    tmpTableRowData.push(curRowData['OrderSysID']);
+                    tmpTableRowData.push(curRowData['InstrumentID']);
+                    if(curRowData['BuyOrSell'] == 'true'){
+                        tmpTableRowData.push('买');
+                    }else{
+                        tmpTableRowData.push('卖');
+                    }
+
+                    if(curRowData['NewOrClose'] == 'true'){
+                        tmpTableRowData.push('开');
+                    }else{
+                        tmpTableRowData.push('平');
+                    }
+
+                    if(curRowData['CloseTodayOrHistoryPos']=='true'){
+                        tmpTableRowData.push('平今');
+                    }else{
+                        tmpTableRowData.push('平昨');
+                    }
+                    tmpTableRowData.push(curRowData['sStatus']);
+                    tmpTableRowData.push(curRowData['TradedPrice']);
+                    tmpTableRowData.push(curRowData['TradedVolume']);
+                    tmpTableRowData.push(curRowData['TradedTime']);
+                    ssMainAccounttManagerInstance.currentTableData.push(tmpTableRowData);
+                }
+                if ($.fn.dataTable.isDataTable(table)) {
+                    table.DataTable().clear();
+                    for (var i = 0; i <  ssMainAccounttManagerInstance.currentTableData.length; i++) {
+                        table.DataTable().row.add( ssMainAccounttManagerInstance.currentTableData[i]);
+                    }
+                    table.DataTable().draw();
+
+                }else {
+                    table.DataTable({
+                        "processing": true,
+                        "data": ssMainAccounttManagerInstance.currentTableData,
+                        "scrollY": "500px",
+                        "scrollCollapse": false,
+                        "paging": false,
+                        "language": {
+                            "search": "搜索:",
+                            "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
+                            "infoEmpty": "显示 0 到 0 共 0 记录",
+                            "emptyTable": "暂无可显示数据",
+                            "processing": "正在加载......"
+                        }
+                    });
+                }
+                for (var i = 0; i < ssMainAccounttManagerInstance.currentTableData.length; i++) {
+                    table.DataTable().cell(i, 0).nodes().to$().append($('<select style="float: right; width: 100%" >'));
+                    for (var j = 0; j < ssMainAccounttManagerInstance.curSubAccounts.length; j++) {
+                        console.log(table.DataTable().cell(i, 0).nodes().to$().find('select').append($('<option>', {
+                            value: ssMainAccounttManagerInstance.curSubAccounts[j][0],
+                            text: ssMainAccounttManagerInstance.curSubAccounts[j][1]
+                        })));
+                    }
+                }
+
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
 
     /***
      * 提交当前的报单同步信息
@@ -766,7 +766,6 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
     }
 
     this.disableOrEnableAccount = function(index,flag){
-
         $.ajax({
             url: this.hostpath,
             type: "get", //send it through get method

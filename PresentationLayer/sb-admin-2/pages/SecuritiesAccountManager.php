@@ -1146,7 +1146,7 @@ include_once("ModalTemplate.php");
         var hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/SubAccount/UpdateData.php";
 
         var restriction = curSubAccounts[subSelectedIndex][3];
-        if (restriction == '是'){
+        if (restriction == '否'){
             restriction = 'False';
         }else{
             restriction = 'True';

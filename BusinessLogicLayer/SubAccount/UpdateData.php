@@ -50,9 +50,7 @@
 //        echo "This is hardcoded test data:<br>";
  //       echo $data;
     }else{
-        
         echo "Some data is missing!";
-        
     }
     
 
