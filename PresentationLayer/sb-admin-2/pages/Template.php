@@ -81,12 +81,15 @@
 
         var tmp_account = getAdminCookie('sharpspeedadminaccount');
         var tmp_password = getAdminCookie('sharpspeedadminpassword');
+        var tmp_serverType = getAdminCookie('sharpspeedservertype');
         console.log("取到Admin cookies:" + tmp_account + tmp_password);
         if (tmp_account != null && tmp_account != "" && tmp_password != null && tmp_password != "") {
             var superAdminId = tmp_account;
             var superAdminPwd = tmp_password;
+            var tmp_serverType = tmp_serverType;
             setAdminCookie('sharpspeedadminaccount', superAdminId, 20);
             setAdminCookie('sharpspeedadminpassword', superAdminPwd, 20);
+            setAdminCookie('sharpspeedservertype', superAdminPwd, 2000);
         } else {
             self.location = 'http://121.40.131.144/Report/Shared/login.html';
         }
@@ -285,6 +288,7 @@
             $(document).on("click", "#mainLogout", function () {
                 delCookie('sharpspeedadminaccount');
                 delCookie('sharpspeedadminpassword');
+                delCookie('sharpspeedservertype');
                 self.location = 'http://121.40.131.144/Report/Shared/login.html';
             });
 
