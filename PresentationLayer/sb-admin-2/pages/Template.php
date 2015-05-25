@@ -86,16 +86,18 @@
         if (tmp_account != null && tmp_account != "" && tmp_password != null && tmp_password != "") {
             var superAdminId = tmp_account;
             var superAdminPwd = tmp_password;
-            var tmp_serverType = tmp_serverType;
+            var superServerType = tmp_serverType;
             setAdminCookie('sharpspeedadminaccount', superAdminId, 20);
             setAdminCookie('sharpspeedadminpassword', superAdminPwd, 20);
-            setAdminCookie('sharpspeedservertype', superAdminPwd, 2000);
+            setAdminCookie('sharpspeedservertype', superServerType, 2000);
         } else {
             self.location = 'http://121.40.131.144/Report/Shared/login.html';
         }
 
 //                var superAdminId = "zch11";
 //                var superAdminPwd = "123456";
+//                var superServerType = 0;
+
 
     </script>
 
@@ -208,6 +210,9 @@
                             <li>
                                 <a href="StockRiskManage.php">证券风控设置</a>
                             </li>
+                            <li id="ProductRiskSetting">
+                                <a href="Report\View\ProductRiskSetting.aspx">产品风控设置</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -291,6 +296,10 @@
                 delCookie('sharpspeedservertype');
                 self.location = 'http://121.40.131.144/Report/Shared/login.html';
             });
+
+            if (superServerType == 1){//私募
+                $("#ProductRiskSetting").hide();
+            }
 
             $(document).on("click", "#mainInformation", function () {
                 console.log('开始获取地址');

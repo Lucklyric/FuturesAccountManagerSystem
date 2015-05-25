@@ -59,7 +59,7 @@ include_once("Template.php");
                                                     </div>
 
 
-                                                    <div class="row clearfix">
+                                                    <div class="row clearfix" id="preferredRow">
                                                         <div class="col-md-2 column modal-row">
                                                             <div class="radio">
                                                                 <label><input type="radio" name="inMoneyRadio" value="优先" id="preferred">优先资金</label>
@@ -296,6 +296,10 @@ include_once("ModalTemplate.php");
         }
         else {
             console.log("开始构建主表");
+            var isPreferredShown = true;
+            if (superServerType == 0){
+                isPreferredShown = false;
+            }
             subAccountTable = $('#subAccountMoneyTable').DataTable({
                 "processing": true,
                 "data": subAccounts,
@@ -310,7 +314,14 @@ include_once("ModalTemplate.php");
                     "infoEmpty": "显示 0 到 0 共 0 记录",
                     "emptyTable":"暂无可显示数据",
                     "processing": "正在加载......"
-                }
+                },
+                "columnDefs": [
+                    {
+                        "targets": [11],
+                        "visible": isPreferredShown,
+                        "searchable": isPreferredShown
+                    },
+                ]
             });
         }
         subAccountTable.row(selectedIndex).nodes().to$().addClass('selected');
@@ -353,6 +364,10 @@ include_once("ModalTemplate.php");
     //填充modal
     function fillModal(isInMoney){
 
+        if (superServerType == 0){
+            $("#preferredRow").hide();
+        }
+
         if (isInMoney == 1){
             $("#newMainAccountLabel").text("子账户入金");
         }else{
@@ -372,7 +387,12 @@ include_once("ModalTemplate.php");
     function SubAccountInMoney(event) {
         var selectedData = subAccounts[selectedIndex];
         var amount = event.data.isInMoney * $("#newInMoneyModal #moneyAmount")[0].value;
-        var preferredMoney = $("input:radio[name ='inMoneyRadio']:checked").val();
+        var preferredMoney;
+        if (superServerType == 0){
+            preferredMoney = "劣后";
+        }else {
+            preferredMoney = $("input:radio[name ='inMoneyRadio']:checked").val();
+        }
         var subId = selectedData[0];
         var subAccountName = selectedData[1];
         var mainAccountId = $("#newInMoneyModal #mainAccount").val();
