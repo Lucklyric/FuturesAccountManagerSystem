@@ -211,7 +211,7 @@
                                 <a href="StockRiskManage.php">证券风控设置</a>
                             </li>
                             <li id="ProductRiskSetting">
-                                <a href="Report\View\ProductRiskSetting.aspx">产品风控设置</a>
+                                <a href="..\..\..\..\Report\View\ProductRiskSetting.aspx">产品风控设置</a>
                             </li>
                         </ul>
                     </li>

@@ -1283,6 +1283,10 @@ include_once("ModalTemplate.php");
         }
         else {
             console.log("开始构建主表");
+            var isPreferredShown = true;
+            if (superServerType != 0){
+                isPreferredShown = false;
+            }
             riskManagerTable = $('#riskManagerTable').DataTable({
                 "processing": true,
                 "data": riskManagerData,
@@ -1294,6 +1298,11 @@ include_once("ModalTemplate.php");
                     {
                         width: '50px',
                         targets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
+                    },
+                    {
+                        "targets": [15,16,17,18,19,20,21,22],
+                        "visible": isPreferredShown,
+                        "searchable": isPreferredShown
                     }
                 ],
                 "dom": '<"riskManagerToolbar"f>rlpti',
@@ -1513,6 +1522,10 @@ include_once("ModalTemplate.php");
     }
 
     function setupRiskManageInfo() {
+        if (superServerType != 0) {
+            $('.nav-tabs li').eq(1).hide();
+            $('.nav-tabs li').eq(2).hide();
+        }
         $("#groupName").removeAttr('disabled');
         $("#newRiskModal #black").prop("checked", true);
         var exchangeSelect = $("#newRiskModal #exchange");
@@ -1584,8 +1597,7 @@ include_once("ModalTemplate.php");
 
             $('.nav-tabs a[href="#abs"]').trigger('click');
 
-            $('.nav-tabs li').eq(0).addClass('disabledTab');
-            $('.nav-tabs li').eq(2).addClass('disabledTab');
+          s
 
         }else {//亏损
 
