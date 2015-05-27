@@ -297,7 +297,7 @@ include_once("ModalTemplate.php");
         else {
             console.log("开始构建主表");
             var isPreferredShown = true;
-            if (superServerType == 0){
+            if (superServerType != 0){
                 isPreferredShown = false;
             }
             subAccountTable = $('#subAccountMoneyTable').DataTable({
@@ -364,7 +364,7 @@ include_once("ModalTemplate.php");
     //填充modal
     function fillModal(isInMoney){
 
-        if (superServerType == 0){
+        if (superServerType != 0){
             $("#preferredRow").hide();
         }
 
@@ -388,7 +388,7 @@ include_once("ModalTemplate.php");
         var selectedData = subAccounts[selectedIndex];
         var amount = event.data.isInMoney * $("#newInMoneyModal #moneyAmount")[0].value;
         var preferredMoney;
-        if (superServerType == 0){
+        if (superServerType != 0){
             preferredMoney = "劣后";
         }else {
             preferredMoney = $("input:radio[name ='inMoneyRadio']:checked").val();

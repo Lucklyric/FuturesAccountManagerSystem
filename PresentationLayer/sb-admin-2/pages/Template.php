@@ -78,7 +78,7 @@
             if (cval != null)
                 document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
         }
-
+//
         var tmp_account = getAdminCookie('sharpspeedadminaccount');
         var tmp_password = getAdminCookie('sharpspeedadminpassword');
         var tmp_serverType = getAdminCookie('sharpspeedservertype');
@@ -93,7 +93,7 @@
         } else {
             self.location = 'http://121.40.131.144/Report/Shared/login.html';
         }
-
+//
 //                var superAdminId = "zch11";
 //                var superAdminPwd = "123456";
 //                var superServerType = 0;
@@ -256,7 +256,6 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
