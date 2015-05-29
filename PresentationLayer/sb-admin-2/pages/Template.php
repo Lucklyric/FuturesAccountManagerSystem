@@ -91,7 +91,7 @@
             setAdminCookie('sharpspeedadminpassword', superAdminPwd, 20);
             setAdminCookie('sharpspeedservertype', superServerType, 2000);
         } else {
-            self.location = 'http://121.40.131.144/Report/Shared/login.html';
+            self.location = '../../../../../Report/Shared/login.html';
         }
 //
 //                var superAdminId = "zch11";
@@ -293,10 +293,10 @@
                 delCookie('sharpspeedadminaccount');
                 delCookie('sharpspeedadminpassword');
                 delCookie('sharpspeedservertype');
-                self.location = 'http://121.40.131.144/Report/Shared/login.html';
+                self.location = '../../../../..//Report/Shared/login.html';
             });
 
-            if (superServerType == 1){//私募
+            if (superServerType != 1){//私募
                 $("#ProductRiskSetting").hide();
             }
 
