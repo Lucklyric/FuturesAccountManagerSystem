@@ -293,7 +293,7 @@
                 delCookie('sharpspeedadminaccount');
                 delCookie('sharpspeedadminpassword');
                 delCookie('sharpspeedservertype');
-                self.location = '../../../../..//Report/Shared/login.html';
+                self.location = '../../../../../Report/Shared/login.html';
             });
 
             if (superServerType != 1){//私募
