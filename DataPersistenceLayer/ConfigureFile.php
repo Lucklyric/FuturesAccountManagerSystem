@@ -9,7 +9,7 @@ $ifLocalTest = false;
 if ($ifLocalTest){
     $serverAddress = "121.40.131.144/";
 }else{
-    $serverAddress =  $_SERVER['SERVER_NAME'] . "/";
+    $serverAddress =  "";
 }
 
 //$serverAddress = "121.40.17.226:10001/";
