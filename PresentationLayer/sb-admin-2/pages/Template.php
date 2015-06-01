@@ -91,7 +91,7 @@
             setAdminCookie('sharpspeedadminpassword', superAdminPwd, 20);
             setAdminCookie('sharpspeedservertype', superServerType, 2000);
         } else {
-            self.location = '../../../../../Report/Shared/login.html';
+            self.location = '../../../../Report/Shared/login.html';
         }
 //
 //                var superAdminId = "zch11";
@@ -293,7 +293,7 @@
                 delCookie('sharpspeedadminaccount');
                 delCookie('sharpspeedadminpassword');
                 delCookie('sharpspeedservertype');
-                self.location = '../../../../../Report/Shared/login.html';
+                self.location = '../../../../Report/Shared/login.html';
             });
 
             if (superServerType != 1){//私募
@@ -303,7 +303,7 @@
             $(document).on("click", "#mainInformation", function () {
                 console.log('开始获取地址');
                 $.ajax({
-                    url: "../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/ServerExtention.php",
+                    url: "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Server/ServerExtention.php",
                     type: "get", //send it through get method
                     dataType: "json",
                     contentType: "application/json",

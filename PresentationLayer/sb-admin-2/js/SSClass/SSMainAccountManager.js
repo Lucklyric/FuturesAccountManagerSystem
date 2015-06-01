@@ -3,7 +3,7 @@
  */
 function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallback){
     var ssMainAccounttManagerInstance = this;
-    this.hostpath = "../../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/ExtentionFunctions.php";
+    this.hostpath = "../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/ExtentionFunctions.php";
     this.accoutId = accoutId;
     this.accoutPwd = accoutPwd;
     this.currentChangedOrders = [];
