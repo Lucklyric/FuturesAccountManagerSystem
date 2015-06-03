@@ -1075,7 +1075,7 @@ include_once("ModalTemplate.php");
         else {
             console.log("开始构建主表");
             var isPreferredShown = true;
-            if (superServerType != 0){
+            if (superServerType == 0){
                 isPreferredShown = false;
             }
             riskManagerTable = $('#riskManagerTable').DataTable({
@@ -1313,7 +1313,7 @@ include_once("ModalTemplate.php");
     }
 
     function setupRiskManageInfo() {
-        if (superServerType != 0) {
+        if (superServerType == 0) {
             $('.nav-tabs li').eq(1).hide();
             $('.nav-tabs li').eq(2).hide();
         }
