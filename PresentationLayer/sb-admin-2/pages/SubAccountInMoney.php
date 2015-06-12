@@ -1,43 +1,43 @@
 <?php
 include_once("Template.php");
 ?>
-    <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h3 class="page-header">资金管理</h3>
-                </div>
-                <!-- /.col-lg-12 -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">资金管理</h3>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            账户权益
-                        </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        账户权益
+                    </div>
 
-                        <div class="panel-body">
-                            <div class="dataTable_wrapper">
+                    <div class="panel-body">
+                        <div class="dataTable_wrapper">
 
 
-                                <!--Modal-->
-                                <div class="modal fade" tabindex="-1" role="dialog" id="inMoneyModal"
-                                     aria-labelledby="newMainAccountLabel" aria-hidden="true">
-                                    <div class="modal-dialog" id="newInMoneyModal">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title" id="newMainAccountLabel">子账户入金</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="container">
+                            <!--Modal-->
+                            <div class="modal fade" tabindex="-1" role="dialog" id="inMoneyModal"
+                                 aria-labelledby="newMainAccountLabel" aria-hidden="true">
+                                <div class="modal-dialog" id="newInMoneyModal">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="newMainAccountLabel">子账户入金</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
                                                 <div class="row clearfix">
                                                     <div class="col-md-2 column modal-row">
                                                         <label style="margin-top: 8px">子账户:</label>
                                                     </div>
                                                     <div class="col-md-4 column modal-row">
-                                                        <label style="margin-top: 8px" id="subAccount" >XXX</label>
+                                                        <label style="margin-top: 8px" id="subAccount">XXX</label>
                                                     </div>
                                                 </div>
                                                 <div class="row clearfix">
@@ -45,108 +45,116 @@ include_once("Template.php");
                                                         <label style="margin-top: 8px">主账户:</label>
                                                     </div>
                                                     <div class="col-md-4 column modal-row">
-                                                        <label style="margin-top: 8px" id="mainAccount" >XXX</label>
+                                                        <label style="margin-top: 8px" id="mainAccount">XXX</label>
                                                     </div>
                                                 </div>
-                                                    <div class="row clearfix">
-                                                        <div class="col-md-2 column modal-row">
-                                                            <label style="margin-top: 8px">输入金额:</label>
-                                                        </div>
-                                                        <div class="col-md-4 column modal-row">
-                                                            <input class="form-control" style="max-width: 300px" type="text" name="moneyAmount" id="moneyAmount"
-                                                                   value="" placeholder="请输入金额"/>
-                                                        </div>
+                                                <div class="row clearfix">
+                                                    <div class="col-md-2 column modal-row">
+                                                        <label style="margin-top: 8px">输入金额:</label>
                                                     </div>
-
-
-                                                    <div class="row clearfix" id="preferredRow">
-                                                        <div class="col-md-2 column modal-row">
-                                                            <div class="radio">
-                                                                <label><input type="radio" name="inMoneyRadio" value="优先" id="preferred">优先资金</label>
-                                                            </div>
-                                                            <div class="radio">
-                                                                <label><input type="radio" name="inMoneyRadio" value="劣后" id="nonPreferred">劣后资金</label>
-                                                            </div>                                                        </div>
+                                                    <div class="col-md-4 column modal-row">
+                                                        <input class="form-control" style="max-width: 300px" type="text"
+                                                               name="moneyAmount" id="moneyAmount"
+                                                               value="" placeholder="请输入金额"/>
                                                     </div>
-
-
                                                 </div>
 
+
+                                                <div class="row clearfix" id="preferredRow">
+                                                    <div class="col-md-2 column modal-row">
+                                                        <div class="radio">
+                                                            <label><input type="radio" name="inMoneyRadio" value="优先"
+                                                                          id="preferred">优先资金</label>
+                                                        </div>
+                                                        <div class="radio">
+                                                            <label><input type="radio" name="inMoneyRadio" value="劣后"
+                                                                          id="nonPreferred">劣后资金</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">取消
-                                                </button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-                                            </div>
+
                                         </div>
-                                        <!-- /.modal-content -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                                            </button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">确定
+                                            </button>
+                                        </div>
                                     </div>
-                                    <!-- /.modal-dialog -->
+                                    <!-- /.modal-content -->
                                 </div>
-                                <!--/.modal-->
-
-                                <table id="subAccountMoneyTable" class="table table-striped table-bordered table-hover"
-                                       cellspacing="0" width="100%">
-
-                                    <div class="subAccountToolbar" style="float:left">
-                                        <button type="button" class="btn btn-default" id="manual-refresh" data-toggle="modal">
-                                            刷新
-                                        </button>
-                                        <button type="button" style="Display : none" class="btn btn-success" id="sub-inMoney" data-toggle="modal">
-                                            子账户入金
-                                        </button>
-                                        <button type="button" style="Display : none" class="btn btn-warning" id="sub-outMoney" data-toggle="modal">
-                                            子账户出金
-                                        </button>
-                                    </div>
-                                    <thead>
-                                    <tr>
-                                        <th>编号</th>
-                                        <th>子账户名称</th>
-                                        <th>静态权益</th>
-                                        <th>手续费</th>
-                                        <th>平仓盈亏</th>
-                                        <th>持仓盈亏</th>
-                                        <th>占用保证金</th>
-                                        <th>动态权益</th>
-                                        <th>风险度</th>
-                                        <th>结算日期</th>
-                                        <th>结算时间</th>
-                                        <th>优先资金</th>
-                                    </tr>
-                                    </thead>
-
-                                    <tfoot>
-                                    <tr>
-                                        <th>编号</th>
-                                        <th>子账户名称</th>
-                                        <th>静态权益</th>
-                                        <th>手续费</th>
-                                        <th>平仓盈亏</th>
-                                        <th>持仓盈亏</th>
-                                        <th>占用保证金</th>
-                                        <th>动态权益</th>
-                                        <th>风险度</th>
-                                        <th>结算日期</th>
-                                        <th>结算时间</th>
-                                        <th>优先资金</th>
-                                    </tr>
-                                    </tfoot>
-                                </table>
+                                <!-- /.modal-dialog -->
                             </div>
+                            <!--/.modal-->
+
+                            <table id="subAccountMoneyTable" class="table table-striped table-bordered table-hover"
+                                   cellspacing="0" width="100%">
+
+                                <div class="subAccountToolbar" style="float:left">
+                                    <button type="button" class="btn btn-default" id="manual-refresh"
+                                            data-toggle="modal">
+                                        刷新
+                                    </button>
+                                    <button type="button" style="Display : none" class="btn btn-success"
+                                            id="sub-inMoney" data-toggle="modal">
+                                        子账户入金
+                                    </button>
+                                    <button type="button" style="Display : none" class="btn btn-warning"
+                                            id="sub-outMoney" data-toggle="modal">
+                                        子账户出金
+                                    </button>
+                                </div>
+                                <thead>
+                                <tr>
+                                    <th>编号</th>
+                                    <th>子账户名称</th>
+                                    <th>静态权益</th>
+                                    <th>手续费</th>
+                                    <th>平仓盈亏</th>
+                                    <th>持仓盈亏</th>
+                                    <th>占用保证金</th>
+                                    <th>动态权益</th>
+                                    <th>风险度</th>
+                                    <th>结算日期</th>
+                                    <th>结算时间</th>
+                                    <th>优先资金</th>
+                                </tr>
+                                </thead>
+
+                                <tfoot>
+                                <tr>
+                                    <th>编号</th>
+                                    <th>子账户名称</th>
+                                    <th>静态权益</th>
+                                    <th>手续费</th>
+                                    <th>平仓盈亏</th>
+                                    <th>持仓盈亏</th>
+                                    <th>占用保证金</th>
+                                    <th>动态权益</th>
+                                    <th>风险度</th>
+                                    <th>结算日期</th>
+                                    <th>结算时间</th>
+                                    <th>优先资金</th>
+                                </tr>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
-
-
                 </div>
-                <!-- /.col-lg-12 -->
+
+
             </div>
-            <!-- /.row -->
+            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.container-fluid -->
         <!-- /.row -->
     </div>
-    <!-- /#page-wrapper -->
+    <!-- /.container-fluid -->
+    <!-- /.row -->
+</div>
+<!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
 <?php
@@ -165,9 +173,9 @@ include_once("ModalTemplate.php");
 
 <!-- DataTables JavaScript -->
 <script
-        src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 <script
-        src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
 <script src="../../../Source/DataTable-Plugins/api/fnProcessingIndicator.js"></script>
 
@@ -179,12 +187,12 @@ include_once("ModalTemplate.php");
     /**
      * 定义全局变量
      */
-    var mainAccountTableData=[];
+    var mainAccountTableData = [];
     var subAccountTable;
     var subAccountTableData;
     var subAccounts = [];
     var selectedIndex = 0;  //mainSelectedIndex
-    var toolBarManger = new SSToolBar($("#restartServer"),$("#connectMainAccount"),$("#onlineCount"),$("#serverStatus"));
+    var toolBarManger = new SSToolBar($("#restartServer"), $("#connectMainAccount"), $("#onlineCount"), $("#serverStatus"));
     /**
      * Document加载完毕 更新数据刷新Table绑定点击事件
      */
@@ -197,7 +205,7 @@ include_once("ModalTemplate.php");
             selectedIndex = subAccountTable.row(this).index();
             //refreshMainTable();
             ifHideSubAccountToolBar(false);
-            if ( $(this).hasClass('selected') ) {
+            if ($(this).hasClass('selected')) {
                 //$(this).removeClass('selected');
             }
             else {
@@ -205,7 +213,12 @@ include_once("ModalTemplate.php");
                 $(this).addClass('selected');
             }
 
-        } );
+        });
+
+        setInterval(function () {
+            setAdminCookie("sharpspeedadminaccount", superAdminId, 20);
+            setAdminCookie("sharpspeedadminpassword", superAdminPwd, 20);
+        }, 1000 * 60 * 10);
 
 
     });
@@ -221,22 +234,22 @@ include_once("ModalTemplate.php");
         var table = $('#subAccountMoneyTable').dataTable();
         table.fnProcessingIndicator();      // On
         console.log("开始刷新数据");
-        if (flag === undefined){
-            if (sessionStorage.getItem('localSettlement')){
+        if (flag === undefined) {
+            if (sessionStorage.getItem('localSettlement')) {
                 subAccounts = JSON.parse(sessionStorage.getItem('localSettlement'));
                 refreshMainTable();
                 return;
             }
         }
         //mainAccountTable.fnProcessingIndicator();
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/Settlement/Refresh.php?AdminAccount=' + superAdminId + '&AdminPassword=' + superAdminPwd, function (data) {
             subAccountTableData = data.data;
             // subAccounts.push(subAccountTableData);
             for (var i = 0; i < subAccountTableData.length; i++) {
                 subAccounts.push(subAccountTableData[i]);
             }
             console.log(subAccounts);
-            sessionStorage.setItem('localSettlement',JSON.stringify(subAccounts));
+            sessionStorage.setItem('localSettlement', JSON.stringify(subAccounts));
             refreshMainTable();
         });
         setAdminCookie("sharpspeedadminaccount", superAdminId, 20);
@@ -246,14 +259,14 @@ include_once("ModalTemplate.php");
     /**
      * 取得主账户子账户关系表
      */
-    function refreshMainSubAccounts(flag){
+    function refreshMainSubAccounts(flag) {
         if (flag === undefined) {
             if (sessionStorage.getItem('mainAccountTableData')) {
                 mainAccountTableData = JSON.parse(sessionStorage.getItem('mainAccountTableData'));
                 return;
             }
         }
-        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php?AdminAccount='+superAdminId+'&AdminPassword='+superAdminPwd, function (data) {
+        $.getJSON('../../../../FuturesAccountManagerSystem/BusinessLogicLayer/MainAccount/Refresh.php?AdminAccount=' + superAdminId + '&AdminPassword=' + superAdminPwd, function (data) {
             mainAccountTableData = data.data;
             sessionStorage.setItem('mainAccountTableData', JSON.stringify(mainAccountTableData));
             console.log(mainAccountTableData);
@@ -266,11 +279,11 @@ include_once("ModalTemplate.php");
      * 返回主账户ID
      * @param subAccountID:子账户ID
      */
-    function returnMainAccountId(subAccountID){
-        for (var i = 0; i < mainAccountTableData.length;i++){
-            for (var j = 0; j < mainAccountTableData[i].subs.length;j++){
-                if (mainAccountTableData[i].subs[j][1] == subAccountID){
-                    return [mainAccountTableData[i].inf[4],mainAccountTableData[i].inf[0]];
+    function returnMainAccountId(subAccountID) {
+        for (var i = 0; i < mainAccountTableData.length; i++) {
+            for (var j = 0; j < mainAccountTableData[i].subs.length; j++) {
+                if (mainAccountTableData[i].subs[j][1] == subAccountID) {
+                    return [mainAccountTableData[i].inf[4], mainAccountTableData[i].inf[0]];
                 }
             }
         }
@@ -297,7 +310,7 @@ include_once("ModalTemplate.php");
         else {
             console.log("开始构建主表");
             var isPreferredShown = true;
-            if (superServerType != 0){
+            if (superServerType != 0) {
                 isPreferredShown = false;
             }
             subAccountTable = $('#subAccountMoneyTable').DataTable({
@@ -312,7 +325,7 @@ include_once("ModalTemplate.php");
                     "search": "搜索:",
                     "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
                     "infoEmpty": "显示 0 到 0 共 0 记录",
-                    "emptyTable":"暂无可显示数据",
+                    "emptyTable": "暂无可显示数据",
                     "processing": "正在加载......"
                 },
                 "columnDefs": [
@@ -329,24 +342,23 @@ include_once("ModalTemplate.php");
     }
 
 
-
 </script>
 
 <script>
 
-    function ifHideSubAccountToolBar(flag){
-        if (flag){
+    function ifHideSubAccountToolBar(flag) {
+        if (flag) {
             $('#sub-inMoney').hide();
             $('#sub-outMoney').hide();
-        }else{
+        } else {
             $('#sub-inMoney').show();
             $('#sub-outMoney').show();
         }
 
-        if(subAccounts.length == 0){
+        if (subAccounts.length == 0) {
             $('#sub-inMoney').hide();
             $('#sub-outMoney').hide();
-        }else{
+        } else {
             $('#sub-inMoney').show();
             $('#sub-outMoney').show();
         }
@@ -357,20 +369,20 @@ include_once("ModalTemplate.php");
 
     function getFormattedDate() {
         var date = new Date();
-        var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
         return str;
     }
 
     //填充modal
-    function fillModal(isInMoney){
+    function fillModal(isInMoney) {
 
-        if (superServerType != 0){
+        if (superServerType != 0) {
             $("#preferredRow").hide();
         }
 
-        if (isInMoney == 1){
+        if (isInMoney == 1) {
             $("#newMainAccountLabel").text("子账户入金");
-        }else{
+        } else {
             $("#newMainAccountLabel").text("子账户出金");
         }
 
@@ -388,9 +400,9 @@ include_once("ModalTemplate.php");
         var selectedData = subAccounts[selectedIndex];
         var amount = event.data.isInMoney * $("#newInMoneyModal #moneyAmount")[0].value;
         var preferredMoney;
-        if (superServerType != 0){
+        if (superServerType != 0) {
             preferredMoney = "劣后";
-        }else {
+        } else {
             preferredMoney = $("input:radio[name ='inMoneyRadio']:checked").val();
         }
         var subId = selectedData[0];
@@ -417,9 +429,9 @@ include_once("ModalTemplate.php");
             },
             success: function (response) {
                 response = JSON.parse(response);
-                if(response==''){
+                if (response == '') {
                     $('#generalNotificationBody').text('成功');
-                }else{
+                } else {
                     $('#generalNotificationBody').text(response);
                 }
                 $('#generalNotification').modal('show');
@@ -444,7 +456,7 @@ include_once("ModalTemplate.php");
         $(document).off("click", "#newInMoneyModal .btn-primary");
         //绑定回调
         fillModal(1);
-        $(document).on("click", "#newInMoneyModal .btn-primary",{isInMoney: 1}, SubAccountInMoney);
+        $(document).on("click", "#newInMoneyModal .btn-primary", {isInMoney: 1}, SubAccountInMoney);
         $('#inMoneyModal').modal('show');
     });
 
