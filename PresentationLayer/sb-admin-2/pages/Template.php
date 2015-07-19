@@ -82,22 +82,28 @@
         var tmp_account = getAdminCookie('sharpspeedadminaccount');
         var tmp_password = getAdminCookie('sharpspeedadminpassword');
         var tmp_serverType = getAdminCookie('sharpspeedservertype');
+        var tmp_accountPriviledge =  getAdminCookie('sharpspeedaccountpriviledge');
+//        var tmp_accountPriviledge =  '1x2x0x1';
         console.log("取到Admin cookies:" + tmp_account + tmp_password);
         if (tmp_account != null && tmp_account != "" && tmp_password != null && tmp_password != "") {
             var superAdminId = tmp_account;
             var superAdminPwd = tmp_password;
             var superServerType = tmp_serverType;
+            var superAccountPriviledgeArray = tmp_accountPriviledge.split("x");
             setAdminCookie('sharpspeedadminaccount', superAdminId, 20);
             setAdminCookie('sharpspeedadminpassword', superAdminPwd, 20);
             setAdminCookie('sharpspeedservertype', superServerType, 2000);
+            setAdminCookie('sharpspeedservertype', tmp_accountPriviledge, 2000);
         } else {
             self.location = '../../../../Report/Shared/login.html';
         }
+
 //
 //                var superAdminId = "zch11";
 //                var superAdminPwd = "123456";
 //                var superServerType = 0;
-
+//        var superAccountPriviledgeArray = tmp_accountPriviledge.split("x");
+//        console.log(superAccountPriviledgeArray);
 
     </script>
 
@@ -198,37 +204,59 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="SubAccountInMoney.php"><i class="fa fa-cny fa-fw"></i> 资金管理</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-tachometer fa-fw"></i> 风控管理<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="FuturesRiskManage.php">期货风控设置</a>
-                            </li>
-                            <li>
-                                <a href="StockRiskManage.php">证券风控设置</a>
-                            </li>
-                            <li id="ProductRiskSetting">
-                                <a href="..\..\..\..\Report\View\ProductRiskSetting.aspx">产品风控设置</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 费率管理<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="FuturesFeeSetting.php">期货费率管理</a>
-                            </li>
-                            <li>
-                                <a href="StockFeeSetting.php">证券费率管理</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="RiskMonitorManager.php"><i class="fa fa-user fa-fw"></i> 风控员管理</a>
-                    </li>
+                    <script>
+                        if (superAccountPriviledgeArray[0] != '0') {
+
+                            document.write('<li> <a href="SubAccountInMoney.php"><i class="fa fa-cny fa-fw"></i> 资金管理</a> </li>');
+
+                        }
+                    </script>
+                    <script>
+                        if (superAccountPriviledgeArray[1] != '0') {
+                            document.write('\
+                    <li>\
+                        <a href="#"><i class="fa fa-tachometer fa-fw"></i> 风控管理<span class="fa arrow"></span></a>\
+                        <ul class="nav nav-second-level">\
+                            <li>\
+                                <a href="FuturesRiskManage.php">期货风控设置</a>\
+                            </li>\
+                            <li>\
+                                <a href="StockRiskManage.php">证券风控设置</a>\
+                            </li>\
+                            <li id="ProductRiskSetting">\
+                                <a href="..\..\..\..\Report\View\ProductRiskSetting.aspx">产品风控设置</a>\
+                            </li>\
+                        </ul>\
+                    </li>');
+
+                        }
+                    </script>
+                    <script>
+                        if (superAccountPriviledgeArray[2] != '0') {
+                            document.write('\
+                    <li>\
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 费率管理<span class="fa arrow"></span></a>\
+                        <ul class="nav nav-second-level">\
+                            <li>\
+                                <a href="FuturesFeeSetting.php">期货费率管理</a>\
+                            </li>\
+                            <li>\
+                                <a href="StockFeeSetting.php">证券费率管理</a>\
+                            </li>\
+                        </ul>\
+                    </li>');
+
+                        }
+                    </script>
+                    <script>
+                        if (superAccountPriviledgeArray[3] != '0') {
+                            document.write('\
+                    <li>\
+                        <a href="RiskMonitorManager.php"><i class="fa fa-user fa-fw"></i> 风控员管理</a>\
+                    </li>');
+
+                        }
+                    </script>
                     <!--<li>-->
                     <!--<a href="AdminManager.html"><i class="fa fa-user fa-fw"></i> 管理员管理</a>-->
                     <!--</li>-->
@@ -293,6 +321,7 @@
                 delCookie('sharpspeedadminaccount');
                 delCookie('sharpspeedadminpassword');
                 delCookie('sharpspeedservertype');
+                delCookie('sharpspeedaccountpriviledge');
                 self.location = '../../../../Report/Shared/login.html';
             });
 
