@@ -338,7 +338,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
         console.log(dataStream);
         $.ajax({
             url: ssMainAccounttManagerInstance.hostpath,
-            type: "get", //send it through get method
+            type: "POST", //send it through get method
             //dataType: "json",
             contentType: "application/json",
             data: {
@@ -745,7 +745,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
         $('#mainSyncPosition').modal('hide');
         $.ajax({
             url: ssMainAccounttManagerInstance.hostpath,
-            type: "get", //send it through get method
+            type: "POST", //send it through get method
             dataType: "json",
             contentType: "application/json",
             data: {
