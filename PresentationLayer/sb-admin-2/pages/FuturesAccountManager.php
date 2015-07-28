@@ -872,21 +872,27 @@ include_once("ModalTemplate.php");
 
     //填充MainModal
     function fillMainModal(modal, data) {
+        $(modal + " #userId").attr('disabled','disabled');
+        $(modal + " #channel").attr('disabled','disabled');
+        $(modal + " #company").attr('disabled','disabled');
+        $(modal + " #server").attr('disabled','disabled');
 
         var channelArray = $(modal + " #channel option");
+
         for (var i = 0; i < channelArray.length; i++){
             if (channelArray.eq(i).text() == data[1]){
                 channelArray.eq(i).attr('selected', 'selected');
-                channelArray.trigger('change')
+                //channelArray.trigger('change')
                 break;
             }
         }
 
         var companyArray = $(modal + " #company option");
+
         for (var i = 0; i < companyArray.length; i++){
             if (companyArray.eq(i).text() == data[2]){
                 companyArray.eq(i).attr('selected', 'selected');
-                companyArray.trigger('change')
+               // companyArray.trigger('change')
                 break;
             }
         }
@@ -902,10 +908,6 @@ include_once("ModalTemplate.php");
 
         $(modal + " #userId").val(data[4]);
         $(modal + " #userPassword").val(data[5]);
-        $(modal + " #userId").attr('disabled','disabled');
-        $(modal + " #channel").attr('disabled','disabled');
-        $(modal + " #company").attr('disabled','disabled');
-        $(modal + " #server").attr('disabled','disabled');
 
     }
 
@@ -1300,8 +1302,11 @@ include_once("ModalTemplate.php");
     $(document).on("click", "#main-update", function () {
         if (allBrokersInfo.length == 0) return;
         $(document).off("click", "#newAccountModal .btn-primary");
+        console.log("startsetMain");
         setMainAccountInfo();
+        console.log("startfill");
         fillMainModal("#accountModal", mainAccounts[selectedIndex]);
+        console.log("endfill");
         //绑定回调
         $(document).on("click", "#newAccountModal .btn-primary", updateAccount);
         $('#accountModal').modal('show');

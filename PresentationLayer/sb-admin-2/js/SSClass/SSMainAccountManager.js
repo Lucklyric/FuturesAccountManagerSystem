@@ -339,8 +339,8 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
         $.ajax({
             url: ssMainAccounttManagerInstance.hostpath,
             type: "POST", //send it through get method
-            //dataType: "json",
-            contentType: "application/json",
+            dataType: "json",
+            //contentType: "application/json",
             data: {
                 Data: dataStream,
                 Method: "onSyncOrder"
@@ -747,7 +747,7 @@ function SSMainAccountManager(accoutId,accoutPwd,redrawCallBack,refreshDataCallb
             url: ssMainAccounttManagerInstance.hostpath,
             type: "POST", //send it through get method
             dataType: "json",
-            contentType: "application/json",
+            //contentType: "application/json",
             data: {
                 Data: dataStream,
                 Method: "onSyncPosition"
