@@ -83,27 +83,27 @@
         var tmp_password = getAdminCookie('sharpspeedadminpassword');
         var tmp_serverType = getAdminCookie('sharpspeedservertype');
         var tmp_accountPriviledge =  getAdminCookie('sharpspeedaccountpriviledge');
-//        var tmp_accountPriviledge =  '1x2x0x1';
+        var tmp_accountPriviledge =  '1x2x0x1';
         console.log("取到Admin cookies:" + tmp_account + tmp_password);
-        if (tmp_account != null && tmp_account != "" && tmp_password != null && tmp_password != "") {
-            var superAdminId = tmp_account;
-            var superAdminPwd = tmp_password;
-            var superServerType = tmp_serverType;
-            var superAccountPriviledgeArray = tmp_accountPriviledge.split("x");
-            setAdminCookie('sharpspeedadminaccount', superAdminId, 20);
-            setAdminCookie('sharpspeedadminpassword', superAdminPwd, 20);
-            setAdminCookie('sharpspeedservertype', superServerType, 2000);
-            setAdminCookie('sharpspeedservertype', tmp_accountPriviledge, 2000);
-        } else {
-            self.location = '../../../../Report/Shared/login.html';
-        }
+//        if (tmp_account != null && tmp_account != "" && tmp_password != null && tmp_password != "") {
+//            var superAdminId = tmp_account;
+//            var superAdminPwd = tmp_password;
+//            var superServerType = tmp_serverType;
+//            var superAccountPriviledgeArray = tmp_accountPriviledge.split("x");
+//            setAdminCookie('sharpspeedadminaccount', superAdminId, 20);
+//            setAdminCookie('sharpspeedadminpassword', superAdminPwd, 20);
+//            setAdminCookie('sharpspeedservertype', superServerType, 2000);
+//            setAdminCookie('sharpspeedservertype', tmp_accountPriviledge, 2000);
+//        } else {
+//            self.location = '../../../../Report/Shared/login.html';
+//        }
 
 //
-//                var superAdminId = "zch11";
-//                var superAdminPwd = "123456";
-//                var superServerType = 0;
-//        var superAccountPriviledgeArray = tmp_accountPriviledge.split("x");
-//        console.log(superAccountPriviledgeArray);
+                var superAdminId = "zch2";
+                var superAdminPwd = "123456";
+                var superServerType = 0;
+        var superAccountPriviledgeArray = tmp_accountPriviledge.split("x");
+        console.log(superAccountPriviledgeArray);
 
     </script>
 
